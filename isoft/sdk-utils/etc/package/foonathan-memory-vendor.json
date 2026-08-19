@@ -1,0 +1,9 @@
+{
+    "name": "foonathan-memory-vendor",
+    "version": "1.3.1",
+    "depend":["foonathan-memory"],
+    "url": "https://github.com/eProsima/foonathan_memory_vendor/archive/refs/tags/v1.3.1.tar.gz",
+    "configure": "cmake @CMAKE_ARGS@ -DBUILD_SHARED_LIBS=ON .",
+    "build": "make -j@JOBS@",
+    "install": "make install DESTDIR=@SYSROOT@"
+}

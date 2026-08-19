@@ -1,0 +1,684 @@
+{
+    "shortName": "machine1",
+    "supervisionMode": [
+        {
+            "fqn": "/AUTOSAR/FunctionGroupSet/CommonFunctionGroups/MotiveFG",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "RunError",
+                    "phmSupervision": [
+                        "engine_alive",
+                        "alive_testunit",
+                        "logical",
+                        "deadline_lb",
+                        "deadline_lt",
+                        "deadline_rb",
+                        "deadline_rt"
+                    ],
+                    "processes": [
+                        {
+                            "processName": "/AUTOSAR/Processes/phm_motive",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Running",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Start",
+                    "phmSupervision": [
+                        "engine_alive",
+                        "alive_testunit",
+                        "logical",
+                        "deadline_lb",
+                        "deadline_lt",
+                        "deadline_rb",
+                        "deadline_rt"
+                    ],
+                    "processes": [
+                        {
+                            "processName": "/AUTOSAR/Processes/phm_motive",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/ISOFT/FunctionGroupSet/CommonFunctionGroups/MachineFG",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Restart",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm/package_manager1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm_master/ucmm",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/tsync/tsync_daemon_proc1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/nm/nm_daemon_proc1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/com/nsomeip_routing_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/sm/state_manager1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/log/dlt_daemon_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/phm/phmd_process1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ResetMachineApp/reset_machine_process1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm/package_manager1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm_master/ucmm",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/tsync/tsync_daemon_proc1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/nm/nm_daemon_proc1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/com/nsomeip_routing_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/sm/state_manager1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/log/dlt_daemon_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/phm/phmd_process1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm/package_manager1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm_master/ucmm",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/tsync/tsync_daemon_proc1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/nm/nm_daemon_proc1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/com/nsomeip_routing_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/sm/state_manager1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/log/dlt_daemon_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/phm/phmd_process1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm/package_manager1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm_master/ucmm",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/tsync/tsync_daemon_proc1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/nm/nm_daemon_proc1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/com/nsomeip_routing_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/sm/state_manager1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/log/dlt_daemon_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/phm/phmd_process1",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/ISOFT/FunctionGroupSet/CommonFunctionGroups/ResidentFG",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Run",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": []
+                }
+            ]
+        },
+        {
+            "fqn": "/ISOFT/NmDemoFGSet/NmDemoCommonFGs/NMDemoFG",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": []
+                }
+            ]
+        }
+    ],
+    "contributes": [
+        {
+            "shortName": "deployment_phm_motive",
+            "globalSupervision": [
+                {
+                    "shortName": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/suGlobal_engine",
+                    "supervisionCycle": 9.0,
+                    "expiredSupervisonCycleTolerance": 1,
+                    "localSupervision": [
+                        "engineLocal"
+                    ]
+                },
+                {
+                    "shortName": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/suGlobal_wheel",
+                    "supervisionCycle": 7.0,
+                    "expiredSupervisonCycleTolerance": 2,
+                    "localSupervision": [
+                        "wheelLocal"
+                    ]
+                }
+            ],
+            "healthChannelSupervision": [
+                {
+                    "shortName": "healthChannelSupervision_engine",
+                    "metaModelIdentifier": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelSupervision_engine",
+                    "supervision": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/suGlobal_engine",
+                    "recoveryNotification": {
+                        "recoveryNotificationRetry": 3,
+                        "recoveryNotificationTimeout": 2.6
+                    }
+                },
+                {
+                    "shortName": "healthChannelSupervision_wheel",
+                    "metaModelIdentifier": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelSupervision_wheel",
+                    "supervision": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/suGlobal_wheel",
+                    "recoveryNotification": {
+                        "recoveryNotificationRetry": 3,
+                        "recoveryNotificationTimeout": 6.2
+                    }
+                }
+            ],
+            "healthChannelExternalStatus": [
+                {
+                    "shortName": "healthChannelExternalStatus_tyre",
+                    "metaModelIdentifier": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelExternalStatus_tyre",
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_tyre",
+                    "phmHealthChannelInterface": "tyre_pressure",
+                    "healthChannelPoint": [
+                        "/ara/phm/Interfaces/tyre_pressure/kVeryLow",
+                        "/ara/phm/Interfaces/tyre_pressure/kVeryHigh"
+                    ],
+                    "recoveryNotification": {
+                        "recoveryNotificationRetry": 3,
+                        "recoveryNotificationTimeout": 4.0
+                    },
+                    "processName": "/AUTOSAR/Processes/phm_motive"
+                },
+                {
+                    "shortName": "healthChannelExternalStatus_voltage",
+                    "metaModelIdentifier": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelExternalStatus_voltage",
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_vol",
+                    "phmHealthChannelInterface": "tyre_pressure",
+                    "healthChannelPoint": [
+                        "/ara/phm/Interfaces/vol/kLow",
+                        "/ara/phm/Interfaces/vol/kHigh"
+                    ],
+                    "recoveryNotification": {
+                        "recoveryNotificationRetry": 3,
+                        "recoveryNotificationTimeout": 5.5
+                    },
+                    "processName": "/AUTOSAR/Processes/phm_motive"
+                }
+            ],
+            "localSupervision": [
+                {
+                    "shortName": "engineLocal",
+                    "failedSupervisionCyclesTolerance": 1,
+                    "aliveSupervision": [
+                        "engine_alive"
+                    ],
+                    "deadlineSupervision": [],
+                    "logicalSupervision": [
+                        "logical"
+                    ],
+                    "identifier": "oem/drivetrain/supervised_entities/engine"
+                },
+                {
+                    "shortName": "wheelLocal",
+                    "failedSupervisionCyclesTolerance": 2,
+                    "aliveSupervision": [],
+                    "deadlineSupervision": [
+                        "deadline_lb",
+                        "deadline_lt",
+                        "deadline_rb",
+                        "deadline_rt"
+                    ],
+                    "logicalSupervision": [],
+                    "identifier": "oem/drivetrain/supervised_entities/engine"
+                }
+            ],
+            "aliveSupervision": [
+                {
+                    "shortName": "engine_alive",
+                    "checkpointName": "engineAlive",
+                    "expectedAliveIndications": 6,
+                    "maxMargin": 2,
+                    "minMargin": 2,
+                    "aliveRefrenceCycle": 15.2
+                }
+            ],
+            "deadlineSupervision": [
+                {
+                    "shortName": "deadline_lb",
+                    "checkpointTransition": [
+                        "wheelStarted_lb",
+                        "wheelFinished_lb"
+                    ],
+                    "maxDeadline": 0.1,
+                    "minDeadline": 0.01
+                },
+                {
+                    "shortName": "deadline_lt",
+                    "checkpointTransition": [
+                        "wheelStarted_lt",
+                        "wheelFinished_lt"
+                    ],
+                    "maxDeadline": 0.1,
+                    "minDeadline": 0.01
+                },
+                {
+                    "shortName": "deadline_rb",
+                    "checkpointTransition": [
+                        "wheelStarted_rb",
+                        "wheelFinished_rb"
+                    ],
+                    "maxDeadline": 0.1,
+                    "minDeadline": 0.01
+                },
+                {
+                    "shortName": "deadline_rt",
+                    "checkpointTransition": [
+                        "wheelStarted_rt",
+                        "wheelFinished_rt"
+                    ],
+                    "maxDeadline": 0.1,
+                    "minDeadline": 0.01
+                }
+            ],
+            "logicalSupervision": [
+                {
+                    "shortName": "logical",
+                    "initialCheckpoint": [
+                        "engineInitializing"
+                    ],
+                    "finalCheckpoint": [
+                        "engineStartup"
+                    ],
+                    "transition": [
+                        {
+                            "shortName": "transition_0",
+                            "sourceCheckpoint": "engineInitializing",
+                            "targetCheckpoint": "engineInitializingFinished"
+                        },
+                        {
+                            "shortName": "transition_1",
+                            "sourceCheckpoint": "engineInitializingFinished",
+                            "targetCheckpoint": "engineStartup"
+                        }
+                    ]
+                }
+            ],
+            "supervisionCheckpoint": [
+                {
+                    "shortName": "engineAlive",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kAlive",
+                    "checkpointId": 4,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_engine"
+                },
+                {
+                    "shortName": "engineInitializing",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kInitializing",
+                    "checkpointId": 1,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_engine"
+                },
+                {
+                    "shortName": "engineInitializingFinished",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kInitializingFinished",
+                    "checkpointId": 3,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_engine"
+                },
+                {
+                    "shortName": "engineStartup",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kStartup",
+                    "checkpointId": 2,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_engine"
+                },
+                {
+                    "shortName": "wheelFinished_lb",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kFinished",
+                    "checkpointId": 2,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_lb"
+                },
+                {
+                    "shortName": "wheelFinished_lt",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kFinished",
+                    "checkpointId": 2,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_lt"
+                },
+                {
+                    "shortName": "wheelFinished_rb",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kFinished",
+                    "checkpointId": 2,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_rb"
+                },
+                {
+                    "shortName": "wheelFinished_rt",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kFinished",
+                    "checkpointId": 2,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_rt"
+                },
+                {
+                    "shortName": "wheelStarted_lb",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kStart",
+                    "checkpointId": 1,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_lb"
+                },
+                {
+                    "shortName": "wheelStarted_lt",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kStart",
+                    "checkpointId": 1,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_lt"
+                },
+                {
+                    "shortName": "wheelStarted_rb",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kStart",
+                    "checkpointId": 1,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_rb"
+                },
+                {
+                    "shortName": "wheelStarted_rt",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kStart",
+                    "checkpointId": 1,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_rt"
+                }
+            ],
+            "healthChannelPoint": [
+                {
+                    "shortName": "tyre_pressure",
+                    "healthStatus": [
+                        {
+                            "shortName": "kHigh",
+                            "statusId": 3,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kLow",
+                            "statusId": 1,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kOk",
+                            "statusId": 2,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kVeryHigh",
+                            "statusId": 4,
+                            "triggersRecoveryNotification": true
+                        },
+                        {
+                            "shortName": "kVeryLow",
+                            "statusId": 0,
+                            "triggersRecoveryNotification": true
+                        }
+                    ]
+                },
+                {
+                    "shortName": "vol",
+                    "healthStatus": [
+                        {
+                            "shortName": "kHigh",
+                            "statusId": 2,
+                            "triggersRecoveryNotification": true
+                        },
+                        {
+                            "shortName": "kLow",
+                            "statusId": 0,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kOk",
+                            "statusId": 1,
+                            "triggersRecoveryNotification": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "shortName": "deployment_phm_motive_testunit",
+            "globalSupervision": [
+                {
+                    "shortName": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/suGlobal_testunit",
+                    "supervisionCycle": 7.0,
+                    "expiredSupervisonCycleTolerance": 2,
+                    "localSupervision": [
+                        "local_testunit"
+                    ]
+                }
+            ],
+            "healthChannelSupervision": [
+                {
+                    "shortName": "healthChannelSupervision_testunit",
+                    "metaModelIdentifier": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/healthChannelSupervision_testunit",
+                    "supervision": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/suGlobal_testunit",
+                    "recoveryNotification": {
+                        "recoveryNotificationRetry": 3,
+                        "recoveryNotificationTimeout": 2.6
+                    }
+                }
+            ],
+            "healthChannelExternalStatus": [
+                {
+                    "shortName": "healthChannelExternalStatus_testunit",
+                    "metaModelIdentifier": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/healthChannelExternalStatus_testunit",
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_hc_testunit",
+                    "phmHealthChannelInterface": "hc_testunit",
+                    "healthChannelPoint": [
+                        "/ara/phm/Interfaces/hc_testunit/kTestVeryLow",
+                        "/ara/phm/Interfaces/hc_testunit/kTestVeryHigh"
+                    ],
+                    "recoveryNotification": {
+                        "recoveryNotificationRetry": 3,
+                        "recoveryNotificationTimeout": 4.0
+                    },
+                    "processName": "/AUTOSAR/Processes/phm_motive"
+                }
+            ],
+            "localSupervision": [
+                {
+                    "shortName": "local_testunit",
+                    "failedSupervisionCyclesTolerance": 1,
+                    "aliveSupervision": [
+                        "alive_testunit"
+                    ],
+                    "deadlineSupervision": [],
+                    "logicalSupervision": [],
+                    "identifier": "oem/drivetrain/supervised_entities/engine"
+                }
+            ],
+            "aliveSupervision": [
+                {
+                    "shortName": "alive_testunit",
+                    "checkpointName": "alive_testunit",
+                    "expectedAliveIndications": 6,
+                    "maxMargin": 2,
+                    "minMargin": 2,
+                    "aliveRefrenceCycle": 15.2
+                }
+            ],
+            "deadlineSupervision": [],
+            "logicalSupervision": [],
+            "supervisionCheckpoint": [
+                {
+                    "shortName": "alive_testunit",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kTestAlive",
+                    "checkpointId": 1,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_hc_testunit"
+                }
+            ],
+            "healthChannelPoint": [
+                {
+                    "shortName": "hc_testunit",
+                    "healthStatus": [
+                        {
+                            "shortName": "kTestHigh",
+                            "statusId": 3,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kTestLow",
+                            "statusId": 1,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kTestOk",
+                            "statusId": 2,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kTestVeryHigh",
+                            "statusId": 4,
+                            "triggersRecoveryNotification": true
+                        },
+                        {
+                            "shortName": "kTestVeryLow",
+                            "statusId": 0,
+                            "triggersRecoveryNotification": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

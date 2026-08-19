@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ResetMachineMapping1</SHORT-NAME>
+      <ELEMENTS>
+        <DLT-LOG-CHANNEL-TO-PROCESS-MAPPING>
+          <SHORT-NAME>dltLogChannelToProcessMapping_2</SHORT-NAME>
+          <DLT-LOG-CHANNEL-REF DEST="DLT-LOG-CHANNEL">/ISOFT/Development/Machine1/log/reset_machine</DLT-LOG-CHANNEL-REF>
+          <PROCESS-REF DEST="PROCESS">/ResetMachineApp1/reset_machine_process</PROCESS-REF>
+        </DLT-LOG-CHANNEL-TO-PROCESS-MAPPING>
+        <PROCESS-TO-MACHINE-MAPPING-SET>
+          <SHORT-NAME>mappingSet</SHORT-NAME>
+          <PROCESS-TO-MACHINE-MAPPINGS>
+            <PROCESS-TO-MACHINE-MAPPING>
+              <SHORT-NAME>ResetMachineMapping</SHORT-NAME>
+              <MACHINE-REF DEST="MACHINE">/ISOFT/Development/Machine1</MACHINE-REF>
+              <PROCESS-REF DEST="PROCESS">/ResetMachineApp1/reset_machine_process</PROCESS-REF>
+            </PROCESS-TO-MACHINE-MAPPING>
+          </PROCESS-TO-MACHINE-MAPPINGS>
+        </PROCESS-TO-MACHINE-MAPPING-SET>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

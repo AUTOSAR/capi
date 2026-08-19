@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>PlatformComponents</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>idsm</SHORT-NAME>
+              <ELEMENTS>
+                <PROCESS-DESIGN>
+                  <SHORT-NAME>idsm_daemon_design</SHORT-NAME>
+                  <EXECUTABLE-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/idsm/exe/idsmd</EXECUTABLE-REF>
+                </PROCESS-DESIGN>
+              </ELEMENTS>
+              <AR-PACKAGES>
+                <AR-PACKAGE>
+                  <SHORT-NAME>exe</SHORT-NAME>
+                  <ELEMENTS>
+                    <EXECUTABLE>
+                      <SHORT-NAME>idsmd</SHORT-NAME>
+                      <BUILD-TYPE>BUILD-TYPE-RELEASE</BUILD-TYPE>
+                      <LOGGING-BEHAVIOR>USES-LOGGING</LOGGING-BEHAVIOR>
+                      <MINIMUM-TIMER-GRANULARITY>0.2</MINIMUM-TIMER-GRANULARITY>
+                      <REPORTING-BEHAVIOR>REPORTS-EXECUTION-STATE</REPORTING-BEHAVIOR>
+                      <ROOT-SW-COMPONENT-PROTOTYPE>
+                        <SHORT-NAME>rootSwComponentPrototype_idsmd</SHORT-NAME>
+                        <APPLICATION-TYPE-TREF DEST="ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE">/ISOFT/PlatformComponents/idsm/swc/swComponent_idsm</APPLICATION-TYPE-TREF>
+                      </ROOT-SW-COMPONENT-PROTOTYPE>
+                      <VERSION>1.0.0</VERSION>
+                    </EXECUTABLE>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>swc</SHORT-NAME>
+                  <ELEMENTS>
+                    <ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+                      <SHORT-NAME>swComponent_idsm</SHORT-NAME>
+                      <PORTS>
+                        <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>idsm_signature</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="CRYPTO-KEY-SLOT-INTERFACE">/ara/idsm/CryptoInterface/idsm_encode_signature</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                        <P-PORT-PROTOTYPE>
+                          <SHORT-NAME>pPort_did_common</SHORT-NAME>
+                          <PROVIDED-INTERFACE-TREF DEST="DIAGNOSTIC-DATA-IDENTIFIER-GENERIC-INTERFACE">/ara/idsm/DiagnosticPortInterface/DiagnosticDataIdentifierGenericInterface_common</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+                      </PORTS>
+                      <INTERNAL-BEHAVIORS>
+                        <ADAPTIVE-SWC-INTERNAL-BEHAVIOR>
+                          <SHORT-NAME>AdaptiveSwcInternalBehavior</SHORT-NAME>
+                          <SERVICE-DEPENDENCYS>
+                            <SWC-SERVICE-DEPENDENCY>
+                              <SHORT-NAME>DiagnosticDataIdentifierGeneric_idsm_common</SHORT-NAME>
+                              <ASSIGNED-PORTS>
+                                <ROLE-BASED-PORT-ASSIGNMENT>
+                                  <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/ISOFT/PlatformComponents/idsm/swc/swComponent_idsm/pPort_did_common</PORT-PROTOTYPE-REF>
+                                  <ROLE>DiagnosticDataIdentifierGenericInterface</ROLE>
+                                </ROLE-BASED-PORT-ASSIGNMENT>
+                              </ASSIGNED-PORTS>
+                              <SERVICE-NEEDS>
+                                <DIAGNOSTIC-VALUE-NEEDS S="">
+                                  <SHORT-NAME>DiagnosticValueNeeds</SHORT-NAME>
+                                  <DIAGNOSTIC-VALUE-ACCESS>READ-WRITE</DIAGNOSTIC-VALUE-ACCESS>
+                                </DIAGNOSTIC-VALUE-NEEDS>
+                              </SERVICE-NEEDS>
+                            </SWC-SERVICE-DEPENDENCY>
+                          </SERVICE-DEPENDENCYS>
+                        </ADAPTIVE-SWC-INTERNAL-BEHAVIOR>
+                      </INTERNAL-BEHAVIORS>
+                    </ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

@@ -1,0 +1,94 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+ {% for swName in port.nameList %}
+     {{ "<AR-PACKAGES>" if not loop.first }}
+      <AR-PACKAGE>
+         <SHORT-NAME>{{ swName }}</SHORT-NAME>
+  {% endfor %}
+        <ELEMENTS>
+            <ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+              <SHORT-NAME>{{ port.lastName }}</SHORT-NAME>
+              <PORTS>
+                  {% for portItem in port.portList %}
+                      <R-PORT-PROTOTYPE>
+                          <SHORT-NAME>{{ portItem.portName }}</SHORT-NAME>
+                          <REQUIRED-INTERFACE-TREF DEST="SERVICE-INTERFACE">/NetworkStateServiceInterfaces/NetworkState</REQUIRED-INTERFACE-TREF>
+                      </R-PORT-PROTOTYPE>
+                  {% endfor %}
+              </PORTS>
+            </ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+        </ELEMENTS>
+        <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>rport</SHORT-NAME>
+                <AR-PACKAGES>
+                <AR-PACKAGE>
+                  <SHORT-NAME>{{ port.machineName }}</SHORT-NAME>
+                  <ELEMENTS>
+                    {% for portItem in port.portList %}
+                    <REQUIRED-SOMEIP-SERVICE-INSTANCE>
+                      <SHORT-NAME>RequiredSomeIpNetworkStateInstance_{{ portItem.portName }}</SHORT-NAME>
+                      <SERVICE-INTERFACE-DEPLOYMENT-REF DEST="SOMEIP-SERVICE-INTERFACE-DEPLOYMENT">/ara/nm/nmSomeipDeployments/NetworkState</SERVICE-INTERFACE-DEPLOYMENT-REF>
+                      <REQUIRED-MINOR-VERSION>0</REQUIRED-MINOR-VERSION>
+                      <REQUIRED-SERVICE-INSTANCE-ID>{{ portItem.instanceId }}</REQUIRED-SERVICE-INSTANCE-ID>
+                      <SD-CLIENT-CONFIG-REF DEST="SOMEIP-SD-CLIENT-SERVICE-INSTANCE-CONFIG">{{ portItem.sdConfigClientFqn }}</SD-CLIENT-CONFIG-REF>
+                    </REQUIRED-SOMEIP-SERVICE-INSTANCE>
+                    <SOMEIP-SERVICE-INSTANCE-TO-MACHINE-MAPPING>
+                      <SHORT-NAME>RequiredNetworkStateToMachine_{{ portItem.portName }}</SHORT-NAME>
+                      <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">{{ portItem.connectorFqn }}</COMMUNICATION-CONNECTOR-REF>
+                      <SERVICE-INSTANCE-REFS>
+                        <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">{{port.allName}}/rport/{{ port.machineName }}/RequiredSomeIpNetworkStateInstance_{{ portItem.portName }}</SERVICE-INSTANCE-REF>
+                      </SERVICE-INSTANCE-REFS>
+                      <TCP-PORT>{{ portItem.port }}</TCP-PORT>
+                      <UDP-PORT>{{ portItem.port }}</UDP-PORT>
+                    </SOMEIP-SERVICE-INSTANCE-TO-MACHINE-MAPPING>
+                    <SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
+                      <SHORT-NAME>RequiredNetworkStateInstanceToPortMapping_{{ portItem.portName }}</SHORT-NAME>
+                      <PORT-PROTOTYPE-IREF>
+                        <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">{{ portItem.rootSwcFqn }}</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+                        <TARGET-PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">{{ portItem.portFqn }}</TARGET-PORT-PROTOTYPE-REF>
+                      </PORT-PROTOTYPE-IREF>
+                      {% if portItem.processDesignFqn != "" %}
+                      <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">{{ portItem.processDesignFqn }}</PROCESS-DESIGN-REF>
+                        {% endif %}
+                      <PROCESS-REF DEST="PROCESS">{{ portItem.processFqn }}</PROCESS-REF>
+                      <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">{{port.allName}}/rport/{{ port.machineName }}/RequiredSomeIpNetworkStateInstance_{{ portItem.portName }}</SERVICE-INSTANCE-REF>
+                    </SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
+                    {% endfor %}
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+  {% for swName in port.nameList %}
+      </AR-PACKAGE>
+      {{ "</AR-PACKAGES>" if not loop.last }}
+  {% endfor %}
+
+  </AR-PACKAGES>
+</AUTOSAR>

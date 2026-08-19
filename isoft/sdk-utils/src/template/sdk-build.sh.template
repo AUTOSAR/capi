@@ -1,0 +1,242 @@
+#!/bin/bash
+
+#  Disclaimer
+#
+#  This work (specification and/or software implementation) and the material
+#  contained in it, as released by AUTOSAR, is for the purpose of information
+#  only. AUTOSAR and the companies that have contributed to it shall not be
+#  liable for any use of the work.
+#
+#  The material contained in this work is protected by copyright and other
+#  types of intellectual property rights. The commercial exploitation of the
+#  material contained in this work requires a license to such intellectual
+#  property rights.
+#
+#  This work may be utilized or reproduced without any modification, in any
+#  form or by any means, for informational purposes only. For any other
+#  purpose, no part of the work may be utilized or reproduced, in any form
+#  or by any means, without permission in writing from the publisher.
+#
+#  The work has been developed for automotive applications only. It has
+#  neither been developed, nor tested for non-automotive applications.
+#
+#  The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+#  --------------------------------------------------------------------------
+
+# ================================================================
+#
+# File description:
+# ----------------
+# @file         sdk-build.sh
+# @brief        Compilation script provided by the SDK, used to compile any AA project.
+# @details
+# @date         by: james.feng
+# @author       fengjian
+# @version      1.2.0
+# ================================================================
+
+# Get sysroot path, the directory where the current script is located is the path
+SYSROOT_DIR="$(dirname $(realpath -e ${BASH_SOURCE[0]}))"
+TOOLCHAIN_DIR="$(realpath -e ${SYSROOT_DIR}/../toolchain)"
+
+# Placeholder replacement area start flag; characters wrapped in @@ within this area will be replaced by the renderer.
+# @TEMPLATE_PLACEHOLDERS_BEGIN@
+CMAKE_ARGS="@CMAKE_ARGS@"
+# @TEMPLATE_PLACEHOLDERS_END@
+# Placeholder area end marker; lines after this will no longer be replaced.
+
+if [ -e "${TOOLCHAIN_DIR}/init.sh" ]; then
+    source "${TOOLCHAIN_DIR}/init.sh"
+fi
+
+# Get SDK version
+function get_sdk_version() {
+    # First try to get it from release.json; if successful, return directly
+    if [ -f "${SYSROOT_DIR}/.release.json" ]; then
+        SDK_VERSION=$(grep -E '"version"' "${SYSROOT_DIR}/.release.json" | head -n 1 |
+            sed -E 's/.*"version"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/' |
+            sed -E 's/^([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+        echo ${SDK_VERSION}
+        return 0
+    fi
+
+    # Scan directories to get SDK version
+    SDK_VERSION=""
+    # Traverse all subdirectories under ara-sysroot/ara/framework
+    #for dir in $(ls "${SYSROOT_DIR}/ara/framework"); do
+    for dir in "${SYSROOT_DIR}/ara/framework"/*/; do
+        # Get directory name (excluding path)
+        dir_name=$(basename "$dir")
+        # Check if directory name matches xx.xx.xx format (pure numbers)
+        if [[ "$dir_name" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            SDK_VERSION="$dir_name"
+            echo "${SDK_VERSION}"
+            return 0
+        fi
+    done
+    return 1
+}
+SDK_VERSION=$(get_sdk_version)
+SCRIPT_MODE_HELP_MESG=$(
+    cat <<EOF
+usage:
+    generate: generate C++ project from Model
+        $0 -g PROJECT_CONFIG_DIR
+    build:
+        $0 PROJECT_DIR
+    build and install:
+        $0 -i [INSTALL_DIR] PROJECT_DIR
+        or:
+        $0 PROJECT_DIR -i [INSTALL_DIR]
+    If INSTALL_DIR is not specified, the default 'ara-sysroot/ara/framework/${SDK_VERSION}' will be used.
+EOF
+)
+
+SOURCE_MODE_HELP_MESG=$(
+    cat <<EOF
+usage:
+    generate: generate C++ project from Model
+        gen4m PROJECT_CONFIG_DIR
+    build: change to your AA project dir, and run 'ab' to build.
+        ab
+    build and install:
+        ab -i [INSTALL_DIR]
+    If INSTALL_DIR is not specified, the default 'ara-sysroot/ara/framework/${SDK_VERSION}' will be used.
+EOF
+)
+
+# Generate C++ project from model
+gen4m() {
+    local prj_config_dir=$1
+    local prj_output_dir=${prj_config_dir}/prj
+    local prj_config_file=${prj_config_dir}/generateCodeConfig.json
+    local prj_gen=${SYSROOT_DIR}/ara-tools/projectGenerate
+    local ara_gen=${SYSROOT_DIR}/ara/framework/${SDK_VERSION}/bin/aragen
+
+    ${prj_gen} -a ${prj_config_dir} -C ${prj_config_file} -o ${prj_output_dir} -g ${ara_gen}
+}
+
+function do_build_and_install() {
+    mkdir -p ${BUILD_DIR}
+    # Some versions of cmake do not support the -B/-S options, so do not use this method
+    #cmake -B .build -S .
+    pushd ${BUILD_DIR}
+    cmake ${CMAKE_ARGS} -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} ..
+    make -j$(nproc)
+    echo "build result at .build"
+    if ! [ -z "${IS_INSTALL}" ]; then
+        make install #DESTDIR=${{SYSROOT_DIR}}
+        echo "build result have been installed"
+    fi
+    popd
+}
+
+#
+# Build operation in script mode, ./build.sh $*
+# Args:
+#    prj_dir: project source directory
+#    is_install: whether to install
+function ab_in_script_mode() {
+    local cmd="build"
+    local PRJ_DIR=""
+    INSTALL_DIR="${SYSROOT_DIR}/ara/framework/${SDK_VERSION}"
+    IS_INSTALL=""
+    case "$#" in
+    1)
+        PRJ_DIR="$1"
+        ;;
+    2)
+        if [ "-i" = "$1" ]; then
+            PRJ_DIR="$2"
+            IS_INSTALL="yes"
+        elif [ "-i" = "$2" ]; then
+            PRJ_DIR="$1"
+            IS_INSTALL="yes"
+        elif [ "-g" = "$1" ]; then
+            cmd="generate"
+            PRJ_DIR="$2"
+        else
+            echo "invalid arguments"
+            printf "${SCRIPT_MODE_HELP_MESG}\n"
+            exit 1
+        fi
+        ;;
+    3)
+        if [ "-i" = "$1" ]; then
+            INSTALL_DIR="$2"
+            PRJ_DIR="$3"
+            IS_INSTALL="yes"
+        elif [ "-i" = "$2" ]; then
+            PRJ_DIR="$1"
+            INSTALL_DIR="$3"
+            IS_INSTALL="yes"
+        else
+            echo "invalid arguments"
+            printf "${SCRIPT_MODE_HELP_MESG}\n"
+            exit 1
+        fi
+        ;;
+    *)
+        echo "invalid arguments"
+        printf "${SCRIPT_MODE_HELP_MESG}\n"
+        exit 1
+        ;;
+    esac
+    if [ "generate" = "${cmd}" ]; then
+        gen4m "${PRJ_DIR}"
+    else
+        INSTALL_DIR=$(realpath -m "${INSTALL_DIR}")
+        BUILD_DIR=$(realpath -m "${PRJ_DIR}/.build")
+        do_build_and_install
+    fi
+}
+
+#
+#    Build operation in source mode, source ./build.sh; ab
+# Args:
+#    prj_dir: project source directory
+#    is_install: whether to install
+function ab() {
+    BUILD_DIR=$(realpath -m "./.build")
+    INSTALL_DIR="${SYSROOT_DIR}/ara/framework/${SDK_VERSION}"
+    IS_INSTALL=""
+    case "$#" in
+    0) ;;
+    1)
+        if [ "-i" = "$1" ]; then
+            IS_INSTALL="yes"
+        else
+            echo "invalid arguments"
+            printf "${SOURCE_MODE_HELP_MESG}\n"
+            return 1
+        fi
+        ;;
+    2)
+        if [ "-i" = "$1" ]; then
+            IS_INSTALL="yes"
+        else
+            echo "invalid arguments"
+            printf "${SOURCE_MODE_HELP_MESG}\n"
+            return 1
+        fi
+        INSTALL_DIR=$(realpath -m "$2")
+        ;;
+    *)
+        echo "invalid arguments"
+        printf "${SOURCE_MODE_HELP_MESG}\n"
+        return 1
+        ;;
+    esac
+    do_build_and_install
+}
+
+if [ "${BASH_SOURCE[0]}" == "${0}" ]; then
+    # Script call mode
+    #printf "${SCRIPT_MODE_HELP_MESG}\n"
+    ab_in_script_mode $*
+else
+    # source mode
+    export -f ab
+    export -f gen4m
+    printf "${SOURCE_MODE_HELP_MESG}\n"
+fi

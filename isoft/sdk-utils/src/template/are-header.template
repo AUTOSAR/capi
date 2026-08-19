@@ -1,0 +1,279 @@
+#!/bin/bash
+
+#  Disclaimer
+#
+#  This work (specification and/or software implementation) and the material
+#  contained in it, as released by AUTOSAR, is for the purpose of information
+#  only. AUTOSAR and the companies that have contributed to it shall not be
+#  liable for any use of the work.
+#
+#  The material contained in this work is protected by copyright and other
+#  types of intellectual property rights. The commercial exploitation of the
+#  material contained in this work requires a license to such intellectual
+#  property rights.
+#
+#  This work may be utilized or reproduced without any modification, in any
+#  form or by any means, for informational purposes only. For any other
+#  purpose, no part of the work may be utilized or reproduced, in any form
+#  or by any means, without permission in writing from the publisher.
+#
+#  The work has been developed for automotive applications only. It has
+#  neither been developed, nor tested for non-automotive applications.
+#
+#  The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+#  --------------------------------------------------------------------------
+
+# ================================================================
+#
+# File description:
+# ----------------
+# @file         are-header.template
+# @brief        
+# @details      ARE file header template, essentially a bash script. When making an ARE,
+#               replace the placeholders in the template with actual values to use as 
+#               the ARE file header, then append the ARE compressed package after the header.
+# @date         by: james.feng
+# @author       fengjian
+# @version      1.2.0
+# ================================================================
+
+# Modification ideas:
+# Decouple ara-header and ara-run; both only establish relationships through ara_ver*.json.
+# When ARA_SYSROOT is specified, directly modify configurations such as platform_framework/platform_core in ara_ver*.json according to the installation path during installation.
+# Subsequently, the run.sh script only reads configurations from ara_ver*.json to determine the locations of each software set.
+
+# ARE preset sysroot installation path.
+export PRESET_ARA_SYSROOT="@ARA_SYSROOT@"
+# ARE compressed package size, used to extract the compressed package content when installing ARE.
+export ARE_TARBALL_SIZE="@PACK_SIZE@"
+# Because the release information contains "", use cat
+export ARE_RELEASE_INFO=$(cat << 'EOF'
+@RELEASE_INFO@
+EOF
+)
+export ARE_RUN_SCRIPT_FILE="run.sh"
+
+set -e
+
+
+# Get the latest version of the ara_ver*.json file; a larger number means newer
+function GetNewestAraConfigFile()
+{
+	max_num=0
+	max_file=""
+
+	for file in ${ARA_SYSROOT}/ara/ara_ver*.json; do
+		if [ ! -f ${file} ];then
+			echo "No ara_ver*.json file found in ${ARA_SYSROOT}" >&2
+			exit 1
+		fi
+	    # Extract the numeric part: remove prefix "ara_ver" and suffix ".json"
+	    num=$(echo "$file" | sed 's/.*ara_ver//' | sed 's/\.json//')
+	
+	    # Compare numeric sizes
+	    if [ "$num" -gt "$max_num" ]; then
+	        max_num=$num
+	        max_file="$file"
+	    fi
+	done
+
+	echo "${max_file:-}"
+}
+
+# Get variable value from ara_ver*.json
+function GetValueFromAraConfigFile() {
+	ARA_CONFIG_FILE="$(GetNewestAraConfigFile)"
+	if [ ! -f "$ARA_CONFIG_FILE" ];then
+		echo "No ara_ver*.json file found" >&2
+		exit 1
+	fi
+    local key="$1"
+    # 1. Use grep to find the line containing the key, ignoring differences in spaces and quotes
+    # 2. Use cut and tr for simple field splitting and character cleaning
+    local value=$(grep "\"$key\"" "$ARA_CONFIG_FILE" | \
+                 cut -d ':' -f 2- | \
+                 tr -d ' "\t\r\n' | \
+                 cut -d ',' -f 1)
+    echo "${value:-}"
+}
+
+
+function GetAraConfig()
+{
+	# Get the values of each field in turn
+	# The location of the framework parent directory. Note, the actual framework directory is at ${ARA_FRAMEWORK_DIR}/framework
+	export ARA_FRAMEWORK_DIR=$(GetValueFromAraConfigFile "platform_framework")
+	if [ -z "${ARA_FRAMEWORK_DIR}" ];then
+		export ARA_FRAMEWORK_DIR="${ARA_SYSROOT}/ara"
+	fi
+	# The location of the core parent directory. Note, the actual core directory is at ${ARA_FRAMEWORK_DIR}/core
+	export ARA_CORE_DIR=$(GetValueFromAraConfigFile "platform_core")
+	if [ -z "${ARA_CORE_DIR}" ];then
+		export ARA_CORE_DIR="${ARA_SYSROOT}/ara"
+	fi
+	# The location of the swcls parent directory. Note, the actual swcls directory is at ${ARA_FRAMEWORK_DIR}/swcls
+	export ARA_SWCLS_DIR=$(GetValueFromAraConfigFile "application_swcls")
+	if [ -z "${ARA_SWCLS_DIR}" ];then
+		export ARA_SWCLS_DIR="${ARA_SYSROOT}/ara"
+	fi
+	# The location of the var directory.
+	export ARA_VAR_DIR=$(GetValueFromAraConfigFile "platform_var")
+	if [ -z "${ARA_VAR_DIR}" ];then
+		export ARA_VAR_DIR="${ARA_SYSROOT}/ara"
+	fi
+	export ARA_FRAMEWORK_VERSION=$(GetValueFromAraConfigFile "framework_version")
+	export ARA_CORE_VERSION=$(GetValueFromAraConfigFile "core_version")
+
+    # Output results (example)
+    echo "platform_framework: $ARA_FRAMEWORK_DIR"
+    echo "platform_core: $ARA_CORE_DIR"
+    echo "platform_var: $ARA_VAR_DIR"
+    echo "application_swcls: $ARA_SWCLS_DIR"
+    echo "framework_version: $ARA_FRAMEWORK_VERSION"
+    echo "core_version: $ARA_CORE_VERSION"
+}
+
+
+# Move the software set folder according to the user-specified location
+function MoveSoftwareCluster()
+{
+    echo "Moving dirs ..."
+    # First get ara configuration, move software set based on the configuration
+    GetAraConfig
+
+    _MoveSwcDir() {
+        local SWC_NAME=$1   # Uppercase software component name, e.g., FRAMEWORK, used for concatenating variable names
+        local SWC_DIR=$2    # Lowercase software component name, e.g., framework, used for concatenating directory names
+        eval "DEST_DIR=\${ARA_${SWC_NAME}_DIR}"
+        # Move directory
+        if [ -n "${DEST_DIR}" ] && [ -d "${ARA_SYSROOT}/ara/${SWC_DIR}" ];then
+            # Some embedded systems' realpath does not support the -m option, so do not get the real path; the upper layer needs to ensure there are no extra //../ etc. characters
+            # if [ "$(realpath ${ARA_SYSROOT}/ara)" != "$(realpath -m ${DEST_DIR})" ];then
+            if [ "$(realpath ${ARA_SYSROOT}/ara)" != "${DEST_DIR}" ];then
+                # Delete the target directory to prevent existing old files from affecting this copy
+                rm -rf ${DEST_DIR}/${SWC_DIR}
+                mkdir -p ${DEST_DIR}
+                echo "Moving ${SWC_DIR} to ${DEST_DIR}"
+                mv "${ARA_SYSROOT}/ara/${SWC_DIR}" ${DEST_DIR}
+            fi
+        fi
+    }
+    
+    _MoveSwcDir "FRAMEWORK" "framework"
+    _MoveSwcDir "CORE" "core"
+    _MoveSwcDir "SWCLS" "swcls"
+}
+
+function Usage()
+{
+    echo "Usage:"
+    echo -e "\tinstall ARE:"
+    echo -e "\t\t$0 [INSTALL_ARA_SYSROOT]"
+    echo -e "\tshow release info:"
+    echo -e "\t\t$0 -v"
+}
+
+function ShowRelease()
+{
+    echo "${ARE_RELEASE_INFO}"
+}
+
+function InstallSysroot()
+{
+    if ! mkdir -p "${ARA_SYSROOT}"; then
+        echo "Error: Failed to create directory: ${ARA_SYSROOT}" >&2
+        exit 1
+    fi
+
+    echo "Unpacking files ..."
+
+    if ! tail -c "${ARE_TARBALL_SIZE}" "$0" | tar xz -C "${ARA_SYSROOT}"; then
+        echo "Error: Failed to extract archive" >&2
+        exit 1
+    fi
+}
+
+
+# Update ara_ver*.json file
+function UpdateAraConfig()
+{
+    # If the command does not specify the sysroot installation path, there is no need to modify ara_ver*.json
+    if [ -z "${CMDLINE_ARA_SYSROOT}" ];then
+        return
+    fi
+    # When the command line parameter specifies the sysroot installation path, clear all path configurations in ara_ver*.json and change them all to the default paths under sysroot.
+	local ARA_CONFIG_FILE=$(GetNewestAraConfigFile)
+    if ! sed -i '/platform_framework/d' "${ARA_CONFIG_FILE}" 2>/dev/null; then
+        echo "sed -i '/platform_framework/d' ${ARA_CONFIG_FILE} execution failed"
+        exit 1
+    fi
+    
+    if ! sed -i '/platform_core/d' "${ARA_CONFIG_FILE}" 2>/dev/null; then
+        echo "sed -i '/platform_core/d' ${ARA_CONFIG_FILE} execution failed"
+        exit 1
+    fi
+    
+    if ! sed -i '/application_swcls/d' "${ARA_CONFIG_FILE}" 2>/dev/null; then
+        echo "sed -i '/application_swcls/d' ${ARA_CONFIG_FILE} execution failed"
+        exit 1
+    fi
+    
+    if ! sed -i '/platform_var/d' "${ARA_CONFIG_FILE}" 2>/dev/null; then
+        echo "sed -i '/platform_var/d' ${ARA_CONFIG_FILE} execution failed"
+        exit 1
+    fi
+}
+
+
+# Get variable value from ara_ver*.json
+function GetValueFromAraConfigFile() {
+	local ARA_CONFIG_FILE=$(GetNewestAraConfigFile)
+	if [ ! -f "$ARA_CONFIG_FILE" ];then
+		echo "No ara_ver*.json file found" >&2
+		exit 1
+	fi
+    local key="$1"
+    # 1. Use grep to find the line containing the key, ignoring differences in spaces and quotes
+    # 2. Use cut and tr for simple field splitting and character cleaning
+    local value=$(grep "\"$key\"" "$ARA_CONFIG_FILE" | \
+                 cut -d ':' -f 2- | \
+                 tr -d ' "\t\r\n' | \
+                 cut -d ',' -f 1)
+    echo "${value:-}"
+}
+
+
+
+########################### main ##########################
+if [ "-v" = "$1" ]; then
+    ShowRelease
+    exit 0
+fi
+
+# Command-line specified ARE installation directory; when the content is not empty, all built-in installation locations are invalid
+CMDLINE_ARA_SYSROOT="$1"
+
+# Installation path rules:
+# 1. Give priority to the installation path specified by the command line parameters.
+# 2. Secondly, use the ARE built-in installation path.
+# 3. If neither is specified, report an error.
+if [ -n "${CMDLINE_ARA_SYSROOT}" ]; then
+    export ARA_SYSROOT="$(realpath ${CMDLINE_ARA_SYSROOT})"
+elif [ -n "${PRESET_ARA_SYSROOT}" ]; then
+    export ARA_SYSROOT="${PRESET_ARA_SYSROOT}"
+else
+    Usage
+    exit 1
+fi
+
+# First step, install sysroot
+InstallSysroot
+# Second step, update ara software set configuration
+UpdateAraConfig
+# Third step, move software set
+MoveSoftwareCluster
+# Print prompt message
+echo "the ara sysroot is at: ${ARA_SYSROOT}, to startup the ara you can run:"
+echo -e "\t${ARA_SYSROOT}/${ARE_RUN_SCRIPT_FILE}"
+
+exit 0

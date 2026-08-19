@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Development</SHORT-NAME>
+          <ELEMENTS>
+            <MACHINE>
+              <SHORT-NAME>Machine2</SHORT-NAME>
+              <MODULE-INSTANTIATIONS>
+                <DO-IP-INSTANTIATION>
+                  <SHORT-NAME>doip</SHORT-NAME>
+                  <EID>0x000000000000</EID>
+                  <ENTITY-STATUS-MAX-BYTE-FIELD-USE>false</ENTITY-STATUS-MAX-BYTE-FIELD-USE>
+                  <GID>0x000000000000</GID>
+                  <GID-INVALIDITY-PATTERN>0</GID-INVALIDITY-PATTERN>
+                  <LOGICAL-ADDRESS>0x0001</LOGICAL-ADDRESS>
+                  <MAX-REQUEST-BYTES>1024</MAX-REQUEST-BYTES>
+                  <NETWORK-INTERFACES>
+                    <DO-IP-NETWORK-CONFIGURATION>
+                      <EID-USE-MAC>true</EID-USE-MAC>
+                      <IS-ACTIVATION-LINE-DEPENDENT>true</IS-ACTIVATION-LINE-DEPENDENT>
+                      <MAX-INITIAL-VEHICLE-ANNOUNCEMENT-TIME>0.5</MAX-INITIAL-VEHICLE-ANNOUNCEMENT-TIME>
+                      <MAX-TESTER-CONNECTIONS>10</MAX-TESTER-CONNECTIONS>
+                      <NETWORK-CONFIGURATION-REF DEST="PLATFORM-MODULE-ETHERNET-ENDPOINT-CONFIGURATION">/ISOFT/Development/PlatformModuleEthernetEndpointConfiguration2/doip</NETWORK-CONFIGURATION-REF>
+                      <NETWORK-INTERFACE-ID>0</NETWORK-INTERFACE-ID>
+                      <TCP-ALIVE-CHECK-RESPONSE-TIMEOUT>0.5</TCP-ALIVE-CHECK-RESPONSE-TIMEOUT>
+                      <TCP-GENERAL-INACTIVITY-TIME>300.0</TCP-GENERAL-INACTIVITY-TIME>
+                      <TCP-INITIAL-INACTIVITY-TIME>2.0</TCP-INITIAL-INACTIVITY-TIME>
+                      <VEHICLE-ANNOUNCEMENT-COUNT>3</VEHICLE-ANNOUNCEMENT-COUNT>
+                      <VEHICLE-ANNOUNCEMENT-INTERVAL>0.5</VEHICLE-ANNOUNCEMENT-INTERVAL>
+                      <VEHICLE-IDENTIFICATION-SYNC-STATUS>true</VEHICLE-IDENTIFICATION-SYNC-STATUS>
+                    </DO-IP-NETWORK-CONFIGURATION>
+                  </NETWORK-INTERFACES>
+                  <REQUEST-CONFIGURATIONS>
+                    <DO-IP-REQUEST-CONFIGURATION>
+                      <END-ADDRESS>0x0dff</END-ADDRESS>
+                      <REQUEST-TYPE>PHYSICAL</REQUEST-TYPE>
+                      <START-ADDRESS>0x0001</START-ADDRESS>
+                    </DO-IP-REQUEST-CONFIGURATION>
+                    <DO-IP-REQUEST-CONFIGURATION>
+                      <END-ADDRESS>0x7fff</END-ADDRESS>
+                      <REQUEST-TYPE>PHYSICAL</REQUEST-TYPE>
+                      <START-ADDRESS>0x1000</START-ADDRESS>
+                    </DO-IP-REQUEST-CONFIGURATION>
+                    <DO-IP-REQUEST-CONFIGURATION>
+                      <END-ADDRESS>0xefff</END-ADDRESS>
+                      <REQUEST-TYPE>FUNCTIONAL</REQUEST-TYPE>
+                      <START-ADDRESS>0xe400</START-ADDRESS>
+                    </DO-IP-REQUEST-CONFIGURATION>
+                  </REQUEST-CONFIGURATIONS>
+                  <VIN-INVALIDITY-PATTERN>0</VIN-INVALIDITY-PATTERN>
+                </DO-IP-INSTANTIATION>
+              </MODULE-INSTANTIATIONS>
+            </MACHINE>
+          </ELEMENTS>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>PlatformModuleEthernetEndpointConfiguration2</SHORT-NAME>
+              <ELEMENTS>
+                <PLATFORM-MODULE-ETHERNET-ENDPOINT-CONFIGURATION>
+                  <SHORT-NAME>doip</SHORT-NAME>
+                  <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign2/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                  <TCP-PORT>13400</TCP-PORT>
+                  <UDP-PORT>13400</UDP-PORT>
+                </PLATFORM-MODULE-ETHERNET-ENDPOINT-CONFIGURATION>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

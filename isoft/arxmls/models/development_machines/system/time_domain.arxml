@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+    <AR-PACKAGE >
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE >
+          <SHORT-NAME>GlobalTimeDomains</SHORT-NAME>
+          <ELEMENTS>
+            <GLOBAL-TIME-DOMAIN >
+              <SHORT-NAME>UTC</SHORT-NAME>
+              <DEBOUNCE-TIME>0.001</DEBOUNCE-TIME>
+              <DOMAIN-ID>0</DOMAIN-ID>
+              <FOLLOW-UP-TIMEOUT-VALUE>2.0</FOLLOW-UP-TIMEOUT-VALUE>
+              <GLOBAL-TIME-CORRECTION-PROPS>
+                <!-- 自适应配置，sws要求使用provider下的配置，导入machine2需要关联machine1 -->
+                <!-- 自适应配置，导入如果machine2没有关联machine1，consumer下的timeSyncCorrection为空，使用时间域的配置  -->
+                <OFFSET-CORRECTION-ADAPTION-INTERVAL>10.0</OFFSET-CORRECTION-ADAPTION-INTERVAL>
+                <OFFSET-CORRECTION-JUMP-THRESHOLD>20.0</OFFSET-CORRECTION-JUMP-THRESHOLD>
+                <RATE-CORRECTION-MEASUREMENT-DURATION>10.0</RATE-CORRECTION-MEASUREMENT-DURATION>
+                <RATE-CORRECTIONS-PER-MEASUREMENT-DURATION>2</RATE-CORRECTIONS-PER-MEASUREMENT-DURATION>
+              </GLOBAL-TIME-CORRECTION-PROPS>
+              <GLOBAL-TIME-DOMAIN-PROPERTYS>
+                <ETH-GLOBAL-TIME-DOMAIN-PROPS>
+                  <CRC-FLAGS>
+                    <CRC-CORRECTION-FIELD>true</CRC-CORRECTION-FIELD>
+                    <CRC-DOMAIN-NUMBER>true</CRC-DOMAIN-NUMBER>
+                    <CRC-MESSAGE-LENGTH>true</CRC-MESSAGE-LENGTH>
+                    <CRC-PRECISE-ORIGIN-TIMESTAMP>true</CRC-PRECISE-ORIGIN-TIMESTAMP>
+                    <CRC-SEQUENCE-ID>true</CRC-SEQUENCE-ID>
+                    <CRC-SOURCE-PORT-IDENTITY>true</CRC-SOURCE-PORT-IDENTITY>
+                  </CRC-FLAGS>
+                  <DESTINATION-PHYSICAL-ADDRESS>01:00:5E:00:00:0E</DESTINATION-PHYSICAL-ADDRESS>
+                  <FUP-DATA-ID-LISTS>
+                    <FUP-DATA-ID-LIST>1</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>2</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>3</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>4</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>5</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>6</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>7</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>8</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>9</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>10</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>11</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>12</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>13</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>14</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>15</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>16</FUP-DATA-ID-LIST>
+                  </FUP-DATA-ID-LISTS>
+                  <MANAGED-COUPLING-PORTS>
+                    <ETH-GLOBAL-TIME-MANAGED-COUPLING-PORT>
+                      <PDELAY-LATENCY-THRESHOLD>0.001</PDELAY-LATENCY-THRESHOLD>
+                      <PDELAY-REQUEST-PERIOD>5.0</PDELAY-REQUEST-PERIOD>
+                      <PDELAY-RESP-AND-RESP-FOLLOW-UP-TIMEOUT>2.0</PDELAY-RESP-AND-RESP-FOLLOW-UP-TIMEOUT>
+                      <PDELAY-RESPONSE-ENABLED>true</PDELAY-RESPONSE-ENABLED>
+                    </ETH-GLOBAL-TIME-MANAGED-COUPLING-PORT>
+                  </MANAGED-COUPLING-PORTS>
+                  <MESSAGE-COMPLIANCE>IEEE802-1AS-AUTOSAR</MESSAGE-COMPLIANCE>
+                </ETH-GLOBAL-TIME-DOMAIN-PROPS>
+              </GLOBAL-TIME-DOMAIN-PROPERTYS>
+              <GLOBAL-TIME-MASTERS>
+                <GLOBAL-TIME-ETH-MASTER >
+                  <SHORT-NAME>globalTimeEthMaster_0</SHORT-NAME>
+                  <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign1/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                  <IMMEDIATE-RESUME-TIME>0.01</IMMEDIATE-RESUME-TIME>
+                  <IS-SYSTEM-WIDE-GLOBAL-TIME-MASTER>true</IS-SYSTEM-WIDE-GLOBAL-TIME-MASTER>
+                  <SYNC-PERIOD>2.0</SYNC-PERIOD>
+                  <CRC-SECURED>CRC-SUPPORTED</CRC-SECURED>
+                  <SUB-TLV-CONFIG>
+                    <OFS-SUB-TLV>true</OFS-SUB-TLV>
+                    <STATUS-SUB-TLV>true</STATUS-SUB-TLV>
+                    <TIME-SUB-TLV>true</TIME-SUB-TLV>
+                    <USER-DATA-SUB-TLV>true</USER-DATA-SUB-TLV>
+                  </SUB-TLV-CONFIG>
+                </GLOBAL-TIME-ETH-MASTER>
+              </GLOBAL-TIME-MASTERS>
+              <SLAVES>
+                <GLOBAL-TIME-ETH-SLAVE >
+                  <SHORT-NAME>globalTimeEthSlave_0</SHORT-NAME>
+                  <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign2/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                  <FOLLOW-UP-TIMEOUT-VALUE>2.0</FOLLOW-UP-TIMEOUT-VALUE>
+                  <TIME-LEAP-FUTURE-THRESHOLD>10.0</TIME-LEAP-FUTURE-THRESHOLD>
+                  <TIME-LEAP-HEALING-COUNTER>10</TIME-LEAP-HEALING-COUNTER>
+                  <TIME-LEAP-PAST-THRESHOLD>10.0</TIME-LEAP-PAST-THRESHOLD>
+                  <CRC-VALIDATED>CRC-OPTIONAL</CRC-VALIDATED>
+                  <TIME-HARDWARE-CORRECTION-THRESHOLD>5.0</TIME-HARDWARE-CORRECTION-THRESHOLD>
+                </GLOBAL-TIME-ETH-SLAVE>
+                <GLOBAL-TIME-ETH-SLAVE >
+                  <SHORT-NAME>globalTimeEthSlave_0_machine1</SHORT-NAME>
+                  <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign1/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                  <FOLLOW-UP-TIMEOUT-VALUE>2.0</FOLLOW-UP-TIMEOUT-VALUE>
+                  <TIME-LEAP-FUTURE-THRESHOLD>10.0</TIME-LEAP-FUTURE-THRESHOLD>
+                  <TIME-LEAP-HEALING-COUNTER>10</TIME-LEAP-HEALING-COUNTER>
+                  <TIME-LEAP-PAST-THRESHOLD>10.0</TIME-LEAP-PAST-THRESHOLD>
+                  <CRC-VALIDATED>CRC-OPTIONAL</CRC-VALIDATED>
+                  <TIME-HARDWARE-CORRECTION-THRESHOLD>5.0</TIME-HARDWARE-CORRECTION-THRESHOLD>
+                </GLOBAL-TIME-ETH-SLAVE>
+              </SLAVES>
+              <SYNC-LOSS-THRESHOLD>0.0</SYNC-LOSS-THRESHOLD>
+              <SYNC-LOSS-TIMEOUT>5.0</SYNC-LOSS-TIMEOUT>
+            </GLOBAL-TIME-DOMAIN>
+            <GLOBAL-TIME-DOMAIN >
+              <SHORT-NAME>UTC_Idsm</SHORT-NAME>
+              <DEBOUNCE-TIME>0.001</DEBOUNCE-TIME>
+              <DOMAIN-ID>1</DOMAIN-ID>
+              <FOLLOW-UP-TIMEOUT-VALUE>2.0</FOLLOW-UP-TIMEOUT-VALUE>
+              <GLOBAL-TIME-CORRECTION-PROPS>
+                <OFFSET-CORRECTION-ADAPTION-INTERVAL>10.0</OFFSET-CORRECTION-ADAPTION-INTERVAL>
+                <OFFSET-CORRECTION-JUMP-THRESHOLD>20.0</OFFSET-CORRECTION-JUMP-THRESHOLD>
+                <RATE-CORRECTION-MEASUREMENT-DURATION>10.0</RATE-CORRECTION-MEASUREMENT-DURATION>
+                <RATE-CORRECTIONS-PER-MEASUREMENT-DURATION>2</RATE-CORRECTIONS-PER-MEASUREMENT-DURATION>
+              </GLOBAL-TIME-CORRECTION-PROPS>
+              <GLOBAL-TIME-DOMAIN-PROPERTYS>
+                <ETH-GLOBAL-TIME-DOMAIN-PROPS>
+                  <CRC-FLAGS>
+                    <CRC-CORRECTION-FIELD>true</CRC-CORRECTION-FIELD>
+                    <CRC-DOMAIN-NUMBER>true</CRC-DOMAIN-NUMBER>
+                    <CRC-MESSAGE-LENGTH>true</CRC-MESSAGE-LENGTH>
+                    <CRC-PRECISE-ORIGIN-TIMESTAMP>true</CRC-PRECISE-ORIGIN-TIMESTAMP>
+                    <CRC-SEQUENCE-ID>true</CRC-SEQUENCE-ID>
+                    <CRC-SOURCE-PORT-IDENTITY>true</CRC-SOURCE-PORT-IDENTITY>
+                  </CRC-FLAGS>
+                  <DESTINATION-PHYSICAL-ADDRESS>01:00:5E:00:00:0E</DESTINATION-PHYSICAL-ADDRESS>
+                  <FUP-DATA-ID-LISTS>
+                    <FUP-DATA-ID-LIST>1</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>2</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>3</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>4</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>5</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>6</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>7</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>8</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>9</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>10</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>11</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>12</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>13</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>14</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>15</FUP-DATA-ID-LIST>
+                    <FUP-DATA-ID-LIST>16</FUP-DATA-ID-LIST>
+                  </FUP-DATA-ID-LISTS>
+                  <MANAGED-COUPLING-PORTS>
+                    <ETH-GLOBAL-TIME-MANAGED-COUPLING-PORT>
+                      <PDELAY-LATENCY-THRESHOLD>0.001</PDELAY-LATENCY-THRESHOLD>
+                      <PDELAY-REQUEST-PERIOD>5.0</PDELAY-REQUEST-PERIOD>
+                      <PDELAY-RESP-AND-RESP-FOLLOW-UP-TIMEOUT>2.0</PDELAY-RESP-AND-RESP-FOLLOW-UP-TIMEOUT>
+                      <PDELAY-RESPONSE-ENABLED>true</PDELAY-RESPONSE-ENABLED>
+                    </ETH-GLOBAL-TIME-MANAGED-COUPLING-PORT>
+                  </MANAGED-COUPLING-PORTS>
+                  <MESSAGE-COMPLIANCE>IEEE802-1AS-AUTOSAR</MESSAGE-COMPLIANCE>
+                </ETH-GLOBAL-TIME-DOMAIN-PROPS>
+               </GLOBAL-TIME-DOMAIN-PROPERTYS>
+              <GLOBAL-TIME-MASTERS>
+                <GLOBAL-TIME-ETH-MASTER>
+                  <SHORT-NAME>globalTimeEthMaster_Idsm</SHORT-NAME>
+                  <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign2/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                  <IMMEDIATE-RESUME-TIME>0.01</IMMEDIATE-RESUME-TIME>
+                  <IS-SYSTEM-WIDE-GLOBAL-TIME-MASTER>true</IS-SYSTEM-WIDE-GLOBAL-TIME-MASTER>
+                  <SYNC-PERIOD>2.0</SYNC-PERIOD>
+                  <CRC-SECURED>CRC-SUPPORTED</CRC-SECURED>
+                  <SUB-TLV-CONFIG>
+                    <OFS-SUB-TLV>true</OFS-SUB-TLV>
+                    <STATUS-SUB-TLV>true</STATUS-SUB-TLV>
+                    <TIME-SUB-TLV>true</TIME-SUB-TLV>
+                    <USER-DATA-SUB-TLV>true</USER-DATA-SUB-TLV>
+                  </SUB-TLV-CONFIG>
+                </GLOBAL-TIME-ETH-MASTER>
+              </GLOBAL-TIME-MASTERS>
+              <SLAVES>
+                <GLOBAL-TIME-ETH-SLAVE>
+                  <SHORT-NAME>globalTimeEthSlave_Idsm</SHORT-NAME>
+                  <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign1/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                  <FOLLOW-UP-TIMEOUT-VALUE>2.0</FOLLOW-UP-TIMEOUT-VALUE>
+                  <TIME-LEAP-FUTURE-THRESHOLD>10.0</TIME-LEAP-FUTURE-THRESHOLD>
+                  <TIME-LEAP-HEALING-COUNTER>10</TIME-LEAP-HEALING-COUNTER>
+                  <TIME-LEAP-PAST-THRESHOLD>10.0</TIME-LEAP-PAST-THRESHOLD>
+                  <CRC-VALIDATED>CRC-OPTIONAL</CRC-VALIDATED>
+                  <TIME-HARDWARE-CORRECTION-THRESHOLD>5.0</TIME-HARDWARE-CORRECTION-THRESHOLD>
+                </GLOBAL-TIME-ETH-SLAVE>
+              </SLAVES>
+              <SYNC-LOSS-THRESHOLD>0.0</SYNC-LOSS-THRESHOLD>
+              <SYNC-LOSS-TIMEOUT>5.0</SYNC-LOSS-TIMEOUT>
+            </GLOBAL-TIME-DOMAIN>
+						<GLOBAL-TIME-DOMAIN >
+                            <SHORT-NAME>offsetTD</SHORT-NAME>
+                            <DEBOUNCE-TIME>0.001</DEBOUNCE-TIME>
+                            <DOMAIN-ID>16</DOMAIN-ID>
+                            <FOLLOW-UP-TIMEOUT-VALUE>2.0</FOLLOW-UP-TIMEOUT-VALUE>
+                            <GLOBAL-TIME-CORRECTION-PROPS>
+                                <OFFSET-CORRECTION-ADAPTION-INTERVAL>10.0</OFFSET-CORRECTION-ADAPTION-INTERVAL>
+                                <OFFSET-CORRECTION-JUMP-THRESHOLD>30.0</OFFSET-CORRECTION-JUMP-THRESHOLD>
+                                <RATE-CORRECTION-MEASUREMENT-DURATION>1.0</RATE-CORRECTION-MEASUREMENT-DURATION>
+                                <RATE-CORRECTIONS-PER-MEASUREMENT-DURATION>10</RATE-CORRECTIONS-PER-MEASUREMENT-DURATION>
+                            </GLOBAL-TIME-CORRECTION-PROPS>
+              <GLOBAL-TIME-DOMAIN-PROPERTYS>
+                                <ETH-GLOBAL-TIME-DOMAIN-PROPS>
+                                    <CRC-FLAGS>
+                                        <CRC-CORRECTION-FIELD>true</CRC-CORRECTION-FIELD>
+                                        <CRC-DOMAIN-NUMBER>true</CRC-DOMAIN-NUMBER>
+                                        <CRC-MESSAGE-LENGTH>true</CRC-MESSAGE-LENGTH>
+                                        <CRC-PRECISE-ORIGIN-TIMESTAMP>true</CRC-PRECISE-ORIGIN-TIMESTAMP>
+                                        <CRC-SEQUENCE-ID>true</CRC-SEQUENCE-ID>
+                                        <CRC-SOURCE-PORT-IDENTITY>true</CRC-SOURCE-PORT-IDENTITY>
+                                    </CRC-FLAGS>
+                                    <DESTINATION-PHYSICAL-ADDRESS>01:00:5E:00:00:0E</DESTINATION-PHYSICAL-ADDRESS>
+                                    <FUP-DATA-ID-LISTS>
+                                        <FUP-DATA-ID-LIST>1</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>2</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>3</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>4</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>5</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>6</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>7</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>8</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>9</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>10</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>11</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>12</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>13</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>14</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>15</FUP-DATA-ID-LIST>
+                                        <FUP-DATA-ID-LIST>16</FUP-DATA-ID-LIST>
+                                    </FUP-DATA-ID-LISTS>
+                                    <MANAGED-COUPLING-PORTS>
+                                        <ETH-GLOBAL-TIME-MANAGED-COUPLING-PORT>
+                                            <PDELAY-LATENCY-THRESHOLD>0.001</PDELAY-LATENCY-THRESHOLD>
+                                            <PDELAY-REQUEST-PERIOD>5.0</PDELAY-REQUEST-PERIOD>
+                                            <PDELAY-RESP-AND-RESP-FOLLOW-UP-TIMEOUT>2.0</PDELAY-RESP-AND-RESP-FOLLOW-UP-TIMEOUT>
+                                            <PDELAY-RESPONSE-ENABLED>true</PDELAY-RESPONSE-ENABLED>
+                                        </ETH-GLOBAL-TIME-MANAGED-COUPLING-PORT>
+                                    </MANAGED-COUPLING-PORTS>
+                                    <MESSAGE-COMPLIANCE>IEEE802-1AS-AUTOSAR</MESSAGE-COMPLIANCE>
+                                </ETH-GLOBAL-TIME-DOMAIN-PROPS>
+               </GLOBAL-TIME-DOMAIN-PROPERTYS>
+              <GLOBAL-TIME-MASTERS>
+                                <GLOBAL-TIME-ETH-MASTER >
+                                    <SHORT-NAME>globalTimeEthMaster_0</SHORT-NAME>
+                                    <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign1/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                                    <IMMEDIATE-RESUME-TIME>0.01</IMMEDIATE-RESUME-TIME>
+                                    <IS-SYSTEM-WIDE-GLOBAL-TIME-MASTER>true</IS-SYSTEM-WIDE-GLOBAL-TIME-MASTER>
+                                    <SYNC-PERIOD>2.0</SYNC-PERIOD>
+                                    <CRC-SECURED>CRC-SUPPORTED</CRC-SECURED>
+                                    <SUB-TLV-CONFIG>
+                                        <OFS-SUB-TLV>true</OFS-SUB-TLV>
+                                        <STATUS-SUB-TLV>true</STATUS-SUB-TLV>
+                                        <TIME-SUB-TLV>true</TIME-SUB-TLV>
+                                        <USER-DATA-SUB-TLV>true</USER-DATA-SUB-TLV>
+                                    </SUB-TLV-CONFIG>
+                                </GLOBAL-TIME-ETH-MASTER>
+                            </GLOBAL-TIME-MASTERS>
+                            <OFFSET-TIME-DOMAIN-REF DEST="GLOBAL-TIME-DOMAIN">/ISOFT/GlobalTimeDomains/UTC</OFFSET-TIME-DOMAIN-REF>
+                            <SLAVES>
+                                <GLOBAL-TIME-ETH-SLAVE >
+                                    <SHORT-NAME>globalTimeEthSlave_0</SHORT-NAME>
+                                    <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign2/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                                    <FOLLOW-UP-TIMEOUT-VALUE>2.0</FOLLOW-UP-TIMEOUT-VALUE>
+                                    <TIME-LEAP-FUTURE-THRESHOLD>10.0</TIME-LEAP-FUTURE-THRESHOLD>
+                                    <TIME-LEAP-HEALING-COUNTER>10</TIME-LEAP-HEALING-COUNTER>
+                                    <TIME-LEAP-PAST-THRESHOLD>10.0</TIME-LEAP-PAST-THRESHOLD>
+                                    <CRC-VALIDATED>CRC-OPTIONAL</CRC-VALIDATED>
+                                    <TIME-HARDWARE-CORRECTION-THRESHOLD>5.0</TIME-HARDWARE-CORRECTION-THRESHOLD>
+                                </GLOBAL-TIME-ETH-SLAVE>
+                            </SLAVES>
+                            <SYNC-LOSS-THRESHOLD>0.0</SYNC-LOSS-THRESHOLD>
+                            <SYNC-LOSS-TIMEOUT>5.0</SYNC-LOSS-TIMEOUT>
+            </GLOBAL-TIME-DOMAIN>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

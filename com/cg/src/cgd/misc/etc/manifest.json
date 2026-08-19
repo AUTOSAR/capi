@@ -1,0 +1,73 @@
+{
+    "name": "cgd_proc",
+    "fullQualifiedName": "/ISOFT/PlatformComponents/cg/cgd_proc",
+    "executable": {
+        "name": "cgd",
+        "fullQualifiedName": "/ISOFT/PlatformComponents/com/cg/exe/cgd",
+        "buildType": "Debug",
+        "loggingBehavior": true,
+        "mininumTimerGranularity": 0,
+        "reportingBehavior": "REPORTS-EXECUTION-STATE",
+        "version": "",
+        "platform_application": true
+    },
+    "functionClusterAffiliation": "",
+    "numberOfRestartAttempts": 0,
+    "preMapping": false,
+    "stateDependentStartupConfig": [
+        {
+            "executionDependency": [
+                "nsomeip_routing_proc.running"
+            ],
+            "functionGroupState": {
+                "name": "/ISOFT/FunctionGroupSet/Machine1/MachineFG",
+                "states": [
+                    "Restart",
+                    "Startup",
+                    "Verify"
+                ]
+            },
+            "resourceConsumption": {
+                "heapUsage": 0,
+                "systemMemoryUsage": 0
+            },
+            "resourceGroup": "DefaultResourceGroup",
+            "startupConfig": {
+                "environmentVariable": [],
+                "processArgument": [],
+                "executionError": 0,
+                "schedulingPolicy": "SCHED_OTHER",
+                "schedulingPriority": 12,
+                "terminationBehavior": "PROCESS-IS-NOT-SELF-TERMINATING"
+            }
+        }
+    ],
+    "processor": [
+        {
+            "id": 0,
+            "core": [
+                0,
+                1
+            ]
+        }
+    ],
+    "service_instance_to_port_prototype_mapping": [
+        {
+            "instance_specifier": "cgd/root_swc/CgServerPDiagnosticResetServer",
+            "service_instance": "/iSOFT/Machine1/core/cg/DiagnosticReset/Provided/SomeipProvidedDiagnosticResetServerInstance"
+        },
+        {
+            "instance_specifier": "cgd/root_swc/CgServerPPowerModeServer",
+            "service_instance": "/iSOFT/Machine1/core/cg/PowerMode/Provided/SomeipProvidedPowerModeServerInstance"
+        },
+        {
+            "instance_specifier": "cgd/root_swc/CgServerRDiagnosticResetClient",
+            "service_instance": "/iSOFT/Machine1/core/cg/DiagnosticReset/Required/SomeipRequiredDiagnosticResetClientInstance"
+        },
+        {
+            "instance_specifier": "cgd/root_swc/CgServerRPowerModeClient",
+            "service_instance": "/iSOFT/Machine1/core/cg/PowerMode/Required/SomeipRequiredPowerModeClientInstance"
+        }
+    ],
+    "recovery_notification_info": []
+}

@@ -1,0 +1,66 @@
+{
+    "netname": "routing",
+    "host": "0.0.0.0",
+    "application": [
+        {
+            "name": "cgd_proc",
+            "client": "27919"
+        }
+    ],
+    "service": [
+        {
+            "service": "44",
+            "instance": "100",
+            "major": "1",
+            "minor": "0",
+            "ttl": "8",
+            "cyclic_delay": "2000",
+            "reliable": "32000",
+            "unreliable": "32000",
+            "signal": [],
+            "event": [
+                {
+                    "event": "32789",
+                    "type": "event",
+                    "reliability": "unreliable"
+                }
+            ],
+            "group": [
+                {
+                    "group": "913",
+                    "threshold": 10,
+                    "multicast": "239.0.0.1:30490"
+                }
+            ]
+        },
+        {
+            "service": "42",
+            "instance": "100",
+            "major": "1",
+            "minor": "0",
+            "ttl": "8",
+            "cyclic_delay": "2000",
+            "reliable": "32000",
+            "unreliable": "32000",
+            "signal": [],
+            "event": [
+                {
+                    "event": "32779",
+                    "type": "event",
+                    "reliability": "unreliable"
+                }
+            ],
+            "group": [
+                {
+                    "group": "911",
+                    "threshold": 10,
+                    "multicast": "239.0.0.1:30490"
+                }
+            ]
+        }
+    ],
+    "service_discovery": {
+        "multicast": "239.0.0.1",
+        "unicast": "30490"
+    }
+}

@@ -1,0 +1,135 @@
+{
+    "LocalComAccessControlEnabled": true,
+    "RemoteAccessControlEnabled": true,
+    "StrictVerificationMode": true,
+    "ComEventGrants": [
+        {
+            "processname": "/homeTest/Client",
+            "serviceid": 1011,
+            "instanceid": 1012,
+            "eventid": 1013
+        },
+        {
+            "processname": "/iam/com/test1",
+            "serviceid": 1014,
+            "instanceid": 1015,
+            "eventid": 1016
+        }
+    ],
+    "ComMethodGrants": [
+        {
+            "processname": "/homeTest/Client",
+            "serviceid": 5010,
+            "instanceid": 1,
+            "methodid": 32
+        },
+        {
+            "processname": "/iam/com/test",
+            "serviceid": 5011,
+            "instanceid": 2,
+            "methodid": 32
+        }
+    ],
+    "ComOfferServiceGrants": [
+        {
+            "processname": "/iam/com/test",
+            "serviceid": 5010,
+            "instanceid": 1
+        },
+        {
+            "processname": "/homeTest/Client",
+            "serviceid": 5011,
+            "instanceid": 2
+        }
+    ],
+    "ComFindServiceGrants": [
+        {
+            "processname": "/iam/com/test",
+            "serviceid": 5010,
+            "instanceid": 1
+        },
+        {
+            "processname": "/homeTest/Client",
+            "serviceid": 5011,
+            "instanceid": 2
+        }
+    ],
+    "ComRemoteEventGrants": [
+        {
+            "LocalIp": "192.168.1.44",
+            "LocalPortStart": 5001,
+            "LocalPortEnd": 5020,
+            "RemoteIp": "192.168.1.45",
+            "RemotePortStart": 5001,
+            "RemotePortEnd": 5020,
+            "serviceid": 1011,
+            "instanceid": 1012,
+            "eventid": 1013
+        },
+        {
+            "LocalIp": "",
+            "LocalPortStart": -1,
+            "LocalPortEnd": -1,
+            "RemoteIp": "192.168.1.45",
+            "RemotePortStart": 5001,
+            "RemotePortEnd": 5020,
+            "serviceid": 1011,
+            "instanceid": 1012,
+            "eventid": 1013
+        }
+    ],
+    "ComRemoteMethodGrants": [
+        {
+            "LocalIp": "",
+            "LocalPortStart": -1,
+            "LocalPortEnd": -1,
+            "RemoteIp": "192.168.1.47",
+            "RemotePortStart": 5000,
+            "RemotePortEnd": 5009,
+            "Protocol": "UDP",
+            "serviceid": 1011,
+            "instanceid": 1012,
+            "methodid": 1013
+        },
+        {
+            "LocalIp": "192.168.1.45",
+            "LocalPortStart": 1000,
+            "LocalPortEnd": 2000,
+            "RemoteIp": "192.168.1.47",
+            "RemotePortStart": 5000,
+            "RemotePortEnd": 5050,
+            "Protocol": "UDP",
+            "serviceid": 1011,
+            "instanceid": 1012,
+            "methodid": 1013
+        }
+    ],
+    "ComTlsMethodGrants": [
+        {
+            "TlsName": "pskey",
+            "serviceid": 1011,
+            "instanceid": 1012,
+            "methodid": 1013
+        },
+        {
+            "TlsName": "pskeyMethod",
+            "serviceid": 2000,
+            "instanceid": 2001,
+            "methodid": 1020
+        }
+    ],
+    "ComTlsEventGrants": [
+        {
+            "TlsName": "pskeyEvent",
+            "serviceid": 2002,
+            "instanceid": 2003,
+            "eventid": 1021
+        },
+        {
+            "TlsName": "pskey",
+            "serviceid": 1011,
+            "instanceid": 1012,
+            "eventid": 1014
+        }
+    ]
+}

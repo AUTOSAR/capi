@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Idsm</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>Deployment</SHORT-NAME>
+              <ELEMENTS>
+                <IDS-DESIGN>
+                  <SHORT-NAME>IdsDesign_1n</SHORT-NAME>
+                  <ELEMENTS>
+                    <IDS-COMMON-ELEMENT-REF-CONDITIONAL>
+                      <IDS-COMMON-ELEMENT-REF DEST="IDSM-INSTANCE">/ISOFT/Idsm/Deployment/Idsm_Instance_1</IDS-COMMON-ELEMENT-REF>
+                    </IDS-COMMON-ELEMENT-REF-CONDITIONAL>
+                  </ELEMENTS>
+                </IDS-DESIGN>
+                <IDSM-PROPERTIES>
+                  <SHORT-NAME>IdsmProperties_1</SHORT-NAME>
+                  <RATE-LIMITATION-FILTERS>
+                    <IDSM-RATE-LIMITATION>
+                      <SHORT-NAME>RateLimit_auth</SHORT-NAME>
+                      <MAX-EVENTS-IN-INTERVAL>24</MAX-EVENTS-IN-INTERVAL>
+                      <TIME-INTERVAL>12.0</TIME-INTERVAL>
+                    </IDSM-RATE-LIMITATION>
+                  </RATE-LIMITATION-FILTERS>
+                  <TRAFFIC-LIMITATION-FILTERS>
+                    <IDSM-TRAFFIC-LIMITATION>
+                      <SHORT-NAME>TrafficLimit_auth</SHORT-NAME>
+                      <MAX-BYTES-IN-INTERVAL>20480</MAX-BYTES-IN-INTERVAL>
+                      <TIME-INTERVAL>12.0</TIME-INTERVAL>
+                    </IDSM-TRAFFIC-LIMITATION>
+                  </TRAFFIC-LIMITATION-FILTERS>
+                </IDSM-PROPERTIES>
+                <IDSM-INSTANCE>
+                  <SHORT-NAME>Idsm_Instance_1</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="iSOFT:idsm:Limitation">
+                        <SD GID="iSOFT:idsm:Limitation:Event">16</SD>
+                        <SD GID="iSOFT:idsm:Limitation:Context">256</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <IDSM-INSTANCE-ID>1</IDSM-INSTANCE-ID>
+                  <IDSM-MODULE-INSTANTIATION-REF DEST="IDSM-MODULE-INSTANTIATION">/ISOFT/Development/Machine1/IdsmModuleInstantiation</IDSM-MODULE-INSTANTIATION-REF>
+                  <RATE-LIMITATION-FILTERS>
+                    <IDSM-RATE-LIMITATION-REF-CONDITIONAL>
+                      <IDSM-RATE-LIMITATION-REF DEST="IDSM-RATE-LIMITATION">/ISOFT/Idsm/Deployment/IdsmProperties_1/RateLimit_auth</IDSM-RATE-LIMITATION-REF>
+                    </IDSM-RATE-LIMITATION-REF-CONDITIONAL>
+                  </RATE-LIMITATION-FILTERS>
+                  <SIGNATURE-SUPPORT-AP>
+                    <CRYPTO-PRIMITIVE>RSA</CRYPTO-PRIMITIVE>
+                  </SIGNATURE-SUPPORT-AP>
+                  <TIMESTAMP-FORMAT>noAutosar</TIMESTAMP-FORMAT>
+                  <TRAFFIC-LIMITATION-FILTERS>
+                    <IDSM-TRAFFIC-LIMITATION-REF-CONDITIONAL>
+                      <IDSM-TRAFFIC-LIMITATION-REF DEST="IDSM-TRAFFIC-LIMITATION">/ISOFT/Idsm/Deployment/IdsmProperties_1/TrafficLimit_auth</IDSM-TRAFFIC-LIMITATION-REF>
+                    </IDSM-TRAFFIC-LIMITATION-REF-CONDITIONAL>
+                  </TRAFFIC-LIMITATION-FILTERS>
+                </IDSM-INSTANCE>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

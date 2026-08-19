@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>iSOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE S="">
+          <SHORT-NAME>Machine2</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>core</SHORT-NAME>
+              <AR-PACKAGES>
+                <AR-PACKAGE>
+                  <SHORT-NAME>cg</SHORT-NAME>
+                  <AR-PACKAGES>
+                    <AR-PACKAGE>
+                      <SHORT-NAME>ServiceInstanceToPortPrototypeMapping</SHORT-NAME>
+                      <ELEMENTS>
+                        <SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING >
+                          <SHORT-NAME>SomeipCGProvidedDiagnosticResetServerInstance2</SHORT-NAME>
+                          <PORT-PROTOTYPE-IREF>
+                            <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/ISOFT/PlatformComponents/com/cg/exe/cgd/root_swc</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+                            <TARGET-PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/ISOFT/PlatformComponents/com/cg/swc/cgdemon/CgServerPDiagnosticResetServer</TARGET-PORT-PROTOTYPE-REF>
+                          </PORT-PROTOTYPE-IREF>
+                          <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">/ISOFT/PlatformComponents/com/cg/cgd_proc_design</PROCESS-DESIGN-REF>
+                          <PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/cg/cgd_proc2</PROCESS-REF>
+                          <SERVICE-INSTANCE-REF DEST="PROVIDED-SOMEIP-SERVICE-INSTANCE">/iSOFT/Machine2/core/cg/DiagnosticReset/Provided/SomeipProvidedDiagnosticResetServerInstance2</SERVICE-INSTANCE-REF>
+                        </SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
+                        <SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING >
+                          <SHORT-NAME>SomeipCGProvidedPowerModeServerInstance2</SHORT-NAME>
+                          <PORT-PROTOTYPE-IREF>
+                            <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/ISOFT/PlatformComponents/com/cg/exe/cgd/root_swc</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+                            <TARGET-PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/ISOFT/PlatformComponents/com/cg/swc/cgdemon/CgServerPPowerModeServer</TARGET-PORT-PROTOTYPE-REF>
+                          </PORT-PROTOTYPE-IREF>
+                          <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">/ISOFT/PlatformComponents/com/cg/cgd_proc_design</PROCESS-DESIGN-REF>
+                          <PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/cg/cgd_proc2</PROCESS-REF>
+                          <SERVICE-INSTANCE-REF DEST="PROVIDED-SOMEIP-SERVICE-INSTANCE">/iSOFT/Machine2/core/cg/PowerMode/Provided/SomeipProvidedPowerModeServerInstance2</SERVICE-INSTANCE-REF>
+                        </SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
+                        <SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
+                          <SHORT-NAME>SomeipCGRequiredDiagnosticResetClientInstance2</SHORT-NAME>
+                          <PORT-PROTOTYPE-IREF>
+                            <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/ISOFT/PlatformComponents/com/cg/exe/cgd/root_swc</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+                            <TARGET-PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/ISOFT/PlatformComponents/com/cg/swc/cgdemon/CgServerRDiagnosticResetClient</TARGET-PORT-PROTOTYPE-REF>
+                          </PORT-PROTOTYPE-IREF>
+                          <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">/ISOFT/PlatformComponents/com/cg/cgd_proc_design</PROCESS-DESIGN-REF>
+                          <PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/cg/cgd_proc2</PROCESS-REF>
+                          <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/iSOFT/Machine2/core/cg/DiagnosticReset/Required/SomeipRequiredDiagnosticResetClientInstance2</SERVICE-INSTANCE-REF>
+                        </SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
+                        <SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING >
+                          <SHORT-NAME>SomeipCGRequiredPowerModeClientInstance2</SHORT-NAME>
+                          <PORT-PROTOTYPE-IREF>
+                            <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/ISOFT/PlatformComponents/com/cg/exe/cgd/root_swc</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+                            <TARGET-PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/ISOFT/PlatformComponents/com/cg/swc/cgdemon/CgServerRPowerModeClient</TARGET-PORT-PROTOTYPE-REF>
+                          </PORT-PROTOTYPE-IREF>
+                          <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">/ISOFT/PlatformComponents/com/cg/cgd_proc_design</PROCESS-DESIGN-REF>
+                          <PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/cg/cgd_proc2</PROCESS-REF>
+                          <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/iSOFT/Machine2/core/cg/PowerMode/Required/SomeipRequiredPowerModeClientInstance2</SERVICE-INSTANCE-REF>
+                        </SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                    <AR-PACKAGE>
+                      <SHORT-NAME>SomeipServiceInstanceToMachineMapping</SHORT-NAME>
+                      <ELEMENTS>
+                        <SOMEIP-SERVICE-INSTANCE-TO-MACHINE-MAPPING >
+                          <SHORT-NAME>ProvidedInstanceToMachineMapping</SHORT-NAME>
+                          <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign2/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                          <SERVICE-INSTANCE-REFS>
+                            <SERVICE-INSTANCE-REF DEST="PROVIDED-SOMEIP-SERVICE-INSTANCE">/iSOFT/Machine2/core/cg/DiagnosticReset/Provided/SomeipProvidedDiagnosticResetServerInstance2</SERVICE-INSTANCE-REF>
+                            <SERVICE-INSTANCE-REF DEST="PROVIDED-SOMEIP-SERVICE-INSTANCE">/iSOFT/Machine2/core/cg/PowerMode/Provided/SomeipProvidedPowerModeServerInstance2</SERVICE-INSTANCE-REF>
+                          </SERVICE-INSTANCE-REFS>
+                          <TCP-PORT>32000</TCP-PORT>
+                          <UDP-PORT>32000</UDP-PORT>
+                        </SOMEIP-SERVICE-INSTANCE-TO-MACHINE-MAPPING>
+                        <SOMEIP-SERVICE-INSTANCE-TO-MACHINE-MAPPING >
+                          <SHORT-NAME>RequiredInstanceToMachineMapping</SHORT-NAME>
+                          <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign2/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                          <SERVICE-INSTANCE-REFS>
+                            <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/iSOFT/Machine2/core/cg/DiagnosticReset/Required/SomeipRequiredDiagnosticResetClientInstance2</SERVICE-INSTANCE-REF>
+                            <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/iSOFT/Machine2/core/cg/PowerMode/Required/SomeipRequiredPowerModeClientInstance2</SERVICE-INSTANCE-REF>
+                          </SERVICE-INSTANCE-REFS>
+                          <TCP-PORT>32001</TCP-PORT>
+                          <UDP-PORT>32001</UDP-PORT>
+                        </SOMEIP-SERVICE-INSTANCE-TO-MACHINE-MAPPING>
+                      </ELEMENTS>
+                    </AR-PACKAGE>
+                  </AR-PACKAGES>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

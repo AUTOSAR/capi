@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Development</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>DiagnosticContributionSet</SHORT-NAME>
+              <AR-PACKAGES>
+                <AR-PACKAGE>
+                  <SHORT-NAME>Machine1</SHORT-NAME>
+                  <ELEMENTS>
+                    <DIAGNOSTIC-CONTRIBUTION-SET>
+                      <SHORT-NAME>DiagnosticContributionSet_core</SHORT-NAME>
+                      <ELEMENTS>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-DATA-IDENTIFIER-SET">/ISOFT/DiagnosticDataIdentifierSet/DiagnosticDataIdentifierSet_0x0064</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-DATA-IDENTIFIER">/ISOFT/DiagnosticDataIdentifier/DiagnosticDataIdentifier_0x0064</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-ENABLE-CONDITION-GROUP">/ISOFT/DiagnosticEnableConditionGroup/DiagnosticEnableConditionGroup_nm</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-ENABLE-CONDITION">/ISOFT/DiagnosticEnableCondition/DiagnosticEnableCondition_nm</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-EVENT">/ISOFT/DiagnosticEvent/DiagnosticEvent_nm</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-EVENT-TO-ENABLE-CONDITION-GROUP-MAPPING">/ISOFT/DiagnosticEvent/DiagnosticEvent_nm_EnableConditionGroup</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-EVENT-PORT-MAPPING">/ISOFT/nm/DiagnosticDesignDtcMapping/DiagnosticEvent_nm_Monitor</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-EVENT-TO-OPERATION-CYCLE-MAPPING">/ISOFT/DiagnosticEvent/DiagnosticEvent_nm_OperationCycle</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-EVENT-TO-TROUBLE-CODE-UDS-MAPPING">/ISOFT/DiagnosticEvent/DiagnosticEvent_nm_TroubleCodeUds</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-PROVIDED-DATA-MAPPING">/ISOFT/DiagnosticExtendedDataRecord/DiagnosticExtendedDataRecord_0_Element_0x0064</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-EXTENDED-DATA-RECORD">/ISOFT/DiagnosticExtendedDataRecord/DiagnosticExtendedDataRecord_0x0064</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-FREEZE-FRAME">/ISOFT/DiagnosticFreezeFrame/DiagnosticFreezeFrame_nm</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-MEMORY-DESTINATION-PRIMARY">/ISOFT/DiagnosticMemoryDestinationPrimary/DiagnosticMemoryDestinationPrimary_nm</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-OPERATION-CYCLE">/ISOFT/DiagnosticOperationCycle/DiagnosticOperationCycle_nm</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-READ-DTC-INFORMATION-CLASS">/ISOFT/DiagnosticReadDTCInformation/DiagnosticReadDTCInformationClass_nm</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-READ-DTC-INFORMATION">/ISOFT/DiagnosticReadDTCInformation/DiagnosticReadDTCInformation_nm</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-READ-DATA-BY-IDENTIFIER-CLASS">/ISOFT/DiagnosticReadDataByIdentifierClass/DiagnosticReadDataByIdentifierClass_0x0064</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-READ-DATA-BY-IDENTIFIER">/ISOFT/DiagnosticReadDataByIdentifier/DiagnosticReadDataByIdentifier_0x0064</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-SERVICE-GENERIC-MAPPING">/ISOFT/nm/DiagnosticDesignDtcMapping/DiagnosticReadDataByIdentifier_nm</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-TROUBLE-CODE-GROUP">/ISOFT/DiagnosticTroubleCodeGroup/DiagnosticTroubleCodeGroup_nm</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-TROUBLE-CODE-PROPS">/ISOFT/DiagnosticTroubleCodeUdsProps/DiagnosticTroubleCodeUdsProps_nm</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                        <DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                          <DIAGNOSTIC-COMMON-ELEMENT-REF DEST="DIAGNOSTIC-TROUBLE-CODE-UDS">/ISOFT/DiagnosticTroubleCodeUds/DiagnosticTroubleCodeUds_nm</DIAGNOSTIC-COMMON-ELEMENT-REF>
+                        </DIAGNOSTIC-COMMON-ELEMENT-REF-CONDITIONAL>
+                      </ELEMENTS>
+                      <SERVICE-TABLES>
+                        <DIAGNOSTIC-SERVICE-TABLE-REF-CONDITIONAL>
+                          <DIAGNOSTIC-SERVICE-TABLE-REF DEST="DIAGNOSTIC-SERVICE-TABLE">/ISOFT/DiagnosticServiceTable/DiagnosticServiceTable_nm</DIAGNOSTIC-SERVICE-TABLE-REF>
+                        </DIAGNOSTIC-SERVICE-TABLE-REF-CONDITIONAL>
+                      </SERVICE-TABLES>
+                    </DIAGNOSTIC-CONTRIBUTION-SET>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+        <AR-PACKAGE S="">
+          <SHORT-NAME>nm</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>DiagnosticDesignDtcMapping</SHORT-NAME>
+              <ELEMENTS>
+                <DIAGNOSTIC-EVENT-PORT-MAPPING >
+                  <SHORT-NAME>DiagnosticEvent_nm_Monitor</SHORT-NAME>
+                  <DIAGNOSTIC-EVENT-REF DEST="DIAGNOSTIC-EVENT">/ISOFT/DiagnosticEvent/DiagnosticEvent_nm</DIAGNOSTIC-EVENT-REF>
+                  <PROCESS-REF DEST="PROCESS-DESIGN">/ISOFT/PlatformComponents/nm/network_manager_design</PROCESS-REF>
+                  <SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                    <CONTEXT-ROOT-COMPONENT-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/ISOFT/PlatformComponents/nm/exe/nmd/network_manager_root</CONTEXT-ROOT-COMPONENT-REF>
+                    <TARGET-SWC-SERVICE-DEPENDENCY-REF DEST="SWC-SERVICE-DEPENDENCY">/ISOFT/PlatformComponents/nm/swc/nm/AdaptiveSwcInternalBehavior_nm/DiagnosticEvent_nm_Monitor</TARGET-SWC-SERVICE-DEPENDENCY-REF>
+                  </SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                </DIAGNOSTIC-EVENT-PORT-MAPPING>
+                <DIAGNOSTIC-SERVICE-GENERIC-MAPPING >
+                  <SHORT-NAME>DiagnosticReadDataByIdentifier_nm</SHORT-NAME>
+                  <DIAGNOSTIC-SERVICE-INSTANCE-REF DEST="DIAGNOSTIC-READ-DATA-BY-IDENTIFIER">/ISOFT/DiagnosticReadDataByIdentifier/DiagnosticReadDataByIdentifier_0x0064</DIAGNOSTIC-SERVICE-INSTANCE-REF>
+                  <PROCESS-REF DEST="PROCESS-DESIGN">/ISOFT/PlatformComponents/nm/network_manager_design</PROCESS-REF>
+                  <SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                    <CONTEXT-ROOT-COMPONENT-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/ISOFT/PlatformComponents/nm/exe/nmd/network_manager_root</CONTEXT-ROOT-COMPONENT-REF>
+                    <TARGET-SWC-SERVICE-DEPENDENCY-REF DEST="SWC-SERVICE-DEPENDENCY">/ISOFT/PlatformComponents/nm/swc/nm/AdaptiveSwcInternalBehavior_nm/DiagnosticDataIdentifierGeneric_nm</TARGET-SWC-SERVICE-DEPENDENCY-REF>
+                  </SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                </DIAGNOSTIC-SERVICE-GENERIC-MAPPING>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

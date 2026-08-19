@@ -1,0 +1,44 @@
+{
+    "loggingBehavior": true,
+    "appId": "LDEO",
+    "appDesc": "LOG DEMO APPLICATION",
+    "channels": [
+        {
+            "modes": 4,
+            "level": 6,
+            "fileName": "/home/yang/logs/nam-_e.dlt",
+            "fileShared": true,
+            "ctxId": "ctx1",
+            "ctxDesc": "LOGDEMO_CHANNEL_2",
+            "bufferSize": 0,
+            "fileSize": 0,
+            "fileCount": 5
+        },
+        {
+            "modes": 2,
+            "level": 6,
+            "fileName": "/home/yang/logs/LDEOctx1.dlt",
+            "fileShared": true,
+            "ctxId": "ctx2",
+            "ctxDesc": "LOGDEMO_CHANNEL_1",
+            "nonVerboseMode": true,
+            "sessionId": 1234,
+            "bufferSize": 0,
+            "fileSize": 10000024,
+            "fileCount": 5
+        },
+        {
+            "modes": 6,
+            "level": 6,
+            "fileName": "/home/yang/logs/LDEOctx1.dlt",
+            "fileShared": false,
+            "ctxId": "ctx3",
+            "ctxDesc": "LOGDEMO_CHANNEL_1",
+            "nonVerboseMode": true,
+            "sessionId": 1234,
+            "bufferSize": 0,
+            "fileSize": 10000024,
+            "fileCount": 5
+        }
+    ]
+}

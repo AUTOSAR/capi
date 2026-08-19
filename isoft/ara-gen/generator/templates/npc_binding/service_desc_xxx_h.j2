@@ -1,0 +1,470 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+
+{%- extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+{% macro method_or_unknown(value) %}
+{% if value %}{{value}}{% else %}ara::com::internal::npc::types::kUndefinedMethodId{% endif %}
+{% endmacro %}
+{% macro event_or_unknown(value) %}
+{% if value %}{{value}}{% else %}ara::com::internal::npc::types::kUndefinedEventId{% endif %}
+{% endmacro %}
+
+#include "{{service.namespacepath}}{{service.standard_name}}_common.h"
+#include "ara/com/internal/npc/npc_types.h"
+
+
+
+{% if service.namespaces %}{% for namespace in service.namespaces %}
+namespace {{namespace}} {
+{% endfor %}{% endif %}
+namespace npc {
+
+struct {{service.service_deployment.name}}ServiceDesc: {{service.name}}{
+    static constexpr auto serviceId() {
+        return ara::com::internal::npc::types::ServiceId{ {{service.deployment_id}} };
+    }
+    static constexpr auto serviceVersionMajor() {
+        return ara::com::internal::npc::types::ServiceVersionMajor{ {{service.service_version_major}} };
+    }
+    static constexpr auto serviceVersionMinor() {
+        return ara::com::internal::npc::types::ServiceVersionMinor{ {{service.service_version_minor}} };
+    }
+    static constexpr auto requiredMinimumMinor() {
+        return ara::com::internal::npc::types::ServiceVersionMinor{ {{service.required_minimum_minor_version}} };
+    }
+    static constexpr auto enabledMinimumMinorPolicy() {
+        return bool{ {% if service.is_minimum_minor_policy_enabled %}true{% else %}false{% endif %} };
+    }
+    static constexpr auto blacklistedVersionsNumber() {
+        return uint32_t{ {{service.blacklisted_versions|length}} };
+    }
+{% if service.blacklisted_versions %}
+{% for bl_version in service.blacklisted_versions %}
+    static constexpr auto blacklistedVersions() {
+        return ara::com::internal::npc::types::ToArray<ara::com::internal::npc::types::BlacklistedVersion>({ ara::com::internal::npc::types::BlacklistedVersion{ {{ bl_version["major"] }}, {{ bl_version["minor"] }} } });
+    }
+{% endfor %}
+{% else %}
+    static constexpr auto blacklistedVersions() {
+        return ara::com::internal::npc::types::ToArray<ara::com::internal::npc::types::BlacklistedVersion>({ ara::com::internal::npc::types::BlacklistedVersion{ 0x0, 0x0 } });
+    }
+{% endif %}
+};
+
+{% for event in service.events %}
+struct {{service.service_deployment.name}}{{event.name}}Desc :{{service.service_deployment.name}}ServiceDesc {
+    static constexpr auto eventId() {
+        return ara::com::internal::npc::types::EventId{ {{event_or_unknown(event.eventidfornpc)}} };
+    }
+    static constexpr auto eventGroups() {
+        return ara::com::internal::npc::types::ToArray<ara::com::internal::npc::types::EventGroupId>({ara::com::internal::npc::types::EventGroupId{ {{event_or_unknown(event.eventidfornpc)}} }});
+    }
+{% if event.is_reliable %}
+    static constexpr auto isReliable() {
+        return bool{true};
+    }
+{% else %}
+    static constexpr auto isReliable() {
+        return bool{false};
+    }
+{% endif %}
+    static constexpr auto byteOrder(){
+{% if event.transformationprops and event.transformationprops.byteorder != ""%}
+        return ara::com::internal::npc::serialize::ByteOrder::{{event.transformationprops.byteorder}};
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::byteOrder();
+{% endif %}
+    }
+    static constexpr auto sessionHandling(){
+{% if event.transformationprops and event.transformationprops.sessionhandling != ""%}
+        return ara::com::internal::npc::serialize::SessionHandling::{{event.transformationprops.sessionhandling}};
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sessionHandling();
+{% endif %}
+    }
+    static constexpr auto alignment(){
+{% if event.transformationprops and event.transformationprops.alignment != None%}
+        return uint16_t{ {{event.transformationprops.alignment}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::alignment();
+{% endif %}
+    }
+    static constexpr auto implementsLegacyStringSerialization(){
+{% if event.transformationprops and event.transformationprops.implementslegacyStringSerialization != None%}
+        return bool{ {{event.transformationprops.implementslegacyStringSerialization}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::implementsLegacyStringSerialization();
+{% endif %}
+    }
+    static constexpr auto isDynamicLengthFieldSize(){
+{% if event.transformationprops and event.transformationprops.isDynamicLengthFieldsize != None%}
+        return bool{ {{event.transformationprops.isDynamicLengthFieldsize}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::isDynamicLengthFieldSize();
+{% endif %}
+    }
+    static constexpr auto sizeofArrayLengthField(){
+{% if event.transformationprops and event.transformationprops.sizeofArrayLengthField != None %}
+        return uint8_t{ {{event.transformationprops.sizeofArrayLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofArrayLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofFixedArrayLengthField(){
+{% if event.transformationprops and event.transformationprops.sizeofFixedArrayLengthField != None %}
+        return uint8_t{ {{event.transformationprops.sizeofFixedArrayLengthField}} };
+{% elif event.transformationprops and event.transformationprops.sizeofArrayLengthField != None %}
+        return uint8_t{ {{event.transformationprops.sizeofArrayLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofFixedArrayLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofStringLengthField(){
+{% if event.transformationprops and event.transformationprops.sizeofstringLengthField != None and event.transformationprops.sizeofstringLengthField != 0%}
+        return uint8_t{ {{event.transformationprops.sizeofstringLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofStringLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofFixedStringLengthField(){
+{% if event.transformationprops and event.transformationprops.sizeofFixedStringLengthField != None %}
+        return uint8_t{ {{event.transformationprops.sizeofFixedStringLengthField}} };
+{% elif event.transformationprops and event.transformationprops.sizeofstringLengthField != None and event.transformationprops.sizeofstringLengthField != 0%}
+        return uint8_t{ {{event.transformationprops.sizeofstringLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofFixedStringLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofStructLengthField(){
+{% if event.transformationprops and event.transformationprops.sizeofstructLengthField != None and event.transformationprops.sizeofstructLengthField != 0%}
+        return uint8_t{ {{event.transformationprops.sizeofstructLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofStructLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofUnionLengthField(){
+{% if event.transformationprops and event.transformationprops.sizeofUnionLengthField != None %}
+        return uint8_t{ {{event.transformationprops.sizeofUnionLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofUnionLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofUnionTypeSelectorField(){
+{% if event.transformationprops and event.transformationprops.sizeofUnionTypeselectorField != None%}
+        return uint8_t{ {{event.transformationprops.sizeofUnionTypeselectorField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofUnionTypeSelectorField();
+{% endif %}
+    }
+    static constexpr auto stringEncoding(){
+{% if event.transformationprops and event.transformationprops.stringEncoding != None%}
+        return ara::com::internal::npc::serialize::StringEncoding::{{event.transformationprops.stringEncoding}};
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::stringEncoding();
+{% endif %}
+    }
+};
+{% endfor %}
+
+
+{% for method in service.methods %}
+struct {{service.service_deployment.name}}{{method.name}}Desc:{{service.service_deployment.name}}ServiceDesc {
+    static constexpr auto methodId() {
+        return ara::com::internal::npc::types::MethodId{ {{method.deployment_id}} };
+    }
+    static constexpr auto possibleErrors() {return {{method.name}}Errors;}
+{% if method.is_reliable %}
+    static constexpr auto isReliable() {
+        return bool{true};
+    }
+{% else %}
+    static constexpr auto isReliable() {
+        return bool{false};
+    }
+{% endif %}
+    static constexpr auto byteOrder(){
+{% if method.transformationprops and method.transformationprops.byteorder != ""%}
+        return ara::com::internal::npc::serialize::ByteOrder::{{method.transformationprops.byteorder}};
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::byteOrder();
+{% endif %}
+    }
+    static constexpr auto sessionHandling(){
+{% if method.transformationprops and method.transformationprops.sessionhandling !=""%}
+        return ara::com::internal::npc::serialize::SessionHandling::{{method.transformationprops.sessionhandling}};
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sessionHandling();
+{% endif %}
+    }
+    static constexpr auto alignment(){
+{% if method.transformationprops and method.transformationprops.alignment != None%}
+        return uint16_t{ {{method.transformationprops.alignment}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::alignment();
+{% endif %}
+    }
+    static constexpr auto implementsLegacyStringSerialization(){
+{% if method.transformationprops and method.transformationprops.implementslegacyStringSerialization != None%}
+        return bool{ {{method.transformationprops.implementslegacyStringSerialization}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::implementsLegacyStringSerialization();
+{% endif %}
+    }
+    static constexpr auto isDynamicLengthFieldSize(){
+{% if method.transformationprops and method.transformationprops.isDynamicLengthFieldsize != None%}
+        return bool{ {{method.transformationprops.isDynamicLengthFieldsize}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::isDynamicLengthFieldSize();
+{% endif %}
+    }
+    static constexpr auto sizeofArrayLengthField(){
+{% if method.transformationprops and method.transformationprops.sizeofArrayLengthField != None %}
+        return uint8_t{ {{method.transformationprops.sizeofArrayLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofArrayLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofFixedArrayLengthField(){
+{% if method.transformationprops and method.transformationprops.sizeofFixedArrayLengthField != None %}
+        return uint8_t{ {{method.transformationprops.sizeofFixedArrayLengthField}} };
+{% elif method.transformationprops and method.transformationprops.sizeofArrayLengthField != None %}
+        return uint8_t{ {{method.transformationprops.sizeofArrayLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofFixedArrayLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofStringLengthField(){
+{% if method.transformationprops and method.transformationprops.sizeofstringLengthField != None and method.transformationprops.sizeofstringLengthField != 0%}
+        return uint8_t{ {{method.transformationprops.sizeofstringLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofStringLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofFixedStringLengthField(){
+{% if method.transformationprops and method.transformationprops.sizeofFixedStringLengthField != None %}
+        return uint8_t{ {{method.transformationprops.sizeofFixedStringLengthField}} };
+{% elif method.transformationprops and method.transformationprops.sizeofstringLengthField != None and method.transformationprops.sizeofstringLengthField != 0%}
+        return uint8_t{ {{method.transformationprops.sizeofstringLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofFixedStringLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofStructLengthField(){
+{% if method.transformationprops and method.transformationprops.sizeofstructLengthField != None and method.transformationprops.sizeofstructLengthField != 0%}
+        return uint8_t{ {{method.transformationprops.sizeofstructLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofStructLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofUnionLengthField(){
+{% if method.transformationprops and method.transformationprops.sizeofUnionLengthField != None %}
+        return uint8_t{ {{method.transformationprops.sizeofUnionLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofUnionLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofUnionTypeSelectorField(){
+{% if method.transformationprops and method.transformationprops.sizeofUnionTypeselectorField != None%}
+        return uint8_t{ {{method.transformationprops.sizeofUnionTypeselectorField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofUnionTypeSelectorField();
+{% endif %}
+    }
+    static constexpr auto stringEncoding(){
+{% if method.transformationprops and method.transformationprops.stringEncoding != None%}
+        return ara::com::internal::npc::serialize::StringEncoding::{{method.transformationprops.stringEncoding}};
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::stringEncoding();
+{% endif %}
+    }
+};
+{% endfor %}
+
+
+{% for field in service.all_fields %}
+struct {{service.service_deployment.name}}{{field.name}}Desc : {{service.service_deployment.name}}ServiceDesc {
+{% if field.has_notifier%}
+    static constexpr auto eventId() {
+        return ara::com::internal::npc::types::EventId{ {{event_or_unknown(field.event_id)}} };
+    }
+{% if field.has_reliable_notifier %}
+    static constexpr auto isReliable() {
+        return bool{true};
+    }
+{% else %}
+    static constexpr auto isReliable() {
+        return bool{false};
+    }
+{% endif %}
+
+{% if service.get_field_event_group(field) %}
+    static constexpr auto eventGroups() {
+        return ara::com::internal::npc::types::ToArray<ara::com::internal::npc::types::EventGroupId>({ {% for event_group_id in service.get_field_event_group(field) %} ara::com::internal::npc::types::EventGroupId{ {{event_group_id}} }{{ "," if not loop.last }}{% endfor %} });
+    }
+{% else %}
+    // Just a placeholder due to field notifier absence. Value will never be used but required for compilation.
+    static constexpr auto eventGroups() {
+        return ara::com::internal::npc::types::ToArray<ara::com::internal::npc::types::EventGroupId>({ara::com::internal::npc::types::EventGroupId{ 0x0 }});
+    }
+{% endif %}
+{% endif %}
+{% if field.has_setter %}
+    static constexpr auto setMethodId() {
+        return ara::com::internal::npc::types::MethodId{ {{method_or_unknown(field.set_method_id)}} };
+    }
+{% if field.has_reliable_setter %}
+    static constexpr auto isSetterReliable() {
+        return bool{true};
+    }
+{% else %}
+    static constexpr auto isSetterReliable() {
+        return bool{false};
+    }
+{% endif %}
+{% endif %}
+{%if field.has_getter%}
+    static constexpr auto getMethodId() {
+        return ara::com::internal::npc::types::MethodId{ {{method_or_unknown(field.get_method_id)}} };
+    }
+{% if field.has_reliable_getter %}
+    static constexpr auto isGetterReliable() {
+        return bool{true};
+    }
+{% else %}
+    static constexpr auto isGetterReliable() {
+        return bool{false};
+    }
+{% endif %}
+{% endif %}
+    static constexpr auto byteOrder(){
+{% if field.transformationprops and field.transformationprops.byteorder != ""%}
+        return ara::com::internal::npc::serialize::ByteOrder::{{field.transformationprops.byteorder}};
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::byteOrder();
+{% endif %}
+    }
+    static constexpr auto sessionHandling(){
+{% if field.transformationprops and field.transformationprops.sessionhandling != ""%}
+        return ara::com::internal::npc::serialize::SessionHandling::{{field.transformationprops.sessionhandling}};
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sessionHandling();
+{% endif %}
+    }
+    static constexpr auto alignment(){
+{% if field.transformationprops and field.transformationprops.alignment != None%}
+        return uint16_t{ {{field.transformationprops.alignment}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::alignment();
+{% endif %}
+    }
+    static constexpr auto implementsLegacyStringSerialization(){
+{% if field.transformationprops and field.transformationprops.implementslegacyStringSerialization != None%}
+        return bool{ {{field.transformationprops.implementslegacyStringSerialization}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::implementsLegacyStringSerialization();
+{% endif %}
+    }
+    static constexpr auto isDynamicLengthFieldSize(){
+{% if field.transformationprops and field.transformationprops.isDynamicLengthFieldsize != None%}
+        return bool{ {{field.transformationprops.isDynamicLengthFieldsize}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::isDynamicLengthFieldSize();
+{% endif %}
+    }
+    static constexpr auto sizeofArrayLengthField(){
+{% if field.transformationprops and field.transformationprops.sizeofArrayLengthField != None %}
+        return uint8_t{ {{field.transformationprops.sizeofArrayLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofArrayLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofFixedArrayLengthField(){
+{% if field.transformationprops and field.transformationprops.sizeofFixedArrayLengthField != None %}
+        return uint8_t{ {{field.transformationprops.sizeofFixedArrayLengthField}} };
+{% elif field.transformationprops and field.transformationprops.sizeofArrayLengthField != None %}
+        return uint8_t{ {{field.transformationprops.sizeofArrayLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofFixedArrayLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofStringLengthField(){
+{% if field.transformationprops and field.transformationprops.sizeofstringLengthField != None and field.transformationprops.sizeofstringLengthField != 0%}
+        return uint8_t{ {{field.transformationprops.sizeofstringLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofStringLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofFixedStringLengthField(){
+{% if field.transformationprops and field.transformationprops.sizeofFixedStringLengthField != None %}
+        return uint8_t{ {{field.transformationprops.sizeofFixedStringLengthField}} };
+{% elif field.transformationprops and field.transformationprops.sizeofstringLengthField != None and field.transformationprops.sizeofstringLengthField != 0%}
+        return uint8_t{ {{field.transformationprops.sizeofstringLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofFixedStringLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofStructLengthField(){
+{% if field.transformationprops and field.transformationprops.sizeofstructLengthField != None and field.transformationprops.sizeofstructLengthField != 0%}
+        return uint8_t{ {{field.transformationprops.sizeofstructLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofStructLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofUnionLengthField(){
+{% if field.transformationprops and field.transformationprops.sizeofUnionLengthField != None %}
+        return uint8_t{ {{field.transformationprops.sizeofUnionLengthField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofUnionLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofUnionTypeSelectorField(){
+{% if field.transformationprops and field.transformationprops.sizeofUnionTypeselectorField != None%}
+        return uint8_t{ {{field.transformationprops.sizeofUnionTypeselectorField}} };
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::sizeofUnionTypeSelectorField();
+{% endif %}
+    }
+    static constexpr auto stringEncoding(){
+{% if field.transformationprops and field.transformationprops.stringEncoding != None%}
+        return ara::com::internal::npc::serialize::StringEncoding::{{field.transformationprops.stringEncoding}};
+{% else %}
+        return ara::com::internal::npc::serialize::TransformationProps::stringEncoding();
+{% endif %}
+    }
+};
+{% endfor %}
+
+
+
+
+} // namespace npc
+{% if service.namespaces %}{% for namespace in service.namespaces|reverse %}
+} // namespace {{namespace}}
+{% endfor %}{% endif %}
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

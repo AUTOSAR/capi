@@ -1,0 +1,69 @@
+// Disclaimer
+//
+// This work (specification and/or software implementation) and the material
+// contained in it, as released by AUTOSAR, is for the purpose of information
+// only. AUTOSAR and the companies that have contributed to it shall not be
+// liable for any use of the work.
+//
+// The material contained in this work is protected by copyright and other
+// types of intellectual property rights. The commercial exploitation of the
+// material contained in this work requires a license to such intellectual
+// property rights.
+//
+// This work may be utilized or reproduced without any modification, in any
+// form or by any means, for informational purposes only. For any other
+// purpose, no part of the work may be utilized or reproduced, in any form
+// or by any means, without permission in writing from the publisher.
+//
+// The work has been developed for automotive applications only. It has
+// neither been developed, nor tested for non-automotive applications.
+//
+// The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+// --------------------------------------------------------------------------
+
+/// ================================================================
+///
+/// File description:
+/// ----------------
+/// @file       activation_line_agent.cpp
+/// @brief
+/// @details
+/// @date       2024-12-27
+/// @author     zhanglipeng
+/// @version    1.2.0
+///
+/// ================================================================
+
+#include "activation_line_agent.h"
+
+#include "activation_line_proxy.h"
+
+namespace isoft {
+namespace dm {
+namespace dic {
+
+ActivationLineAgent::ActivationLineAgent(uint16_t const& instanceId, uint32_t const& serviceInstanceId)
+{
+    proxy_ = std::make_shared< ActivationLineProxy >(instanceId, serviceInstanceId);
+}
+
+ara::core::Result< std::uint8_t > ActivationLineAgent::GetNetworkInterfaceId()
+{
+    return proxy_->GetNetworkInterfaceId();
+}
+
+ara::core::Result< bool > ActivationLineAgent::GetActivationLineState() { return proxy_->GetActivationLineState(); }
+
+void ActivationLineAgent::RegisterActivationLineStateNotifier(std::function< void(bool) > const& notifier)
+{
+    proxy_->RegisterActivationLineStateNotifier(notifier);
+}
+
+void ActivationLineAgent::RegisterOnReady(std::function< void(bool) > const& callback) noexcept
+{
+    proxy_->RegisterOnReady(callback);
+}
+
+}  // namespace dic
+}  // namespace dm
+}  // namespace isoft

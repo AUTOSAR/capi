@@ -1,0 +1,20 @@
+{
+    "recovery_notification_to_pport_prototype_mapping": [
+        {
+            "instance_specifier": "smd/state_manager/EngineSupervisionRecoveryNotification",
+            "healthChannelId": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelSupervision_engine"
+        },
+        {
+            "instance_specifier": "smd/state_manager/WheelSupervisionRecoveryNotification",
+            "healthChannelId": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelSupervision_wheel"
+        },
+        {
+            "instance_specifier": "smd/state_manager/TyrePressureHealthChannelRecoveryNotification",
+            "healthChannelId": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelExternalStatus_tyre"
+        },
+        {
+            "instance_specifier": "smd/state_manager/VoltagePressureHealthChannelRecoveryNotification",
+            "healthChannelId": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelExternalStatus_voltage"
+        }
+    ]
+}

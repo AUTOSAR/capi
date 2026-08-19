@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE >
+      <SHORT-NAME>ara</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE >
+          <SHORT-NAME>ucm_master</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE >
+              <SHORT-NAME>deployment</SHORT-NAME>
+              <ELEMENTS>
+                <SOMEIP-SERVICE-INTERFACE-DEPLOYMENT >
+                  <SHORT-NAME>VehiclePackageManagementSomeIp</SHORT-NAME>
+                  <FIELD-DEPLOYMENTS>
+                    <SOMEIP-FIELD-DEPLOYMENT >
+                      <SHORT-NAME>RequestedPackage</SHORT-NAME>
+                      <FIELD-REF DEST="FIELD">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/RequestedPackage</FIELD-REF>
+                      <GET >
+                        <SHORT-NAME>RequestedPackage_getter</SHORT-NAME>
+                        <METHOD-ID>31006</METHOD-ID>
+                        <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                      </GET>
+                      <NOTIFIER >
+                        <SHORT-NAME>RequestedPackage_notifier</SHORT-NAME>
+                        <EVENT-ID>9433</EVENT-ID>
+                        <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                      </NOTIFIER>
+                    </SOMEIP-FIELD-DEPLOYMENT>
+                    <SOMEIP-FIELD-DEPLOYMENT >
+                      <SHORT-NAME>SafetyState</SHORT-NAME>
+                      <FIELD-REF DEST="FIELD">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/SafetyState</FIELD-REF>
+                      <GET >
+                        <SHORT-NAME>SafetyState_getter</SHORT-NAME>
+                        <METHOD-ID>31007</METHOD-ID>
+                        <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                      </GET>
+                      <NOTIFIER >
+                        <SHORT-NAME>SafetyState_notifier</SHORT-NAME>
+                        <EVENT-ID>9434</EVENT-ID>
+                        <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                      </NOTIFIER>
+                    </SOMEIP-FIELD-DEPLOYMENT>
+                    <SOMEIP-FIELD-DEPLOYMENT >
+                      <SHORT-NAME>TransferState</SHORT-NAME>
+                      <FIELD-REF DEST="FIELD">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/TransferState</FIELD-REF>
+                      <GET >
+                        <SHORT-NAME>TransferState_getter</SHORT-NAME>
+                        <METHOD-ID>31005</METHOD-ID>
+                        <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                      </GET>
+                      <NOTIFIER >
+                        <SHORT-NAME>TransferState_notifier</SHORT-NAME>
+                        <EVENT-ID>9432</EVENT-ID>
+                        <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                      </NOTIFIER>
+                    </SOMEIP-FIELD-DEPLOYMENT>
+                  </FIELD-DEPLOYMENTS>
+                  <METHOD-DEPLOYMENTS>
+                    <SOMEIP-METHOD-DEPLOYMENT >
+                      <SHORT-NAME>AllowCampaign</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/AllowCampaign</METHOD-REF>
+                      <METHOD-ID>31110</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT >
+                      <SHORT-NAME>CancelCampaign</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/CancelCampaign</METHOD-REF>
+                      <METHOD-ID>31109</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT >
+                      <SHORT-NAME>DeleteTransfer</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/DeleteTransfer</METHOD-REF>
+                      <METHOD-ID>31111</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT >
+                      <SHORT-NAME>GetCampaignHistory</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/GetCampaignHistory</METHOD-REF>
+                      <METHOD-ID>31112</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT >
+                      <SHORT-NAME>GetSwClusterInfo</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/GetSwClusterInfo</METHOD-REF>
+                      <METHOD-ID>31113</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT >
+                      <SHORT-NAME>GetSwPackages</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/GetSwPackages</METHOD-REF>
+                      <METHOD-ID>31114</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT >
+                      <SHORT-NAME>SwPackageInventory</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/SwPackageInventory</METHOD-REF>
+                      <METHOD-ID>31115</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT >
+                      <SHORT-NAME>TransferData</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/TransferData</METHOD-REF>
+                      <METHOD-ID>31118</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT >
+                      <SHORT-NAME>TransferExit</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/TransferExit</METHOD-REF>
+                      <METHOD-ID>31119</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT >
+                      <SHORT-NAME>TransferStart</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/TransferStart</METHOD-REF>
+                      <METHOD-ID>31120</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT >
+                      <SHORT-NAME>TransferVehiclePackage</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement/TransferVehiclePackage</METHOD-REF>
+                      <METHOD-ID>31121</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                  </METHOD-DEPLOYMENTS>
+                  <SERVICE-INTERFACE-REF DEST="SERVICE-INTERFACE">/ara/ucm/pkgmgr/portinterfaces/VehiclePackageManagement</SERVICE-INTERFACE-REF>
+                  <EVENT-GROUPS>
+                    <SOMEIP-EVENT-GROUP >
+                      <SHORT-NAME>RequestedPackage_eventgroup</SHORT-NAME>
+                      <EVENT-GROUP-ID>45401</EVENT-GROUP-ID>
+                      <EVENT-REFS>
+                        <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/ara/ucm_master/deployment/VehiclePackageManagementSomeIp/RequestedPackage/RequestedPackage_notifier</EVENT-REF>
+                      </EVENT-REFS>
+                    </SOMEIP-EVENT-GROUP>
+                    <SOMEIP-EVENT-GROUP >
+                      <SHORT-NAME>SafetyState_eventgroup</SHORT-NAME>
+                      <EVENT-GROUP-ID>45402</EVENT-GROUP-ID>
+                      <EVENT-REFS>
+                        <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/ara/ucm_master/deployment/VehiclePackageManagementSomeIp/SafetyState/SafetyState_notifier</EVENT-REF>
+                      </EVENT-REFS>
+                    </SOMEIP-EVENT-GROUP>
+                    <SOMEIP-EVENT-GROUP >
+                      <SHORT-NAME>TransferState_eventgroup</SHORT-NAME>
+                      <EVENT-GROUP-ID>45400</EVENT-GROUP-ID>
+                      <EVENT-REFS>
+                        <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/ara/ucm_master/deployment/VehiclePackageManagementSomeIp/TransferState/TransferState_notifier</EVENT-REF>
+                      </EVENT-REFS>
+                    </SOMEIP-EVENT-GROUP>
+                  </EVENT-GROUPS>
+                  <SERVICE-INTERFACE-ID>31</SERVICE-INTERFACE-ID>
+                  <SERVICE-INTERFACE-VERSION>
+                    <MAJOR-VERSION>1</MAJOR-VERSION>
+                    <MINOR-VERSION>0</MINOR-VERSION>
+                  </SERVICE-INTERFACE-VERSION>
+                </SOMEIP-SERVICE-INTERFACE-DEPLOYMENT>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

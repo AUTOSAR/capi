@@ -1,0 +1,134 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{%- extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+{% macro cppStyle() %}
+{% if soaElementCppDefStyle=="inside" %}{{ service.name }}{% else %}{% endif %}
+{% endmacro %}
+
+#include "ara/com/internal/skeleton/event.h"
+#include "ara/com/internal/skeleton/field.h"
+#include "ara/com/internal/skeleton/skeleton.h"
+#include "{{ service.standard_name }}_common.h"
+
+{% if service.namespaces %}{% for ns in service.namespaces %}
+namespace {{ns}} {
+{% endfor %}{% endif %}
+namespace skeleton {
+{% if service.events %}
+namespace events {
+{% for event in service.events %}
+{% if loop.first %}
+  /// @uptrace{SWS_CM_00003, 84cc29c978aec068acc705370cacf6f3b31f5dc2}
+{% endif %}
+  using {{ cppStyle() }}{{ event.name }} = ara::com::internal::skeleton::Event<{{event.type_declaration}}>;
+{% endfor %}
+} // namespace events
+{% endif %}
+
+{% if service.all_fields %}
+namespace fields {
+{% for field in service.all_fields %}
+{% if loop.first %}
+  /// @uptrace{SWS_CM_00007, adf916790365a0da074932506599bbd7cd4ad20d}
+{% endif %}
+  using {{ cppStyle() }}{{ field.name }} = ara::com::internal::skeleton::{{field.get_fieldtype}}Field<{{field.type_declaration}}>;
+{% if field.init_value != "" %}
+  static const {{ cppStyle() }}{{ field.name }}::FieldType kInitValue{{ field.name }}{{ field.init_value }};
+{% endif %}
+{% endfor %}
+} // namespace fields
+{% endif %}
+
+
+
+/// @uptrace{SWS_CM_00002, 841140974e021781110b2ee4744870b87d49897f}
+class {{ service.name }}Skeleton
+    : public {{ service.name }}
+    , public ara::com::internal::skeleton::ServiceSkeleton<{{ service.name }}Skeleton> {
+public:
+{% for event in service.events %}
+  events::{{ cppStyle() }}{{ event.name }} {{ event.name }};
+{% endfor %}
+{% for field in service.all_fields %}
+  fields::{{ cppStyle() }}{{ field.name }} {{ field.name }};
+{% endfor %}
+
+protected:
+
+{% for method in service.methods %}
+
+{% if method.is_fire_and_forget %}
+  virtual void {{ method.name }}({% for arg in method.get_input_args %}const {{arg.type_declaration}}& {{ arg.name }}{% if not loop.last %},{% endif %}{% endfor %}) = 0;
+
+{% else %}
+{% if method.get_output_args %}
+  virtual ara::core::Future<{{service.name}}::{{method.name}}Output> {{ method.name }}({% for arg in method.get_input_args %}const {{arg.type_declaration}}& {{ arg.name }}{% if not loop.last %},{% endif %}{% endfor %})  = 0;
+{% else %}
+  virtual ara::core::Future<void> {{ method.name }}({% for arg in method.get_input_args %}const {{arg.type_declaration}}& {{ arg.name }}{% if not loop.last %},{% endif %}{% endfor %}) = 0;
+{% endif %}
+{% endif %}
+{% endfor %}
+public:
+    using ServiceSkeleton = ara::com::internal::skeleton::ServiceSkeleton<{{ service.name }}Skeleton>;
+    using ServiceSkeleton::ServiceSkeleton;
+    explicit {{ service.name }}Skeleton(ara::com::InstanceIdentifier instanceIdentifier, ara::com::MethodCallProcessingMode mode = ara::com::MethodCallProcessingMode::kEvent) : ServiceSkeleton{instanceIdentifier, mode} { Initialize().ValueOrThrow(); }
+    explicit {{ service.name }}Skeleton(ara::core::InstanceSpecifier instanceSpecifier, ara::com::MethodCallProcessingMode mode = ara::com::MethodCallProcessingMode::kEvent) : ServiceSkeleton{instanceSpecifier, mode} { Initialize().ValueOrThrow(); }
+    explicit {{ service.name }}Skeleton(ara::com::InstanceIdentifierContainer instanceIdentifiers, ara::com::MethodCallProcessingMode mode = ara::com::MethodCallProcessingMode::kEvent) : ServiceSkeleton{instanceIdentifiers, mode} { Initialize().ValueOrThrow(); }
+
+    {{ service.name }}Skeleton(const {{ service.name }}Skeleton& other) = delete;
+    {{ service.name }}Skeleton& operator=(const {{ service.name }}Skeleton& other) = delete;
+    {{ service.name }}Skeleton({{ service.name }}Skeleton&& other) = default;
+    {{ service.name }}Skeleton& operator=({{ service.name }}Skeleton&& other) = default;
+
+
+
+
+
+  virtual ara::core::Result<void> OfferService() noexcept override{
+
+        using Result = ara::core::Result<void>;
+        Result result{};
+{% for field in service.all_fields %}
+    if(!(result =  {{ field.name }}.EnsureAvailable())) return result;
+{% endfor %}
+        return ServiceSkeleton::OfferService();
+
+    }
+
+
+
+
+};
+
+} // namespace skeleton
+{% if service.namespaces %}{% for ns in service.namespaces[::-1] %}
+} // namespace {{ ns }}
+{% endfor %}{% endif %}
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

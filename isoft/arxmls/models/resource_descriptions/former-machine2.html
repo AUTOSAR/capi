@@ -1,0 +1,704 @@
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>former-machine2</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d914fb1e-e43e-4175-b7d2-2a8dcd3a8a05" class="page sans"><header><h1 class="page-title">former-machine2</h1><p class="page-description"></p></header><div class="page-body"><h1 id="2be470f2-df7c-4fc1-a095-c17953e2df8b" class="">资源概览</h1><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="da1f2987-0886-4122-8d58-7c72b8de2a9b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Tips:<p id="fb84c433-e2f8-4cfb-9b1c-bd7d3a453688" class="block-color-default">machine2 为一台预定义的机器，该资源为 <mark class="highlight-orange"><strong>可选资源</strong></mark>，若无多机器需求，可以不添加此资源。</p></div></figure><p id="bdd0deef-88e6-4765-b5d8-92801d67e668" class="">
+</p><p id="fd7f20ad-1f79-432c-a61b-8cb9c86733a7" class=""><strong>该资源具有如下特征：</strong></p><h1 id="6d395d73-4514-4261-b7ad-a2406a5d9b66" class="">一、机器基本信息</h1><p id="3f707962-f76d-455c-a755-9c2b765cec51" class="block-color-default">该机器默认包含如下基本信息：</p><ul id="c19008a4-72c7-4ebf-aca5-1e643dd41b1d" class="bulleted-list"><li style="list-style-type:disc">双核： core0 与 core1<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5cb1f5ad-bbbd-4879-a084-286e24e8109f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Tips：<ul id="8cc488da-6ede-49cd-b475-d21b8d7bbac6" class="bulleted-list"><li style="list-style-type:disc">Machine 子元素 Processor 中的核（ProcessorCore）数量与各 coreid 应根据实际环境进行配置</li></ul><ul id="1e7afaf2-c9a8-4389-bca5-142c83d17808" class="bulleted-list"><li style="list-style-type:disc">各进程的 ProcessToMachineMapping 中，属性 shallRunOns 与 shallNotRunOns 指定该进程在哪个核运行/不运行，若均未配置，则默认使用 Machine 子元素 Processor 中配置的所有核（即 ProcessorCore）</li></ul></div></figure></li></ul><ul id="943fa6e8-ee61-4fdc-8532-ec07c16bdc77" class="bulleted-list"><li style="list-style-type:disc">1个资源组： ResourceGroup<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6dee6e7b-3c76-48d0-8f94-fc50870f5dcf"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">可根据实际情况调整资源限制</div></figure></li></ul><h1 id="1efea127-f3c4-4577-bb0e-d56aae05060c" class="">二、机器服务情况</h1><p id="6174f7f1-b7b2-4db3-ae98-a015b3967e20" class="block-color-default">该部分资源包含的服务情况如下：</p><ul id="5f0cfab6-226c-44e7-8fa7-4aaec0d255ae" class="bulleted-list"><li style="list-style-type:disc">已实例化了所有平台模块</li></ul><ul id="4f28f989-1013-4c45-bc96-f8a0c2a4f679" class="bulleted-list"><li style="list-style-type:disc">服务设定<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bfa7f003-d89f-4d10-b5fb-654ff454b7a8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Tips：<ul id="60c65373-a923-4ef9-9902-93bf6d233b52" class="bulleted-list"><li style="list-style-type:disc">已启用了 IAM 授权验证，故 <strong><mark class="highlight-red">请勿</mark></strong><mark class="highlight-red"> </mark>自行移除 IAM 的 daemon 进程</li></ul><ul id="f5253ee2-d5b9-4980-acd8-cbfef37a9d3c" class="block-color-gray_background bulleted-list"><li style="list-style-type:disc">提供 <strong><mark class="highlight-orange">doipd</mark></strong>，诊断路由服务进程。故此机器不再默认提供 dmd 诊断服务进程</li></ul><ul id="3e687576-a055-4670-943b-de6afda5e86e" class="bulleted-list"><li style="list-style-type:disc">提供了 <strong><mark class="highlight-orange">诊断提取</mark></strong>，若无需诊断服务，该部分可删除</li></ul><ul id="57ac23fe-1b4b-4a48-b258-193777227fd2" class="bulleted-list"><li style="list-style-type:disc">SM 控制应用 Demo<ul id="705cdaf9-cef5-4a28-a61d-b0b29addd0f6" class="bulleted-list"><li style="list-style-type:circle">smd：实现了状态机状态切换、功能组状态切换等基本管理功能；</li></ul><ul id="9134fa2b-a11b-4542-a2a4-c03d7f48b0e9" class="bulleted-list"><li style="list-style-type:circle">ResetMachine：实现 ECU 重启功能。</li></ul></li></ul><ul id="f07a15c0-2c1d-4d1f-9186-c7820f06c93c" class="block-color-gray_background bulleted-list"><li style="list-style-type:disc">支持作为 <strong>时间接收者（slave）</strong>， 支持从时间主机器订阅时间<ul id="3b7c64a2-1371-4f13-bd7e-b744569117cf" class="bulleted-list"><li style="list-style-type:circle"><strong>注意：</strong>该部分需配合时间主运用，若只使用 machine2（<mark class="highlight-purple">同一个网络集群中不存在 machine1 等其它提供时间分发（时间主 master）的机器</mark>）时，该部分服务不生效。</li></ul></li></ul></div></figure></li></ul><h1 id="fb088de0-20df-448d-a90c-0851bfdbd5a1" class="block-color-default">三、预置的软件集&amp;软件包</h1><p id="d39b2526-0318-4a1f-997b-733c7fa62874" class="">包含：<strong><mark class="highlight-orange">core</mark></strong>、<strong><mark class="highlight-orange">framework</mark></strong>、<strong><mark class="highlight-orange">os </mark></strong>三个软件集，</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d6808111-e171-4931-9260-29bad18b3998"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>注意：</strong><p id="f9e93106-6a3e-4b14-a5e9-e4362192f374" class="">这三个软件集中，不能更改其依赖关系，以及各软件集的 Category 的属性值。</p></div></figure><p id="f94deeb1-5df7-47d2-93ba-132d69a3871f" class="">各软件集：</p><ol type="1" id="70964114-2ff7-412a-8540-99a25dbf0df3" class="numbered-list" start="1"><li><strong><mark class="highlight-orange">core </mark></strong>与 <strong><mark class="highlight-orange">framework </mark></strong>软件集<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0c4ebac1-0063-4a8e-bf8d-3ebbe586f28d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>注意：</strong><ul id="408ebb3f-ffc1-41a6-baeb-7bfb586841a8" class="bulleted-list"><li style="list-style-type:disc">承载了 AP 平台的服务进程，提供的模块服务 <strong><mark class="highlight-red">不建议改动</mark></strong>；</li></ul><ul id="19581199-1543-4606-b041-5403b1ec43ed" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-default">名为 core 的 SoftwareCluster 中使用到了</mark><strong><mark class="highlight-orange"> 诊断地址</mark></strong><mark class="highlight-default">（元素名为 SoftwareClusterDoipDiagnosticAddress 的属性 diagnosticAddress），故需注意确认此地址的正确性。</mark></li></ul></div></figure></li></ol><ol type="1" id="80e26617-0138-4e3f-90a5-f586cc2e1654" class="numbered-list" start="2"><li><strong><mark class="highlight-orange">os </mark></strong>软件集<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9590d353-bd4d-4c9d-9c7c-1145b5483649"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">该软件集默认提供的相关配置仅为示意，提供在车包更新时，如若涉及 OS 系统的更新，应如何配置的一个简化示例。故可按需处理。</div></figure></li></ol><h1 id="b35667c5-4f6f-42ec-9ae7-15935a3d0e71" class="">四、预置的集成基础</h1><p id="74702c5f-95a7-4b7c-805f-49dc1b8e273f" class="">该部分资源提供 <mark class="highlight-orange">预置的功能组</mark><mark class="highlight-default">、</mark><mark class="highlight-orange">预定义的机器信息 </mark><mark class="highlight-default">三部分，为 </mark><mark class="highlight-red"><strong>必要资源</strong></mark><mark class="highlight-default">。</mark></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e5f61df7-e4d2-4e63-b9ef-6f1578078a97"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Tips<strong>：</strong><ul id="fd620a0c-82a6-442a-8525-a8b2975e0b47" class="bulleted-list"><li style="list-style-type:disc">该资源中结合<mark class="highlight-default">使用到哪台机器，对应的资源内容只保留相关的文件或配置即可，不删除也无影响，</mark><strong><mark class="highlight-red">请注意，删除任何预置的内容，请谨慎操作</mark></strong><mark class="highlight-default">。</mark></li></ul><p id="80005620-cc8e-4c68-98b6-7dc9a5437d6f" class=""><mark class="highlight-default">如：只使用 machine1 机器，则 machine2_Design.arxml 可删除，若需同时使用 machine2 则需保留。</mark></p></div></figure><h2 id="fd12c809-38d6-4d88-9640-d40782afeca6" class="">4.1、<mark class="highlight-default">预置的功能组</mark></h2><h3 id="c34e531b-b445-4268-94aa-f911b5ae62c2" class="">MachineFG:  </h3><p id="8431f1f6-1b4a-4be8-9cd5-23f98c011569" class="block-color-default">即 <mark class="highlight-orange">机器功能组</mark>，此功能组为特殊功能组，用于描述 Machine 的运行状态。</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8d982825-f32e-4178-b415-750d5bdbcefa"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>注意：</strong><ol type="1" id="ea96c935-8dfb-405f-aebe-3b153ee2b2ac" class="numbered-list" start="1"><li>MachineFG  预置以下功能组状态，<strong><mark class="highlight-red">均为必配功能组状态，不能改动</mark></strong>：<ul id="a951c263-5c3d-44fb-9ea6-71d993f9e675" class="bulleted-list"><li style="list-style-type:disc">Startup：启动状态；对机器进行启动操作后，如果启动成功，其状态会切换至此状态；</li></ul><ul id="43dfe10d-1125-40e6-9a8a-7f13035884d8" class="bulleted-list"><li style="list-style-type:disc">Shutdown：停止状态；对机器进行关闭操作后，其状态会切换至此状态；</li></ul><ul id="10980af1-c6ef-4e7a-b1a9-635dc40470b1" class="bulleted-list"><li style="list-style-type:disc">Off：特定逻辑语义状态；</li></ul><ul id="38095dac-9533-4f71-9a84-cbc4c0d442cc" class="bulleted-list"><li style="list-style-type:disc">Verify：特定逻辑语义状态；</li></ul><ul id="ae066a3e-65f3-4c68-bb5d-52020ffbad4b" class="bulleted-list"><li style="list-style-type:disc">Restart：特定逻辑语义状态。</li></ul></li></ol><ol type="1" id="69a539a3-e9ef-4300-a46d-4b6d590ff27e" class="numbered-list" start="2"><li>支持添加自定义机器状态（即可自定义增加 MachineFG 的功能组状态）</li></ol></div></figure><h3 id="de7ed1ed-9fb8-4824-bba4-d4213d68e829" class="">ProcessStateMachine： </h3><p id="dd7115c5-400f-47cd-b3e1-89d40d813f50" class="">即 <mark class="highlight-orange">进程状态机</mark>，此功能组为特殊功能组，用于描述进程所处的生命周期。</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f08bbc02-0829-4543-a379-787fe528dfef"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">进程状态机包括如下两个进程状态机状态 <strong><mark class="highlight-red">不能改动</mark></strong>：<ul id="c91b6e40-ab09-4c69-914f-644901c2d8ce" class="bulleted-list"><li style="list-style-type:disc">Running</li></ul><ul id="664dd2aa-a7bc-448e-b54a-fe0dbe0aee87" class="bulleted-list"><li style="list-style-type:disc">Terminated</li></ul></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ffeb1381-b357-4df5-8d13-ac205ff0fbee"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Tips<mark class="highlight-default">：</mark><ul id="c4d4466e-572d-4a30-9c5e-340bfc8dc719" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-default">完整的进程生命周期有 5 个状态：</mark>Idle、Starting、Running、Terminating、Terminated；</li></ul><ul id="6688ec27-95eb-4cda-b6ab-100ab3433438" class="bulleted-list"><li style="list-style-type:disc">Idle（初始<mark class="highlight-default">态）、 </mark>Starting <mark class="highlight-default">和 </mark>Terminating 三<mark class="highlight-default">个过程态属于临时状态，不能被其他进程依赖或使用，故仅定义了 </mark>Running <mark class="highlight-default">和 </mark>Terminated <mark class="highlight-default">这两个确认状态，以供其它进程依赖使用。</mark></li></ul></div></figure><h2 id="f5b7678b-573d-4c5f-af5a-83b839b9b75a" class="">4.2、<strong>预制的状态机</strong></h2><p id="e32fb294-dc83-4fa9-a9b1-555a468ce504" class="">新增状态机（<mark class="highlight-default">StateMachine</mark>）功能，默认提供名为 <mark class="highlight-orange">MachineSM </mark><mark class="highlight-default">的状态机。</mark></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="da1f5ba9-4774-4c74-b78e-1156ec77fb96"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><mark class="highlight-orange">MachineSM</mark><mark class="highlight-default">：</mark><ul id="8fffd3f3-e824-474d-ae8a-966818a197fc" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-orange">MachineSM </mark>为管控 MachineFG 的状态机（StateMachine）</li></ul><ul id="ed980295-bb44-42ef-9209-79b391af6278" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-orange">MachineSM </mark>当前针对 MachineFG 的管控仅限于错误恢复处理（即 EM 和/或 PHM 报告错误时，根据 <mark class="highlight-orange">MachineSM </mark>的错误列表，切换 MachineFG 到指定状态，完成 MachineFG 功能的恢复）</li></ul><ul id="3a66b1f5-2b43-451f-bb93-4794e52ac1ea" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-orange">MachineSM </mark>当前包含的状态机状态有：<ul id="9d0f8463-2d24-4b39-8a14-7589db501efa" class="bulleted-list"><li style="list-style-type:circle">Initial</li></ul><ul id="2170d42f-f8a9-4a01-984f-befe4b665ba8" class="bulleted-list"><li style="list-style-type:circle">Fallback</li></ul><ul id="c06a2a24-afcb-45b8-9f56-bd4e9f847b57" class="bulleted-list"><li style="list-style-type:circle">Final</li></ul></li></ul></div></figure><h2 id="41163cb4-efd8-4fca-b157-c637fe49d1f6" class="">4.3、<mark class="highlight-default">预定义的机器信息</mark></h2><p id="74b7559a-4ed6-44eb-8bf9-675ccb5638cd" class="">该部分包括如下内容：</p><ul id="d117f707-1459-4174-80e0-face2a603487" class="bulleted-list"><li style="list-style-type:disc"><strong>machine_design</strong><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="117ac5fe-7378-45fc-bcd5-3bd4f19d583b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">即 MachineDesign，描述了通信连接器、SOME/IP 服务发现等。<mark class="highlight-default"> </mark></div></figure></li></ul><ul id="fd7ecc25-c642-44d0-896c-d7cbb1bc9ba9" class="bulleted-list"><li style="list-style-type:disc"><strong>network_manifest</strong><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8195b05d-72f2-4ccf-aaaa-152387563feb"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">即以太网集群 EthernetCluster，描述了机器的网络拓朴。</div></figure></li></ul><ul id="920b795c-4722-4b95-aa74-7262ec65f914" class="bulleted-list"><li style="list-style-type:disc"><strong>udp-nm-cluster</strong><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="55abd022-7987-4637-917c-34aa27b8811c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">即 NmConfig → UdpNmCluster，描述了机器的网络拓朴。</div></figure></li></ul><ul id="84b974ac-9772-4ddf-8c78-dc1c4cb8b363" class="bulleted-list"><li style="list-style-type:disc"><strong>time_domain</strong><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="64aeec18-ceac-453b-920b-a2db6bbf310f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">即 TimeDomain，描述了时间域相关定义，包括全局时间域、域 master、域 slave、时间基、以及时间同步相关策略等。</div></figure></li></ul><h2 id="2bf7fca9-b092-456b-9f89-ab99e4a29852" class="">4.4、预定义的诊断提取       </h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3a0a5c7d-9a74-41a7-a9ed-4a70fd25915e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Tips:<p id="0afe9870-e9d9-4a14-8b34-7041a1a1d692" class="">该资源为可选资源，若无需 <mark class="highlight-orange">诊断服务</mark>，可在添加资源后进行删除。当前不支持单独提供诊断提取资源。</p></div></figure><h1 id="36b3c88f-e962-4e71-a779-aa6bd7ac8caf" class="">五、添加后的资源路径</h1><p id="c4bdc10a-8759-4452-be45-fffe2fca7b4a" class="">添加后的路径为：MI 项目 → Resources 文件夹</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="18ff6896-b51f-4644-959f-f5e2bfdb6d1b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>注意：</strong><p id="e48bf8a7-e8e9-4d51-9b0e-e0e15a28d903" class="">当前添加机器资源会出现重复资源片段，需用户确认后手动进行删除，包括如下：</p><ul id="efefec7d-b534-41d8-833e-ebd7b333f567" class="bulleted-list"><li style="list-style-type:disc">诊断提取，即 diagnostic_extract 文件夹</li></ul><ul id="bb6b0cbd-b09d-4d13-bff3-b6bb1d3ab549" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-default">预定义的机器信息，即 </mark>system 文件夹</li></ul><ul id="5e7d5f6e-f3d3-4bd0-aa22-2501f227327e" class="bulleted-list"><li style="list-style-type:disc">预定义的平台组件，即 platform_components 中的文件夹/文件</li></ul></div></figure><p id="7a694817-f036-492f-a13a-ce47e1fd5036" class="">
+</p><p id="faada7bd-6e8d-43bc-b5be-753518485c31" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

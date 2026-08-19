@@ -1,0 +1,376 @@
+#  Disclaimer
+#
+#  This work (specification and/or software implementation) and the material
+#  contained in it, as released by AUTOSAR, is for the purpose of information
+#  only. AUTOSAR and the companies that have contributed to it shall not be
+#  liable for any use of the work.
+#
+#  The material contained in this work is protected by copyright and other
+#  types of intellectual property rights. The commercial exploitation of the
+#  material contained in this work requires a license to such intellectual
+#  property rights.
+#
+#  This work may be utilized or reproduced without any modification, in any
+#  form or by any means, for informational purposes only. For any other
+#  purpose, no part of the work may be utilized or reproduced, in any form
+#  or by any means, without permission in writing from the publisher.
+#
+#  The work has been developed for automotive applications only. It has
+#  neither been developed, nor tested for non-automotive applications.
+#
+#  The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+#  --------------------------------------------------------------------------
+
+# 2025-02-25 HYX clang-tidy configuration
+
+# Add the following comments in the code to suppress QAC errors, e.g., to suppress 2024
+#   // PRQA S 2024 QAC /// @qac: false positive
+#   // PRQA L:QAC
+
+# Add "// NOLINT" at the end of the line to suppress checks.
+# // NOLINTBEGIN and // NOLINTEND are comment syntaxes introduced by clang-tidy-14 to ignore code blocks.
+# clang-tidy official website: https://clang.llvm.org/extra/clang-tidy/checks/list.html
+
+# clang-tidy -p ~/ap-all/crypto/build ~/ap-all/crypto/libs/include/internal/ara/crypto/cryp/ph_crypto_provider.h  | grep ph_crypto_provider >> ~/ap-all/crypto/1.log
+---
+# Enabling too many checks may cause the runtime to exceed 1 hour (TODO(hanjingjing: use clang-tidy parameter --enable-check-profile to enable cost-effective checks, and also update clang-tidy-checker.sh)
+Checks:          '-*,
+  readability-identifier-naming*,
+  readability-redundant-member-init
+  '
+#HeaderFilterRegex: '(?!gen/).*'
+HeaderFilterRegex: '.*'
+WarningsAsErrors: '*'
+AnalyzeTemporaryDtors: false
+User:            MISRA style with camelBack namespaces and Camel_Snake_Case enum values
+# 2025-03-27 Yuxin Han: Experiment shows clang-tidy-10 rule readability-identifier-naming does not support regular expressions
+CheckOptions:
+  # Naming convention: Header include guards use cpplint rules
+  - key:             readability-identifier-naming.MacroDefinition
+    value:           '^[A-Z][A-Z0-9_/]*_H_$'
+  # Naming convention: Namespaces
+  - key:             readability-identifier-naming.NamespaceCase
+    value:           lower_case
+  - key:             readability-identifier-naming.NamespacePrefix
+    value:           ''
+  - key:             readability-identifier-naming.NamespaceSuffix
+    value:           ''
+  # Naming convention: Inline namespaces
+  - key:             readability-identifier-naming.InlineNamespaceCase
+    value:           lower_case
+  - key:             readability-identifier-naming.InlineNamespacePrefix
+    value:           ''
+  - key:             readability-identifier-naming.InlineNamespaceSuffix
+    value:           ''
+
+## Types
+  # Naming convention: Abstract class names
+  - key:             readability-identifier-naming.AbstractClassCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.AbstractClassPrefix
+    value:           ''
+  - key:             readability-identifier-naming.AbstractClassSuffix
+    value:           ''
+  # Naming convention: Class names
+  - key:             readability-identifier-naming.ClassCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.ClassPrefix
+    value:           ''
+  - key:             readability-identifier-naming.ClassSuffix
+    value:           ''
+  # Naming convention: Type aliases
+  - key:             readability-identifier-naming.TypeAliasCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.TypeAliasPrefix
+    value:           ''
+  - key:             readability-identifier-naming.TypeAliasSuffix
+    value:           ''
+  # Naming convention: Struct names
+  - key:             readability-identifier-naming.StructCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.StructPrefix
+    value:           ''
+  - key:             readability-identifier-naming.StructSuffix
+    value:           ''
+  # Naming convention: Union names
+  - key:             readability-identifier-naming.UnionCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.UnionPrefix
+    value:           ''
+  - key:             readability-identifier-naming.UnionSuffix
+    value:           ''
+  # Naming convention: Type aliases (typedef)
+  - key:             readability-identifier-naming.TypedefCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.TypedefPrefix
+    value:           ''
+  - key:             readability-identifier-naming.TypedefSuffix
+    value:           ''
+  # Naming convention: Enum types
+  - key:             readability-identifier-naming.EnumCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.EnumPrefix
+    value:           ''
+  - key:             readability-identifier-naming.EnumSuffix
+    value:           ''
+
+## Functions
+  # Naming convention: Constexpr class member methods
+  - key:             readability-identifier-naming.ConstexprMethodCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.ConstexprMethodPrefix
+    value:           ''
+  - key:             readability-identifier-naming.ConstexprMethodSuffix
+    value:           ''
+  # Naming convention: Class static member methods
+  - key:             readability-identifier-naming.ClassMethodCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.ClassMethodPrefix
+    value:           ''
+  - key:             readability-identifier-naming.ClassMethodSuffix
+    value:           ''
+  # Naming convention: Virtual member methods in classes
+  - key:             readability-identifier-naming.VirtualMethodCase
+    value:           Camel_Snake_Case 
+  - key:             readability-identifier-naming.VirtualMethodPrefix
+    value:           ''
+  - key:             readability-identifier-naming.VirtualMethodSuffix
+    value:           ''
+  # Naming convention: Private member methods in classes
+  - key:             readability-identifier-naming.PrivateMethodCase
+    value:           camelBack
+  - key:             readability-identifier-naming.PrivateMethodPrefix
+    value:           '_'
+  - key:             readability-identifier-naming.PrivateMethodSuffix
+    value:           ''
+  # Naming convention: Protected member methods in classes
+  - key:             readability-identifier-naming.ProtectedMethodCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.ProtectedMethodPrefix
+    value:           '_'
+  - key:             readability-identifier-naming.ProtectedMethodSuffix
+    value:           ''
+  # Naming convention: Public member methods in classes
+  - key:             readability-identifier-naming.PublicMethodCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.PublicMethodPrefix
+    value:           ''
+  - key:             readability-identifier-naming.PublicMethodSuffix
+    value:           ''
+  # Naming convention: All member methods in classes
+  - key:             readability-identifier-naming.MethodCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.MethodPrefix
+    value:           ''
+  - key:             readability-identifier-naming.MethodSuffix
+    value:           ''
+  # Naming convention: Constexpr functions
+  - key:             readability-identifier-naming.ConstexprFunctionCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.ConstexprFunctionPrefix
+    value:           ''
+  - key:             readability-identifier-naming.ConstexprFunctionSuffix
+    value:           ''
+  # Naming convention: Functions (global)
+  - key:             readability-identifier-naming.FunctionCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.FunctionPrefix
+    value:           ''
+  - key:             readability-identifier-naming.FunctionSuffix
+    value:           ''
+  # Naming convention: Global functions
+  - key:             readability-identifier-naming.GlobalFunctionCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.GlobalFunctionPrefix
+    value:           ''
+  - key:             readability-identifier-naming.GlobalFunctionSuffix
+    value:           ''
+
+## Constants
+  # Naming convention: const-qualified parameters
+  - key:             readability-identifier-naming.ConstantParameterCase
+    value:           camelBack
+  - key:             readability-identifier-naming.ConstantParameterPrefix
+    value:           ''
+  - key:             readability-identifier-naming.ConstantParameterSuffix
+    value:           ''
+  # Naming convention: Local constants
+  - key:             readability-identifier-naming.LocalConstantCase
+    value:           camelBack
+  - key:             readability-identifier-naming.LocalConstantPrefix
+    value:           ''
+  - key:             readability-identifier-naming.LocalConstantSuffix
+    value:           ''
+  # Naming convention: Static members in classes (constants)
+  - key:             readability-identifier-naming.ClassConstantCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.ClassConstantPrefix
+    value:           'k'
+  - key:             readability-identifier-naming.ClassConstantSuffix
+    value:           ''
+  # Naming convention: Member constants in classes
+  - key:             readability-identifier-naming.ConstantMemberCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.ConstantMemberPrefix
+    value:           'k'
+  - key:             readability-identifier-naming.ConstantMemberSuffix
+    value:           ''
+  # Naming convention: Static constants
+  - key:             readability-identifier-naming.StaticConstantCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.StaticConstantPrefix
+    value:           'k'
+  - key:             readability-identifier-naming.StaticConstantSuffix
+    value:           ''
+  # Naming convention: Global constants
+  - key:             readability-identifier-naming.GlobalConstantCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.GlobalConstantPrefix
+    value:           'k'
+  - key:             readability-identifier-naming.GlobalConstantSuffix
+    value:           ''
+  # Naming convention: All const-qualified constants
+  - key:             readability-identifier-naming.ConstantCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.ConstantPrefix
+    value:           'k'
+  - key:             readability-identifier-naming.ConstantSuffix
+    value:           ''
+  # Naming convention: Enum constants
+  - key:             readability-identifier-naming.EnumConstantCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.EnumConstantPrefix
+    value:           'k'
+  - key:             readability-identifier-naming.EnumConstantSuffix
+    value:           ''
+  # Naming convention: Constexpr variables
+  - key:             readability-identifier-naming.ConstexprVariableCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.ConstexprVariablePrefix
+    value:           'k'
+  - key:             readability-identifier-naming.ConstexprVariableSuffix
+    value:           ''
+## Parameters, local variables
+  # Naming convention: Parameters
+  - key:             readability-identifier-naming.ParameterCase
+    value:           camelBack
+  - key:             readability-identifier-naming.ParameterPrefix
+    value:           ''
+  - key:             readability-identifier-naming.ParameterSuffix
+    value:           ''
+  # Naming convention: Parameter packs
+  - key:             readability-identifier-naming.ParameterPackCase
+    value:           camelBack
+  - key:             readability-identifier-naming.ParameterPackPrefix
+    value:           ''
+  - key:             readability-identifier-naming.ParameterPackSuffix
+    value:           ''   
+  # Naming convention: Local variables
+  - key:             readability-identifier-naming.LocalVariableCase
+    value:           camelBack
+  - key:             readability-identifier-naming.LocalVariablePrefix
+    value:           ''
+  - key:             readability-identifier-naming.LocalVariableSuffix
+    value:           ''  
+## Class member variables
+  # Naming convention: Static members in classes
+  - key:             readability-identifier-naming.ClassMemberCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.ClassMemberPrefix
+    value:           's_'
+  - key:             readability-identifier-naming.ClassMemberSuffix
+    value:           '_'
+  # Naming convention: Private members
+  - key:             readability-identifier-naming.PrivateMemberCase
+    value:           camelBack
+  - key:             readability-identifier-naming.PrivateMemberPrefix
+    value:           ''
+  - key:             readability-identifier-naming.PrivateMemberSuffix
+    value:           '_'
+  # Naming convention: Protected members
+  - key:             readability-identifier-naming.ProtectedMemberCase
+    value:           camelBack
+  - key:             readability-identifier-naming.ProtectedMemberPrefix
+    value:           ''
+  - key:             readability-identifier-naming.ProtectedMemberSuffix
+    value:           '_'
+  # Naming convention: Public members
+  - key:             readability-identifier-naming.PublicMemberCase
+    value:           camelBack
+  - key:             readability-identifier-naming.PublicMemberPrefix
+    value:           ''
+  - key:             readability-identifier-naming.PublicMemberSuffix
+    value:           ''
+  # Naming convention: All members in classes
+  - key:             readability-identifier-naming.MemberCase
+    value:           camelBack
+  - key:             readability-identifier-naming.MemberPrefix
+    value:           ''
+  - key:             readability-identifier-naming.MemberSuffix
+    value:           '_'
+## Variables
+  # Naming convention: Static variables
+  - key:             readability-identifier-naming.StaticVariableCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.StaticVariablePrefix
+    value:           's_'
+  - key:             readability-identifier-naming.StaticVariableSuffix
+    value:           ''
+  # Naming convention: Global variables
+  - key:             readability-identifier-naming.GlobalVariableCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.GlobalVariablePrefix
+    value:           'g_'
+  - key:             readability-identifier-naming.GlobalVariableSuffix
+    value:           ''
+  # Naming convention: Variables
+  - key:             readability-identifier-naming.VariableCase
+    value:           camelBack
+  - key:             readability-identifier-naming.VariablePrefix
+    value:           ''
+  - key:             readability-identifier-naming.VariableSuffix
+    value:           ''
+## Templates
+  # Naming convention: Template parameters
+  - key:             readability-identifier-naming.TemplateParameterCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.TemplateParameterPrefix
+    value:           ''
+  - key:             readability-identifier-naming.TemplateParameterSuffix
+    value:           ''
+  # Naming convention: Template template parameters
+  - key:             readability-identifier-naming.TemplateTemplateParameterCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.TemplateTemplateParameterPrefix
+    value:           ''
+  - key:             readability-identifier-naming.TemplateTemplateParameterSuffix
+    value:           ''
+  # Naming convention: Value template parameters
+  - key:             readability-identifier-naming.ValueTemplateParameterCase
+    value:           camelBack
+  - key:             readability-identifier-naming.ValueTemplateParameterPrefix
+    value:           ''
+  - key:             readability-identifier-naming.ValueTemplateParameterSuffix
+    value:           ''
+  # Naming convention: Type template parameters in templates
+  - key:             readability-identifier-naming.TypeTemplateParameterCase
+    value:           Camel_Snake_Case
+  - key:             readability-identifier-naming.TypeTemplateParameterPrefix
+    value:           ''
+  - key:             readability-identifier-naming.TypeTemplateParameterSuffix
+    value:           ''
+
+
+  # Readability redundant member init: When true, this check will ignore unnecessary base class initializations in copy constructors
+  - key:             readability-redundant-member-init.IgnoreBaseInCopyConstructors
+    value:           true
+
+  # Signed integer bitwise operations: Ignore warnings for unsigned integer bitwise operations
+  - key:             hicpp-signed-bitwise.IgnorePositiveIntegerLiterals
+    value:           true
+  # Naming convention: Ignore split failures
+  - key:             readability-identifier-naming.IgnoreFailedSplit
+    value:           '0'
+
+...
+

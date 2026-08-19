@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR
+    xmlns="http://autosar.org/schema/r4.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+        <AR-PACKAGE>
+            <SHORT-NAME>ISOFT</SHORT-NAME>
+            <AR-PACKAGES>
+                <AR-PACKAGE>
+                    <SHORT-NAME>Development</SHORT-NAME>
+                    <AR-PACKAGES>
+                        <AR-PACKAGE>
+                            <SHORT-NAME>SoftwarePackages2</SHORT-NAME>
+                            <AR-PACKAGES>
+                                <AR-PACKAGE >
+                                    <SHORT-NAME>Delta_Update_SWPs</SHORT-NAME>
+                                    <AR-PACKAGES>
+                                        <AR-PACKAGE>
+                                            <SHORT-NAME>VER_150</SHORT-NAME>
+                                            <ELEMENTS>
+                                                <SOFTWARE-PACKAGE >
+                                                    <SHORT-NAME>framework</SHORT-NAME>
+                                                    <ADMIN-DATA>
+                                                        <SDGS>
+                                                            <SDG GID="iSOFT:ucm:SoftwarePackage">
+                                                                <SD GID="iSOFT:ucm:SoftwarePackage:ActivationAction">reboot</SD>
+                                                            </SDG>
+                                                        </SDGS>
+                                                    </ADMIN-DATA>
+                                                    <ACTION-TYPE>UPDATE</ACTION-TYPE>
+                                                    <!-- <ACTIVATION-ACTION>REBOOT</ACTIVATION-ACTION> -->
+                                                    <COMPRESSED-SOFTWARE-PACKAGE-SIZE>6592760</COMPRESSED-SOFTWARE-PACKAGE-SIZE>
+                                                    <DELTA-PACKAGE-APPLICABLE-VERSION>1.0.0</DELTA-PACKAGE-APPLICABLE-VERSION>
+                                                    <MAXIMUM-SUPPORTED-UCM-VERSION>2.0.0</MAXIMUM-SUPPORTED-UCM-VERSION>
+                                                    <MINIMUM-SUPPORTED-UCM-VERSION>1.0.0</MINIMUM-SUPPORTED-UCM-VERSION>
+                                                    <PACKAGER-ID>42</PACKAGER-ID>
+                                                    <!-- <PACKAGER-SIGNATURE-REF DEST="CRYPTO-SERVICE-CERTIFICATE">/ISOFT/Development/CryptoServiceCertificates2/packagerServiceCert</PACKAGER-SIGNATURE-REF> -->
+                                                    <SOFTWARE-CLUSTER-REF DEST="SOFTWARE-CLUSTER">/ISOFT/Development/SoftwareClusters2/framework</SOFTWARE-CLUSTER-REF>
+                                                    <!-- <SOFTWARE-CLUSTER-REF DEST="SOFTWARE-CLUSTER">/ISOFT/Development/SoftwareClusters2/VER_150/core</SOFTWARE-CLUSTER-REF> -->
+                                                    <UNCOMPRESSED-SOFTWARE-CLUSTER-SIZE>6845749</UNCOMPRESSED-SOFTWARE-CLUSTER-SIZE>
+                                                </SOFTWARE-PACKAGE>
+                                            </ELEMENTS>
+                                        </AR-PACKAGE>
+                                    </AR-PACKAGES>
+                                </AR-PACKAGE>
+                                <!-- <AR-PACKAGE >
+                                    <SHORT-NAME>Update_SWPs</SHORT-NAME>
+                                    <AR-PACKAGES>
+                                        <AR-PACKAGE>
+                                            <SHORT-NAME>VER_200</SHORT-NAME>
+                                            <ELEMENTS>
+                                                <SOFTWARE-PACKAGE >
+                                                    <SHORT-NAME>framework</SHORT-NAME>
+                                                    <ADMIN-DATA>
+                                                        <SDGS>
+                                                            <SDG GID="iSOFT:ucm:SoftwarePackage">
+                                                                <SD GID="iSOFT:ucm:SoftwarePackage:ActivationAction">reboot</SD>
+                                                            </SDG>
+                                                        </SDGS>
+                                                    </ADMIN-DATA>
+                                                    <ACTION-TYPE>UPDATE</ACTION-TYPE>
+                                                    <COMPRESSED-SOFTWARE-PACKAGE-SIZE>6592760</COMPRESSED-SOFTWARE-PACKAGE-SIZE>
+                                                    <MAXIMUM-SUPPORTED-UCM-VERSION>2.0.0</MAXIMUM-SUPPORTED-UCM-VERSION>
+                                                    <MINIMUM-SUPPORTED-UCM-VERSION>1.0.0</MINIMUM-SUPPORTED-UCM-VERSION>
+                                                    <PACKAGER-ID>42</PACKAGER-ID>
+                                                    <SOFTWARE-CLUSTER-REF DEST="SOFTWARE-CLUSTER">/ISOFT/Development/SoftwareClusters2/framework</SOFTWARE-CLUSTER-REF>
+                                                    <UNCOMPRESSED-SOFTWARE-CLUSTER-SIZE>6845749</UNCOMPRESSED-SOFTWARE-CLUSTER-SIZE>
+                                                </SOFTWARE-PACKAGE>
+                                            </ELEMENTS>
+                                        </AR-PACKAGE>
+                                    </AR-PACKAGES>
+                                </AR-PACKAGE> -->
+                            </AR-PACKAGES>
+                        </AR-PACKAGE>
+                    </AR-PACKAGES>
+                </AR-PACKAGE>
+            </AR-PACKAGES>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

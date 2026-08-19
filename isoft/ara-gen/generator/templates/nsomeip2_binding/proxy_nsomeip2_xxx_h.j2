@@ -1,0 +1,70 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{%- extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+#include "{{service.namespacepath}}{{ service.standard_name }}_proxy.h"
+#include "ara/com/internal/nsomeip/proxy/nsomeip_proxy.h"
+#include "{{ service.service_deployment.standard_name }}_service_desc.h"
+
+{% if service.namespaces %}{% for ns in service.namespaces %}
+namespace {{ns}} {
+{% endfor %}{% endif %}
+namespace nsomeip {
+struct {{ service.service_deployment.name }}ProxyImpl
+    : {{ service.service_deployment.name }}ServiceDesc{
+  using Proxy = {% if not service.namespaces %}::{% endif %}proxy::{{ service.name }}Proxy;
+  static auto CreateBindProxy(Proxy& proxy ,ara::com::InstanceIdentifier const& instanceIdentifier) {
+        auto bindProxy{ara::com::internal::nsomeip::proxy::Create<{{ service.service_deployment.name }}ServiceDesc>(proxy,instanceIdentifier)};
+        if (bindProxy == nullptr) return bindProxy;
+{% for event in service.events %}
+        auto {{event.name}} = bindProxy->Create<{{service.service_deployment.name}}{{event.name}}Desc, decltype(proxy.{{event.name}})>();
+{% endfor %}
+{% for method in service.methods %}
+        auto {{method.name}} = bindProxy->Create<{{service.service_deployment.name}}{{method.name}}Desc, decltype(proxy.{{method.name}})>();
+{% endfor %}
+{% for field in service.all_fields %}
+        auto {{field.name}} = bindProxy->Create<{{service.service_deployment.name}}{{field.name}}Desc, decltype(proxy.{{field.name}})>();
+{% endfor %}
+{% for event in service.events %}
+        proxy.{{event.name}} = {{event.name}};
+{% endfor %}
+{% for method in service.methods %}
+        proxy.{{method.name}} = {{method.name}};
+{% endfor %}
+{% for field in service.all_fields %}
+        proxy.{{field.name}} ={{field.name }};
+{% endfor %}
+        return bindProxy;
+    }
+};
+} // namespace nsomeip
+{% if service.namespaces %}{% for ns in service.namespaces[::-1] -%}
+} // namespace {{ ns }}
+{% endfor %}{% endif %}
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

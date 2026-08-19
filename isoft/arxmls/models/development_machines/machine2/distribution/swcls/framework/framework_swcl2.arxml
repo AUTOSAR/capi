@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Development</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE >
+              <SHORT-NAME>SoftwareClusters2</SHORT-NAME>
+              <ELEMENTS>
+                <SOFTWARE-CLUSTER >
+                  <SHORT-NAME>framework</SHORT-NAME>
+                  <CATEGORY>ISOFT_FRAMEWORK</CATEGORY>
+                  <!-- <ADMIN-DATA>
+                      <SDGS>
+                          <SDG GID="iSOFT:ucm:SoftwareCluster">
+                              <SD GID="iSOFT:ucm:SoftwareCluster:ExtraPackageDir">/home/hanzhibo/ara-sysroot/ara/framework/1.0.0</SD>
+                          </SDG>
+                      </SDGS>
+                  </ADMIN-DATA> -->
+                  <CONTAINED-AR-ELEMENT-REFS>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/com/cg/exe/cgd</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/com/exe/nsomeipd</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/crypto/cryptod</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/diag/Executable/dmd</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/log/exe/logd</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/nm/exe/nmd</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/phm/exe/phmd</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/tsync/tsyncd</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/ucm/exe/ucmd</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/ucm_master/exe/ucmmd</CONTAINED-AR-ELEMENT-REF>
+                  </CONTAINED-AR-ELEMENT-REFS>
+                  <TYPE-APPROVAL>e1*2024/123*4567*89</TYPE-APPROVAL>
+                  <VENDOR-ID>1</VENDOR-ID>
+                  <!-- <VENDOR-SIGNATURE-REF DEST="CRYPTO-SERVICE-CERTIFICATE">/ISOFT/Development/CryptoServiceCertificates2/vendorServiceCert</VENDOR-SIGNATURE-REF> -->
+                  <VERSION>1.0.0</VERSION>
+                </SOFTWARE-CLUSTER>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

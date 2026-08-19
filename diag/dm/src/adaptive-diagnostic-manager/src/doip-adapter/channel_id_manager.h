@@ -1,0 +1,156 @@
+// Disclaimer
+//
+// This work (specification and/or software implementation) and the material
+// contained in it, as released by AUTOSAR, is for the purpose of information
+// only. AUTOSAR and the companies that have contributed to it shall not be
+// liable for any use of the work.
+//
+// The material contained in this work is protected by copyright and other
+// types of intellectual property rights. The commercial exploitation of the
+// material contained in this work requires a license to such intellectual
+// property rights.
+//
+// This work may be utilized or reproduced without any modification, in any
+// form or by any means, for informational purposes only. For any other
+// purpose, no part of the work may be utilized or reproduced, in any form
+// or by any means, without permission in writing from the publisher.
+//
+// The work has been developed for automotive applications only. It has
+// neither been developed, nor tested for non-automotive applications.
+//
+// The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+// --------------------------------------------------------------------------
+
+/// ================================================================
+///
+/// File description:
+/// ----------------
+/// @file       channel_id_manager.h
+/// @brief      This file provides the definition of the ChannelId Management class
+/// @details
+/// @date       2022-08-19
+/// @author     kai.ju
+/// @version    1.2.0
+///
+/// ================================================================
+
+#ifndef ARA_DIAG_DOIP_CHANNEL_ID_GENERATE_H_
+#define ARA_DIAG_DOIP_CHANNEL_ID_GENERATE_H_
+#include <ara/core/map.h>
+#include <ara/core/string.h>
+//#include <ara/per/key_value_storage.h>
+//#include <ara/per/shared_handle.h>
+
+#include <set>
+
+#include "../uds-adapter/persistence_file.h"
+
+namespace ara {
+namespace diag {
+namespace doip {
+
+/// @brief Manage ChannelId, used to generate, save and remove ChannelId
+class ChannelIdManager final
+{
+    /// @brief ChannelId information
+    class ChannelIdInfo final
+    {
+    public:
+        /// @brief channelId
+        uint64_t channelId{0};
+        /// @brief Local IP
+        core::String localIp;
+        /// @brief Local port number
+        uint16_t localPort{0};
+        /// @brief Remote IP
+        core::String peerIp;
+        /// @brief Remote port
+        uint16_t peerPort{0};
+        /// @brief Target address
+        uint16_t targetAdress{0U};
+    };
+
+public:
+    /// @brief Reconnection notification
+    using ReestablishmentCallback = std::function< void(uint32_t) >;
+
+    /// @brief structure of ChannelIdManager
+    ChannelIdManager() noexcept = default;
+
+    /// @brief deconstruction of ChannelIdManager
+    ~ChannelIdManager() = default;
+
+    /// @brief Copy constructor is prohibited
+    /// @param[in] other
+    ChannelIdManager(ChannelIdManager const& other) = delete;
+
+    /// @brief Copy assignment operator is prohibited
+    /// @param[in] right
+    /// @return ChannelIdManager&
+    ChannelIdManager& operator=(ChannelIdManager const& right) = delete;
+
+    /// @brief Move constructor is prohibited
+    /// @param[in] right
+    ChannelIdManager(ChannelIdManager&& right) = delete;
+
+    /// @brief Move assignment operator is prohibited
+    /// @param[in] right
+    /// @return ChannelIdManager&
+    ChannelIdManager& operator=(ChannelIdManager&& right) = delete;
+
+    /// @brief Singleton instantiation
+    /// @return ChannelIdManager&
+    static ChannelIdManager& GetInstance() noexcept
+    {
+        static ChannelIdManager s_Channel_Id_Manager;
+        return s_Channel_Id_Manager;
+    }
+
+    /// @brief Initialization
+    /// @throw unknown
+    void Initialize();
+
+    /// @brief Generate ChannelID
+    /// @param[in] localIp Local IP
+    /// @param[in] localPort Local port
+    /// @param[in] peerIp Remote IP
+    /// @param[in] peerPort Remote port
+    /// @param[out] newChannelId Output new ID
+    /// @return true: Need to reconnect this channel ID
+    /// @throw unknown
+    int32_t Generate(core::String const& localIp,
+                     uint16_t const localPort,
+                     core::String const& peerIp,
+                     uint16_t const peerPort,
+                     uint64_t& newChannelId);
+
+    /// @brief Save ChannelId
+    /// @param[in] channelId Value to be saved
+    /// @throw unknown
+    void SaveChannelId(uint64_t const channelId, uint16_t const ta);
+
+    /// @brief Remove ChannelId
+    /// @param[in] channelId Value of ChannelId
+    /// @throw unknown
+    void RemoveChannelId(uint64_t const channelId);
+
+private:
+    /// @brief Storage
+    // ara::per::SharedHandle< ara::per::KeyValueStorage > storage_{};
+
+    std::shared_ptr< dmd::PersistenceFile > persistenceFilePtr_{};
+
+    /// @brief ChannelIdInfo data persisted on the persistent storage
+    core::Map< core::String, ChannelIdInfo > mapSaveChannelInfo_{};
+
+    /// @brief ChannelIdInfo data generated by the current process
+    core::Map< core::String, ChannelIdInfo > mapChannelInfo_{};
+
+    /// @brief Mapping between ChannelId and ChannelIdInfo
+    core::Map< uint64_t, ChannelIdInfo > mapChannelIdToInfo_{};
+};
+
+}  // namespace doip
+}  // namespace diag
+}  // namespace ara
+#endif  // ARA_DIAG_DOIP_CONSTANTS_H_

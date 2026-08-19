@@ -1,0 +1,31 @@
+{
+	"CryptoGrants": [
+		{
+			"processname": "/homeTest/Client",
+			"slotname": [
+				"slot1",
+				"slot2",
+				"slot3",
+				"slot5"
+			]
+		},
+		{
+			"processname": "/homeTest/slot1",
+			"slotname": [
+				"slot11",
+				"slot22",
+				"slot33",
+				"slot44"
+			]
+		},
+		{
+			"processname": "/homeTest/slot2",
+			"slotname": [
+				"slot111",
+				"slot222",
+				"slot333",
+				"slot444"
+			]
+		}
+	]
+}

@@ -1,0 +1,64 @@
+{
+    "End2EndEventDataIdMapping": [{
+        "serviceId": 20481,
+        "instanceId": 1,
+        "eventId": 32769,
+        "dataId": [235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250]
+    },
+    {
+        "serviceId": 20481,
+        "instanceId": 1,
+        "eventId": 37121,
+        "dataId": [1234]
+    },
+    {
+        "serviceId": 20481,
+        "instanceId": 1,
+        "eventId": 61697,
+        "dataId": [168496141]
+    }],
+    "End2EndMethodDataIdMapping": [
+        {
+            "serviceId": 20481,
+            "instanceId": 1,
+            "methodId": 1,
+            "dataId": [1238],
+            "sourceId": 1193048
+        },
+        {
+            "serviceId": 20481,
+            "instanceId": 2,
+            "methodId": 1,
+            "dataId": [1238],
+            "sourceId": 1193148
+        },
+        {
+            "serviceId": 20481,
+            "instanceId": 1,
+            "methodId": 257,
+            "dataId": [1237],
+            "sourceId": 1193047
+        },
+        {
+            "serviceId": 20481,
+            "instanceId": 1,
+            "methodId": 513,
+            "dataId": [1239],
+            "sourceId": 1193049
+        },
+        {
+            "serviceId": 20481,
+            "instanceId": 1,
+            "methodId": 25089,
+            "dataId": [1240],
+            "sourceId": 1193050
+        },
+        {
+            "serviceId": 20481,
+            "instanceId": 1,
+            "methodId": 24833,
+            "dataId": [1241],
+            "sourceId": 1193051
+        }
+    ]
+}

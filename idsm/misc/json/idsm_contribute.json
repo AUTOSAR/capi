@@ -1,0 +1,157 @@
+{
+    "idsmInstance": {
+        "shortName": "Idsm_Instance_1",
+        "fqn": "/ISOFT/Idsm/Deployment/Idsm_Instance_1",
+        "ecuInstance": "/ISOFT/Development/machine1_ecu",
+        "idsmInstanceId": 1,
+        "idsmModuleInstantiation": {
+            "networkInterface": {
+                "udpPort": 0,
+                "ipv4IpAddress": "127.0.0.1",
+                "tcpPort": 9090
+            },
+            "timeBase": "/ISOFT/Development/Machine1/timeSyncModuleInstantiation_0/synchronizedTimeBaseProvider_0"
+        },
+        "rateLimitationFilter": {
+            "maxEventsInInterval": 24,
+            "timeInterval": 24.0
+        },
+        "trafficLimitationFilter": {
+            "maxBytesInInterval": 20480,
+            "timeInterval": 24.0
+        },
+        "signatureSupportAp": {
+            "cryptoPrimitive": "RSA",
+            "keySlot": "ISOFT/Development/Machine1/idsm_cryptod/idsmCryptoProvider_puhua/key_slot_idsm"
+        },
+        "signatureSupportCp": "",
+        "timestampFormat": "autosar",
+        "memoryLimitation": {
+            "event": 4096,
+            "context": 4096
+        }
+    },
+    "securityEventFilterChains": [
+        {
+            "fqn": "/ISOFT/Idsm/Design/SecurityEventFilterChain_auth",
+            "oneEveryN": 1,
+            "state": {
+                "blockIfStateActiveAp": [
+                    {
+                        "modeDeclarationGroupPrototype": "/ISOFT/Idsm/HelloworldIdsmFGSet/HelloworldIdsmFG",
+                        "modeDeclaration": "/ISOFT/Idsm/HelloworldIdsmFG/Startup"
+                    }
+                ]
+            }
+        }
+    ],
+    "securityEventDefinitions": [
+        {
+            "shortName": "TCPIP_SEV_DROP_INV_PORT_TCP",
+            "fqn": "/ISOFT/GenDef/Standardized_SecurityEvents_TcpIp/TCPIP_SEV_DROP_INV_PORT_TCP",
+            "eventSymbolName": "",
+            "id": 32768
+        },
+        {
+            "shortName": "SecurityEventDefinition_auth",
+            "fqn": "/ISOFT/Custom/SecurityEventDefinition_auth",
+            "eventSymbolName": "",
+            "id": 32769
+        },
+        {
+            "shortName": "IDSM_INTERNAL_EVENT_NO_EVENT_BUFFER_AVAILABLE",
+            "fqn": "/ISOFT/GenDef/Standardized_SecurityEvents_IDSM/IDSM_INTERNAL_EVENT_NO_EVENT_BUFFER_AVAILABLE",
+            "eventSymbolName": "",
+            "id": 46
+        },
+        {
+            "shortName": "IDSM_INTERNAL_EVENT_NO_CONTEXT_DATA_BUFFER_AVAILABLE",
+            "fqn": "/ISOFT/GenDef/Standardized_SecurityEvents_IDSM/IDSM_INTERNAL_EVENT_NO_CONTEXT_DATA_BUFFER_AVAILABLE",
+            "eventSymbolName": "",
+            "id": 47
+        },
+        {
+            "shortName": "IDSM_INTERNAL_EVENT_COMMUNICATION_ERROR",
+            "fqn": "/ISOFT/GenDef/Standardized_SecurityEvents_IDSM/IDSM_INTERNAL_EVENT_COMMUNICATION_ERROR",
+            "eventSymbolName": "",
+            "id": 49
+        },
+        {
+            "shortName": "IDSM_INTERNAL_EVENT_TRAFFIC_LIMITATION_EXCEEDED",
+            "fqn": "/ISOFT/GenDef/Standardized_SecurityEvents_IDSM/IDSM_INTERNAL_EVENT_TRAFFIC_LIMITATION_EXCEEDED",
+            "eventSymbolName": "",
+            "id": 48
+        }
+    ],
+    "didToSecurityEventContextProps": [],
+    "dtcToSecurityEventContextProps": [],
+    "securityEventContextProps": [
+        {
+            "shortName": "SecurityEventContextProps_DropInvPortTcp",
+            "fqn": "/ISOFT/Idsm/Design/SecurityEventContextMappingApplication_hellworld_idsm/SecurityEventContextProps_DropInvPortTcp",
+            "contextData": "",
+            "defaultReportingMode": "BRIEF",
+            "persistentStorage": true,
+            "sensorInstanceId": 0,
+            "severity": 0,
+            "securityEvent": "/ISOFT/GenDef/Standardized_SecurityEvents_TcpIp/TCPIP_SEV_DROP_INV_PORT_TCP"
+        },
+        {
+            "shortName": "SecurityEventContextProps_auth",
+            "fqn": "/ISOFT/Idsm/Design/SecurityEventContextMappingApplication_hellworld_idsm/SecurityEventContextProps_auth",
+            "contextData": "",
+            "defaultReportingMode": "DETAILED",
+            "persistentStorage": true,
+            "sensorInstanceId": 0,
+            "severity": 3,
+            "securityEvent": "/ISOFT/Custom/SecurityEventDefinition_auth"
+        }
+    ],
+    "securityEventReportedMappingProcess": [
+        {
+            "shortName": "SecurityEventMapping_DropInvPortTcp",
+            "fqn": "/ISOFT/Idsm/Design/SecurityEventMapping/SecurityEventMapping_DropInvPortTcp",
+            "id": 1,
+            "process": "/ISOFT/Idsm/Processes/helloworld_idsm_process1",
+            "fg": "HelloworldIdsmFG",
+            "eventPortInstance": "helloworld_idsm/RootSwComponent/rPort_DropInvPortTcp"
+        },
+        {
+            "shortName": "SecurityEventMapping_auth",
+            "fqn": "/ISOFT/Idsm/Design/SecurityEventMapping/SecurityEventMapping_auth",
+            "id": 1,
+            "process": "/ISOFT/Idsm/Processes/helloworld_idsm_process1",
+            "fg": "HelloworldIdsmFG",
+            "eventPortInstance": "helloworld_idsm/RootSwComponent/rPort_auth"
+        }
+    ],
+    "securityEventReportedMappingPort": [
+        {
+            "shortName": "SecurityEventReportToSecurityEventDefinitionMapping_DropInvPortTcp",
+            "fqn": "/ISOFT/Idsm/Design/SecurityEventReportToSecurityEventDefinitionMapping/SecurityEventReportToSecurityEventDefinitionMapping_DropInvPortTcp",
+            "eventPortInstance": "helloworld_idsm/RootSwComponent/rPort_DropInvPortTcp",
+            "securityEventDefinition": "/ISOFT/GenDef/Standardized_SecurityEvents_TcpIp/TCPIP_SEV_DROP_INV_PORT_TCP"
+        },
+        {
+            "shortName": "SecurityEventReportToSecurityEventDefinitionMapping_auth",
+            "fqn": "/ISOFT/Idsm/Design/SecurityEventReportToSecurityEventDefinitionMapping/SecurityEventReportToSecurityEventDefinitionMapping_auth",
+            "eventPortInstance": "helloworld_idsm/RootSwComponent/rPort_auth",
+            "securityEventDefinition": "/ISOFT/Custom/SecurityEventDefinition_auth"
+        }
+    ],
+    "securityEventContextMappingBswModules": [],
+    "securityEventContextMappingFunctionalClusters": [],
+    "securityEventContextMappingCommConnectors": [],
+    "securityEventContextMappingApplications": [
+        {
+            "shortName": "SecurityEventContextMappingApplication_hellworld_idsm",
+            "fqn": "/ISOFT/Idsm/Design/SecurityEventContextMappingApplication_hellworld_idsm",
+            "affectedApplication": "AP",
+            "filterChain": "/ISOFT/Idsm/Design/SecurityEventFilterChain_auth",
+            "mappedSecurityEvent": [
+                "/ISOFT/Idsm/Design/SecurityEventContextMappingApplication_hellworld_idsm/SecurityEventContextProps_DropInvPortTcp",
+                "/ISOFT/Idsm/Design/SecurityEventContextMappingApplication_hellworld_idsm/SecurityEventContextProps_auth"
+            ]
+        }
+    ]
+}

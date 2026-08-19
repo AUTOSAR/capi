@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+	<AR-PACKAGE>
+		<SHORT-NAME>ara</SHORT-NAME>
+		<AR-PACKAGES>
+			<AR-PACKAGE>
+				<SHORT-NAME>sm</SHORT-NAME>
+				<AR-PACKAGES>
+					<AR-PACKAGE>
+						<SHORT-NAME>Errors</SHORT-NAME>
+						<ELEMENTS> 
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>Canceled</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">The request was replaced by a newer one and therefore it was cancelled.</L-2>
+								</DESC>
+								<ERROR-CODE>14</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>InvalidValue</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">The provided value is not mapped to any transition.</L-2>
+								</DESC>
+								<ERROR-CODE>10</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>RecoveryTransitionOngoing</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">Request will not be carried out, because currently recovery is ongoing.</L-2>
+								</DESC>
+								<ERROR-CODE>12</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>TransitionFailed</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">During transition to the requested state an error occurred.</L-2>
+								</DESC>
+								<ERROR-CODE>13</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>TransitionNotAllowed</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">Requested transition is not possible from current StateMachine state.</L-2>
+								</DESC>
+								<ERROR-CODE>11</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>InTransitionToSameState</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">A transition to the requested state is already ongoing.</L-2>
+								</DESC>
+								<ERROR-CODE>15</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>NotWorking</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">The StateMachine is not working.</L-2>
+								</DESC>
+								<ERROR-CODE>16</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+						</ELEMENTS>
+					</AR-PACKAGE>
+				</AR-PACKAGES>
+			</AR-PACKAGE>
+		</AR-PACKAGES>
+	</AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

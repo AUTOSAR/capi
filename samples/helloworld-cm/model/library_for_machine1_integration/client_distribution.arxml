@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR
+    xmlns="http://autosar.org/schema/r4.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+        <AR-PACKAGE>
+            <SHORT-NAME>ISOFT</SHORT-NAME>
+            <AR-PACKAGES>
+                <AR-PACKAGE>
+                    <SHORT-NAME>Development</SHORT-NAME>
+                    <AR-PACKAGES>
+                        <AR-PACKAGE>
+                            <SHORT-NAME>SoftwareClusters1</SHORT-NAME>
+                            <AR-PACKAGES>
+                                <AR-PACKAGE UUID="0adf1f4d-bb51-41e6-87f1-ac9008cd541c">
+                                    <SHORT-NAME>VER_100</SHORT-NAME>
+                                    <ELEMENTS>
+                                        <SOFTWARE-CLUSTER UUID="de6eb0b5-cd00-4d0d-93e8-7536fd4ef841">
+                                            <SHORT-NAME>CMDemo_client</SHORT-NAME>
+                                            <CATEGORY>APPLICATION_LAYER</CATEGORY>
+                                            <CLAIMED-FUNCTION-GROUP-REFS>
+                                                <CLAIMED-FUNCTION-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/FunctionGroups/HelloWorld_CM/FunctionGroupsSet/HelloWorldGroup</CLAIMED-FUNCTION-GROUP-REF>
+                                            </CLAIMED-FUNCTION-GROUP-REFS>
+                                            <CONTAINED-AR-ELEMENT-REFS>
+                                                <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ClientApp/exe/clientd</CONTAINED-AR-ELEMENT-REF>
+                                            </CONTAINED-AR-ELEMENT-REFS>
+                                            <CONTAINED-PROCESS-REFS>
+                                                <CONTAINED-PROCESS-REF DEST="PROCESS">/ClientDeployment/client_process</CONTAINED-PROCESS-REF>
+                                            </CONTAINED-PROCESS-REFS>
+                                            <TYPE-APPROVAL>e1*2024/123*4567*89</TYPE-APPROVAL>
+                                            <VENDOR-ID>1</VENDOR-ID>
+                                            <!--<VENDOR-SIGNATURE-REF DEST="CRYPTO-SERVICE-CERTIFICATE">/ara/ucm/CryptoServiceCertificates/vendorCert</VENDOR-SIGNATURE-REF> -->
+                                            <VERSION>1.1.0</VERSION>
+                                        </SOFTWARE-CLUSTER>
+                                    </ELEMENTS>
+                                </AR-PACKAGE>
+                            </AR-PACKAGES>
+                        </AR-PACKAGE>
+                    </AR-PACKAGES>
+                </AR-PACKAGE>
+            </AR-PACKAGES>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

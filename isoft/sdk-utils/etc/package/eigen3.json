@@ -1,0 +1,9 @@
+{
+	"name": "eigen3",
+	"!version": "5.0.1",
+	"url": "https://gitlab.com/libeigen/eigen/-/archive/5.0.1/eigen-5.0.1.tar.gz",
+	"preproc": "${CAPI_SRC_DIR}/isoft/sdk-utils/etc/package/package-source-cleanup/cleanup-eigen-sources.sh",
+	"configure": "mkdir ../eigen-build; cd ../eigen-build; cmake -DCMAKE_INSTALL_PREFIX=/usr @CMAKE_ARGS@ ../eigen3",
+	"build": "cd ../eigen-build;make -j@JOBS@",
+	"install": "cd ../eigen-build;make install DESTDIR=@SYSROOT@"
+}

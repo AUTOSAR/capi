@@ -1,0 +1,18 @@
+{
+    "name": "apall",
+    "version": "develop2.2",
+    "depend": ["openssl", "googletest", "rapidjson", "fast-dds", "libseccomp", "cunit", "concurrentqueue", "eigen3", "zlib"],
+    "url": " external download not available, please make sure that CAPI_SRC_DIR is set and passed correctly",
+    "configure": [
+        "CMAKE_ARG_LIST=$(echo @CMAKE_ARGS@ | tr -s ' ' | sed -e 's/ -D/;-D/g')",
+        "export ARA_SYSROOT=@SYSROOT@",
+        "mkdir .build",
+        "cmake -DCMAKE_ARGS=${CMAKE_ARG_LIST} @CMAKE_ARGS@ -DCMAKE_INSTALL_PREFIX=@SYSROOT@/ara/framework/1.0.0 -DARA_GEN_EXECUTABLE_OUTPUT=@SYSROOT@/../ara-binout -B .build -S . -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=Debug"
+    ],
+    "build": [
+        "cmake --build .build -j @JOBS@"
+    ],
+    "install": [
+        "rm -rf @SYSROOT@/../ara-binout"
+    ]
+}

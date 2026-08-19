@@ -1,0 +1,8 @@
+{
+    "name": "googletest",
+    "version": "1.10",
+    "url": "https://github.com/google/googletest/archive/refs/tags/release-1.10.0.tar.gz",
+    "configure": "cmake @CMAKE_ARGS@ -DCMAKE_CXX_FLAGS=-Wno-error=maybe-uninitialized .",
+    "build": "make -j@JOBS@",
+    "install": "make install DESTDIR=@SYSROOT@"
+}

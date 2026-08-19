@@ -1,0 +1,9 @@
+{
+    "show_help": false,
+    "show_version": false,
+    "test_api": false,
+    "output_file": "logs/output.log",
+    "net_mode":false,
+    "test_method": 7,
+    "msg_count": 10000
+}

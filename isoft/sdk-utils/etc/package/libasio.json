@@ -1,0 +1,11 @@
+{
+    "name": "libasio",
+    "version": "1.36.0",
+    "url": "https://zenlayer.dl.sourceforge.net/project/asio/asio/1.36.0%20%28Stable%29/asio-1.36.0.tar.gz",
+    "configure": [
+        "./autogen.sh",
+        "./configure --host=@TARGET@ --prefix=@PREFIX@ --without-boost"
+    ],
+    "build": "make -j@JOBS@",
+    "install": "make install DESTDIR=@SYSROOT@"
+}

@@ -1,0 +1,171 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+
+#include "ara/com/internal/runtime.h"
+#include "ara/core/future.h"
+
+{% for domain in error_domains %}
+#include {{domain.include_name}}
+{% endfor %}
+#ifdef HAS_NSOMEIP_BINDING
+#include "ara/com/internal/nsomeip/nsomeip_runtime.h"
+{% if service.is_show and "nsomeip" in service.bind_types%}
+{% for name in service.someipdep_name%}
+#include "{%for n in service.lowNamespaces%}{{n}}/{%endfor%}nsomeip/{{name | lower}}_proxy_impl.h"
+{% endfor %}
+{% endif %}
+#endif
+
+#ifdef HAS_NPC_BINDING
+#include "ara/com/internal/npc/npc_runtime.h"
+{% if service.is_show and "npc" in service.bind_types%}
+{% for name in service.userdefdep_name%}
+#include "{%for n in service.lowNamespaces%}{{n}}/{%endfor%}npc/{{name | lower}}_proxy_impl.h"
+{% endfor %}
+{% endif %}
+#endif
+
+#ifdef HAS_ICC_BINDING
+#include "ara/com/internal/icc/icc_runtime.h"
+{% if service.is_show and "icc" in service.bind_types%}
+{% for name in service.iccdep_name%}
+#include "{%for n in service.lowNamespaces%}{{n}}/{%endfor%}icc/{{name | lower}}_proxy_impl.h"
+{% endfor %}
+{% endif %}
+#endif
+
+#ifdef HAS_FASTDDS_BINDING
+#include "ara/com/internal/fastdds/fastdds_runtime.h"
+{% if service.is_show and "fastdds" in service.bind_types%}
+{% for name in service.ddsdep_name%}
+#include "{%for n in service.lowNamespaces%}{{n}}/{%endfor%}fastdds/{{name | lower}}_proxy_impl.h"
+{% endfor %}
+{% endif %}
+#endif
+
+{% if isHaveCg %}
+#ifdef HAS_ARA_CG
+#include "ara/com/internal/cg/cg_runtime.h"
+#include "ara/com/internal/cg/cg_type_info_{{ isHaveCg }}.h"
+#endif
+{% endif %}
+
+#ifdef HAS_ARA_RAW
+#include "ara/com/internal/raw/raw_runtime.h"
+#endif
+
+namespace ara {
+namespace com {
+namespace internal {
+
+
+ara::core::Result<void> Initialize{{service.name}}() noexcept {
+    using Result = ara::core::Result<void>;
+    Result result{};
+#ifdef HAS_NSOMEIP_BINDING
+{
+{% if service.is_show and "nsomeip" in service.bind_types%}
+    auto& runtime = ara::com::internal::nsomeip::runtime::GetInstance();
+{% for name in service.someipdep_name%}
+    runtime.RegisterProxyMapper<::{%for n in service.namespaces%}{{n}}::{%endfor%}nsomeip::{{name}}ProxyImpl>();
+{% endfor %}
+{% endif %}
+}
+#endif // HAS_NSOMEIP_BINDING
+
+#ifdef HAS_NPC_BINDING
+{
+{% if service.is_show and "npc" in service.bind_types%}
+    auto& runtime = ara::com::internal::npc::runtime::GetInstance();
+{% for name in service.userdefdep_name%}
+    runtime.RegisterProxyMapper<::{%for n in service.namespaces%}{{n}}::{%endfor%}npc::{{name}}ProxyImpl>();
+{% endfor %}
+{% endif %}
+}
+#endif // HAS_NPC_BINDING
+
+#ifdef HAS_ICC_BINDING
+{
+{% if service.is_show and "icc" in service.bind_types%}
+    auto& runtime = ara::com::internal::icc::runtime::GetInstance();
+{% for name in service.iccdep_name%}
+    runtime.RegisterProxyMapper<::{%for n in service.namespaces%}{{n}}::{%endfor%}icc::{{name}}ProxyImpl>();
+{% endfor %}
+{% endif %}
+}
+#endif // HAS_ICC_BINDING
+
+#ifdef HAS_FASTDDS_BINDING
+{
+{% if service.is_show and "fastdds" in service.bind_types%}
+    auto& runtime = ara::com::internal::fastdds::runtime::GetInstance();
+{% for name in service.ddsdep_name%}
+    runtime.RegisterProxyMapper<::{%for n in service.namespaces%}{{n}}::{%endfor%}fastdds::{{name}}ProxyImpl>();
+{% endfor %}
+{% endif %}
+}
+#endif // HAS_FASTDDS_BINDING
+
+#ifdef HAS_ARA_RAW
+{
+    //auto& runtime = ara::com::internal::raw::runtime::GetInstance();
+}
+#endif // HAS_ARA_RAW
+
+#ifdef HAS_ARA_CG
+
+{
+}
+
+#endif // HAS_ARA_CG
+
+    return result;
+}
+
+
+#ifndef ARA_FC_LIB
+ara::core::Result<void> Deinitialize{{service.name}}() noexcept {
+    using Result = ara::core::Result<void>;
+    Result result{};
+#ifdef HAS_NSOMEIP_BINDING
+#endif // HAS_NSOMEIP_BINDING
+#ifdef HAS_NPC_BINDING
+#endif // HAS_NPC_BINDING
+#ifdef HAS_ICC_BINDING
+#endif // HAS_ICC_BINDING
+#ifdef HAS_FASTDDS_BINDING
+#endif // HAS_FASTDDS_BINDING
+#ifdef HAS_ARA_RAW
+#endif // HAS_ARA_RAW
+#ifdef HAS_ARA_CG
+#endif // HAS_ARA_CG
+    return result;
+}
+#endif
+} // namespace internal
+} // namespace com
+} // namespace ara
+
+

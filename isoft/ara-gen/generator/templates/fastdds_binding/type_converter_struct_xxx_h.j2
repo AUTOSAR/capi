@@ -1,0 +1,103 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+#include "ara/com/types.h"
+#include "ara/com/internal/fastdds/dds_idl_types_binding.h"
+{% if not ara_type.interface_type %}
+{% for service in services%}
+#include "{% for namespace in service.namespaces %}{{namespace|lower}}/{% endfor %}{{service.standard_name}}_common.h"
+{%endfor%}
+{% endif %}
+{% if ara_type.self_include %}
+// Header generated from ARXML
+#include {{ara_type.self_include}}
+{% endif %}
+{% for include in dds_type.idl_type_support_includes_fastdds %}
+{% if loop.first %}
+
+// Headers generated from IDL
+{% endif %}
+#include {{include}}
+{% endfor %}
+{% for include in dds_type.idl_converter_includes_fastdds %}
+{% if loop.first %}
+
+// Type converter headers
+{% endif %}
+#include {{include}}
+{% endfor %}
+
+namespace ara
+{
+namespace com
+{
+namespace internal
+{
+namespace fastdds
+{
+/// @uptrace{SWS_CM_11042, 367805dbdc5ffa42e5d6515f20d6c78ed67aa951}
+/// @uptrace{SWS_CM_11043, 34beaeddfbcee96f3f3e8bd646d3eeab83e80c9a}
+/// @uptrace{SWS_CM_11044, a19269790743ce8fe53fe9402e3f31eb9c5469bb}
+/// @uptrace{SWS_CM_11046, 40caf9de5bacd2fb17b293d95f07caed08396aeb}
+/// @uptrace{SWS_CM_11047, a72cde1629ac40e0c3ae4a28bcadc06805655d85}
+/// @uptrace{SWS_CM_11048, eba3e39ed85711497b9384740683bb4297a47ee8}
+/// @uptrace{SWS_CM_11049, b03bc2144d6f8dd06f37d193cea572d7ffd85ca4}
+/// @uptrace{SWS_CM_11050, a410980d690bf2d0f1e1119e8f6f074173d05179}
+
+{% if dds_type.interface_type %}
+inline void ConvertToIdl({{ara_type.qualified_cpp_name}} const& source, {{dds_type.qualified_cpp_name_fastdds}}& result)
+{% else %}
+inline void ConvertToIdl({{ara_type.qualified_cpp_name}} const& source, {{dds_type.qualified_cpp_name}}& result)
+{%endif%}
+{
+{% for item in dds_type.names_optionals_data_ids %}
+    ara::com::internal::fastdds::ConvertToIdl(source.{{item[0]}}, result.{{item[0]}}());
+{% endfor %}
+
+    return;
+}
+{% if dds_type.interface_type %}
+inline void ConvertFromIdl({{dds_type.qualified_cpp_name_fastdds}} const& source, {{ara_type.qualified_cpp_name}}& result)
+{% else %}
+inline void ConvertFromIdl({{dds_type.qualified_cpp_name}} const& source, {{ara_type.qualified_cpp_name}}& result)
+{%endif%}
+{
+{% for item in dds_type.names_optionals_data_ids %}
+    ara::com::internal::fastdds::ConvertFromIdl(source.{{ item[0] }}(), result.{{ item[0] }});
+{% endfor %}
+    return;
+}
+
+}  // namespace dds
+}  // namespace internal
+}  // namespace com
+}  // namespace ara
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}
+

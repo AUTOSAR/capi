@@ -1,0 +1,111 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+{% macro cppStyle() %}
+{% if soaElementCppDefStyle=="inside" %}{{ service.name }}{% else %}{% endif %}
+{% endmacro %}
+
+#include "ara/com/internal/proxy/event.h"
+#include "ara/com/internal/proxy/field.h"
+#include "ara/com/internal/proxy/method.h"
+#include "ara/com/internal/proxy/proxy.h"
+#include "{{ service.standard_name }}_common.h"
+
+{% if service.namespaces %}{% for ns in service.namespaces %}
+namespace {{ns}} {
+{% endfor %}{% endif %}
+namespace proxy {
+
+{% if service.events %}
+namespace events {
+{% for event in service.events %}
+  using {{ cppStyle() }}{{ event.name }} = ara::com::internal::proxy::Event<{{event.type_declaration}}>;
+{% endfor %}
+} // namespace events
+{% endif %}
+
+
+{% if service.methods %}
+namespace methods {
+{% for method in service.methods -%}
+{% if method.get_output_args %}
+using {{ cppStyle() }}{{ method.name }} = ara::com::internal::proxy::RMethod<{{service.name}}::{{method.name}}Output({% for argument in method.get_input_args -%}const {{argument.type_declaration}}&{% if not loop.last %},{% endif %}{% endfor -%})>;
+{% elif method.is_fire_and_forget %}
+using {{ cppStyle() }}{{ method.name }} = ara::com::internal::proxy::FMethod<void({% for argument in method.get_input_args -%}const {{argument.type_declaration}}&{% if not loop.last %},{% endif %}{% endfor -%})>;
+{% else %}
+using {{ cppStyle() }}{{ method.name }} = ara::com::internal::proxy::VMethod<void({% for argument in method.get_input_args -%} const {{argument.type_declaration}}&{% if not loop.last %},{% endif %}{% endfor -%})>;
+{% endif %}
+{% endfor -%}
+} // namespace methods
+{% endif %}
+
+{% if service.all_fields %}
+namespace fields {
+{% for field in service.all_fields %}
+  using {{ cppStyle() }}{{ field.name }} = ara::com::internal::proxy::{{field.get_fieldtype}}Field<{{field.type_declaration}}>;
+{% endfor %}
+} // namespace fields
+{% endif %}
+/// @brief SxProxy
+class {{ service.name }}Proxy
+    :public {{ service.name}}
+    ,public ara::com::internal::proxy::ServiceProxy<{{ service.name }}Proxy>{
+
+public:
+
+{% for event in service.events %}
+  events::{{ cppStyle() }}{{ event.name }} {{ event.name }};
+{% endfor %}
+{% for method in service.methods %}
+{% if loop.first %}
+{% endif %}
+  methods::{{ cppStyle() }}{{ method.name }} {{ method.name }};
+{% endfor %}
+{% for field in service.all_fields %}
+  fields::{{ cppStyle() }}{{ field.name }} {{ field.name }};
+{% endfor %}
+
+public:
+    using ServiceProxy = ara::com::internal::proxy::ServiceProxy<{{ service.name }}Proxy>;
+    using ServiceProxy::ServiceProxy;
+    explicit {{ service.name }}Proxy(HandleType const& handle) : ServiceProxy{handle} { Initialize().ValueOrThrow(); }
+
+    {{ service.name }}Proxy(const {{ service.name }}Proxy& other) = delete;
+    {{ service.name }}Proxy& operator=(const {{ service.name }}Proxy& other) = delete;
+    {{ service.name }}Proxy({{ service.name }}Proxy&& other) = default;
+    {{ service.name }}Proxy& operator=({{ service.name }}Proxy&& other) = default;
+
+};
+
+} // namespace proxy
+{% if service.namespaces %}{% for ns in service.namespaces|reverse %}
+} // namespace {{ ns }}
+{% endfor %}{% endif %}
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

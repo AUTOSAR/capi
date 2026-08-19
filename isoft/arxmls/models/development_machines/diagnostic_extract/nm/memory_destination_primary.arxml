@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>DiagnosticMemoryDestinationPrimary</SHORT-NAME>
+          <ELEMENTS>
+            <DIAGNOSTIC-MEMORY-DESTINATION-PRIMARY>
+              <SHORT-NAME>DiagnosticMemoryDestinationPrimary_nm</SHORT-NAME>
+              <DTC-STATUS-AVAILABILITY-MASK>255</DTC-STATUS-AVAILABILITY-MASK>
+              <EVENT-DISPLACEMENT-STRATEGY>NONE</EVENT-DISPLACEMENT-STRATEGY>
+              <MAX-NUMBER-OF-EVENT-ENTRIES>10</MAX-NUMBER-OF-EVENT-ENTRIES>
+              <MEMORY-ENTRY-STORAGE-TRIGGER>CONFIRMED</MEMORY-ENTRY-STORAGE-TRIGGER>
+              <TYPE-OF-FREEZE-FRAME-RECORD-NUMERATION>CONFIGURED</TYPE-OF-FREEZE-FRAME-RECORD-NUMERATION>
+              <TYPE-OF-DTC-SUPPORTED>ISO-14229--1</TYPE-OF-DTC-SUPPORTED>
+            </DIAGNOSTIC-MEMORY-DESTINATION-PRIMARY>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+	<AR-PACKAGES><AR-PACKAGE>
+		<SHORT-NAME>ara</SHORT-NAME>
+		<AR-PACKAGES><AR-PACKAGE>
+			<SHORT-NAME>nm</SHORT-NAME>
+			<ELEMENTS>
+				<!-- AUTOSAR_SWS_AdaptiveDiagnostics.pdf, 8.1.1.11 / Table 8.11 -->
+				<!-- Compu-method is not really needed in a hand written arxml, but leaving it here anyway just for reference, since it's short -->
+				<COMPU-METHOD>
+					<SHORT-NAME>nm_NetworkStateType</SHORT-NAME>
+					<CATEGORY>TEXTTABLE</CATEGORY>
+					<COMPU-INTERNAL-TO-PHYS><COMPU-SCALES>
+						<!-- 0x00 -->
+						<COMPU-SCALE>
+							<LOWER-LIMIT INTERVAL-TYPE="CLOSED">0</LOWER-LIMIT>
+							<UPPER-LIMIT INTERVAL-TYPE="CLOSED">0</UPPER-LIMIT>
+							<COMPU-CONST><VT>kNoCom</VT></COMPU-CONST>
+						</COMPU-SCALE>
+						<!-- 0x01 -->
+						<COMPU-SCALE>
+							<LOWER-LIMIT INTERVAL-TYPE="CLOSED">1</LOWER-LIMIT>
+							<UPPER-LIMIT INTERVAL-TYPE="CLOSED">1</UPPER-LIMIT>
+							<COMPU-CONST><VT>kFullCom</VT></COMPU-CONST>
+						</COMPU-SCALE>
+						<!-- 如下取值是filed SetEtherStateMachineSate&GetEtherStateMachineState使用 -->
+						<!-- 0x02 -->
+						<COMPU-SCALE>
+							<LOWER-LIMIT INTERVAL-TYPE="CLOSED">2</LOWER-LIMIT>
+							<UPPER-LIMIT INTERVAL-TYPE="CLOSED">2</UPPER-LIMIT>
+							<COMPU-CONST><VT>kBusSleep</VT></COMPU-CONST>
+						</COMPU-SCALE>
+						<!-- 0x03 -->
+						<COMPU-SCALE>
+							<LOWER-LIMIT INTERVAL-TYPE="CLOSED">3</LOWER-LIMIT>
+							<UPPER-LIMIT INTERVAL-TYPE="CLOSED">3</UPPER-LIMIT>
+							<COMPU-CONST><VT>kPrepareBusSleep</VT></COMPU-CONST>
+						</COMPU-SCALE>
+						<!-- 0x04 -->
+						<COMPU-SCALE>
+							<LOWER-LIMIT INTERVAL-TYPE="CLOSED">4</LOWER-LIMIT>
+							<UPPER-LIMIT INTERVAL-TYPE="CLOSED">4</UPPER-LIMIT>
+							<COMPU-CONST><VT>kRepeatMessageState</VT></COMPU-CONST>
+						</COMPU-SCALE>
+						<!-- 0x05 -->
+						<COMPU-SCALE>
+							<LOWER-LIMIT INTERVAL-TYPE="CLOSED">5</LOWER-LIMIT>
+							<UPPER-LIMIT INTERVAL-TYPE="CLOSED">5</UPPER-LIMIT>
+							<COMPU-CONST><VT>kNormalOperation</VT></COMPU-CONST>
+						</COMPU-SCALE>
+						<!-- 0x06 -->
+						<COMPU-SCALE>
+							<LOWER-LIMIT INTERVAL-TYPE="CLOSED">6</LOWER-LIMIT>
+							<UPPER-LIMIT INTERVAL-TYPE="CLOSED">6</UPPER-LIMIT>
+							<COMPU-CONST><VT>kReadySleep</VT></COMPU-CONST>
+						</COMPU-SCALE>
+					</COMPU-SCALES></COMPU-INTERNAL-TO-PHYS>
+				</COMPU-METHOD>
+				<COMPU-METHOD>
+					<SHORT-NAME>nm_NMMessageCtrlType</SHORT-NAME>
+					<CATEGORY>TEXTTABLE</CATEGORY>
+					<COMPU-INTERNAL-TO-PHYS><COMPU-SCALES>
+						<!-- 0x00 -->
+						<COMPU-SCALE>
+							<LOWER-LIMIT INTERVAL-TYPE="CLOSED">0</LOWER-LIMIT>
+							<UPPER-LIMIT INTERVAL-TYPE="CLOSED">0</UPPER-LIMIT>
+							<COMPU-CONST><VT>kEnableAll</VT></COMPU-CONST>
+						</COMPU-SCALE>
+						<!-- 0x01 -->
+						<COMPU-SCALE>
+							<LOWER-LIMIT INTERVAL-TYPE="CLOSED">1</LOWER-LIMIT>
+							<UPPER-LIMIT INTERVAL-TYPE="CLOSED">1</UPPER-LIMIT>
+							<COMPU-CONST><VT>kEnableReceive</VT></COMPU-CONST>
+						</COMPU-SCALE>
+						<!-- 如下取值是filed SetEtherStateMachineSate&GetEtherStateMachineState使用 -->
+						<!-- 0x02 -->
+						<COMPU-SCALE>
+							<LOWER-LIMIT INTERVAL-TYPE="CLOSED">2</LOWER-LIMIT>
+							<UPPER-LIMIT INTERVAL-TYPE="CLOSED">2</UPPER-LIMIT>
+							<COMPU-CONST><VT>kEnableSend</VT></COMPU-CONST>
+						</COMPU-SCALE>
+						<!-- 0x03 -->
+						<COMPU-SCALE>
+							<LOWER-LIMIT INTERVAL-TYPE="CLOSED">3</LOWER-LIMIT>
+							<UPPER-LIMIT INTERVAL-TYPE="CLOSED">3</UPPER-LIMIT>
+							<COMPU-CONST><VT>kDisableAll</VT></COMPU-CONST>
+						</COMPU-SCALE>
+					</COMPU-SCALES></COMPU-INTERNAL-TO-PHYS>
+				</COMPU-METHOD>
+				<STD-CPP-IMPLEMENTATION-DATA-TYPE>
+					<SHORT-NAME>NetworkStateType</SHORT-NAME>
+					<CATEGORY>TYPE_REFERENCE</CATEGORY>
+					<SW-DATA-DEF-PROPS>
+						<SW-DATA-DEF-PROPS-VARIANTS>
+							<SW-DATA-DEF-PROPS-CONDITIONAL>
+								<COMPU-METHOD-REF DEST="COMPU-METHOD">/ara/nm/nm_NetworkStateType</COMPU-METHOD-REF>
+							</SW-DATA-DEF-PROPS-CONDITIONAL>
+						</SW-DATA-DEF-PROPS-VARIANTS>
+					</SW-DATA-DEF-PROPS>
+					<NAMESPACES>
+						<SYMBOL-PROPS>
+							<SHORT-NAME>ara</SHORT-NAME>
+							<SYMBOL>ara</SYMBOL>
+						</SYMBOL-PROPS>
+						<SYMBOL-PROPS>
+							<SHORT-NAME>nm</SHORT-NAME>
+							<SYMBOL>nm</SYMBOL>
+						</SYMBOL-PROPS>
+					</NAMESPACES>
+					<TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+					<TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint8_t</TYPE-REFERENCE-REF>
+				</STD-CPP-IMPLEMENTATION-DATA-TYPE>
+				<STD-CPP-IMPLEMENTATION-DATA-TYPE>
+					<SHORT-NAME>NMEtherStateChangedType</SHORT-NAME>
+					<CATEGORY>STRUCTURE</CATEGORY>
+					<NAMESPACES>
+					<SYMBOL-PROPS>
+						<SHORT-NAME>ara</SHORT-NAME>
+						<SYMBOL>ara</SYMBOL>
+					</SYMBOL-PROPS>
+					<SYMBOL-PROPS>
+						<SHORT-NAME>nm</SHORT-NAME>
+						<SYMBOL>nm</SYMBOL>
+					</SYMBOL-PROPS>
+					</NAMESPACES>
+					<SUB-ELEMENTS>
+					<CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+						<SHORT-NAME>EthIp</SHORT-NAME>
+						<TYPE-REFERENCE>
+						<TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/ISOFT/SharedTypes/String</TYPE-REFERENCE-REF>
+						</TYPE-REFERENCE>
+					</CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+					<CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+						<SHORT-NAME>currentState</SHORT-NAME>
+						<TYPE-REFERENCE>
+						<TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/ara/nm/NetworkStateType</TYPE-REFERENCE-REF>
+						</TYPE-REFERENCE>
+					</CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+					</SUB-ELEMENTS>
+					<TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+				</STD-CPP-IMPLEMENTATION-DATA-TYPE>
+				<STD-CPP-IMPLEMENTATION-DATA-TYPE>
+					<SHORT-NAME>MessageCtrlType</SHORT-NAME>
+					<CATEGORY>TYPE_REFERENCE</CATEGORY>
+					<SW-DATA-DEF-PROPS>
+						<SW-DATA-DEF-PROPS-VARIANTS>
+							<SW-DATA-DEF-PROPS-CONDITIONAL>
+								<COMPU-METHOD-REF DEST="COMPU-METHOD">/ara/nm/nm_NMMessageCtrlType</COMPU-METHOD-REF>
+							</SW-DATA-DEF-PROPS-CONDITIONAL>
+						</SW-DATA-DEF-PROPS-VARIANTS>
+					</SW-DATA-DEF-PROPS>
+					<NAMESPACES>
+						<SYMBOL-PROPS>
+							<SHORT-NAME>ara</SHORT-NAME>
+							<SYMBOL>ara</SYMBOL>
+						</SYMBOL-PROPS>
+						<SYMBOL-PROPS>
+							<SHORT-NAME>nm</SHORT-NAME>
+							<SYMBOL>nm</SYMBOL>
+						</SYMBOL-PROPS>
+					</NAMESPACES>
+					<TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+					<TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint8_t</TYPE-REFERENCE-REF>
+				</STD-CPP-IMPLEMENTATION-DATA-TYPE>
+				<STD-CPP-IMPLEMENTATION-DATA-TYPE>
+					<SHORT-NAME>PassivePNInform</SHORT-NAME>
+					<CATEGORY>STRUCTURE</CATEGORY>
+					<NAMESPACES>
+					<SYMBOL-PROPS>
+						<SHORT-NAME>ara</SHORT-NAME>
+						<SYMBOL>ara</SYMBOL>
+					</SYMBOL-PROPS>
+					<SYMBOL-PROPS>
+						<SHORT-NAME>nm</SHORT-NAME>
+						<SYMBOL>nm</SYMBOL>
+					</SYMBOL-PROPS>
+					</NAMESPACES>
+					<SUB-ELEMENTS>
+					<CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+						<SHORT-NAME>EthIp</SHORT-NAME>
+						<TYPE-REFERENCE>
+						<TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/ISOFT/SharedTypes/String</TYPE-REFERENCE-REF>
+						</TYPE-REFERENCE>
+					</CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+					<CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+						<SHORT-NAME>PnList</SHORT-NAME>
+						<TYPE-REFERENCE>
+						<TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/ISOFT/SharedTypes/String</TYPE-REFERENCE-REF>
+						</TYPE-REFERENCE>
+					</CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+					</SUB-ELEMENTS>
+					<TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+				</STD-CPP-IMPLEMENTATION-DATA-TYPE>
+			</ELEMENTS>
+		</AR-PACKAGE></AR-PACKAGES>
+	</AR-PACKAGE></AR-PACKAGES>
+</AUTOSAR>

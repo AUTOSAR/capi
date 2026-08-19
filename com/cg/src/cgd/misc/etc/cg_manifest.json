@@ -1,0 +1,26 @@
+{
+    "cg_server_service_instances": [
+        {
+            "instance_specifier": "cgd/root_swc/CgServerPDiagnosticResetServer",
+            "name": "DiagnosticReset",
+            "client:": 0
+        },
+        {
+            "instance_specifier": "cgd/root_swc/CgServerPPowerModeServer",
+            "name": "PowerMode",
+            "client:": 0
+        }
+    ],
+    "cg_client_service_instances": [
+        {
+            "instance_specifier": "cgd/root_swc/CgServerRDiagnosticResetClient",
+            "name": "DiagnosticReset",
+            "client:": 0
+        },
+        {
+            "instance_specifier": "cgd/root_swc/CgServerRPowerModeClient",
+            "name": "PowerMode",
+            "client:": 0
+        }
+    ]
+}

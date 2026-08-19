@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+        <AR-PACKAGE>
+            <SHORT-NAME>ServerDeployment1</SHORT-NAME>
+            <ELEMENTS>
+                <PROCESS-TO-MACHINE-MAPPING-SET>
+                    <SHORT-NAME>mappingSet</SHORT-NAME>
+                    <PROCESS-TO-MACHINE-MAPPINGS>
+                        <PROCESS-TO-MACHINE-MAPPING>
+                            <SHORT-NAME>ServerMapping</SHORT-NAME>
+                            <MACHINE-REF DEST="MACHINE">/ISOFT/Development/Machine1</MACHINE-REF>
+                            <PROCESS-REF DEST="PROCESS">/ServerDeployment1/server_process</PROCESS-REF>
+                        </PROCESS-TO-MACHINE-MAPPING>
+                    </PROCESS-TO-MACHINE-MAPPINGS>
+                </PROCESS-TO-MACHINE-MAPPING-SET>
+                <DLT-LOG-CHANNEL-TO-PROCESS-MAPPING>
+                    <SHORT-NAME>dltLogChannelToProcessMapping1_server_default</SHORT-NAME>
+                    <DLT-LOG-CHANNEL-REF DEST="DLT-LOG-CHANNEL">/ISOFT/Development/Machine1/helloworld_server_log/default</DLT-LOG-CHANNEL-REF>
+                    <PROCESS-REF DEST="PROCESS">/ServerDeployment1/server_process</PROCESS-REF>
+                </DLT-LOG-CHANNEL-TO-PROCESS-MAPPING>
+                <DLT-LOG-CHANNEL-TO-PROCESS-MAPPING>
+                    <SHORT-NAME>dltLogChannelToProcessMapping1_server_com</SHORT-NAME>
+                    <DLT-LOG-CHANNEL-REF DEST="DLT-LOG-CHANNEL">/ISOFT/Development/Machine1/helloworld_server_log/com</DLT-LOG-CHANNEL-REF>
+                    <PROCESS-REF DEST="PROCESS">/ServerDeployment1/server_process</PROCESS-REF>
+                </DLT-LOG-CHANNEL-TO-PROCESS-MAPPING>
+                <DLT-LOG-CHANNEL-TO-PROCESS-MAPPING>
+                    <SHORT-NAME>dltLogChannelToProcessMapping1_server_nai</SHORT-NAME>
+                    <DLT-LOG-CHANNEL-REF DEST="DLT-LOG-CHANNEL">/ISOFT/Development/Machine1/helloworld_server_log/nai</DLT-LOG-CHANNEL-REF>
+                    <PROCESS-REF DEST="PROCESS">/ServerDeployment1/server_process</PROCESS-REF>
+                </DLT-LOG-CHANNEL-TO-PROCESS-MAPPING>
+                <SOMEIP-SERVICE-INSTANCE-TO-MACHINE-MAPPING>
+                    <SHORT-NAME>ServiceHelloWorld_ProvidedServiceInstance_toMachine</SHORT-NAME>
+                    <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign1/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                    <SERVICE-INSTANCE-REFS>
+                        <SERVICE-INSTANCE-REF DEST="PROVIDED-SOMEIP-SERVICE-INSTANCE">/SomeipInstancesDeployments/ProvidedInstanceServiceHelloWorld</SERVICE-INSTANCE-REF>
+                    </SERVICE-INSTANCE-REFS>
+                    <UDP-PORT>5001</UDP-PORT>
+                </SOMEIP-SERVICE-INSTANCE-TO-MACHINE-MAPPING>
+                <PROCESS>
+                    <SHORT-NAME>server_process</SHORT-NAME>
+                    <DESIGN-REF DEST="PROCESS-DESIGN">/ServerApp/ServerDesign</DESIGN-REF>
+                    <EXECUTABLE-REF DEST="EXECUTABLE">/ServerApp/exe/serverd</EXECUTABLE-REF>
+                    <PROCESS-STATE-MACHINE>
+                        <SHORT-NAME>processStatMachine</SHORT-NAME>
+                        <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/ISOFT/ProcessModes/ProcessStateMachine</TYPE-TREF>
+                    </PROCESS-STATE-MACHINE>
+                    <STATE-DEPENDENT-STARTUP-CONFIGS>
+                        <STATE-DEPENDENT-STARTUP-CONFIG>
+                            <FUNCTION-GROUP-STATE-IREFS>
+                                <FUNCTION-GROUP-STATE-IREF>
+                                    <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/FunctionGroups/HelloWorld_CM/FunctionGroupsSet/HelloWorldGroup</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                    <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/FunctionGroups/HelloWorld_CM/HelloWorldGroup/Driving</TARGET-MODE-DECLARATION-REF>
+                                </FUNCTION-GROUP-STATE-IREF>
+                                <FUNCTION-GROUP-STATE-IREF>
+                                    <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/FunctionGroups/HelloWorld_CM/FunctionGroupsSet/HelloWorldGroup</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                                    <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/FunctionGroups/HelloWorld_CM/HelloWorldGroup/Parking</TARGET-MODE-DECLARATION-REF>
+                                </FUNCTION-GROUP-STATE-IREF>
+                            </FUNCTION-GROUP-STATE-IREFS>
+                            <RESOURCE-GROUP-REF DEST="RESOURCE-GROUP">/ISOFT/Development/Machine1/OS/DefaultResourceGroup</RESOURCE-GROUP-REF>
+                            <STARTUP-CONFIG-REF DEST="STARTUP-CONFIG">/ServerDeployment1/startup_set/server_config</STARTUP-CONFIG-REF>
+                        </STATE-DEPENDENT-STARTUP-CONFIG>
+                    </STATE-DEPENDENT-STARTUP-CONFIGS>
+                </PROCESS>
+                <STARTUP-CONFIG-SET>
+                    <SHORT-NAME>startup_set</SHORT-NAME>
+                    <STARTUP-CONFIGS>
+                        <STARTUP-CONFIG>
+                            <SHORT-NAME>server_config</SHORT-NAME>
+                            <ENVIRONMENT-VARIABLES>
+                                <TAG-WITH-OPTIONAL-VALUE>
+                                    <KEY>proxy</KEY>
+                                    <VALUE>192.168.1.2</VALUE>
+                                </TAG-WITH-OPTIONAL-VALUE>
+                            </ENVIRONMENT-VARIABLES>
+                            <SCHEDULING-POLICY>RR</SCHEDULING-POLICY>
+                            <SCHEDULING-PRIORITY>12</SCHEDULING-PRIORITY>
+                            <TERMINATION-BEHAVIOR>PROCESS-IS-NOT-SELF-TERMINATING</TERMINATION-BEHAVIOR>
+                        </STARTUP-CONFIG>
+                    </STARTUP-CONFIGS>
+                </STARTUP-CONFIG-SET>
+                <SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING UUID="">
+                    <SHORT-NAME>ServiceHelloWorld_ProvidedServiceInstance_toPort</SHORT-NAME>
+                    <PORT-PROTOTYPE-IREF>
+                        <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/ServerApp/exe/serverd/server</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+                        <TARGET-PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/ServerApp/swc/server/helloworld_PPort</TARGET-PORT-PROTOTYPE-REF>
+                    </PORT-PROTOTYPE-IREF>
+                    <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">/ServerApp/ServerDesign</PROCESS-DESIGN-REF>
+                    <PROCESS-REF DEST="PROCESS">/ServerDeployment1/server_process</PROCESS-REF>
+                    <SERVICE-INSTANCE-REF DEST="PROVIDED-SOMEIP-SERVICE-INSTANCE">/SomeipInstancesDeployments/ProvidedInstanceServiceHelloWorld</SERVICE-INSTANCE-REF>
+                </SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
+            </ELEMENTS>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

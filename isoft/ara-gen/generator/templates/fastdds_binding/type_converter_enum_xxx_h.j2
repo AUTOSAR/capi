@@ -1,0 +1,90 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+#include <cassert>
+
+#include "ara/com/types.h"
+#include "ara/com/internal/fastdds/dds_idl_types_binding.h"
+#pragma GCC diagnostic ignored"-Wreturn-type"
+
+{% if ara_type.self_include %}
+// Header generated from ARXML
+#include {{ara_type.self_include}}
+{% endif %}
+{% for include in dds_type.idl_type_support_includes_fastdds %}
+{% if loop.first %}
+
+
+// Headers generated from IDL
+{% endif %}
+#include {{include}}
+{% endfor %}
+
+namespace ara
+{
+namespace com
+{
+namespace internal
+{
+namespace fastdds
+{
+
+inline void ConvertToIdl({{ara_type.qualified_cpp_name}} const& source, {{dds_type.qualified_cpp_name_fastdds}}& result)
+{
+    switch (source) {
+{% for literal in dds_type._impltype.literal_value_map %}
+        case {{ara_type.qualified_cpp_name}}::{{literal[0]}} :
+            result = ::dds{{ dds_type.qualified_cpp_name }}::{{literal[0]}};
+            break;
+{% endfor %}
+        default: assert(false);
+    }
+    return;
+}
+
+inline void ConvertFromIdl({{dds_type.qualified_cpp_name_fastdds}} const& source, {{ara_type.qualified_cpp_name}}& result)
+{
+    switch (source) {
+{% for literal in dds_type._impltype.literal_value_map %}
+        case ::dds{{ dds_type.qualified_cpp_name }}::{{literal[0]}} :
+            result = {{ara_type.qualified_cpp_name}}::{{literal[0]}};
+            break;
+{% endfor %}
+        default: assert(false);
+    }
+    return;
+}
+
+}  // namespace dds
+}  // namespace internal
+}  // namespace com
+}  // namespace ara
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}
+

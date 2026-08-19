@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ara</SHORT-NAME>
+      <AR-PACKAGES><AR-PACKAGE>
+        <SHORT-NAME>sm</SHORT-NAME>
+        <AR-PACKAGES>
+          <AR-PACKAGE><SHORT-NAME>AAInterfaces</SHORT-NAME><ELEMENTS>
+            <SERVICE-INTERFACE>
+              <SHORT-NAME>TriggerIn_State</SHORT-NAME>
+              <NAMESPACES>
+                <SYMBOL-PROPS>
+                  <SHORT-NAME>ara</SHORT-NAME>
+                  <SYMBOL>ara</SYMBOL>
+                </SYMBOL-PROPS>
+                <SYMBOL-PROPS>
+                  <SHORT-NAME>sm</SHORT-NAME>
+                  <SYMBOL>sm</SYMBOL>
+                </SYMBOL-PROPS>
+              </NAMESPACES>
+              <MAJOR-VERSION>1</MAJOR-VERSION>
+              <MINOR-VERSION>0</MINOR-VERSION>
+              <FIELDS>
+                <FIELD>
+                  <SHORT-NAME>Trigger</SHORT-NAME>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/ISOFT/SharedTypes/String</TYPE-TREF>
+                  <HAS-GETTER>false</HAS-GETTER>
+                  <HAS-NOTIFIER>false</HAS-NOTIFIER>
+                  <HAS-SETTER>true</HAS-SETTER>
+                </FIELD>
+              </FIELDS>
+              <METHODS>
+                <CLIENT-SERVER-OPERATION>
+                  <SHORT-NAME>PlaceholderFunction</SHORT-NAME>
+                  <POSSIBLE-AP-ERROR-REFS>
+                    <POSSIBLE-AP-ERROR-REF DEST="AP-APPLICATION-ERROR">/ara/sm/Errors/Rejected</POSSIBLE-AP-ERROR-REF>
+                    <POSSIBLE-AP-ERROR-REF DEST="AP-APPLICATION-ERROR">/ara/sm/Errors/FGNameIllegal</POSSIBLE-AP-ERROR-REF>
+                    <POSSIBLE-AP-ERROR-REF DEST="AP-APPLICATION-ERROR">/ara/sm/Errors/FGStateIllegal</POSSIBLE-AP-ERROR-REF>
+                    <POSSIBLE-AP-ERROR-REF DEST="AP-APPLICATION-ERROR">/ara/sm/Errors/UpdateSessionIsActive</POSSIBLE-AP-ERROR-REF>
+                    <POSSIBLE-AP-ERROR-REF DEST="AP-APPLICATION-ERROR">/ara/sm/Errors/FGDeactived</POSSIBLE-AP-ERROR-REF>
+                    <POSSIBLE-AP-ERROR-REF DEST="AP-APPLICATION-ERROR">/ara/sm/Errors/AlreadyInState</POSSIBLE-AP-ERROR-REF>
+                  </POSSIBLE-AP-ERROR-REFS>
+                </CLIENT-SERVER-OPERATION>
+              </METHODS>
+            </SERVICE-INTERFACE>
+          </ELEMENTS></AR-PACKAGE>
+        </AR-PACKAGES>
+      </AR-PACKAGE></AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

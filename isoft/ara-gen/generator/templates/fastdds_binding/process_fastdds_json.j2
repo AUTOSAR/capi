@@ -1,0 +1,111 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% macro hex_to_dec(value) %}{{value|int(0, 16)}}{% endmacro %}
+{% macro to_bool(value) %}
+{%- if value -%}"reliable"{%- else -%}"unreliable"{%- endif -%}
+{% endmacro %}
+{
+    "netname" : "fastdds",
+    {#"host" : "0.0.0.0",#}
+    "host" : "{{machine.ip_address}}",
+
+    "application" : [
+        {
+            "name": "{{process.name}}",
+            "client": "{{hex_to_dec(process.id)}}"
+        }
+    ],
+    "service" : [
+{% for service in services %}
+        {
+            "service" : "{{hex_to_dec(service.deployment_id)}}",
+            "instance" : "{{hex_to_dec(service.dds_specific_instance_id)}}",
+            "major":  "{{hex_to_dec(service.service_version_major)}}",
+            "minor":  "{{hex_to_dec(service.service_version_minor)}}",
+            "multicast" : "{{machine.sd_address}}:{{machine.sd_port}}",
+{% if service.ports['tcp'] %}
+            "reliable" :"{{service.ports['tcp']}}",
+{% endif %}
+{% if service.ports['udp'] %}
+            "unreliable" : "{{service.ports['udp']}}",
+{% endif %}
+{% if service.ports['tcp'] and service.ports['udp']%}
+             "reliability": "both",
+{% elif service.ports['tcp']%}
+             "reliability": "reliable",
+{% else %}
+             "reliability": "unreliable",
+{% endif %}
+            "event" :[
+{% for event in service.events %}
+                {
+                    "event" : "{{hex_to_dec(event.deployment_id)}}",
+                    "type" : "event",
+                    "reliability" : {{to_bool(event.is_reliable)}}
+                }{% if not loop.last or service.fields_with_notifier %},{% endif %}
+{% endfor %}
+{% for field in service.fields_with_notifier %}
+                {
+                    "event" : "{{hex_to_dec(field.event_id)}}",
+                    "type" : "field",
+                    "reliability" : {{to_bool(field.has_reliable_notifier)}}
+                }{% if not loop.last %},{% endif %}
+{% endfor %}
+            ],
+            "group" : [
+{% for event_group in service.event_groups %}
+                {
+                    "group" : "{{hex_to_dec(event_group.event_group_id)}}",
+                     "multicast" : "{{machine.sd_address}}:{{machine.sd_port}}"
+                }{% if not loop.last %},{% endif %}
+{% endfor %}
+            ]
+        }{% if not loop.last %},{% endif %}
+{% endfor %}
+    ],
+    "service_discovery" : {
+{% if machine.sd_config["initial_delay_min"] %}
+        "init_delay_min" : "{{machine.sd_config["initial_delay_min"]}}",
+{% endif %}
+{% if machine.sd_config["initial_delay_max"] %}
+        "init_delay_max" : "{{machine.sd_config["initial_delay_max"]}}",
+{% endif %}
+{% if machine.sd_config["initial_repetitions_base_delay"] %}
+        "repetitions_delay" : "{{machine.sd_config["initial_repetitions_base_delay"]}}",
+{% endif %}
+{% if machine.sd_config["initial_repetitions_max"] %}
+        "repetitions_max" : "{{machine.sd_config["initial_repetitions_max"]}}",
+{% endif %}
+{% if machine.sd_config["ttl"] %}
+        "ttl" : "{{machine.sd_config["ttl"]}}",
+{% endif %}
+{% if machine.sd_config["cyclic_delay"] %}
+        "offer_cyclic_delay" : "{{machine.sd_config["cyclic_delay"]}}",
+{% endif %}
+        "multicast" : "{{machine.sd_address}}",
+        "unicast" : "{{machine.sd_port}}"
+    }
+}
+{% block footer %}{% endblock %}

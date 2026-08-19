@@ -1,0 +1,1013 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<prqaproject xmlversion="3.0.0" qafversion="3.2.0">
+    <!-- Config file information... -->
+    <configurations>
+        <cosmetic_name name="qac_template_prj_for98"/>
+        <languageFamily name="C/C++"/>
+        <processMonitor>
+            <includeOptionSyntax>
+                <option string="-I"/>
+                <option string="/I"/>
+                <option string="-isystem"/>
+            </includeOptionSyntax>
+            <defineOptionSyntax>
+                <option string="-D"/>
+                <option string="/D"/>
+            </defineOptionSyntax>
+            <flagScript string=""/>
+            <settingsOptionSyntax>
+                <option string="@" compiler="Visual Studio" extension=".rsp" literal_quotes="no"/>
+                <option string="-@" compiler="Windriver" extension="" literal_quotes="no"/>
+                <option string="--Via" compiler="Greenhills" extension="__i" literal_quotes="no"/>
+            </settingsOptionSyntax>
+            <excludeStrings/>
+            <fileFilterStrings/>
+        </processMonitor>
+        <suppressIncludes active="no"/>
+        <exclusionPattern method="CSV"/>
+        <root_paths>
+            <root_path path="${PROJECT_ROOT}" name="SOURCE_ROOT"/>
+        </root_paths>
+        <default_config name="Initial"/>
+        <!-- Individual Configs... -->
+        <config name="Initial">
+            <baselinedSourceRoot baseline="OFF"/>
+            <baselineSnapshot date="" id="" name=""/>
+            <acf name="default.acf"/>
+            <rcf name="ascm-3.2.0-en_US.rcf"/>
+            <ccts>
+                <cct name="GNU_GCC-gcc_9.4-x86_64-generic-linux-C.cct" target="C" active="yes"/>
+                <cct name="GNU_GCC-g++_9.4-x86_64-generic-linux-C++-c++14.cct" target="C++" active="yes"/>
+            </ccts>
+        </config>
+    </configurations>
+    <!-- Mapping of extension to target_language... -->
+    <file_extensions>
+        <language target="C">
+            <extension ext=".c"/>
+        </language>
+        <language target="C++">
+            <extension ext=".cpp"/>
+        </language>
+        <language target="C++">
+            <extension ext=".cxx"/>
+        </language>
+        <language target="C++">
+            <extension ext=".cc"/>
+        </language>
+        <language target="C++">
+            <extension ext=".C"/>
+        </language>
+        <language target="C++">
+            <extension ext=".cp"/>
+        </language>
+        <language target="C++">
+            <extension ext=".c++"/>
+        </language>
+    </file_extensions>
+    <!-- Files in project... -->
+    <files>
+        <!-- Explicit files... -->
+        <!-- <file folder="/home/hanjingjing/ap-all/per/test" name="gtest_debug_01.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_CRYPTO"/>
+    <define name="HAS_ARA_EXEC_EXECUTION_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="HAS_ARA_PER"/>
+    <define name="ARA_DEBUG=1"/>
+    <define name="ARA_PER_DEBUG=1"/>
+    <define name="ISOFT_MANIFEST_DEBUG=1"/>
+   </defines>
+   <includes>
+    <include path="/home/hanjingjing/ap-all/per/include/public"/>
+    <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+    <include path="/usr/local/include/dlt"/>
+   </includes>
+  </file>
+  <file folder="/home/hanjingjing/ap-all/per/test" name="gtest_file_storage.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_CRYPTO"/>
+    <define name="HAS_ARA_EXEC_EXECUTION_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="HAS_ARA_PER"/>
+    <define name="ARA_DEBUG=1"/>
+    <define name="ARA_PER_DEBUG=1"/>
+    <define name="ISOFT_MANIFEST_DEBUG=1"/>
+   </defines>
+   <includes>
+    <include path="/home/hanjingjing/ap-all/per/include/public"/>
+    <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+    <include path="/usr/local/include/dlt"/>
+   </includes>
+  </file>
+  <file folder="/home/hanjingjing/ap-all/per/test" name="gtest_kv_storage.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_CRYPTO"/>
+    <define name="HAS_ARA_EXEC_EXECUTION_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="HAS_ARA_PER"/>
+    <define name="ARA_DEBUG=1"/>
+    <define name="ARA_PER_DEBUG=1"/>
+    <define name="ISOFT_MANIFEST_DEBUG=1"/>
+   </defines>
+   <includes>
+    <include path="/home/hanjingjing/ap-all/per/include/public"/>
+    <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+    <include path="/usr/local/include/dlt"/>
+   </includes>
+  </file>
+  <file folder="/home/hanjingjing/ap-all/per/test" name="gtest_kv_system_01.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_CRYPTO"/>
+    <define name="HAS_ARA_EXEC_EXECUTION_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="HAS_ARA_PER"/>
+    <define name="ARA_DEBUG=1"/>
+    <define name="ARA_PER_DEBUG=1"/>
+    <define name="ISOFT_MANIFEST_DEBUG=1"/>
+   </defines>
+   <includes>
+    <include path="/home/hanjingjing/ap-all/per/include/public"/>
+    <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+    <include path="/usr/local/include/dlt"/>
+   </includes>
+  </file>
+  <file folder="/home/hanjingjing/ap-all/per/test" name="gtest_kv_system_02.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_CRYPTO"/>
+    <define name="HAS_ARA_EXEC_EXECUTION_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="HAS_ARA_PER"/>
+    <define name="ARA_DEBUG=1"/>
+    <define name="ARA_PER_DEBUG=1"/>
+    <define name="ISOFT_MANIFEST_DEBUG=1"/>
+   </defines>
+   <includes>
+    <include path="/home/hanjingjing/ap-all/per/include/public"/>
+    <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+    <include path="/usr/local/include/dlt"/>
+   </includes>
+  </file>
+  <file folder="/home/hanjingjing/ap-all/per/test" name="gtest_kv_system_03.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_CRYPTO"/>
+    <define name="HAS_ARA_EXEC_EXECUTION_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="HAS_ARA_PER"/>
+    <define name="ARA_DEBUG=1"/>
+    <define name="ARA_PER_DEBUG=1"/>
+    <define name="ISOFT_MANIFEST_DEBUG=1"/>
+   </defines>
+   <includes>
+    <include path="/home/hanjingjing/ap-all/per/include/public"/>
+    <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+    <include path="/usr/local/include/dlt"/>
+   </includes>
+  </file>
+  <file folder="/home/hanjingjing/ap-all/per/test" name="gtest_manifest.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_CRYPTO"/>
+    <define name="HAS_ARA_EXEC_EXECUTION_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="HAS_ARA_PER"/>
+    <define name="ARA_DEBUG=1"/>
+    <define name="ARA_PER_DEBUG=1"/>
+    <define name="ISOFT_MANIFEST_DEBUG=1"/>
+   </defines>
+   <includes>
+    <include path="/home/hanjingjing/ap-all/per/include/public"/>
+    <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+    <include path="/usr/local/include/dlt"/>
+   </includes>
+  </file>
+  <file folder="/home/hanjingjing/ap-all/per/test" name="gtest_ph_common.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_CRYPTO"/>
+    <define name="HAS_ARA_EXEC_EXECUTION_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="HAS_ARA_PER"/>
+    <define name="ARA_DEBUG=1"/>
+    <define name="ARA_PER_DEBUG=1"/>
+    <define name="ISOFT_MANIFEST_DEBUG=1"/>
+   </defines>
+   <includes>
+    <include path="/home/hanjingjing/ap-all/per/include/public"/>
+    <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+    <include path="/usr/local/include/dlt"/>
+   </includes>
+  </file> -->
+        <!-- <file folder="/home/hanjingjing/ap-all/per/test" name="test_main.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_CRYPTO"/>
+    <define name="HAS_ARA_EXEC_EXECUTION_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="HAS_ARA_PER"/>
+    <define name="ARA_DEBUG=1"/>
+    <define name="ARA_PER_DEBUG=1"/>
+    <define name="ISOFT_MANIFEST_DEBUG=1"/>
+   </defines>
+   <includes>
+    <include path="/home/hanjingjing/ap-all/per/include/public"/>
+    <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+    <include path="/usr/local/include/dlt"/>
+   </includes>
+  </file> -->
+        <file folder="/home/hanjingjing/ap-all/per/src/isoftkv" name="config_muster.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/isoftkv" name="kv_cache_page.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/isoftkv" name="kv_data_type.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/isoftkv" name="kv_error_code.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/isoftkv" name="kv_log_api.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/isoftkv" name="kv_object.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/isoftkv" name="kv_system.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/isoftkv" name="kv_update_file.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/isoftkv" name="kv_update_opt.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/isoftkv" name="nai_map_buff.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/page_opt" name="page_opt_base.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/page_opt" name="page_opt_key_hash.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/page_opt" name="page_opt_kv_store.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/page_opt" name="page_opt_page_boss.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/page_opt" name="page_opt_page_group.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/page_opt" name="page_opt_solo.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/page_opt" name="page_opt_value.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/page_opt" name="page_opt_walog.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/manifest" name="manifest_instance.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/manifest" name="manifest_reader_per.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/manager" name="manager_cache.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/manager" name="manager_kv_store.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/manager" name="manager_page.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/manager" name="manager_value.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/manager" name="manager_walog_id.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/crypto" name="ph_per_crypto.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/common" name="kv_thread_lock.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/common" name="ph_auto_buff.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/common" name="ph_file_opt.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/common" name="ph_file_opt_crypto.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/common" name="ph_file_opt_page.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/common" name="ph_per_common_api.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src/common" name="ph_select_mofn.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src" name="file_storage.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src" name="initialize.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src" name="key_value_storage.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src" name="open_storage_logic.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src" name="per_error_demain.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src" name="read_accessor.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src" name="read_write_accessor.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src" name="recovery.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+        <file folder="/home/hanjingjing/ap-all/per/src" name="update.cpp" target="C++">
+            <defines>
+                <define name="BOOST_ALL_NO_LIB"/>
+                <define name="DEBUG"/>
+                <define name="HAS_ARA_CRYPTO"/>
+                <define name="HAS_ARA_LOG"/>
+                <define name="HAS_ARA_PER"/>
+                <define name="per_EXPORTS"/>
+                <define name="ARA_DEBUG=1"/>
+                <define name="ARA_PER_DEBUG=1"/>
+                <define name="ISOFT_MANIFEST_DEBUG=1"/>
+            </defines>
+            <includes>
+                <include path="/home/hanjingjing/ap-all/per/include/public"/>
+                <include path="/home/hanjingjing/ara-sysroot/ara/framework/1.0.0/include"/>
+                <include path="/usr/local/include/dlt"/>
+            </includes>
+        </file>
+    </files>
+</prqaproject>

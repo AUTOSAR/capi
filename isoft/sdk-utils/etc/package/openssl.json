@@ -1,0 +1,8 @@
+{
+    "name": "openssl",
+    "version": "3.5.1",
+    "url": "https://github.com/openssl/openssl/archive/refs/tags/openssl-3.5.1.tar.gz",
+    "configure": "export MACHINE=@ARCH@;./config linux-@ARCH@ --prefix=@PREFIX@ --openssldir=@PREFIX@ --libdir=lib enable-legacy '-Wl,-rpath,$(LIBRPATH)'",
+    "build": "make -j@JOBS@",
+    "install": "make install_sw DESTDIR=@SYSROOT@"
+}

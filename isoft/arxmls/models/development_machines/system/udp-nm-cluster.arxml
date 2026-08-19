@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <ELEMENTS>
+        <NM-CONFIG>
+          <SHORT-NAME>ap_udpnm_config</SHORT-NAME>
+          <NM-CLUSTERS>
+            <UDP-NM-CLUSTER >
+              <SHORT-NAME>udp_nm_cluster1</SHORT-NAME>
+              <!--<ADMIN-DATA>
+                <SDGS>
+                    <SDG GID="iSOFT:nm:UdpNmClusterExtension">
+                      <SD GID="iSOFT:nm:UdpNmClusterExtension:SendImmediateInRepeatMessage">true</SD>
+                      <SD GID="iSOFT:nm:UdpNmClusterExtension:RepeatMessageRequestPnCheck">true</SD>
+                      <SD GID="iSOFT:nm:UdpNmClusterExtension:SetActiveWakeupBit">true</SD>
+                      <SD GID="iSOFT:nm:UdpNmClusterExtension:NmStateInUserDataOffset">1</SD>
+                      <SD GID="iSOFT:nm:UdpNmClusterExtension:BusSleepToRepeatMessageState">0x01</SD>
+                      <SD GID="iSOFT:nm:UdpNmClusterExtension:PrepareBusSleepToRepeatMessageState">0x02</SD>
+                      <SD GID="iSOFT:nm:UdpNmClusterExtension:RepeatMessageStateToNormalOperationState">0x04</SD>
+                      <SD GID="iSOFT:nm:UdpNmClusterExtension:ReadySleepStateToNormalOperationState">0x08</SD>
+                      <SD GID="iSOFT:nm:UdpNmClusterExtension:ReadySleepStateToRepeatMessageState">0x10</SD>
+                      <SD GID="iSOFT:nm:UdpNmClusterExtension:NormalOperationStateToRepeatMessageState">0x20</SD>
+                    </SDG>
+                </SDGS>
+              </ADMIN-DATA>-->
+              <COMMUNICATION-CLUSTER-REF DEST="ETHERNET-CLUSTER">/ISOFT/Development/Network/EthCluster1</COMMUNICATION-CLUSTER-REF>
+              <NM-NODES>
+                <UDP-NM-NODE>
+                  <SHORT-NAME>machine1</SHORT-NAME>
+                  <!--<ADMIN-DATA>
+                    <SDGS>
+                        <SDG GID="iSOFT:nm:UdpNmNodeExtension">
+                          <SD GID="iSOFT:nm:UdpNmNodeExtension:UserDataString">ff</SD>
+                        </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>-->
+                  <MACHINE-REF DEST="MACHINE-DESIGN">/ISOFT/Development/MachineDesign1</MACHINE-REF>
+                  <NM-NODE-ID>101</NM-NODE-ID>
+                  <ALL-NM-MESSAGES-KEEP-AWAKE>false</ALL-NM-MESSAGES-KEEP-AWAKE>
+                  <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign1/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                  <NM-MSG-CYCLE-OFFSET>1.2</NM-MSG-CYCLE-OFFSET>
+                  <NM-PN-HANDLE-MULTIPLE-NETWORK-REQUESTS>true</NM-PN-HANDLE-MULTIPLE-NETWORK-REQUESTS>
+                </UDP-NM-NODE>
+                <UDP-NM-NODE>
+                  <SHORT-NAME>machine2</SHORT-NAME>
+                  <MACHINE-REF DEST="MACHINE-DESIGN">/ISOFT/Development/MachineDesign2</MACHINE-REF>
+                  <NM-NODE-ID>102</NM-NODE-ID>
+                  <ALL-NM-MESSAGES-KEEP-AWAKE>false</ALL-NM-MESSAGES-KEEP-AWAKE>
+                  <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign2/CommunicationConnector1</COMMUNICATION-CONNECTOR-REF>
+                  <NM-MSG-CYCLE-OFFSET>1.5</NM-MSG-CYCLE-OFFSET>
+                  <NM-PN-HANDLE-MULTIPLE-NETWORK-REQUESTS>true</NM-PN-HANDLE-MULTIPLE-NETWORK-REQUESTS>
+                </UDP-NM-NODE>
+              </NM-NODES>
+              <NM-NODE-ID-ENABLED>true</NM-NODE-ID-ENABLED>
+              <NM-PNC-PARTICIPATION>true</NM-PNC-PARTICIPATION>
+              <NETWORK-CONFIGURATION>
+                <IPV-4-MULTICAST-IP-ADDRESS>239.0.0.1</IPV-4-MULTICAST-IP-ADDRESS>
+                <UDP-PORT>30928</UDP-PORT>
+              </NETWORK-CONFIGURATION>
+              <NM-CBV-POSITION>0</NM-CBV-POSITION>
+              <NM-IMMEDIATE-NM-CYCLE-TIME>1.0</NM-IMMEDIATE-NM-CYCLE-TIME>
+              <NM-IMMEDIATE-NM-TRANSMISSIONS>5</NM-IMMEDIATE-NM-TRANSMISSIONS>
+              <NM-MSG-CYCLE-TIME>2.0</NM-MSG-CYCLE-TIME>
+              <NM-NETWORK-TIMEOUT>10.0</NM-NETWORK-TIMEOUT>
+              <NM-NID-POSITION>1</NM-NID-POSITION>
+              <NM-REPEAT-MESSAGE-TIME>14.0</NM-REPEAT-MESSAGE-TIME>
+              <NM-USER-DATA-LENGTH>0</NM-USER-DATA-LENGTH>
+              <NM-USER-DATA-OFFSET>0</NM-USER-DATA-OFFSET>
+              <NM-WAIT-BUS-SLEEP-TIME>10.0</NM-WAIT-BUS-SLEEP-TIME>
+            </UDP-NM-CLUSTER>
+          </NM-CLUSTERS>
+        </NM-CONFIG>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

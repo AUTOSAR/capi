@@ -1,0 +1,34 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% macro to_bool(value) %}
+{% if value == "DELETE" %}D{% endif %}
+{% if value == "OVERWRITE" %}W{% endif %}
+{% if value == "KEEP-EXISTING" %}E{% endif %}
+{% endmacro %}
+[I]:K={PerVersion},V=c,{{ kvs.perVersion.length }},{{ kvs.perVersion.brackets_before }}{{ kvs.perVersion.key_crc32 }}{{ kvs.perVersion.brackets_after }},C={{ kvs.perVersion.brackets_before }}{{ kvs.perVersion.key_value_crc32 }}{{ kvs.perVersion.brackets_after }},
+[I]:K={AppVersion},V=c,{{ kvs.appVersion.length }},{{ kvs.appVersion.brackets_before }}{{ kvs.appVersion.key_crc32 }}{{ kvs.appVersion.brackets_after }},C={{ kvs.appVersion.brackets_before }}{{ kvs.appVersion.key_value_crc32 }}{{ kvs.appVersion.brackets_after }},
+{% for per_info in kvs.per_info %}
+[{{to_bool(per_info.update_strategy)}}]:K={{per_info.brackets_before}}{{per_info.key_name}}{{per_info.brackets_after}},V={{per_info.value_type}},{{per_info.value_length}},{{per_info.brackets_before}}{{per_info.value_crc32}}{{per_info.brackets_after}},C={{per_info.brackets_before}}{{per_info.key_value_crc32}}{{per_info.brackets_after}}
+{% endfor %}

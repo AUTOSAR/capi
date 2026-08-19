@@ -1,0 +1,271 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+
+{% macro to_bool(value) %}
+{% if value %}true{% else %}false{% endif %}
+{% endmacro %}
+{
+
+
+
+    "shortName":"{{machine.standard_name}}",
+
+    "supervisionMode":
+			[
+{%for supervisionMode in machine.supervisionModes%}
+
+				{
+					"fqn":"{{supervisionMode.fqn}}",
+					"fgStates":[
+{%for supervisionModeInfo in supervisionMode.fgStates%}
+                        {
+                        "shortName": "{{supervisionModeInfo.shortName}}",
+					"phmSupervision": [
+{%for phmSupervision in supervisionModeInfo.phmSupervision%}
+
+						"{{phmSupervision}}"{% if not loop.last %},{% endif %}
+{% endfor %}
+],
+					"processes":[
+{%for process in supervisionModeInfo.process%}
+
+						{
+						"processName":"{{process.processName}}",
+						"executionError":{{process.executionError}}
+                        }{% if not loop.last %},{% endif %}
+{% endfor %}
+
+                                    ]
+                        }{% if not loop.last %},{% endif %}
+{%endfor%}
+
+					]
+
+				}{% if not loop.last %},{% endif %}
+{% endfor %}
+			],
+"contributes": [
+{% for phmcontribution in machine.phmcontributions %}
+
+{
+    "shortName": "{{phmcontribution.shortName}}",
+	"globalSupervision": [
+	{% for globalsupervision in phmcontribution.globalsupervisions %}
+		{
+			"shortName": "{{globalsupervision.shortname}}",
+			"supervisionCycle": {{globalsupervision.supervisionCycle}},
+			"expiredSupervisonCycleTolerance": {{globalsupervision.expiredsupervisoncycletolerance}},
+			"localSupervision": [
+			{% for localsupervision in globalsupervision.localsupervisions %}
+				"{{localsupervision.shortname}}"{% if not loop.last %},{% endif %}
+
+			{% endfor %}
+			]
+		    }{% if not loop.last %},{% endif %}
+
+	{% endfor %}
+
+	],
+
+		"healthChannelSupervision": [
+		{%for healthchannelsupervision in phmcontribution.healthchannelsupervisions%}
+				{
+					"shortName": "{{healthchannelsupervision.shortName}}",
+					"metaModelIdentifier": "{{healthchannelsupervision.metaModelIdentifier}}",
+					"supervision": "{{healthchannelsupervision.supervision}}",
+					"recoveryNotification": {
+						"recoveryNotificationRetry": {{healthchannelsupervision.recoveryNotification.recoveryNotificationRetry}},
+						"recoveryNotificationTimeout": {{healthchannelsupervision.recoveryNotification.recoveryNotificationTimeout}}
+					}
+				}{% if not loop.last %},{% endif %}
+
+		{% endfor %}
+			],
+			"healthChannelExternalStatus": [
+			{%for healthchannelexternalstatuse in phmcontribution.healthchannelexternalstatuses%}
+				{
+					"shortName": "{{healthchannelexternalstatuse.shortName}}",
+					"metaModelIdentifier": "{{healthchannelexternalstatuse.metaModelIdentifier}}",
+					"IdentifierR":"{{healthchannelexternalstatuse.IdentifierR}}",
+					"phmHealthChannelInterface":"{{healthchannelexternalstatuse.phmHealthChannelInterface}}",
+					"healthChannelPoint": [
+
+					{%for healthChannelPoint in healthchannelexternalstatuse.healthChannelPoint%}
+
+					    "{{healthChannelPoint}}"{% if not loop.last %},{% endif %}
+
+					{% endfor %}
+
+					],
+					"recoveryNotification": {
+						"recoveryNotificationRetry":{{healthchannelexternalstatuse.recoveryNotification.recoveryNotificationRetry}},
+						"recoveryNotificationTimeout": {{healthchannelexternalstatuse.recoveryNotification.recoveryNotificationTimeout}}
+					},
+					"processName":"{{healthchannelexternalstatuse.processName}}"
+				}{% if not loop.last %},{% endif %}
+
+			{% endfor %}
+			],
+
+	"localSupervision": [
+	{% for localsupervision in phmcontribution.localsupervisions %}
+		{
+			"shortName": "{{localsupervision.shortname}}",
+			"failedSupervisionCyclesTolerance": {{localsupervision.failedSupervisionCyclesTolerance}},
+			"aliveSupervision": [
+			    {% for alivesupervision in localsupervision.alivesupervisions %}
+				    "{{alivesupervision.shortname}}"{% if not loop.last %},{% endif %}
+
+			    {% endfor %}
+			],
+			"deadlineSupervision": [
+			     {% for deadlinesupervision in localsupervision.deadlinesupervisions %}
+                "{{deadlinesupervision.shortname}}"{% if not loop.last %},{% endif %}
+
+			     {% endfor %}
+			],
+			"logicalSupervision": [
+				{% for logicalSupervision in localsupervision.logicalSupervisions %}
+				    "{{logicalSupervision.shortname}}"{% if not loop.last %},{% endif %}
+
+			     {% endfor %}
+			]
+		    }{% if not loop.last %},{% endif %}
+
+	{% endfor %}
+
+	],
+	"aliveSupervision": [
+
+	    {% for alivesupervision in phmcontribution.alivesupervisions %}
+
+		{
+			"shortName": "{{alivesupervision.shortname}}",
+			"checkpointName": "{{alivesupervision.checkpointName}}",
+			"expectedAliveIndications": {{alivesupervision.expectedAliveIndications}},
+			"maxMargin": {{alivesupervision.maxMargin}},
+			"minMargin": {{alivesupervision.minMargin}},
+			"aliveRefrenceCycle": {{alivesupervision.aliveRefrenceCycle}}
+		}{% if not loop.last %},{% endif %}
+
+		{% endfor %}
+
+
+	],
+	"deadlineSupervision": [
+
+	{% for deadlinesupervision in phmcontribution.deadlinesupervisions %}
+
+		{
+			"shortName": "{{deadlinesupervision.shortname}}",
+			"checkpointTransition": [
+			{% for transition in deadlinesupervision.transitions %}
+
+			"{{transition.sourceCheckpoint}}",
+			"{{transition.targetCheckpoint}}"{% if not loop.last %},{% endif %}
+
+			{% endfor %}
+
+			],
+			"maxDeadline": {{deadlinesupervision.maxdeadline}},
+			"minDeadline": {{deadlinesupervision.mindeadline}}
+		}{% if not loop.last %},{% endif %}
+
+		{% endfor %}
+
+
+	],
+	"logicalSupervision": [
+	{% for localsupervision in phmcontribution.localsupervisions %}
+	    {% for logicalSupervision in localsupervision.logicalSupervisions %}
+
+		{
+			"shortName": "{{logicalSupervision.shortname}}",
+			"initialCheckpoint": [
+			{% for initialCheckpoint in logicalSupervision.initialCheckpoint %}
+				    "{{initialCheckpoint}}"{% if not loop.last %},{% endif %}
+
+			{% endfor %}
+
+			],
+			"finalCheckpoint": [
+				{% for finalCheckpoint in logicalSupervision.finalCheckpoint %}
+				    "{{finalCheckpoint}}"{% if not loop.last %},{% endif %}
+
+			{% endfor %}
+			],
+			"transition": [
+			{% for transition in logicalSupervision.transitions %}
+
+				{
+					"shortName": "{{transition.shortname}}",
+					"sourceCheckpoint": "{{transition.sourceCheckpoint}}",
+					"targetCheckpoint": "{{transition.targetCheckpoint}}"
+				}{% if not loop.last %},{% endif %}
+
+			{% endfor %}
+			]
+		},
+
+		{% endfor %}
+	{% endfor %}
+	],
+	"supervisionCheckpoint": [
+	{% for supervisioncheckpoint in phmcontribution.supervisioncheckpoints %}
+
+		{
+			"shortName": "{{supervisioncheckpoint.shortname}}",
+			"processName": "{{supervisioncheckpoint.processName}}",
+			"status": "{{supervisioncheckpoint.status}}",
+			"checkpointId": {{supervisioncheckpoint.checkpointId}},
+			"IdentifierR":"{{supervisioncheckpoint.IdentifierR}}"
+		}{% if not loop.last %},{% endif %}
+
+    {% endfor %}
+
+	],
+	"healthChannelPoint": [
+	{% for healthChannelPoint in phmcontribution.healthChannelPoint %}
+				{
+					"shortName": "{{healthChannelPoint.shortname}}",
+					"healthStatus": [
+	{% for healthStatus in healthChannelPoint.healthStatus %}
+						{
+							"shortName": "{{healthStatus.name}}",
+							"statusId": {{healthStatus.statusid}},
+							"triggersRecoveryNotification": {{to_bool(healthStatus.triggersRN)}}
+						}{% if not loop.last %},{% endif %}
+
+	{% endfor %}
+					]
+				}{% if not loop.last %},{% endif %}
+
+	 {% endfor %}
+			]
+}{% if not loop.last %},{% endif %}
+
+{% endfor %}
+    ]
+}

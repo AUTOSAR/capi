@@ -1,0 +1,64 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+
+{%- extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+
+#include <ara/core/instance_specifier.h>
+
+
+{% if seinterface.namespaces %}{% for ns in seinterface.namespaces %}
+namespace {{ns}} {
+{% endfor %}{% endif %}
+namespace {{seinterface.name}} {
+
+{% if seinterface.checkpoints %}
+enum class Checkpoints : uint32_t {
+{% for checkpoint in seinterface.checkpoints %}
+    {{ checkpoint.name }} ={{ checkpoint.checkpointid }}U,
+{% endfor %}
+};
+{% endif %}
+} // namespace {{seinterface.name}}
+
+{%for identifier in seinterface.identifier %}
+{%for inp in seinterface.get_identifiernamespace(identifier)%}
+namespace {{inp}} {
+{%endfor%}
+const ara::core::InstanceSpecifier {{seinterface.get_identifiername(identifier)}}("{{identifier}}");
+{%for inp in seinterface.get_identifiernamespace(identifier)%}
+}//namespace {{inp}}
+{%endfor%}
+{%endfor%}
+
+
+{% if seinterface.namespaces %}{% for ns in seinterface.namespaces[::-1] %}
+} // namespace {{ ns }}
+{% endfor %}{% endif %}
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

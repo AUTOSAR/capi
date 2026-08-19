@@ -1,0 +1,87 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+
+#ifndef dds_idl_dds_rpc_idl
+#define dds_idl_dds_rpc_idl
+
+// Types for rpc features from "DDS RPC over DDS v1.0"
+module dds {
+    typedef octet OctetArray_12_t[12]; // fixing "anonymous types are deprecated by OMG spec"
+    typedef octet OctetArray_3_t[3]; // fixing "anonymous types are deprecated by OMG spec"
+    typedef OctetArray_12_t GuidPrefix_t;
+
+    struct EntityId_t
+    {
+        OctetArray_3_t entityKey;
+        octet entityKind;
+    };
+
+    struct GUID_t
+    {
+        GuidPrefix_t guidPrefix;
+        EntityId_t entityId;
+    };
+
+    struct SequenceNumber_t
+    {
+        long high;
+        unsigned long low;
+    };
+
+    struct SampleIdentity_t
+    {
+        GUID_t writer_guid;
+        SequenceNumber_t sequence_number;
+    };
+
+    module rpc {
+        typedef octet UnknownOperation;
+        typedef octet UnknownException;
+        typedef octet UnusedMember;
+        typedef string<255> InstanceName_t;
+
+        enum RemoteExceptionCode_t
+        {
+            REMOTE_EX_OK,
+            REMOTE_EX_UNSUPPORTED,
+            REMOTE_EX_INVALID_ARGUMENT,
+            REMOTE_EX_OUT_OF_RESOURCES,
+            REMOTE_EX_UNKNOWN_OPERATION,
+            REMOTE_EX_UNKNOWN_EXCEPTION
+        };
+
+        struct RequestHeader {
+            SampleIdentity_t requestId;
+            InstanceName_t instanceName;
+        };
+
+        struct ReplyHeader {
+            SampleIdentity_t relatedRequestId;
+            RemoteExceptionCode_t remoteEx;
+        };
+    }; // module rpc
+}; // module dds
+
+#endif // dds_idl_dds_rpc_idl

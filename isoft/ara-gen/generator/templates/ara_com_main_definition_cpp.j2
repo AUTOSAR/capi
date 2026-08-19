@@ -1,0 +1,73 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{%- extends "utils/source_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+
+#if  defined(HAS_NSOMEIP_BINDING)
+#include "ara/com/internal/ara_com_main.h"
+#endif 
+
+#ifdef HAS_NSOMEIP_BINDING
+#include "ara/com/internal/nsomeip/nsomeip_binding.h"
+#include "ara/com/internal/nsomeip/nsomeip_error_domains.h"
+{% for service in error_sources %}
+#include "nsomeip/{{service.namespacepath}}errors_{{service.service_deployment.standard_name}}.h"
+{% endfor %}
+#endif // HAS_NSOMEIP_BINDING
+
+
+{% for domain in error_domains %}
+#include {{domain.include_name}}
+{% endfor %}
+
+namespace ara {
+namespace com {
+namespace internal {
+namespace runtime {
+
+void Initialize() {
+
+#ifdef HAS_NSOMEIP_BINDING
+    nsomeip::runtime::Register();
+{% for source in error_sources %}
+    {{ source.absolute_namespace }}::{{ source.standard_name }}_binding::nsomeip::registerErrors();
+{% endfor %}
+{% for domain in error_domains %}
+    ara::com::internal::nsomeip::common::error_domains::Registry::registerDomain({{domain.qualified_cpp_namespace_prefix}}::Get{{domain.name}}ErrorDomain());
+{% endfor %}
+#endif // HAS_NSOMEIP_BINDING
+
+}
+
+
+} // namespace runtime
+} // namespace internal
+} // namespace com
+} // namespace ara
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Development</SHORT-NAME>
+          <ELEMENTS>
+            <MACHINE-DESIGN>
+              <SHORT-NAME>MachineDesign1</SHORT-NAME>
+              <COMMUNICATION-CONNECTORS>
+                <ETHERNET-COMMUNICATION-CONNECTOR>
+                  <SHORT-NAME>CommunicationConnector1</SHORT-NAME>
+                  <MAXIMUM-TRANSMISSION-UNIT>1500</MAXIMUM-TRANSMISSION-UNIT>
+                  <PNC-FILTER-DATA-MASK>65536</PNC-FILTER-DATA-MASK>
+                  <UNICAST-NETWORK-ENDPOINT-REF DEST="NETWORK-ENDPOINT">/ISOFT/Development/Network/EthCluster1/EthPhysChannel1/NetworkEndpoint1</UNICAST-NETWORK-ENDPOINT-REF>
+                </ETHERNET-COMMUNICATION-CONNECTOR>
+              </COMMUNICATION-CONNECTORS>
+              <PN-RESET-TIMER>2.5</PN-RESET-TIMER>
+              <PNC-PREPARE-SLEEP-TIMER>7.0</PNC-PREPARE-SLEEP-TIMER>
+              <SERVICE-DISCOVER-CONFIGS>
+                <SOMEIP-SERVICE-DISCOVERY>
+                  <MULTICAST-SD-IP-ADDRESS-REF DEST="NETWORK-ENDPOINT">/ISOFT/Development/Network/EthCluster1/EthPhysChannel1/SDNetworkEndpoint1</MULTICAST-SD-IP-ADDRESS-REF>
+                  <SOMEIP-SERVICE-DISCOVERY-PORT>30490</SOMEIP-SERVICE-DISCOVERY-PORT>
+                </SOMEIP-SERVICE-DISCOVERY>
+              </SERVICE-DISCOVER-CONFIGS>
+            </MACHINE-DESIGN>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

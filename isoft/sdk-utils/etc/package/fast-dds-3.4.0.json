@@ -1,0 +1,10 @@
+{
+    "name": "fast-dds",
+    "version": "3.4.0",
+    "depend": ["openssl", "libasio", "tinyxml2", "foonathan-memory-vendor", "fast-cdr"],
+    "url": "https://github.com/eProsima/Fast-DDS/archive/refs/tags/v3.4.0.tar.gz",
+    "patch": ["fast-dds.patch"],
+    "configure": "cmake @CMAKE_ARGS@ . ",
+    "build": "make -j@JOBS@",
+    "install": "make install DESTDIR=@SYSROOT@"
+}

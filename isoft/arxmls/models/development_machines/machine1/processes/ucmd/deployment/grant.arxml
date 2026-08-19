@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+ <AR-PACKAGES>
+    <AR-PACKAGE >
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Development</SHORT-NAME>
+          <ELEMENTS>
+            <MACHINE>
+              <SHORT-NAME>Machine1</SHORT-NAME>
+              <MODULE-INSTANTIATIONS>
+                <IAM-MODULE-INSTANTIATION>
+                  <SHORT-NAME>IamModuleInstantiation</SHORT-NAME>
+                  <GRANT-REFS>
+                    <GRANT-REF DEST="COM-FIND-SERVICE-GRANT">/ISOFT/Development/iam/ucm_sm_findservicegrant</GRANT-REF>
+                    <GRANT-REF DEST="COM-METHOD-GRANT">/ISOFT/Development/iam/ucm_sm_methodgrant1</GRANT-REF>
+                    <GRANT-REF DEST="COM-METHOD-GRANT">/ISOFT/Development/iam/ucm_sm_methodgrant2</GRANT-REF>
+                    <GRANT-REF DEST="COM-METHOD-GRANT">/ISOFT/Development/iam/ucm_sm_methodgrant3</GRANT-REF>
+                    <GRANT-REF DEST="COM-METHOD-GRANT">/ISOFT/Development/iam/ucm_sm_methodgrant4</GRANT-REF>
+                    <GRANT-REF DEST="COM-METHOD-GRANT">/ISOFT/Development/iam/ucm_sm_methodgrant5</GRANT-REF>
+                    <GRANT-REF DEST="COM-METHOD-GRANT">/ISOFT/Development/iam/ucm_sm_methodgrant6</GRANT-REF>
+                  </GRANT-REFS>
+                </IAM-MODULE-INSTANTIATION>
+              </MODULE-INSTANTIATIONS>
+            </MACHINE>
+          </ELEMENTS>
+          <AR-PACKAGES>
+            <AR-PACKAGE >
+              <SHORT-NAME>iam</SHORT-NAME>
+              <ELEMENTS>
+                <COM-FIND-SERVICE-GRANT S="">
+                  <SHORT-NAME>ucm_sm_findservicegrant</SHORT-NAME>
+                  <DESIGN-REF DEST="COM-FIND-SERVICE-GRANT-DESIGN">/ISOFT/PlatformComponents/ucm/ucm_sm_findservicegrantdesign</DESIGN-REF>
+                  <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/ara/ucm/instance/RequiredSomeIpUpdateRequestInstance1</SERVICE-INSTANCE-REF>
+                </COM-FIND-SERVICE-GRANT>
+                <COM-METHOD-GRANT>
+                  <SHORT-NAME>ucm_sm_methodgrant1</SHORT-NAME>
+                  <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/ara/ucm/instance/RequiredSomeIpUpdateRequestInstance1</SERVICE-INSTANCE-REF>
+                  <DESIGN-REF DEST="COM-METHOD-GRANT-DESIGN">/ISOFT/PlatformComponents/ucm/ucm_sm_methodgrantdesign1</DESIGN-REF>
+                  <SERVICE-DEPLOYMENT-REF DEST="SOMEIP-METHOD-DEPLOYMENT">/SomeipDeployments/SSC_UpdateRequest/SM_StartUpdateSession</SERVICE-DEPLOYMENT-REF>
+                </COM-METHOD-GRANT>
+                <COM-METHOD-GRANT>
+                  <SHORT-NAME>ucm_sm_methodgrant2</SHORT-NAME>
+                  <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/ara/ucm/instance/RequiredSomeIpUpdateRequestInstance1</SERVICE-INSTANCE-REF>
+                  <DESIGN-REF DEST="COM-METHOD-GRANT-DESIGN">/ISOFT/PlatformComponents/ucm/ucm_sm_methodgrantdesign2</DESIGN-REF>
+                  <SERVICE-DEPLOYMENT-REF DEST="SOMEIP-METHOD-DEPLOYMENT">/SomeipDeployments/SSC_UpdateRequest/SM_StopUpdateSession</SERVICE-DEPLOYMENT-REF>
+                </COM-METHOD-GRANT>
+                <COM-METHOD-GRANT >
+                  <SHORT-NAME>ucm_sm_methodgrant3</SHORT-NAME>
+                  <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/ara/ucm/instance/RequiredSomeIpUpdateRequestInstance1</SERVICE-INSTANCE-REF>
+                  <DESIGN-REF DEST="COM-METHOD-GRANT-DESIGN">/ISOFT/PlatformComponents/ucm/ucm_sm_methodgrantdesign3</DESIGN-REF>
+                  <SERVICE-DEPLOYMENT-REF DEST="SOMEIP-METHOD-DEPLOYMENT">/SomeipDeployments/SSC_UpdateRequest/SM_ResetMachine</SERVICE-DEPLOYMENT-REF>
+                </COM-METHOD-GRANT>
+                <COM-METHOD-GRANT>
+                  <SHORT-NAME>ucm_sm_methodgrant4</SHORT-NAME>
+                  <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/ara/ucm/instance/RequiredSomeIpUpdateRequestInstance1</SERVICE-INSTANCE-REF>
+                  <DESIGN-REF DEST="COM-METHOD-GRANT-DESIGN">/ISOFT/PlatformComponents/ucm/ucm_sm_methodgrantdesign4</DESIGN-REF>
+                  <SERVICE-DEPLOYMENT-REF DEST="SOMEIP-METHOD-DEPLOYMENT">/SomeipDeployments/SSC_UpdateRequest/SM_PrepareUpdate</SERVICE-DEPLOYMENT-REF>
+                </COM-METHOD-GRANT>
+                <COM-METHOD-GRANT >
+                  <SHORT-NAME>ucm_sm_methodgrant5</SHORT-NAME>
+                  <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/ara/ucm/instance/RequiredSomeIpUpdateRequestInstance1</SERVICE-INSTANCE-REF>
+                  <DESIGN-REF DEST="COM-METHOD-GRANT-DESIGN">/ISOFT/PlatformComponents/ucm/ucm_sm_methodgrantdesign5</DESIGN-REF>
+                  <SERVICE-DEPLOYMENT-REF DEST="SOMEIP-METHOD-DEPLOYMENT">/SomeipDeployments/SSC_UpdateRequest/SM_VerifyUpdate</SERVICE-DEPLOYMENT-REF>
+                </COM-METHOD-GRANT>
+                <COM-METHOD-GRANT >
+                  <SHORT-NAME>ucm_sm_methodgrant6</SHORT-NAME>
+                  <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/ara/ucm/instance/RequiredSomeIpUpdateRequestInstance1</SERVICE-INSTANCE-REF>
+                  <DESIGN-REF DEST="COM-METHOD-GRANT-DESIGN">/ISOFT/PlatformComponents/ucm/ucm_sm_methodgrantdesign6</DESIGN-REF>
+                  <SERVICE-DEPLOYMENT-REF DEST="SOMEIP-METHOD-DEPLOYMENT">/SomeipDeployments/SSC_UpdateRequest/SM_PrepareRollback</SERVICE-DEPLOYMENT-REF>
+                </COM-METHOD-GRANT>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

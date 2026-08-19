@@ -1,0 +1,10 @@
+{
+	"name": "rapidjson",
+	"version": "1.1.0",
+	"url": "https://github.com/Tencent/rapidjson/archive/refs/tags/v1.1.0.tar.gz",
+	"configure": "cmake @CMAKE_ARGS@ -DRAPIDJSON_BUILD_TESTS=0 -DRAPIDJSON_BUILD_EXAMPLES=0 -DRAPIDJSON_BUILD_DOC=0 -DRAPIDJSON_BUILD_THIRDPARTY_GTEST=0 .",
+	"patch": ["rapidjson.patch"],
+	"build": "make -j@JOBS@",
+	"install": "make install DESTDIR=@SYSROOT@",
+	"!install": "cmake --install ."
+}

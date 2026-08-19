@@ -1,0 +1,72 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+
+{% extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+#include "ara/com/internal/cg/cg_instance.h"
+
+#include "{%for n in rService.namespaces%}{{n}}/{%endfor%}{{ rService.name|lower }}_proxy.h"
+#include "{%for n in pService.namespaces%}{{n}}/{%endfor%}{{ pService.name|lower }}_skeleton.h"
+
+#include "ara/com/internal/cg/impl_communication_group.h"
+
+namespace ara {
+namespace com {
+namespace internal {
+namespace cg {
+using {{ rService.cg_sign }} = ara::com::internal::cg::TCommunicationGroup<{%for n in pService.namespaces%}{{n}}::{%endfor%}skeleton::{{ pService.name }}Skeleton,{%for n in rService.namespaces%}{{n}}::{%endfor%}proxy::{{ rService.name }}Proxy,
+    {% for method in rService.methods %}{% for argument in method.input_arguments if argument.name == "msg"%}{%for n in argument.impl_type.namespace%}{{n}}::{%endfor%}{{ argument.impl_type.name }}{% endfor %}{% endfor %}{% for event in rService.events if event.name == "response" %},{%for n in event.impl_type.namespace%}{{n}}::{%endfor%}{{ event.impl_type.name }}>;{% endfor %}
+
+template <>
+struct CgTypeInfo<{{ rService.cg_sign }}>
+{
+    using Skeleton = {{ rService.cg_sign }};
+    using Proxy =  {%for n in rService.namespaces%}{{n}}::{%endfor%}proxy::{{ rService.name }}Proxy;
+    using Msg =  {% for method in rService.methods %}{% for argument in method.input_arguments if argument.name == "msg"%}{%for n in argument.impl_type.namespace%}{{n}}::{%endfor%}{{ argument.impl_type.name }}{% endfor %}{% endfor %};
+    using RespMsg =  {% for event in rService.events if event.name == "response" %}{%for n in event.impl_type.namespace%}{{n}}::{%endfor%}{{ event.impl_type.name }}{% endfor %};
+
+    static std::unique_ptr<Skeleton> Create(
+        ara::core::InstanceSpecifier instanceSpecifier,
+        ara::com::MethodCallProcessingMode mode = ara::com::MethodCallProcessingMode::kEvent) {
+        auto instanceIdentifiersRes = ara::com::runtime::ResolveInstanceIDs(instanceSpecifier);
+        if (!instanceIdentifiersRes) return nullptr;
+        auto instanceIdentifiers = std::move(instanceIdentifiersRes).Value();
+        if (instanceIdentifiers.empty()) return nullptr;
+        auto skeletonRes =
+            Skeleton::Create<Skeleton>(instanceIdentifiers.front(), mode);
+        if (!skeletonRes) return nullptr;
+        return std::make_unique<Skeleton>(std::move(skeletonRes).Value());
+    };
+    static inline char const* type_name() { return "{{ rService.cg_sign }}"; }
+};
+
+}  // namespace cg
+}  // namespace internal
+}  // namespace com
+}  // namespace ara
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

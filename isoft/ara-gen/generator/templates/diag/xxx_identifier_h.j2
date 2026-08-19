@@ -1,0 +1,93 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+#include <cstdint>
+
+#include <ara/core/future.h>
+#include <ara/core/instance_specifier.h>
+#include <ara/diag/internal/continuation_manager.h>
+#include <ara/diag/internal/raw_data_identifier.h>
+#include <ara/diag/internal/types.h>
+#include <ara/diag/cancellation_handler.h>
+#include <ara/diag/meta_info.h>
+#include <ara/diag/reentrancy.h>
+
+{% if item.includeDatatypeList %}{% for datatypeItem in item.includeDatatypeList %}
+#include "{{ datatypeItem }}"
+{% endfor %}{% endif %}
+
+{% if item.namespaces %}{% for ns in item.namespaces %}
+namespace {{ns}} {
+{% endfor %}{% endif %}
+
+class {{item.name}} : public ara::diag::internal::RawDataIdentifier {
+ public:
+{% if item.read %}
+    struct {{item.read.name}} {
+{%for out_item in item.read.readOut%}
+        {{out_item.outputType}} {{out_item.name}};
+{%endfor%}
+
+        using TagEnumerable = void;
+        template <typename F>
+        void enumerate(F& fun) {
+{%for out_item in item.read.readOut%}
+            fun({{out_item.name}});
+{% endfor %}
+        }
+    };
+{% endif %}
+    {{item.name}}(const ara::core::InstanceSpecifier& specifier, ara::diag::DataIdentifierReentrancyType reentrancyType);
+
+    virtual ~{{item.name}}() noexcept = default;
+
+{% if item.read %}
+    virtual ara::core::Future<{{item.read.name}}> Read(ara::diag::MetaInfo& metaInfo,
+                                                    ara::diag::CancellationHandler cancellationHandler) = 0;
+{%endif%}
+{% if item.write %}
+    virtual ara::core::Future<void> Write({%for write_item in item.write%}{{write_item.writeType}} {{write_item.name}},{%endfor%} ara::diag::MetaInfo& metaInfo,
+                                          ara::diag::CancellationHandler cancellationHandler) = 0;
+{%endif%}
+protected:
+
+    virtual ara::core::Future<ara::diag::internal::Chunk> RawRead(
+        ara::diag::MetaInfo& metaInfo, ara::diag::CancellationHandler cancellationHandler) override;
+
+    virtual ara::core::Future<void> RawWrite(ara::diag::internal::Chunk& requestData, ara::diag::MetaInfo& metaInfo,
+                                             ara::diag::CancellationHandler cancellationHandler) override;
+
+};
+
+{% if item.namespaces %}{% for ns in item.namespaces|reverse %}
+} // namespace {{ ns }}
+{% endfor %}{% endif %}
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}
+

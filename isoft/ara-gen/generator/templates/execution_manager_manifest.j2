@@ -1,0 +1,159 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% macro to_bool(value) %}
+{% if value %}true{% else %}false{% endif %}
+{% endmacro %}
+{
+    "name": "{{process.name}}",
+    "fullQualifiedName": "{{process.fqn}}",
+{% if process.deterministic_client is not none %}
+    "deterministicClient":{
+{% if process.deterministic_client.cycleTimeValue %}
+        "cycleTimeValue":{{ process.deterministic_client.cycleTimeValue }}{% if process.deterministic_client.numberOfWorkers %},{% endif %}
+{% endif %}
+{% if process.deterministic_client.numberOfWorkers %}
+        "numberOfWorkers":{{ process.deterministic_client.numberOfWorkers }}
+{% endif %}
+    },
+{% endif %}
+    "executable":{
+        "name":"{{ process.em_info.name }}",
+        "fullQualifiedName":"{{ process.em_info.fqn }}",
+        "buildType":"{{ process.em_info.buildType }}",
+        "loggingBehavior": {{to_bool(process.em_info.uses_logging)}},
+        "mininumTimerGranularity": {{process.em_info.timer_granularity}},
+        "reportingBehavior": "{{process.em_info.execution_state_reporting}}",
+        "version":"{{ process.em_info.version }}",
+        "platform_application": {{to_bool(process.em_info.platform_application)}}
+    },
+{% if process.deterministic.client %}
+    "deterministicClient": {
+        "cycleTimeValue": {{ process.deterministic.client.cycleTimeValue }},
+        "numberOfWorkers": {{ process.deterministic.client.numberOfWorkers }},
+        "deterministicSyncMaster": "{{ process.deterministic.client.deterministicSyncMaster }}",
+        "deterSyncMasterIpcName": "{{ process.deterministic.client.deterSyncMasterIpcName }}"
+    },
+{% endif %}
+{% if process.deterministic.master %}
+    "deterministicSyncMaster": {
+        "fullQualifiedName": "{{ process.deterministic.master.fullQualifiedName }}",
+        "maxRunCycleLoop": {{ process.deterministic.master.maxRunCycleLoop }},
+        "verificationMethod": "{{ process.deterministic.master.verificationMethod }}",
+        "deterministicSyncMOutOfN": {
+            "minimumNumberOfRequests": {{ process.deterministic.master.deterministicSyncMOutOfN.minimumNumberOfRequests }},
+            "numberOfConnectedClients": {{ process.deterministic.master.deterministicSyncMOutOfN.numberOfConnectedClients }}
+        }
+    },
+{% endif %}
+    "functionClusterAffiliation": "{{process.function}}",
+{% if process.ipcName %}
+    "ipcName": "{{ process.ipcName }}",
+{% endif %}
+    "numberOfRestartAttempts": {{process.em_info.restartNumber}},
+    "preMapping": {{to_bool(process.em_info.pre_mapping)}},
+    {% if (process.em_info.functionClusterAffiliation is not none) %}
+          "functionClusterAffiliation": "{{process.em_info.functionClusterAffiliation}}",
+    {% endif %}
+    "stateDependentStartupConfig":[
+        {% for config in process.em_info.startup_configs %}
+        {
+            "executionDependency":[{% for index in config.executionDependency %}"{{index}}"{{ "," if not loop.last }}{% endfor %}],
+            "functionGroupState":{
+                {% if config.fg_modes|length > 0 %}
+                     "name": "{{config.fg_modes[0].mode_group}}",
+                     "states":[{% for fgm in config.fg_modes %}"{{fgm.mode}}"{{ "," if not loop.last }}{% endfor %}]
+                {% endif %}
+            },
+            "resourceConsumption":{
+                "heapUsage": {{config.resourceConsumption.heap_usage_key}},
+                "systemMemoryUsage": {{config.resourceConsumption.memory_usage_key}}
+            },
+            "resourceGroup": "{{config.resource_group}}",
+            "startupConfig":{
+                "environmentVariable":[{% for variable in config.environmentVariable %}"{{variable}}"{{ "," if not loop.last }}{% endfor %}],
+                {% if config.arguments|length > 0 %}
+                 "processArgument":[
+                 {% for ar in config.arguments %}
+                      "{{ar}}"{{ "," if not loop.last }}
+                 {% endfor %}
+                 ],
+                {%else%}
+                "processArgument":[],
+                {%endif%}
+                "executionError":{{ config.execution_error_num }},
+                "schedulingPolicy": "{{config.scheduling_policy}}",
+                "schedulingPriority": {{config.scheduling_priority}},
+                {% if (config.timeoutOb is not none) %}
+                    "timeout":{
+                        "enterTimeout": {{ config.timeoutOb.enterTimeout }},
+                        "exitTimeout": {{ config.timeoutOb.exitTimeout }}
+                    },
+                {% endif %}
+                "terminationBehavior":"{{ config.behavior }}"
+
+            }
+        }{{ "," if not loop.last }}
+
+    {% endfor %}
+    ],
+    {% if (process.em_info.processor) %}
+        "processor": [
+            {% for processorItem in process.em_info.processor %}
+                {
+                    "id": {{ processorItem.id }},
+                    "core":[{% for coreItem in processorItem.core %}{{ coreItem }}{{ "," if not loop.last }}{% endfor %}]
+                }{{ "," if not loop.last }}
+            {% endfor %}
+        ],
+    {% endif %}
+     "service_instance_to_port_prototype_mapping" :[
+{% for m in process.si_mappings.provided + process.si_mappings.required %}
+      {
+        "instance_specifier" : "{{m.instance_specifier}}",
+        "service_instance" : "{{m.si_fqn}}"
+      }{{ "," if not loop.last }}
+{% endfor %}
+    ],
+    "logicnetwork_to_serviceinstance_mapping":[
+{% for m in process.si_mappings.provided + process.si_mappings.required %}
+{% if m.instance_id and m.netPort %}
+      {
+        "logicnetworkname" : "{{m.netPort}}",
+        "service_instance_id" : "{{m.instance_id}}"
+      }{{ "," if not loop.last }}
+{% endif %}
+{% endfor %}
+    ],
+     "recovery_notification_info" :[
+{% for info in process.recovery_notification_infos %}
+      {
+        "instance_specifier"  : "{{info.instance_specifier}}",
+        "interface"  : "{{info.interface}}",
+        "interface_class" :"{{info.interface_class}}"
+      }{{ "," if not loop.last }}
+{% endfor %}
+    ]
+}
+{% block footer %}{% endblock %}

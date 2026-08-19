@@ -1,0 +1,396 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+
+{%- extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+{% macro method_or_unknown(value) %}
+{% if value %}{{value}}{% else %}ara::com::internal::fastdds::types::kUndefinedMethodId{% endif %}
+{% endmacro %}
+{% macro event_or_unknown(value) %}
+{% if value %}{{value}}{% else %}ara::com::internal::fastdds::types::kUndefinedEventId{% endif %}
+{% endmacro %}
+
+#include "{{service.namespacepath}}{{service.standard_name}}_common.h"
+#include "ara/com/internal/fastdds/type_converter_ara_core.h"
+//#include "ara/com/internal/fastdds/fastdds_types.h"
+
+
+{% for include in includes %}
+#include {{include}}
+{% endfor %}
+
+#include <memory>
+
+
+{% if service.namespaces %}{% for namespace in service.namespaces %}
+namespace {{namespace}} {
+{% endfor %}{% endif %}
+namespace fastdds {
+using namespace ara::com::internal::fastdds;
+struct {{service.service_deployment.name}}ServiceDesc: {{service.name}}{
+    //static constexpr auto domainId() { return types::DomainId{  }; };
+    //static constexpr auto serviceQosProfile(){return types::QosProfile{"default"};};
+    static constexpr auto serviceId() {return "{{service.deployment_id}}";}
+    static constexpr auto serviceVersionMajor() {return types::ServiceVersionMajor{ {{service.major_version}} };}
+    static constexpr auto serviceVersionMinor() {return types::ServiceVersionMinor{ {{service.minor_version}} };}
+    static constexpr auto requiredMinimumMinor() {return types::ServiceVersionMinor{ {{service.required_minimum_minor_version}} };}
+    static constexpr auto enabledMinimumMinorPolicy() {return bool{ {% if service.is_minimum_minor_policy_enabled %}true{% else %}false{% endif %} };}
+    static constexpr auto blacklistedVersionsNumber() {return uint32_t{ {{service.blacklisted_versions|length}} };}
+{% if service.blacklisted_versions %}
+    static constexpr auto blacklistedVersions() {
+        return types::ToArray<ara::com::internal::fastdds::types::BlacklistedVersion>({ {% for bl_version in service.blacklisted_versions %}ara::com::internal::fastdds::types::BlacklistedVersion{ {{ bl_version["major"] }}, {{ bl_version["minor"] }} }{% if not loop.last %},{% endif %}{% endfor %} });
+    }
+{% else %}
+    static constexpr auto blacklistedVersions() {
+        return types::ToArray<ara::com::internal::fastdds::types::BlacklistedVersion>({ ara::com::internal::fastdds::types::BlacklistedVersion{ 0x0, 0x0 } });
+    }
+{% endif %}
+
+};
+
+
+{% for event in service.events %}
+struct {{service.service_deployment.name}}{{event.name}}Desc :{{service.service_deployment.name}}ServiceDesc {
+
+    static constexpr auto descMode() { return kOther;}
+    static constexpr auto getname() { return "{{event.name}}";}
+
+};
+{% endfor %}
+
+
+{% for method in service.methods %}
+struct {{service.service_deployment.name}}{{method.name}}Desc:{{service.service_deployment.name}}ServiceDesc {
+    static constexpr auto methodId() {return types::MethodId{ {{service.absolute_namespace}}::{{service.deployment_id}}Method_{{method.name}}_Hash };}
+    static constexpr auto possibleErrors() {return {{method.name}}Errors;}
+{% if method.is_reliable %}
+    static constexpr auto isReliable() {return bool{true};}
+{% else %}
+    static constexpr auto isReliable() {return bool{false};}
+{% endif %}
+    //static constexpr auto inputTopicName()  {return types::TopicName{"{{method.request_topic}}"};}
+    //static constexpr auto outputTopicName()  {return types::TopicName{"{{method.reply_topic}}"};}
+    //static constexpr auto qosProfile(){return types::QosProfile{"default"};};
+    static constexpr auto descMode() { return kOther;}
+    static constexpr auto getname() { return "{{method.name}}";}
+
+    using request_t = {{service.absolute_namespace}}::{{service.deployment_id}}Method_Request;
+    using reply_t = {{service.absolute_namespace}}::{{service.deployment_id}}Method_Reply;
+
+    using input_t = {{service.absolute_namespace}}::{{service.deployment_id}}Method_{{method.name}}_In;
+    using output_t = {{service.absolute_namespace}}::{{service.deployment_id}}Method_{{method.name}}_Out;
+    using result_t = {{service.absolute_namespace}}::{{service.deployment_id}}Method_{{method.name}}_Result;
+
+{% if method.get_output_args %}
+    using ara_output_t = {{service.absolute_namespace}}::{{service.name}}::{{method.name}}Output;
+{% else %}
+    using ara_output_t = void;
+{% endif %}
+
+    using signature_t = ara_output_t({%- for arg in method.get_input_args -%}const {{arg.type_declaration}}& {{ arg.name }}{% if not loop.last %},{% endif %}{%- endfor -%});
+{% if method.is_fire_and_forget %}
+    using invoker_t = std::function<ara_output_t(request_t const&)>;
+{%else%}
+    using invoker_t = std::function<ara::core::Future<ara_output_t>(request_t const&)>;
+{%endif%}
+    static void SetRequestData(request_t& request, input_t const& data) {
+      request.data().{{method.name}}(data);
+  }
+    template <typename... Args>
+    static void SetRequestData(request_t &request, Args const &...args){
+        std::unique_ptr<input_t> data = std::make_unique<input_t>();
+        struct
+        {
+{%if method.get_input_args%}
+{%for arg in method.get_input_args%}
+             {{arg.type_declaration}} const *{{ arg.name }};
+{% endfor %}
+{%else%}
+           dds::rpc::UnusedMember dummy;
+{%endif%}
+        } tmp = {&args...};
+{%if method.get_input_args%}
+{%for arg in method.get_input_args%}
+    ara::com::internal::fastdds::ConvertToIdl(*tmp.{{ arg.name }}, data->{{ arg.name }}());
+{% endfor %}
+{%else%}
+        data->dummy(tmp.dummy);
+{%endif%}
+        request.data().{{method.name}}(*data);
+    }
+
+  template<typename Promise>
+  static void SetPromiseValue(Promise& promise, reply_t const& reply) {
+    if (reply.data().{{method.name}}()._d() == dds::RETCODE_OK) {
+{% if method.get_output_args %}
+      std::unique_ptr<ara_output_t> result = std::make_unique<ara_output_t>();
+        ara::com::internal::fastdds::ConvertFromIdl(reply.data().{{method.name}}().result(), *result);
+        promise.set_value(*result);
+{% else %}
+      promise.set_value();
+{% endif %}
+    } else if (reply.data().{{method.name}}()._d() == dds::RETCODE_ERROR) {
+      promise.SetError(ara::com::internal::fastdds::ConvertFromIdl(reply.data().{{method.name}}().error()));
+    } else {
+      assert(false);
+    }
+  }
+
+{% if method.get_output_args %}
+  static void SetReplyData(reply_t& reply, ara::core::Result<ara_output_t> const& data){
+    result_t result;
+    if (data.HasValue()){
+      std::unique_ptr<output_t> output = std::make_unique<output_t>();
+      ara::com::internal::fastdds::ConvertToIdl(data.Value(),*output);
+      result.result(*output);
+    } else {
+      result.error(ara::com::internal::fastdds::ConvertToIdl(data.Error()));
+    }
+
+    reply.data().{{method.name}}(result);
+  }
+{% else %}
+  static void SetReplyData(reply_t& reply, ara::core::Result<ara_output_t> const& data){
+    result_t result;
+    if (data.HasValue()) {
+      result.result(output_t());
+    } else {
+      result.error(ara::com::internal::fastdds::ConvertToIdl(data.Error()));
+    }
+
+    reply.data().{{method.name}}(result);
+  }
+{% endif %}
+    static void GetRequestData(const request_t& request{%for arg in method.get_input_args%},{{arg.type_declaration}}& {{ arg.name }}{% endfor %}) {
+    (void)request;
+{%for arg in method.get_input_args%}
+    ara::com::internal::fastdds::ConvertFromIdl(request.data().{{method.name}}().{{arg.name}}(), {{arg.name}});
+{% endfor %}
+     return ;
+  }
+
+};
+{% endfor %}
+
+
+{% for field in service.all_fields %}
+
+{% if field.has_notifier%}
+struct {{service.service_deployment.name}}{{field.name}}EventDesc : {{service.service_deployment.name}}ServiceDesc {
+    //static constexpr auto topicName()  {return types::TopicName{"{{field.notifier_topic_name}}"};};
+    //static constexpr auto qosProfile(){return types::QosProfile{"default"};};
+    static constexpr auto descMode() { return kField;}
+    static constexpr auto getname() { return "{{field.name}}Notifier";}
+
+};
+{% endif %}
+{%if field.has_getter%}
+struct {{service.service_deployment.name}}{{field.name}}GetterDesc : {{service.service_deployment.name}}ServiceDesc {
+    static constexpr auto methodId() { return types::MethodId{ {{service.absolute_namespace}}::{{service.deployment_id}}Field_Get{{field.name}}_Hash}; }
+    //static constexpr auto inputTopicName()  {return types::TopicName{"{{field.getter_request_topic_name}}"};}
+    //static constexpr auto outputTopicName()  {return types::TopicName{"{{field.getter_reply_topic_name}}"};}
+    //static constexpr auto qosProfile(){return types::QosProfile{"default"};};
+    static constexpr auto descMode() { return kField;}
+    static constexpr auto getname() { return "{{field.name}}Getter";}
+
+    using request_t = {{service.absolute_namespace}}::{{service.deployment_id}}Field_Request;
+    using reply_t = {{service.absolute_namespace}}::{{service.deployment_id}}Field_Reply;
+
+    using input_t = {{service.absolute_namespace}}::{{service.deployment_id}}Field_Get{{field.name}}_In;
+    using output_t = {{service.absolute_namespace}}::{{service.deployment_id}}Field_Get{{field.name}}_Out;
+    using result_t = {{service.absolute_namespace}}::{{service.deployment_id}}Field_Get{{field.name}}_Result;
+
+    using ara_output_t = {{field.type_declaration}};
+    using signature_t = ara_output_t();
+    using invoker_t = std::function<ara::core::Future<ara_output_t>(request_t const&)>;
+
+    static void SetRequestData(request_t& request, input_t const& data) {
+    request.data().get{{field.name}}(data);
+  }
+  template <typename... Args>
+  static void SetRequestData(request_t& request, Args const&... args) {
+    input_t data;
+    struct {
+      dds::rpc::UnusedMember dummy;
+    } tmp = {args...};
+    data.dummy(tmp.dummy);
+    request.data().get{{field.name}}(data);
+  }
+   template<typename Promise>
+  static void SetPromiseValue(Promise& promise, reply_t const& reply) {
+    if (reply.data().get{{field.name}}()._d() == dds::RETCODE_OK) {
+        std::unique_ptr<ara_output_t> result = std::make_unique<ara_output_t>();
+        ara::com::internal::fastdds::ConvertFromIdl(reply.data().get{{field.name}}().result_().return_(), *result);
+        promise.set_value(*result);
+    } else if (reply.data().get{{field.name}}()._d() == dds::RETCODE_ERROR) {
+        promise.SetError(ara::com::internal::fastdds::ConvertFromIdl(reply.data().get{{field.name}}().error()));
+    } else {
+        assert(false);
+    }
+  }
+  static void SetReplyData(reply_t &reply, ara::core::Result<ara_output_t> const &data){
+    result_t result;
+    if (data.HasValue()){
+        std::unique_ptr< output_t> output = std::make_unique<output_t>();
+        ara::com::internal::fastdds::ConvertToIdl(data.Value(), output->return_());
+        result.result_(*output);
+    }else{
+        result.error(ara::com::internal::fastdds::ConvertToIdl(data.Error()));
+    }
+
+    reply.data().get{{field.name}}(result);
+  }
+
+  template <typename T>
+  static auto WrapHandler(T &handler){
+    return [handler]({{service.service_deployment.name}}{{field.name}}GetterDesc::request_t const &request){
+      (void)request;
+      return handler();
+    };
+  }
+
+
+};
+{% endif %}
+{% if field.has_setter %}
+struct {{service.service_deployment.name}}{{field.name}}SetterDesc : {{service.service_deployment.name}}ServiceDesc {
+    static constexpr auto methodId() { return types::MethodId{ {{service.absolute_namespace}}::{{service.deployment_id}}Field_Set{{field.name}}_Hash}; }
+    //static constexpr auto inputTopicName() { return types::TopicName{"{{field.setter_request_topic_name}}"}; }
+    //static constexpr auto outputTopicName() { return types::TopicName{"{{field.setter_reply_topic_name}}"}; }
+    //static constexpr auto qosProfile() { return types::QosProfile{"default"}; };
+    static constexpr auto descMode() { return kField;}
+    static constexpr auto getname() { return "{{field.name}}Setter";}
+
+    using request_t = {{service.absolute_namespace}}::{{service.deployment_id}}Field_Request;
+    using reply_t = {{service.absolute_namespace}}::{{service.deployment_id}}Field_Reply;
+
+    using input_t = {{service.absolute_namespace}}::{{service.deployment_id}}Field_Set{{field.name}}_In;
+    using output_t = {{service.absolute_namespace}}::{{service.deployment_id}}Field_Set{{field.name}}_Out;
+    using result_t = {{service.absolute_namespace}}::{{service.deployment_id}}Field_Set{{field.name}}_Result;
+
+    using ara_output_t = {{field.type_declaration}};
+    using signature_t = ara_output_t({{field.type_declaration}} const &);
+    using invoker_t = std::function<ara::core::Future<ara_output_t>(request_t const &)>;
+
+    /// @uptrace{SWS_CM_11151, 1095a8e95a2e1d5201835dc927a168b9ce790921}s
+    static void SetRequestData(request_t &request, input_t const &data) {
+        request.data().set{{field.name}}(data);
+    }
+    template <typename... Args>
+    static void SetRequestData(request_t &request, Args const &...args) {
+        std::unique_ptr<input_t> data = std::make_unique<input_t>();
+        struct {
+            {{field.type_view.qualified_cpp_name}} const *{{field.name}};
+        } tmp = {&args...};
+        ara::com::internal::fastdds::ConvertToIdl(*tmp.{{ field.name }}, data->{{ field.name }}());
+        request.data().set{{field.name}}(*data);
+    }
+    template <typename Promise>
+    static void SetPromiseValue(Promise &promise, reply_t const &reply) {
+        if (reply.data().set{{field.name}}()._d() == dds::RETCODE_OK) {
+            std::unique_ptr<ara_output_t> result = std::make_unique<ara_output_t>();
+            ara::com::internal::fastdds::ConvertFromIdl(reply.data().set{{field.name}}().result_().return_(), *result);
+            promise.set_value(*result);
+        } else if (reply.data().set{{field.name}}()._d() == dds::RETCODE_ERROR) {
+            promise.SetError(ara::com::internal::fastdds::ConvertFromIdl(reply.data().set{{field.name}}().error()));
+        } else {
+            assert(false);
+        }
+    }
+    static void SetReplyData(reply_t &reply, ara::core::Result<ara_output_t> const &data) {
+    result_t result;
+
+    if (data.HasValue()){
+      std::unique_ptr<output_t> output = std::make_unique<output_t>();
+      ara::com::internal::fastdds::ConvertToIdl(data.Value(), output->return_());
+      result.result_(*output);
+    }else{
+      result.error(ara::com::internal::fastdds::ConvertToIdl(data.Error()));
+    }
+
+    reply.data().set{{field.name}}(result);
+  }
+
+  template <typename T>
+  static auto WrapHandler(T &handler){
+    return [handler]({{service.service_deployment.name}}{{field.name}}SetterDesc::request_t const &request){
+      std::unique_ptr<ara_output_t> output = std::make_unique<ara_output_t>();
+      ara::com::internal::fastdds::ConvertFromIdl(request.data().set{{field.name}}().{{field.name}}(),*output);
+      return handler(*output);
+
+    };
+  }
+};
+{% endif %}
+
+struct {{service.service_deployment.name}}{{field.name}}Desc : {{service.service_deployment.name}}ServiceDesc {
+
+    using data_t = {{field.type_view.qualified_cpp_name_fastdds}};
+{% if field.has_notifier %}
+    static constexpr bool has_notifier = true;
+    using event_descriptor_t = {{service.service_deployment.name}}{{field.name}}EventDesc;
+{% else %}
+    static constexpr bool has_notifier = false;
+    using event_descriptor_t = ara::com::internal::fastdds::types::NullType;
+{% endif %}
+{% if field.has_getter %}
+    static constexpr bool has_getter = true;
+    using getter_descriptor_t = {{service.service_deployment.name}}{{field.name}}GetterDesc;
+    using getter_t = {{service.service_deployment.name}}{{field.name}}GetterDesc;
+{% else %}
+    static constexpr bool has_getter = false;
+    using getter_descriptor_t = ara::com::internal::fastdds::types::NullType;
+    using getter_t = ara::com::internal::fastdds::types::NullType;
+{% endif %}
+{% if field.has_setter %}
+    static constexpr bool has_setter = true;
+    using setter_descriptor_t = {{service.service_deployment.name}}{{field.name}}SetterDesc;
+    using setter_t = {{service.service_deployment.name}}{{field.name}}SetterDesc;
+{% else %}
+    static constexpr bool has_setter = false;
+    using setter_descriptor_t = ara::com::internal::fastdds::types::NullType;
+    using setter_t = ara::com::internal::fastdds::types::NullType;
+{% endif %}
+{% if field.has_getter %}
+    static constexpr auto getMethodId() { return getter_descriptor_t::methodId(); }
+{% endif %}
+{% if field.has_setter %}
+    static constexpr auto setMethodId() { return setter_descriptor_t::methodId(); }
+{% endif %}
+};
+{% endfor %}
+
+
+
+
+} // namespace fastdds
+{% if service.namespaces %}{% for namespace in service.namespaces|reverse %}
+} // namespace {{namespace}}
+{% endfor %}{% endif %}
+
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

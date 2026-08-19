@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="02c5e172-fa71-4367-9d55-2edc74941f8a">
+      <SHORT-NAME>ara</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>phm</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE UUID="c657d2b0-dbcc-4c54-a502-cb88bd3fc718">
+              <SHORT-NAME>Interfaces</SHORT-NAME>
+              <ELEMENTS>
+                <PHM-HEALTH-CHANNEL-INTERFACE UUID="2b08f252-bedc-4c88-9ff5-83dcd67afd34">
+                  <SHORT-NAME>hc_testunit</SHORT-NAME>
+                  <IS-SERVICE>false</IS-SERVICE>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ara</SHORT-NAME>
+                      <SYMBOL>ara</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>phm</SHORT-NAME>
+                      <SYMBOL>phm</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>health_channels</SHORT-NAME>
+                      <SYMBOL>health_channels</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <STATUSS>
+                    <PHM-HEALTH-CHANNEL-STATUS UUID="c99e5d0c-f464-495b-9530-9904b9d40e95">
+                      <SHORT-NAME>kTestHigh</SHORT-NAME>
+                      <STATUS-ID>3</STATUS-ID>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                    <PHM-HEALTH-CHANNEL-STATUS UUID="210a0abc-2fdc-4de8-aa74-fd8ddffc505d">
+                      <SHORT-NAME>kTestLow</SHORT-NAME>
+                      <STATUS-ID>1</STATUS-ID>
+                      <TRIGGERS-RECOVERY-NOTIFICATION>false</TRIGGERS-RECOVERY-NOTIFICATION>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                    <PHM-HEALTH-CHANNEL-STATUS UUID="2f62b632-140f-4939-ad2a-bbfd611c1e02">
+                      <SHORT-NAME>kTestOk</SHORT-NAME>
+                      <STATUS-ID>2</STATUS-ID>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                    <PHM-HEALTH-CHANNEL-STATUS UUID="50515b08-fbd5-4dd7-8931-d89037b7f8a4">
+                      <SHORT-NAME>kTestVeryHigh</SHORT-NAME>
+                      <STATUS-ID>4</STATUS-ID>
+                      <TRIGGERS-RECOVERY-NOTIFICATION>true</TRIGGERS-RECOVERY-NOTIFICATION>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                    <PHM-HEALTH-CHANNEL-STATUS UUID="11e32a4f-836a-46b8-b6d4-b8c202656112">
+                      <SHORT-NAME>kTestVeryLow</SHORT-NAME>
+                      <STATUS-ID>0</STATUS-ID>
+                      <TRIGGERS-RECOVERY-NOTIFICATION>true</TRIGGERS-RECOVERY-NOTIFICATION>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                  </STATUSS>
+                </PHM-HEALTH-CHANNEL-INTERFACE>
+                <PHM-HEALTH-CHANNEL-INTERFACE UUID="2b08f252-bedc-4c88-9ff5-83dcd67afd34">
+                  <SHORT-NAME>tyre_pressure</SHORT-NAME>
+                  <IS-SERVICE>false</IS-SERVICE>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ara</SHORT-NAME>
+                      <SYMBOL>ara</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>phm</SHORT-NAME>
+                      <SYMBOL>phm</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>health_channels</SHORT-NAME>
+                      <SYMBOL>health_channels</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <STATUSS>
+                    <PHM-HEALTH-CHANNEL-STATUS UUID="c99e5d0c-f464-495b-9530-9904b9d40e95">
+                      <SHORT-NAME>kHigh</SHORT-NAME>
+                      <STATUS-ID>3</STATUS-ID>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                    <PHM-HEALTH-CHANNEL-STATUS UUID="210a0abc-2fdc-4de8-aa74-fd8ddffc505d">
+                      <SHORT-NAME>kLow</SHORT-NAME>
+                      <STATUS-ID>1</STATUS-ID>
+                      <TRIGGERS-RECOVERY-NOTIFICATION>false</TRIGGERS-RECOVERY-NOTIFICATION>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                    <PHM-HEALTH-CHANNEL-STATUS UUID="2f62b632-140f-4939-ad2a-bbfd611c1e02">
+                      <SHORT-NAME>kOk</SHORT-NAME>
+                      <STATUS-ID>2</STATUS-ID>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                    <PHM-HEALTH-CHANNEL-STATUS UUID="50515b08-fbd5-4dd7-8931-d89037b7f8a4">
+                      <SHORT-NAME>kVeryHigh</SHORT-NAME>
+                      <STATUS-ID>4</STATUS-ID>
+                      <TRIGGERS-RECOVERY-NOTIFICATION>true</TRIGGERS-RECOVERY-NOTIFICATION>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                    <PHM-HEALTH-CHANNEL-STATUS UUID="11e32a4f-836a-46b8-b6d4-b8c202656112">
+                      <SHORT-NAME>kVeryLow</SHORT-NAME>
+                      <STATUS-ID>0</STATUS-ID>
+                      <TRIGGERS-RECOVERY-NOTIFICATION>true</TRIGGERS-RECOVERY-NOTIFICATION>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                  </STATUSS>
+                </PHM-HEALTH-CHANNEL-INTERFACE>
+                <PHM-HEALTH-CHANNEL-INTERFACE UUID="c18a2de7-ada8-4111-b6aa-fd6d7332e725">
+                  <SHORT-NAME>vol</SHORT-NAME>
+                  <IS-SERVICE>false</IS-SERVICE>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ara</SHORT-NAME>
+                      <SYMBOL>ara</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>phm</SHORT-NAME>
+                      <SYMBOL>phm</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>health_channels</SHORT-NAME>
+                      <SYMBOL>health_channels</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <STATUSS>
+                    <PHM-HEALTH-CHANNEL-STATUS>
+                      <SHORT-NAME>kHigh</SHORT-NAME>
+                      <CATEGORY>lll</CATEGORY>
+                      <STATUS-ID>3</STATUS-ID>
+                      <TRIGGERS-RECOVERY-NOTIFICATION>true</TRIGGERS-RECOVERY-NOTIFICATION>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                    <PHM-HEALTH-CHANNEL-STATUS UUID="5b343a91-92c8-4572-a6c1-ddfca3e1a0d6">
+                      <SHORT-NAME>kLow</SHORT-NAME>
+                      <STATUS-ID>2</STATUS-ID>
+                      <TRIGGERS-RECOVERY-NOTIFICATION>false</TRIGGERS-RECOVERY-NOTIFICATION>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                    <PHM-HEALTH-CHANNEL-STATUS UUID="1ce32eb7-269f-43ff-b856-03cced6f704b">
+                      <SHORT-NAME>kOk</SHORT-NAME>
+                      <CATEGORY>lll</CATEGORY>
+                      <STATUS-ID>1</STATUS-ID>
+                      <TRIGGERS-RECOVERY-NOTIFICATION>true</TRIGGERS-RECOVERY-NOTIFICATION>
+                    </PHM-HEALTH-CHANNEL-STATUS>
+                  </STATUSS>
+                </PHM-HEALTH-CHANNEL-INTERFACE>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

@@ -1,0 +1,470 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% macro hex_to_dec(value) %}{{value|int(0, 16)}}{% endmacro %}
+{% macro gen_mappings(mappings, isP) %}
+{% for mapping in mappings %}
+{% set service = mapping['service'] %}
+            {
+{% if 'SomeIpServiceView' in service.__class__.__name__ %}
+                "type" : "some/ip",
+                "name" : "{{mapping['si_fqn']}}",
+                "service_id" : "NSomeip{{service.name}}",
+                "instance_id" : "{{service.instance_id}}",
+                "service_interface_id" : {{ service.deployment_id_ }},
+                "service_interface_version":{
+                    "major_version":{{ service.major_version_ }},
+                    "minor_version":{{ service.minor_version_ }}
+                },
+                {% if service.deployment.load_balancing_priority != None %}
+                 "load_balancing_priority": {{ service.deployment.load_balancing_priority }},
+                {% endif %}
+                {% if service.deployment.load_balancing_weight != None  %}
+                 "load_balancing_weight": {{ service.deployment.load_balancing_weight }},
+                {% endif %}
+                {% if service.deployment.required_minor_version != None %}
+                    {% if service.deployment.required_minor_version == "ANY" %}
+                    "required_minor_version": "ANY",
+                    {% else %}
+                    "required_minor_version": {{ service.deployment.required_minor_version }},
+                    {% endif %}
+                {% endif %}
+                {% if not isP %}
+                "blacklisted_versions": [
+                    {% for bl_version in service.blacklisted_versions %}
+                    {
+                        "major_version": {{ bl_version["major"] }},
+                        "minor_version": {{ bl_version["minor"] }}
+                    }{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                ],
+                {% endif %}
+                {% if service.deployment.sd_config and service.deployment.sd_config.showSdConfig %}
+                    {% if isP %}
+                     "sd_server_config":{
+                     {% else %}
+                     "sd_client_config": {
+                     {% endif %}
+                        {% if service.deployment.sd_config.showInitial %}
+                        {% if isP %}
+                        "initial_offer_behavior": {
+                        {% else %}
+                        "initial_find_behavior": {
+                        {% endif %}
+                            {% if service.deployment.sd_config.initial_delay_max != None  %}
+                            "initial_delay_max_value": {{ service.deployment.sd_config.initial_delay_max }},
+                            {% endif %}
+                            {% if service.deployment.sd_config.initial_delay_min != None  %}
+                            "initial_delay_min_value": {{ service.deployment.sd_config.initial_delay_min }},
+                            {% endif %}
+                            {% if service.deployment.sd_config.initial_repetitions_base_delay != None  %}
+                            "initial_repetitions_base_delay": {{ service.deployment.sd_config.initial_repetitions_base_delay }},
+                            {% endif %}
+                            {% if service.deployment.sd_config.initial_repetitions_max != None  %}
+                            "initial_repetitions_max": {{ service.deployment.sd_config.initial_repetitions_max }}
+                            {% endif %}
+                        },
+                        {% endif %}
+                        {% if isP and service.deployment.sd_config.cyclic_delay != None %}
+                        "offer_cyclic_delay": {{ service.deployment.sd_config.cyclic_delay }},
+                        {% endif %}
+                        {% if service.deployment.sd_config.ttl != None %}
+                        {% if isP %}
+                        "service_offer_time_to_live": {{ service.deployment.sd_config.ttl }},
+                        {% else %}
+                        "service_find_time_to_live": {{ service.deployment.sd_config.ttl }},
+                        {% endif %}
+                        {% endif %}
+                        {% if isP and service.deployment.sd_config.showResponseDelay %}
+                        "request_response_delay": {
+                            {% if service.deployment.sd_config.request_response_delay_max != None %}
+                            "max_value": {{ service.deployment.sd_config.request_response_delay_max }},
+                            {% endif %}
+                            {% if service.deployment.sd_config.request_response_delay_min != None %}
+                            "min_value": {{ service.deployment.sd_config.request_response_delay_min }}
+                            {% endif %}
+                        }
+                        {% endif %}
+                    },
+                {% endif %}
+                {% if isP %}
+                {% if service.ports.size_threshold != None %}
+                    "udp_collection_buffer_size_threshold": {{ service.ports.size_threshold }},
+                {% endif %}
+                {% else %}
+                {% if service.deployment.version_driven_find_behavior != "" %}
+                    "version_driven_find_behavior": "{{ service.deployment.version_driven_find_behavior }}",
+                {% endif %}
+                {% endif %}
+                {% if service.event_groups | length > 0 %}
+                "event_groups": [
+                {% for event_group in service.event_groups %}
+                    {
+                        "event_group_id": {{ event_group.event_group.event_group_id }},
+                        {% if isP and event_group.event_group.threshold != None %}
+                            "multicast_threshold": {{ event_group.event_group.threshold }},
+                        {% endif %}
+                        "events":[
+                            {% for event_group_id in event_group.event_group.events %}
+                                {{ event_group_id }}{% if not loop.last %},{% endif %}
+                            {% endfor %}
+                        ],
+                         {% if event_group.event_group.showConfig %}
+                         {% if isP %}
+                         "sd_server_event_group_timing_config":{
+                         {% else %}
+                         "sd_client_event_group_timing_config": {
+                         {% endif %}
+                            {% if event_group.event_group.request_response_delay %}
+                            "request_response_delay": {
+                                "max_value": {{ event_group.event_group.request_response_delay.max_value }},
+                                "min_value": {{ event_group.event_group.request_response_delay.min_value }}
+                             },
+                            {% endif %}
+                            {% if event_group.event_group.subscribe_timeo != None %}
+                            "subscribe_event_group_retry_delay": {{ event_group.event_group.subscribe_timeo }},
+                            {% endif %}
+                            {% if event_group.event_group.subscribe_renew != None %}
+                            "subscribe_event_group_retry_max": {{ event_group.event_group.subscribe_renew }},
+                            {% endif %}
+                            {% if event_group.event_group.ttl != None %}
+                            "time_to_live": {{ event_group.event_group.ttl }}
+                            {% endif %}
+                         }
+                         {% endif %}
+                    }{% if not loop.last %},{% endif %}
+                {% endfor %}
+                ],
+                {% endif %}
+                {% if service.deployment.have_event_notifier %}
+                "events": [
+                {% for event in service.events %}
+                    {
+                        "event_id":{{ event.event_id }},
+                        {% if event.event_deployment.event_depl %}
+                        {% if event.event_deployment.event_depl.maximum_segment_length != None %}
+                        "maximum_segment_length": {{ event.event_deployment.event_depl.maximum_segment_length }},
+                        {% endif %}
+                        {% if event.event_deployment.event_depl.separation_time != None %}
+                        "separation_time": {{ event.event_deployment.event_depl.separation_time }},
+                        {% endif %}
+                        {% if event.event_deployment.event_depl.serializerDump %}
+                        "serializer": "{{ event.event_deployment.event_depl.serializerDump }}",
+                        {% endif %}
+                        {% if event.event_deployment.event_depl.collection_props %}
+                        "collection_props": {
+                             {% if event.event_deployment.event_depl.collection_props.buffer_timeout != None %}
+                                "udp_collection_buffer_timeout":{{ event.event_deployment.event_depl.collection_props.buffer_timeout }} ,
+                             {% endif %}
+                             {% if event.event_deployment.event_depl.collection_props.trigger %}
+                                "udp_collection_trigger":"{{ event.event_deployment.event_depl.collection_props.trigger | lower }}"
+                             {% endif %}
+                         },
+                        {% endif %}
+                        {% endif %}
+                        "transport_protocol":"{{ event.event_deployment.proto }}"
+                    },
+                {% endfor %}
+                {% for field in service.all_fields %}
+                    {% if field.field_notifier %}
+                     {
+                        "event_id":{{ field.notifier_id }},
+                        {% if field.field_notifier.maximum_segment_length != None %}
+                        "maximum_segment_length": {{ field.field_notifier.maximum_segment_length }},
+                        {% endif %}
+                        {% if field.field_notifier.separation_time != None %}
+                        "separation_time": {{ field.field_notifier.separation_time }},
+                        {% endif %}
+                        {% if field.field_notifier.serializerDump %}
+                        "serializer": "{{ field.field_notifier.serializerDump }}",
+                        {% endif %}
+                        {% if field.field_notifier.collection_props %}
+                        "collection_props": {
+                             {% if field.field_notifier.collection_props.buffer_timeout != None %}
+                                "udp_collection_buffer_timeout":{{ field.field_notifier.collection_props.buffer_timeout }} ,
+                             {% endif %}
+                             {% if field.field_notifier.collection_props.trigger %}
+                                "udp_collection_trigger":"{{ field.field_notifier.collection_props.trigger | lower }}"
+                             {% endif %}
+                         },
+                        {% endif %}
+                        "transport_protocol":"{{ field.field_notifier.proto }}"
+                     },
+                    {% endif %}
+                {% endfor %}
+                ],
+                {% endif %}
+                {% if service.deployment.have_method_get_set %}
+                "methods": [
+                {% for method in service.methods %}
+                    {
+                        "method_id":{{ method.method_id }},
+                        {% if method.deployment.method_depl %}
+                        {% if method.deployment.method_depl.length_request != None %}
+                        "maximum_segment_length_request": {{ method.deployment.method_depl.length_request }},
+                        {% endif %}
+                        {% if method.deployment.method_depl.length_response != None %}
+                        "maximum_segment_length_response": {{ method.deployment.method_depl.length_response }},
+                        {% endif %}
+                        {% if method.deployment.method_depl.time_request != None %}
+                        "separation_time_request": {{ method.deployment.method_depl.time_request }},
+                        {% endif %}
+                        {% if method.deployment.method_depl.time_response != None %}
+                        "separation_time_response": {{ method.deployment.method_depl.time_response }},
+                        {% endif %}
+                        {% if method.deployment.method_depl.collection_props %}
+                        "collection_props": {
+                             {% if method.deployment.method_depl.collection_props.buffer_timeout != None %}
+                                "udp_collection_buffer_timeout":{{ method.deployment.method_depl.collection_props.buffer_timeout }} ,
+                             {% endif %}
+                             {% if method.deployment.method_depl.collection_props.trigger %}
+                                "udp_collection_trigger":"{{ method.deployment.method_depl.collection_props.trigger | lower }}" ,
+                             {% endif %}
+                         },
+                        {% endif %}
+                        {% endif %}
+                        "transport_protocol":"{{ method.deployment.proto }}"
+                    },
+                {% endfor %}
+                {% for field in service.all_fields %}
+                    {% if field.filed_getter %}
+                    {
+                        "method_id":{{ field.getter_id }},
+                        {% if field.filed_getter.length_request != None %}
+                        "maximum_segment_length_request": {{ field.filed_getter.length_request }},
+                        {% endif %}
+                        {% if field.filed_getter.length_response != None %}
+                        "maximum_segment_length_response": {{ field.filed_getter.length_response }},
+                        {% endif %}
+                        {% if field.filed_getter.time_request != None %}
+                        "separation_time_request": {{ field.filed_getter.time_request }},
+                        {% endif %}
+                        {% if field.filed_getter.time_response != None %}
+                        "separation_time_response": {{ field.filed_getter.time_response }},
+                        {% endif %}
+                        {% if field.filed_getter.collection_props %}
+                        "collection_props": {
+                             {% if field.filed_getter.collection_props.buffer_timeout != None %}
+                                "udp_collection_buffer_timeout":{{ field.filed_getter.collection_props.buffer_timeout }} ,
+                             {% endif %}
+                             {% if field.filed_getter.collection_props.trigger %}
+                                "udp_collection_trigger":"{{ field.filed_getter.collection_props.trigger | lower }}" ,
+                             {% endif %}
+                         },
+                        {% endif %}
+                        "transport_protocol":"{{ field.filed_getter.proto }}"
+                    },
+                    {% endif %}
+                    {% if field.field_setter %}
+                    {
+                        "method_id":{{ field.setter_id }},
+                        {% if field.field_setter.length_request != None %}
+                        "maximum_segment_length_request": {{ field.field_setter.length_request }},
+                        {% endif %}
+                        {% if field.field_setter.length_response != None %}
+                        "maximum_segment_length_response": {{ field.field_setter.length_response }},
+                        {% endif %}
+                        {% if field.field_setter.time_request != None %}
+                        "separation_time_request": {{ field.field_setter.time_request }},
+                        {% endif %}
+                        {% if field.field_setter.time_response != None %}
+                        "separation_time_response": {{ field.field_setter.time_response }},
+                        {% endif %}
+                        {% if field.field_setter.collection_props %}
+                        "collection_props": {
+                             {% if field.field_setter.collection_props.buffer_timeout != None %}
+                                "udp_collection_buffer_timeout":{{ field.field_setter.collection_props.buffer_timeout }} ,
+                             {% endif %}
+                             {% if field.field_setter.collection_props.trigger %}
+                                "udp_collection_trigger":"{{ field.field_setter.collection_props.trigger | lower }}" ,
+                             {% endif %}
+                         },
+                        {% endif %}
+                        "transport_protocol":"{{ field.field_setter.proto }}"
+                    },
+                    {% endif %}
+                {% endfor %}
+                ],
+                {% endif %}
+                {% if service.all_fields | length > 0 %}
+                "fields": [
+                {% for field in service.all_fields %}
+                    {
+                        {% if field.getter_id != None %}
+                            "getter": {{ field.getter_id }},
+                        {% endif %}
+                        {% if field.setter_id != None %}
+                            "setter": {{ field.setter_id }},
+                        {% endif %}
+                        {% if field.notifier_id != None %}
+                            "notifier": {{ field.notifier_id }}
+                        {% endif %}
+                    }{% if not loop.last %},{% endif %}
+                {% endfor %}
+                ]
+                {% endif %}
+{% endif %}
+{% if 'UserDefinedServiceView' in service.__class__.__name__ %}
+{% if service.user_defined_type == "icc" %}
+                "type" : "icc",
+                "name" : "{{mapping['si_fqn']}}",
+                "service_id" : "Icc{{service.name}}",
+                "instance_id" : "ICC:{{service.userdef_specific_instance_id}}",
+                "service_interface_id" : {{ service.deployment_id_ }},
+                "service_interface_version":{
+                    "major_version":{{ service.icc_service.major }},
+                    "minor_version":{{ service.icc_service.minor }}
+                },
+                "blacklisted_versions": [
+                    {% for bl_version in service.blacklisted_versions %}
+                    {
+                        "major": {{ bl_version["major"] }},
+                        "minor": {{ bl_version["minor"] }}
+                    }
+                    {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                ]
+{% else %}
+                "type" : "npc",
+                "name" : "{{mapping['si_fqn']}}",
+                "service_id" : "Npc{{service.name}}",
+                "instance_id" : "NPC:{{service.userdef_specific_instance_id}}",
+                "service_interface_id" : {{ service.deployment_id_ }},
+                "service_interface_version":{
+                    "major_version":{{ service.ipc_service.major }},
+                    "minor_version":{{ service.ipc_service.minor }}
+                },
+                "blacklisted_versions": [
+                    {% for bl_version in service.blacklisted_versions %}
+                    {
+                        "major": {{ bl_version["major"] }},
+                        "minor": {{ bl_version["minor"] }}
+                    }
+                    {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                ]
+{% endif %}
+{% endif %}
+{% if 'DdsServiceView' in service.__class__.__name__ %}
+                "type" : "dds",
+                "name" : "{{mapping['si_fqn']}}",
+                "service_id" : "{{service.deployment_id}}",
+                "instance_id" : "{{service.instance_id}}",
+                "blacklisted_versions": [
+                    {% for bl_version in service.blacklisted_versions %}
+                    {
+                        "major": {{ bl_version["major"] }},
+                        "minor": {{ bl_version["minor"] }}
+                    }
+                    {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                ],
+                "domain_id" : {{service.domain_id}},
+                "qos_profile" : "{{service.qos_profile}}",
+                "transport_plugins" :
+                [
+{% for plugin in service.transport_plugins %}
+                    "{{plugin}}"{{ "," if not loop.last else "" }}
+{% endfor %}
+                ],
+{%if service.methods%}
+{% for method in service.methods %}
+                "methodreplytopicname" :"{{method.reply_topic}}",
+                "methodrequesttopicname" :"{{method.request_topic}}",
+{%endfor%}
+{% else %}
+                "methodreplytopicname" :"",
+                "methodrequesttopicname" :"",
+{%endif%}
+{%if service.all_fields%}
+{% for field in service.all_fields %}
+                "fieldreplytopicname" : "{{field.setter_reply_topic_name}}",
+                "fieldrequesttopicname" : "{{field.setter_request_topic_name}}",
+{%endfor%}
+{% else %}
+                "fieldreplytopicname" : "",
+                "fieldrequesttopicname" : "",
+{%endif%}
+                "events" :
+                [
+{% for event in service.events %}
+                    {
+                        "topicname" : "{{event.topic_name}}",
+                        "name" : "{{event.name}}",
+                        "qos_profile" : "{{event.qos_profile}}",
+                        "transport_protocols" :
+                        [
+{% for protocol in event.transport_protocols %}
+                            "{{protocol}}"{{ "," if not loop.last else "" }}
+{% endfor %}
+                        ]
+                    }{{ "," if not loop.last else "" }}
+{% endfor %}
+                ],
+                "fields" : [
+{% for field in service.all_fields %}
+                    {
+                        "topicname" : "{{field.notifier_topic_name}}",
+                        "name" : "{{field.name}}Notifier",
+                        "qos_profile" : "{{field.notifier_qos_profile}}",
+                        "transport_protocols" :
+                        [
+{%if field.has_notifier%}
+{% for protocol in field.deployment.notifier.transport_protocols %}
+                            "{{protocol}}"{{ "," if not loop.last else "" }}
+{% endfor %}
+{%endif%}
+                        ]
+                    }{{ "," if not loop.last else "" }}
+{% endfor %}
+                ],
+                "methods" : [
+{% for method in service.methods %}
+                    {
+                        "name" : "{{method.name}}",
+                        "qos_profile" : "{{method.qos_profile}}",
+                        "transport_protocols" :
+                        [
+{% for protocol in method.transport_protocols %}
+                            "{{protocol}}"{{ "," if not loop.last else "" }}
+{% endfor %}
+                        ]
+                    }{{ "," if not loop.last else "" }}
+{% endfor %}
+                ]
+{% endif %}
+            }{{ "," if not loop.last else "" }}
+{% endfor %}
+{% endmacro %}
+{
+    "ap_service_instances" :{
+        "provided_ap_service_instances" :[
+{{gen_mappings(mappings['provided'], True)}}
+        ],
+        "required_ap_service_instances" :[
+{{gen_mappings(mappings['required'], False)}}
+        ]
+    }
+}
+{% block footer %}{% endblock %}

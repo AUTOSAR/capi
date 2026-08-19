@@ -1,0 +1,10 @@
+{
+    "name": "zlib",
+    "version": "1.2.11",
+    "url": "https://github.com/madler/zlib/archive/refs/tags/v1.2.11.tar.gz",
+    "md5sum": "",
+    "preproc": "${CAPI_SRC_DIR}/isoft/sdk-utils/etc/package/package-source-cleanup/cleanup-zlib-sources.sh",
+    "configure": "./configure --prefix=@PREFIX@",
+    "build": "make -j@JOBS@",
+    "install": "make install DESTDIR=@SYSROOT@"
+}

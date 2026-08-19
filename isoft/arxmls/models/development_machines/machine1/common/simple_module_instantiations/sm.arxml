@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR
+    xmlns="http://autosar.org/schema/r4.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+        <AR-PACKAGE>
+            <SHORT-NAME>ISOFT</SHORT-NAME>
+            <AR-PACKAGES>
+                <AR-PACKAGE>
+                    <SHORT-NAME>Development</SHORT-NAME>
+                    <ELEMENTS>
+                        <MACHINE>
+                            <SHORT-NAME>Machine1</SHORT-NAME>
+                            <MODULE-INSTANTIATIONS>
+                                <GENERIC-MODULE-INSTANTIATION>
+                                    <SHORT-NAME>StateManagementModuleInstantiation</SHORT-NAME>
+                                    <ADMIN-DATA>
+                                        <SDGS>
+                                            <SDG GID="iSOFT:sm:GenericModuleInstantiation">
+                                                <SDG GID="iSOFT:sm:GenericModuleInstantiation:FGServerInstanceConfig">
+                                                    <SDG GID="iSOFT:sm:FGServerInstanceConfigDefinition:FunctionGroup">
+                                                        <SDX-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/ISOFT/FunctionGroupSet/Machine1/MachineFG</SDX-REF>
+                                                    </SDG>
+                                                    <SD GID="iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInIdentifier">100</SD>
+                                                    <SDG GID="iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInSomeipSdServerServiceInstanceConfig">
+                                                        <SDX-REF DEST="SOMEIP-SD-SERVER-SERVICE-INSTANCE-CONFIG">/ara/sm/StateMachineTiming1/SomeipServerServiceInstanceConfig</SDX-REF>
+                                                    </SDG>
+                                                    <SDG GID="iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInConnector">
+                                                        <SDX-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign1/CommunicationConnector1</SDX-REF>
+                                                    </SDG>
+                                                    <SD GID="iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInPort">32000</SD>
+                                                    <SD GID="iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInOutIdentifier">100</SD>
+                                                    <SDG GID="iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInOutSomeipSdServerServiceInstanceConfig">
+                                                        <SDX-REF DEST="SOMEIP-SD-SERVER-SERVICE-INSTANCE-CONFIG">/ara/sm/StateMachineTiming1/SomeipServerServiceInstanceConfig</SDX-REF>
+                                                    </SDG>
+                                                    <SDG GID="iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInOutConnector">
+                                                        <SDX-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign1/CommunicationConnector1</SDX-REF>
+                                                    </SDG>
+                                                    <SD GID="iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInOutPort">32000</SD>
+                                                    <SD GID="iSOFT:sm:FGServerInstanceConfigDefinition:TriggerOutIdentifier">100</SD>
+                                                    <SDG GID="iSOFT:sm:FGServerInstanceConfigDefinition:TriggerOutSomeipSdServerServiceInstanceConfig">
+                                                        <SDX-REF DEST="SOMEIP-SD-SERVER-SERVICE-INSTANCE-CONFIG">/ara/sm/StateMachineTiming1/SomeipServerServiceInstanceConfig</SDX-REF>
+                                                    </SDG>
+                                                    <SDG GID="iSOFT:sm:FGServerInstanceConfigDefinition:TriggerOutConnector">
+                                                        <SDX-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign1/CommunicationConnector1</SDX-REF>
+                                                    </SDG>
+                                                    <SD GID="iSOFT:sm:FGServerInstanceConfigDefinition:TriggerOutPort">32000</SD>
+                                                </SDG>
+                                                <SDG GID="iSOFT:sm:GenericModuleInstantiation:Notification">    <!-- MachineSM状态机对应的StateManagementStateNotification -->
+                                                    <SDG-CAPTION>
+                                                        <SHORT-NAME>MachineSMNotification</SHORT-NAME>
+                                                    </SDG-CAPTION>
+                                                    <SD GID="iSOFT:sm:StateManagementStateNotification:TriggerOutIdentifier">100</SD>   <!-- 用于通知状态机状态改变的服务实例配置 -->
+                                                    
+                                                    <SDG GID="iSOFT:sm:StateManagementStateNotification:TriggerOutSomeipSdServerServiceInstanceConfig">
+                                                        <SDX-REF DEST="SOMEIP-SD-SERVER-SERVICE-INSTANCE-CONFIG">/ara/sm/StateMachineTiming1/SomeipServerServiceInstanceConfig</SDX-REF>
+                                                    </SDG>
+                                                    
+                                                    <SDG GID="iSOFT:sm:StateManagementStateNotification:TriggerOutConnector">
+                                                        <SDX-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign1/CommunicationConnector1</SDX-REF>
+                                                    </SDG>
+
+                                                    <SD GID="iSOFT:sm:StateManagementStateNotification:TriggerOutPort">32000</SD>
+                                                    <SDG GID="iSOFT:sm:StateManagementStateNotification:StateMachine">    <!-- 实际聚合的状态机 -->
+                                                        <SDG-CAPTION>
+                                                            <SHORT-NAME>MachineSM</SHORT-NAME>
+                                                        </SDG-CAPTION>
+                                                        <SDG GID="iSOFT:sm:StateMachine">
+                                                            <SDX-REF DEST="MODE-DECLARATION-GROUP">/ISOFT/StateMachineModes/MachineSM</SDX-REF>
+                                                        </SDG>
+                                                    </SDG>
+                                                    <SD GID="iSOFT:sm:StateManagementStateNotification:StateMachineIdentifier">100</SD>   <!-- 用于转换状态机状态的服务实例配置 -->
+
+                                                    <SDG GID="iSOFT:sm:StateManagementStateNotification:StateMachineSomeipSdServerServiceInstanceConfig">
+                                                        <SDX-REF DEST="SOMEIP-SD-SERVER-SERVICE-INSTANCE-CONFIG">/ara/sm/StateMachineTiming1/SomeipServerServiceInstanceConfig</SDX-REF>
+                                                    </SDG>
+                                                    
+                                                    <SDG GID="iSOFT:sm:StateManagementStateNotification:StateMachineConnector">
+                                                        <SDX-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/ISOFT/Development/MachineDesign1/CommunicationConnector1</SDX-REF>
+                                                    </SDG>
+
+                                                    <SD GID="iSOFT:sm:StateManagementStateNotification:StateMachinePort">32000</SD>
+                                                </SDG>
+
+                                                <SDG GID="iSOFT:sm:GenericModuleInstantiation:ActionItemList">    <!-- MachineSM状态机的Initial状态对应的动作列表 -->
+                                                    <SDG-CAPTION>
+                                                        <SHORT-NAME>MachineSM_Initial_ActionItemList</SHORT-NAME>
+                                                    </SDG-CAPTION>
+                                                    <SDG GID="iSOFT:sm:StateManagementActionList:ActionItem">    <!-- 单个动作1(有序) -->
+                                                        <SD GID="iSOFT:sm:StateManagementActionItem:ItemType">SetFunctionGroupState</SD>   <!-- 设置功能组状态动作 -->
+                                                        <SDG GID="iSOFT:sm:StateManagementActionItem:SetFunctionGroupStateContextModeDeclarationGroupPrototype">
+                                                            <SDX-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/ISOFT/FunctionGroupSet/Machine1/MachineFG</SDX-REF>
+                                                        </SDG>
+                                                        <SDG GID="iSOFT:sm:StateManagementActionItem:SetFunctionGroupStateTargetModeDeclaration">
+                                                            <SDX-REF DEST="MODE-DECLARATION">/ISOFT/FunctionGroupModes/MachineFG/Startup</SDX-REF>
+                                                        </SDG>
+                                                    </SDG>
+
+                                                    <SDX-REF DEST="SDG-CAPTION">/ISOFT/Development/Machine1/StateManagementModuleInstantiation/MachineSM</SDX-REF> <!-- 关联的状态机 -->
+
+                                                    <SDG GID="iSOFT:sm:StateManagementActionList:AffectedState">   <!-- 关联的状态机状态 -->
+                                                        <SDX-REF DEST="MODE-DECLARATION">/ISOFT/StateMachineModes/MachineSM/Initial</SDX-REF>
+                                                    </SDG>
+                                                </SDG>
+                                                <SDG GID="iSOFT:sm:GenericModuleInstantiation:ActionItemList">    <!-- MachineSM状态机的Fallback状态对应的动作列表 -->
+                                                    <SDG-CAPTION>
+                                                        <SHORT-NAME>MachineSM_Fallback_ActionItemList</SHORT-NAME>
+                                                    </SDG-CAPTION>
+                                                    <SDG GID="iSOFT:sm:StateManagementActionList:ActionItem">    <!-- 单个动作1(有序) -->
+                                                        <SD GID="iSOFT:sm:StateManagementActionItem:ItemType">SetFunctionGroupState</SD>   <!-- 设置功能组状态动作 -->
+                                                        <SDG GID="iSOFT:sm:StateManagementActionItem:SetFunctionGroupStateContextModeDeclarationGroupPrototype">
+                                                            <SDX-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/ISOFT/FunctionGroupSet/Machine1/MachineFG</SDX-REF>
+                                                        </SDG>
+                                                        <SDG GID="iSOFT:sm:StateManagementActionItem:SetFunctionGroupStateTargetModeDeclaration">
+                                                            <SDX-REF DEST="MODE-DECLARATION">/ISOFT/FunctionGroupModes/MachineFG/Fallback</SDX-REF>
+                                                        </SDG>
+                                                    </SDG>
+
+                                                    <SDX-REF DEST="SDG-CAPTION">/ISOFT/Development/Machine1/StateManagementModuleInstantiation/MachineSM</SDX-REF>  <!-- 关联的状态机 -->
+
+                                                    <SDG GID="iSOFT:sm:StateManagementActionList:AffectedState">   <!-- 关联的状态机状态 -->
+                                                        <SDX-REF DEST="MODE-DECLARATION">/ISOFT/StateMachineModes/MachineSM/Fallback</SDX-REF>
+                                                    </SDG>
+                                                </SDG>
+                                                <SDG GID="iSOFT:sm:GenericModuleInstantiation:ActionItemList">    <!-- MachineSM状态机的Shutdown状态对应的动作列表 -->
+                                                    <SDG-CAPTION>
+                                                        <SHORT-NAME>MachineSM_Shutdown_ActionItemList</SHORT-NAME>
+                                                    </SDG-CAPTION>
+                                                    <SDG GID="iSOFT:sm:StateManagementActionList:ActionItem">    <!-- 单个动作1(有序) -->
+                                                        <SD GID="iSOFT:sm:StateManagementActionItem:ItemType">SetFunctionGroupState</SD>   <!-- 设置功能组状态动作 -->
+                                                        <SDG GID="iSOFT:sm:StateManagementActionItem:SetFunctionGroupStateContextModeDeclarationGroupPrototype">
+                                                            <SDX-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/ISOFT/FunctionGroupSet/Machine1/MachineFG</SDX-REF>
+                                                        </SDG>
+                                                        <SDG GID="iSOFT:sm:StateManagementActionItem:SetFunctionGroupStateTargetModeDeclaration">
+                                                            <SDX-REF DEST="MODE-DECLARATION">/ISOFT/FunctionGroupModes/MachineFG/Shutdown</SDX-REF>
+                                                        </SDG>
+                                                    </SDG>
+
+                                                    <SDX-REF DEST="SDG-CAPTION">/ISOFT/Development/Machine1/StateManagementModuleInstantiation/MachineSM</SDX-REF>    <!-- 关联的状态机 -->
+
+                                                    <SDG GID="iSOFT:sm:StateManagementActionList:AffectedState">   <!-- 关联的状态机状态 -->
+                                                        <SDX-REF DEST="MODE-DECLARATION">/ISOFT/StateMachineModes/MachineSM/Shutdown</SDX-REF>
+                                                    </SDG>
+                                                </SDG>
+                                                <SDG GID="iSOFT:sm:GenericModuleInstantiation:ActionItemList">    <!-- MachineSM状态机的Restart状态对应的动作列表 -->
+                                                    <SDG-CAPTION>
+                                                        <SHORT-NAME>MachineSM_Restart_ActionItemList</SHORT-NAME>
+                                                    </SDG-CAPTION>
+                                                    <SDG GID="iSOFT:sm:StateManagementActionList:ActionItem">    <!-- 单个动作1(有序) -->
+                                                        <SD GID="iSOFT:sm:StateManagementActionItem:ItemType">SetFunctionGroupState</SD>   <!-- 设置功能组状态动作 -->
+                                                        <SDG GID="iSOFT:sm:StateManagementActionItem:SetFunctionGroupStateContextModeDeclarationGroupPrototype">
+                                                            <SDX-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/ISOFT/FunctionGroupSet/Machine1/MachineFG</SDX-REF>
+                                                        </SDG>
+                                                        <SDG GID="iSOFT:sm:StateManagementActionItem:SetFunctionGroupStateTargetModeDeclaration">
+                                                            <SDX-REF DEST="MODE-DECLARATION">/ISOFT/FunctionGroupModes/MachineFG/Restart</SDX-REF>
+                                                        </SDG>
+                                                    </SDG>
+
+                                                    <SDX-REF DEST="SDG-CAPTION">/ISOFT/Development/Machine1/StateManagementModuleInstantiation/MachineSM</SDX-REF>    <!-- 关联的状态机 -->
+
+                                                    <SDG GID="iSOFT:sm:StateManagementActionList:AffectedState">   <!-- 关联的状态机状态 -->
+                                                        <SDX-REF DEST="MODE-DECLARATION">/ISOFT/StateMachineModes/MachineSM/Restart</SDX-REF>
+                                                    </SDG>
+                                                </SDG>
+                                                <SDG GID="iSOFT:sm:GenericModuleInstantiation:ActionItemList">    <!-- MachineSM状态机的Final状态对应的动作列表 -->
+                                                    <SDG-CAPTION>
+                                                        <SHORT-NAME>MachineSM_Final_ActionItemList</SHORT-NAME>
+                                                    </SDG-CAPTION>
+                                                    <SDG GID="iSOFT:sm:StateManagementActionList:ActionItem">    <!-- 单个动作1(有序) -->
+                                                        <SD GID="iSOFT:sm:StateManagementActionItem:ItemType">SetFunctionGroupState</SD>   <!-- 设置功能组状态动作 -->
+                                                        <SDG GID="iSOFT:sm:StateManagementActionItem:SetFunctionGroupStateContextModeDeclarationGroupPrototype">
+                                                            <SDX-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/ISOFT/FunctionGroupSet/Machine1/MachineFG</SDX-REF>
+                                                        </SDG>
+                                                        <SDG GID="iSOFT:sm:StateManagementActionItem:SetFunctionGroupStateTargetModeDeclaration">
+                                                            <SDX-REF DEST="MODE-DECLARATION">/ISOFT/FunctionGroupModes/MachineFG/Shutdown</SDX-REF>
+                                                        </SDG>
+                                                    </SDG>
+
+                                                    <SDX-REF DEST="SDG-CAPTION">/ISOFT/Development/Machine1/StateManagementModuleInstantiation/MachineSM</SDX-REF>    <!-- 关联的状态机 -->
+
+                                                    <SDG GID="iSOFT:sm:StateManagementActionList:AffectedState">   <!-- 关联的状态机状态 -->
+                                                        <SDX-REF DEST="MODE-DECLARATION">/ISOFT/StateMachineModes/MachineSM/Final</SDX-REF>
+                                                    </SDG>
+                                                </SDG>
+                                                <SDG GID="iSOFT:sm:GenericModuleInstantiation:Request">    <!-- EM/PHM相关的错误恢复 -->
+                                                    <SDG-CAPTION>
+                                                        <SHORT-NAME>EM_ErrorRecovery</SHORT-NAME>
+                                                    </SDG-CAPTION>
+                                                    <SD GID="iSOFT:sm:StateManagementStateRequest:RequestType">RequestError</SD>   <!-- 错误请求 -->
+                                                    <SDG GID="iSOFT:sm:StateManagementStateRequest:Rule">   <!-- 规则 -->
+                                                        <SDX-REF DEST="SDG-CAPTION">/ISOFT/Development/Machine1/StateManagementModuleInstantiation/MachineSM</SDX-REF>    <!-- 关联的状态机 -->
+                                                        
+                                                        <SD GID="iSOFT:sm:StateManagementRequestRule:CompareValue">ANY</SD>   <!-- 比较的值 -->
+                                                        <SDG GID="iSOFT:sm:StateManagementRequestRule:NextState">   <!-- 下一个状态机状态 -->
+                                                            <SDX-REF DEST="MODE-DECLARATION">/ISOFT/StateMachineModes/MachineSM/Fallback</SDX-REF>
+                                                        </SDG>
+                                                    </SDG>
+                                                </SDG>
+                                            </SDG>
+                                        </SDGS>
+                                    </ADMIN-DATA>
+                                </GENERIC-MODULE-INSTANTIATION>
+                            </MODULE-INSTANTIATIONS>
+                        </MACHINE>
+                    </ELEMENTS>
+                </AR-PACKAGE>
+            </AR-PACKAGES>
+        </AR-PACKAGE>
+        <AR-PACKAGE >
+            <SHORT-NAME>ara</SHORT-NAME>
+            <AR-PACKAGES>
+                <AR-PACKAGE >
+                <SHORT-NAME>sm</SHORT-NAME>
+                <AR-PACKAGES>
+                    <AR-PACKAGE >
+                    <SHORT-NAME>StateMachineTiming1</SHORT-NAME>
+                    <ELEMENTS>
+                        <SOMEIP-SD-SERVER-SERVICE-INSTANCE-CONFIG>
+                        <SHORT-NAME>SomeipServerServiceInstanceConfig</SHORT-NAME>
+                        <INITIAL-OFFER-BEHAVIOR>
+                            <INITIAL-DELAY-MAX-VALUE>0.1</INITIAL-DELAY-MAX-VALUE>
+                            <INITIAL-DELAY-MIN-VALUE>0.01</INITIAL-DELAY-MIN-VALUE>
+                            <INITIAL-REPETITIONS-BASE-DELAY>0.2</INITIAL-REPETITIONS-BASE-DELAY>
+                            <INITIAL-REPETITIONS-MAX>3</INITIAL-REPETITIONS-MAX>
+                        </INITIAL-OFFER-BEHAVIOR>
+                        <OFFER-CYCLIC-DELAY>2.0</OFFER-CYCLIC-DELAY>
+                        <REQUEST-RESPONSE-DELAY>
+                            <MAX-VALUE>1.5</MAX-VALUE>
+                            <MIN-VALUE>1.5</MIN-VALUE>
+                        </REQUEST-RESPONSE-DELAY>
+                        <SERVICE-OFFER-TIME-TO-LIVE>8</SERVICE-OFFER-TIME-TO-LIVE>
+                        </SOMEIP-SD-SERVER-SERVICE-INSTANCE-CONFIG>
+                    </ELEMENTS>
+                    </AR-PACKAGE>
+                </AR-PACKAGES>
+                </AR-PACKAGE>
+            </AR-PACKAGES>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

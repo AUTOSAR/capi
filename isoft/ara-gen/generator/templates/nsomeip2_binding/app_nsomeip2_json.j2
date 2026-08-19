@@ -1,0 +1,101 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% macro hex_to_dec(value) %}{{value|int(0, 16)}}{% endmacro %}
+{% macro to_bool(value) %}
+{% if value %}"reliable"{% else %}"unreliable"{% endif %}
+{% endmacro %}
+{
+    "netname" : "nsomeip",
+    "host" : "{{machine.ip_address}}",
+    "mode": "route",
+    "application" : [
+        {
+            "name": "{{machine.nsomeipdProcessName}}",
+            "client": "0"
+        }
+    ],
+{% if machine.maxtransmissunit >0 %}
+    "network": {
+{% if machine.networkConfig %}
+{% if machine.networkConfig["sendTimeout"] %}
+        "send_timeo": "{{ machine.networkConfig["sendTimeout"] }}",
+{% endif %}
+{% if machine.networkConfig["recvTimeout"] %}
+        "recv_timeo": "{{ machine.networkConfig["recvTimeout"] }}",
+{% endif %}
+{% if machine.networkConfig["queueMixLimit"] %}
+        "queue_mix_limit": "{{ machine.networkConfig["queueMixLimit"] }}",
+{% endif %}
+{% if machine.networkConfig["tcpEnable"] %}
+        "tcp_keepalive_enable": "{{ machine.networkConfig["tcpEnable"] }}",
+{% endif %}
+{% if machine.networkConfig["tcpIdle"] %}
+        "tcp_keepalive_idle": "{{ machine.networkConfig["tcpIdle"] }}",
+{% endif %}
+{% if machine.networkConfig["tcpInterval"] %}
+        "tcp_keepalive_interval": "{{ machine.networkConfig["tcpInterval"] }}",
+{% endif %}
+{% if machine.networkConfig["tcpCnt"] %}
+        "tcp_keepalive_cnt": "{{ machine.networkConfig["tcpCnt"] }}",
+{% endif %}
+{% endif %}
+        "mss": {{machine.maxtransmissunit}}
+    },
+{% endif %}
+    "service_discovery" : {
+{% if machine.sd_config.get("initial_delay_min") != None %}
+        "init_delay_min" : "{{machine.sd_config["initial_delay_min"]}}",
+{% endif %}
+{% if machine.sd_config.get("initial_delay_max") != None %}
+        "init_delay_max" : "{{machine.sd_config["initial_delay_max"]}}",
+{% endif %}
+{% if machine.sd_config.get("initial_repetitions_base_delay") != None %}
+        "repetitions_delay" : "{{machine.sd_config["initial_repetitions_base_delay"]}}",
+{% endif %}
+{% if machine.sd_config.get("initial_repetitions_max") != None %}
+        "repetitions_max" : "{{machine.sd_config["initial_repetitions_max"]}}",
+{% endif %}
+
+        "multicast" : "{{machine.sd_address}}",
+        "unicast" : "{{machine.sd_port}}"
+    }
+{% if machine.usd_sd_option != -1 %},
+    "compatible": {
+	    "use_sd_option": {{ machine.usd_sd_option }}
+    }
+{% endif %}
+{% if machine.multiple_host | length > 0 %},
+    "multiple_host":[
+{% for item in machine.multiple_host %}
+    {
+        "host": "{{ item.host }}",
+        "sd_multicast": "{{ item.sd_multicast }}",
+        "sd_unicast": "{{ item.sd_unicast }}"
+    }{{ "," if not loop.last }}
+{% endfor %}
+    ]
+{% endif %}
+}
+{% block footer %}{% endblock %}

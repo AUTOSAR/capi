@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Development</SHORT-NAME>
+          <ELEMENTS>
+            <MACHINE>
+              <SHORT-NAME>Machine1</SHORT-NAME>
+              <MODULE-INSTANTIATIONS>
+                <IDSM-MODULE-INSTANTIATION>
+                  <SHORT-NAME>IdsmModuleInstantiation</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="iSOFT:idsm:Idsr">
+                        <SD GID="iSOFT:idsm:Idsr:Port">30981</SD>
+                        <SDG GID="iSOFT:idsm:Idsr:IpAddr">
+                          <SDX-REF DEST="NETWORK-ENDPOINT">/ISOFT/Development/Network/EthCluster1/EthPhysChannel1/NetworkEndpoint_Idsr</SDX-REF>
+                        </SDG>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <TIME-BASES>
+                    <TIME-BASE-RESOURCE-REF-CONDITIONAL>
+                      <TIME-BASE-RESOURCE-REF DEST="SYNCHRONIZED-TIME-BASE-CONSUMER">/ISOFT/Development/Machine1/idsm_timeSync/synchronizedTimeBaseConsumer_idsm</TIME-BASE-RESOURCE-REF>
+                    </TIME-BASE-RESOURCE-REF-CONDITIONAL>
+                  </TIME-BASES>
+                </IDSM-MODULE-INSTANTIATION>
+                <CRYPTO-MODULE-INSTANTIATION>
+                  <SHORT-NAME>idsm_cryptod</SHORT-NAME>
+                  <CRYPTO-PROVIDERS>
+                    <CRYPTO-PROVIDER>
+                      <SHORT-NAME>idsmCryptoProvider_puhua</SHORT-NAME>
+                      <KEY-SLOTS>
+                        <CRYPTO-KEY-SLOT>
+                          <SHORT-NAME>key_slot_idsm</SHORT-NAME>
+                          <ALLOCATE-SHADOW-COPY>true</ALLOCATE-SHADOW-COPY>
+                          <CRYPTO-ALG-ID>aesecb</CRYPTO-ALG-ID>
+                          <CRYPTO-OBJECT-TYPE>PRIVATE-KEY</CRYPTO-OBJECT-TYPE>
+                          <KEY-SLOT-ALLOWED-MODIFICATION>
+                            <ALLOW-CONTENT-TYPE-CHANGE>true</ALLOW-CONTENT-TYPE-CHANGE>
+                            <EXPORTABILITY>true</EXPORTABILITY>
+                            <MAX-NUMBER-OF-ALLOWED-UPDATES>222</MAX-NUMBER-OF-ALLOWED-UPDATES>
+                            <RESTRICT-UPDATE>true</RESTRICT-UPDATE>
+                          </KEY-SLOT-ALLOWED-MODIFICATION>
+                          <KEY-SLOT-CONTENT-ALLOWED-USAGES>
+                            <CRYPTO-KEY-SLOT-CONTENT-ALLOWED-USAGE>
+                              <ALLOWED-KEYSLOT-USAGE>ALLOW-DATA-ENCRYPTION</ALLOWED-KEYSLOT-USAGE>
+                            </CRYPTO-KEY-SLOT-CONTENT-ALLOWED-USAGE>
+                            <CRYPTO-KEY-SLOT-CONTENT-ALLOWED-USAGE>
+                              <ALLOWED-KEYSLOT-USAGE>ALLOW-DATA-DECRYPTION</ALLOWED-KEYSLOT-USAGE>
+                            </CRYPTO-KEY-SLOT-CONTENT-ALLOWED-USAGE>
+                          </KEY-SLOT-CONTENT-ALLOWED-USAGES>
+                          <SLOT-CAPACITY>2048</SLOT-CAPACITY>
+                          <SLOT-TYPE>MACHINE</SLOT-TYPE>
+                        </CRYPTO-KEY-SLOT>
+                      </KEY-SLOTS>
+                    </CRYPTO-PROVIDER>
+                  </CRYPTO-PROVIDERS>
+                </CRYPTO-MODULE-INSTANTIATION>
+                <TIME-SYNC-MODULE-INSTANTIATION>
+                  <SHORT-NAME>idsm_timeSync</SHORT-NAME>
+                  <TIME-BASES>
+                    <SYNCHRONIZED-TIME-BASE-CONSUMER>
+                      <SHORT-NAME>synchronizedTimeBaseConsumer_idsm</SHORT-NAME>
+                      <NETWORK-TIME-CONSUMER-REF DEST="GLOBAL-TIME-ETH-SLAVE">/ISOFT/GlobalTimeDomains/UTC_Idsm/globalTimeEthSlave_Idsm</NETWORK-TIME-CONSUMER-REF>
+                    </SYNCHRONIZED-TIME-BASE-CONSUMER>
+                  </TIME-BASES>
+                </TIME-SYNC-MODULE-INSTANTIATION>
+              </MODULE-INSTANTIATIONS>
+            </MACHINE>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

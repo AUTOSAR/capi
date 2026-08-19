@@ -1,0 +1,55 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% macro hex_to_dec(value) %}{{value|int(0, 16)}}{% endmacro %}
+{% macro to_bool(value) %}
+{% if value %}"reliable"{% else %}"unreliable"{% endif %}
+{% endmacro %}
+{
+    "netname" : "fastdds",
+    "host" : "{{machine.ip_address}}",
+    "service_discovery" : {
+{% if machine.sd_config["initial_delay_min"] %}
+        "init_delay_min" : "{{machine.sd_config["initial_delay_min"]}}",
+{% endif %}
+{% if machine.sd_config["initial_delay_max"] %}
+        "init_delay_max" : "{{machine.sd_config["initial_delay_max"]}}",
+{% endif %}
+{% if machine.sd_config["initial_repetitions_base_delay"] %}
+        "repetitions_delay" : "{{machine.sd_config["initial_repetitions_base_delay"]}}",
+{% endif %}
+{% if machine.sd_config["initial_repetitions_max"] %}
+        "repetitions_max" : "{{machine.sd_config["initial_repetitions_max"]}}",
+{% endif %}
+{% if machine.sd_config["ttl"] %}
+        "ttl" : "{{machine.sd_config["ttl"]}}",
+{% endif %}
+{% if machine.sd_config["cyclic_delay"] %}
+        "offer_cyclic_delay" : "{{machine.sd_config["cyclic_delay"]}}",
+{% endif %}
+        "multicast" : "{{machine.sd_address}}",
+        "unicast" : "{{machine.sd_port}}"
+    }
+}
+{% block footer %}{% endblock %}

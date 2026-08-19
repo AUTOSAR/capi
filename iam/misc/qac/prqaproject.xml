@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<prqaproject xmlversion="3.0.0" qafversion="3.3.0">
+ <!-- Config file information... -->
+ <configurations>
+  <cosmetic_name name="qac_temple_prj_for98-v2022_2"/>
+  <languageFamily name="C/C++"/>
+  <processMonitor>
+   <includeOptionSyntax>
+    <option string="-I"/>
+    <option string="/I"/>
+    <option string="-isystem"/>
+   </includeOptionSyntax>
+   <defineOptionSyntax>
+    <option string="-D"/>
+    <option string="/D"/>
+   </defineOptionSyntax>
+   <flagScript string=""/>
+   <settingsOptionSyntax>
+    <option string="@" compiler="Visual Studio" extension=".rsp" literal_quotes="no"/>
+    <option string="-@" compiler="Windriver" extension="" literal_quotes="no"/>
+    <option string="--Via" compiler="Greenhills" extension="__i" literal_quotes="no"/>
+   </settingsOptionSyntax>
+   <excludeStrings/>
+   <fileFilterStrings/>
+  </processMonitor>
+  <suppressIncludes active="no"/>
+  <exclusionPattern method="CSV"/>
+  <root_paths>
+   <root_path path="${PROJECT_ROOT}" name="SOURCE_ROOT"/>
+  </root_paths>
+  <default_config name="Initial"/>
+  <!-- Individual Configs... -->
+  <config name="Initial">
+   <baselinedSourceRoot baseline="OFF"/>
+   <baselineSnapshot date="" id="" name=""/>
+   <acf name="default.acf"/>
+   <rcf name="ascm-3.3.0-en_US.rcf"/>
+   <ccts>
+    <cct name="GNU_GCC-gcc_9.4-x86_64-generic-linux-C.cct" target="C" active="yes"/>
+    <cct name="GNU_GCC-g++_9.4-x86_64-generic-linux-C++-c++14.cct" target="C++" active="yes"/>
+   </ccts>
+  </config>
+ </configurations>
+ <!-- Mapping of extension to target_language... -->
+ <file_extensions>
+  <language target="C">
+   <extension ext=".c"/>
+  </language>
+  <language target="C++">
+   <extension ext=".cpp"/>
+  </language>
+  <language target="C++">
+   <extension ext=".cxx"/>
+  </language>
+  <language target="C++">
+   <extension ext=".cc"/>
+  </language>
+  <language target="C++">
+   <extension ext=".C"/>
+  </language>
+  <language target="C++">
+   <extension ext=".cp"/>
+  </language>
+  <language target="C++">
+   <extension ext=".c++"/>
+  </language>
+ </file_extensions>
+ <!-- Files in project... -->
+ <files>
+  <!-- Explicit files... -->
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/libgrantstorage" name="comStorage.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/libgrantstorage" name="cryptoStorage.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/libgrantstorage" name="idsmStorage.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/libgrantstorage" name="phmStorage.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/libgrantquery" name="com.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/libgrantquery" name="crypto.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/libgrantquery" name="idsm.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/libgrantquery" name="phm.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/libgrantquery" name="raw.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/grantcheck" name="comCheck.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/grantcheck" name="cryptoCheck.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/grantcheck" name="idsmCheck.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+  <file folder="/home/jiangzhiyuan/work/project/iam/src/grantcheck" name="phmCheck.cpp" target="C++">
+   <defines>
+    <define name="BOOST_ALL_NO_LIB"/>
+    <define name="DEBUG"/>
+    <define name="HAS_ARA_EXEC_FIND_PROCESS_CLIENT"/>
+    <define name="HAS_ARA_LOG"/>
+    <define name="ARA_LOG_WITHOUT_MODEL_MESSAGE=1"/>
+   </defines>
+   <includes>
+    <include path="/home/jiangzhiyuan/work/project/iam/include"/>
+    <include path="/home/jiangzhiyuan/sdk/ara-sysroot/ara/framework/1.1.0/include"/>
+   </includes>
+  </file>
+ </files>
+</prqaproject>

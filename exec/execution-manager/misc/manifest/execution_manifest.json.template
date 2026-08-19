@@ -1,0 +1,63 @@
+{
+    "name": "demo_proc",
+    "executable": {
+        "name": "demo_exe",
+        "buildType": "Debug|Release",
+        "loggingBehavior": true|false,
+        "mininumTimerGranularity": 1e-3,
+        "reportingBehavior": true|false,
+        "version": "1.0.0"
+    },
+    "restartNumber": 3,
+    "preMapping": true|false,
+    "stateDependentStartupConfig": [
+        {
+            "executionDependency": [
+                "network-init.terminated",
+                "smd.running",
+                "tsyncd.running"
+            ],
+            "functionGroupState": {
+                "name": "/ISOFT/FunctionGroupSet/MachineFG",
+                "states": ["Startup", "Shutdown", "Driving", "Parking"]
+            },
+            "resourceConsumption": {
+                "heapUsage": 1024000,
+                "systemMemoryUsage": 1024000
+            },
+            "resourceGroup": "ResourceGroupCore",
+            "startupConfig": {
+                "environmentVariable": ["HELLO=world","FOO=bar"],
+                "processArgument": ["-o", "-p", "--foo=bar"],
+                "executionError": 1,
+                "schedulingPolicy": "RR|FIFO|OTHER",
+                "schedulingPriority": 1,
+                "terminationBehavior": true|false
+            }
+        },
+        {
+            "executionDependency": [
+                "network-init.terminated",
+                "smd.running",
+                "tsyncd.running"
+            ],
+            "functionGroupState": {
+                "name": "/ISOFT/FunctionGroupSet/MachineFG",
+                "states": ["Verify"]
+            },
+            "resourceConsumption": {
+                "heapUsage": 1024000,
+                "systemMemoryUsage": 1024000
+            },
+            "resourceGroup": "ResourceGroupFull",
+            "startupConfig": {
+                "environmentVariable": ["HELLO=world","FOO=bar"],
+                "processArgument": ["-o", "-p", "--foo=bar"],
+                "executionError": 1,
+                "schedulingPolicy": "RR|FIFO|OTHER",
+                "schedulingPriority": 1,
+                "terminationBehavior": true|false
+            }
+        }
+    ]
+}

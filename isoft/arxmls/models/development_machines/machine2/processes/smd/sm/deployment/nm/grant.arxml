@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE >
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Development</SHORT-NAME>
+          <ELEMENTS>
+            <MACHINE>
+              <SHORT-NAME>Machine2</SHORT-NAME>
+              <MODULE-INSTANTIATIONS>
+                <IAM-MODULE-INSTANTIATION>
+                  <SHORT-NAME>IamModuleInstantiation</SHORT-NAME>
+                  <GRANT-REFS>
+                    <GRANT-REF DEST="COM-FIELD-GRANT">/ISOFT/Development/iam/sm_nm_field_currentfieldgrant2</GRANT-REF>
+                    <GRANT-REF DEST="COM-FIELD-GRANT">/ISOFT/Development/iam/sm_nm_fieldrequeststategrant2</GRANT-REF>
+                    <GRANT-REF DEST="COM-FIND-SERVICE-GRANT">/ISOFT/Development/iam/sm_nm_findservicegrant2</GRANT-REF>
+                  </GRANT-REFS>
+                </IAM-MODULE-INSTANTIATION>
+              </MODULE-INSTANTIATIONS>
+            </MACHINE>
+          </ELEMENTS>
+          <AR-PACKAGES>
+            <AR-PACKAGE >
+              <SHORT-NAME>iam</SHORT-NAME>
+              <ELEMENTS>
+                <COM-FIELD-GRANT>
+                  <SHORT-NAME>sm_nm_field_currentfieldgrant2</SHORT-NAME>
+                  <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/ara/sm/instances2/RequiredSomeIpNetworkStateInstance1</SERVICE-INSTANCE-REF>
+                  <DESIGN-REF DEST="COM-FIELD-GRANT-DESIGN">/ISOFT/PlatformComponents/sm/sm_nm_field_currentfieldgrantdesign</DESIGN-REF>
+                  <SERVICE-DEPLOYMENT-REF DEST="SOMEIP-FIELD-DEPLOYMENT">/ara/nm/nmSomeipDeployments/NetworkState/NetworkCurrentState</SERVICE-DEPLOYMENT-REF>
+                </COM-FIELD-GRANT>
+                <COM-FIELD-GRANT>
+                  <SHORT-NAME>sm_nm_fieldrequeststategrant2</SHORT-NAME>
+                  <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/ara/sm/instances2/RequiredSomeIpNetworkStateInstance1</SERVICE-INSTANCE-REF>
+                  <DESIGN-REF DEST="COM-FIELD-GRANT-DESIGN">/ISOFT/PlatformComponents/sm/sm_nm_fieldrequeststategrantdesign</DESIGN-REF>
+                  <ROLE>GETTER-SETTER</ROLE>
+                  <SERVICE-DEPLOYMENT-REF DEST="SOMEIP-FIELD-DEPLOYMENT">/ara/nm/nmSomeipDeployments/NetworkState/NetworkRequestedState</SERVICE-DEPLOYMENT-REF>
+                </COM-FIELD-GRANT>
+                <COM-FIND-SERVICE-GRANT >
+                  <SHORT-NAME>sm_nm_findservicegrant2</SHORT-NAME>
+                  <DESIGN-REF DEST="COM-FIND-SERVICE-GRANT-DESIGN">/ISOFT/PlatformComponents/sm/sm_nm_findservicegrantdesign</DESIGN-REF>
+                  <SERVICE-INSTANCE-REF DEST="REQUIRED-SOMEIP-SERVICE-INSTANCE">/ara/sm/instances2/RequiredSomeIpNetworkStateInstance1</SERVICE-INSTANCE-REF>
+                </COM-FIND-SERVICE-GRANT>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

@@ -1,0 +1,236 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+
+{% macro to_bool(value) %}
+{% if value %}true{% else %}false{% endif %}
+{% endmacro %}
+{
+	"globalTimeDomain":
+	[
+	{% for globalTimeDomain in configuration.golbalTimeDomains %}
+		{
+		    "name" : "{{globalTimeDomain.name}}",
+			"debounceTime" : {{globalTimeDomain.debounceTime}},
+			"domainId" : {{globalTimeDomain.domainId}},
+			"gateway" : [
+
+				{% for gateway in globalTimeDomain.gateways %}
+
+                {
+                    "host" :"{{gateway.host}}",
+                    "master" :"{{gateway.master}}",
+                    "slave" :"{{gateway.slave}}"
+			    }{% if not loop.last %},{% endif %}
+
+			    {% endfor %}
+
+			],
+{% if globalTimeDomain.timeStampType %}
+            "timeStampType": "{{ globalTimeDomain.timeStampType }}",
+{% endif %}
+{% if globalTimeDomain.masterSlaveConflictDetection %}
+            "masterSlaveConflictDetection": {{ globalTimeDomain.masterSlaveConflictDetection }},
+{% endif %}
+{% if globalTimeDomain.crcTimeFlagsTxSecured %}
+            "crcTimeFlagsTxSecured": {{ globalTimeDomain.crcTimeFlagsTxSecured }},
+{% endif %}
+{% if globalTimeDomain.globalTimeSequenceCounterJumpWidth %}
+            "globalTimeSequenceCounterJumpWidth": {{ globalTimeDomain.globalTimeSequenceCounterJumpWidth }},
+{% endif %}
+{% if globalTimeDomain.steadyClock %}
+            "steadyClock": {{ globalTimeDomain.steadyClock }},
+{% endif %}
+{% if globalTimeDomain.globalTimePropagationDelay %}
+            "globalTimePropagationDelay": "{{ globalTimeDomain.globalTimePropagationDelay }}",
+{% endif %}
+			"globalTimeCorrectionProps" : {
+                "offsetCorrectionAdaptionInterval": {{globalTimeDomain.globalTimeCorrectionProps.offsetCorrectionAdaptionInterval}},
+                "offsetCorrectionJumpThreshold": {{globalTimeDomain.globalTimeCorrectionProps.offsetCorrectionJumpThreshold}},
+                "rateCorrectionMeasurementDuration": {{globalTimeDomain.globalTimeCorrectionProps.rateCorrectionMeasurementDuration}},
+                "rateCorrectionPerMeasurementDuration": {{globalTimeDomain.globalTimeCorrectionProps.rateCorrectionPerMeasurementDuration}}
+			},
+			"globalTimeDomainProperty" : {
+			    "destinationPhysicalAddress" : "{{globalTimeDomain.globalTimeDomainProperty.destinationPhysicalAddress}}",
+			    "fupDataIDList" : [
+                    {% for fupDataID in globalTimeDomain.globalTimeDomainProperty.fupDataIDList %}
+
+                        {{fupDataID}}{% if not loop.last %},{% endif %}
+
+                    {% endfor %}
+
+			    ],
+                "crcFlags" : {
+                    "crcCorrectionField": {{to_bool(globalTimeDomain.globalTimeDomainProperty.crcFlags.crcCorrectionField)}},
+                    "crcDomainNumber": {{to_bool(globalTimeDomain.globalTimeDomainProperty.crcFlags.crcDomainNumber)}},
+                    "crcMessageLength": {{to_bool(globalTimeDomain.globalTimeDomainProperty.crcFlags.crcMessageLength)}},
+                    "crcPreciseOriginTimestamp": {{to_bool(globalTimeDomain.globalTimeDomainProperty.crcFlags.crcPreciseOriginTimestamp)}},
+                    "crcSequenceId": {{to_bool(globalTimeDomain.globalTimeDomainProperty.crcFlags.crcSequenceId)}},
+                    "crcSourcePortIdentity": {{to_bool(globalTimeDomain.globalTimeDomainProperty.crcFlags.crcSourcePortIdentity)}}
+			    },
+			    "managedCouplingPort" : {
+                    "couplingPort": "{{globalTimeDomain.globalTimeDomainProperty.managedCouplingPort.couplingPort}}",
+                    "pdelayLatencyThreshold": {{globalTimeDomain.globalTimeDomainProperty.managedCouplingPort.pdelayLatencyThreshold}},
+                    "pdelayRequestPeriod": {{globalTimeDomain.globalTimeDomainProperty.managedCouplingPort.pdelayRequestPeriod}},
+                    "pdelayRespAndRespFollowUpTimeout":{{globalTimeDomain.globalTimeDomainProperty.managedCouplingPort.pdelayRespAndRespFollowUpTimeout}},
+                    "pdelayResponseEnabled": {{to_bool(globalTimeDomain.globalTimeDomainProperty.managedCouplingPort.pdelayResponseEnabled)}}
+			    },
+			    {% if globalTimeDomain.globalTimeDomainProperty.vlanPriority %}
+
+			    "vlanPriority" : {{globalTimeDomain.globalTimeDomainProperty.vlanPriority}},
+
+			    {% endif %}
+                "messageCompliance" : "{{globalTimeDomain.globalTimeDomainProperty.messageCompliance}}"
+
+			},
+
+			"globalTimeMaster" :
+			{
+				"name" : "{{globalTimeDomain.globalTimeEthMaster.name}}",
+				"immediateResumeTime" : {{globalTimeDomain.globalTimeEthMaster.immediateResumeTime}},
+				"isSystemWideGlobalTimeMaster" : {{to_bool(globalTimeDomain.globalTimeEthMaster.isSystemWideGlobalTime)}},
+				"syncPeriod" : {{globalTimeDomain.globalTimeEthMaster.syncPeriod}},
+				"crcSecured" : "{{globalTimeDomain.globalTimeEthMaster.crcSecured}}",
+                {% if globalTimeDomain.globalTimeEthMaster.ethernetConnector %}
+                "ethernetConnector":"{{ globalTimeDomain.globalTimeEthMaster.ethernetConnector }}",
+                {% endif %}
+                {% if globalTimeDomain.globalTimeEthMaster.vlanId %}
+                "vlanId":{{ globalTimeDomain.globalTimeEthMaster.vlanId }},
+                {% endif %}
+				"subTlvConfig":{
+                    "ofsSubTlv": {{to_bool(globalTimeDomain.globalTimeEthMaster.subTlvConfig.ofsSubTlv)}},
+                    "statusSubTlv": {{to_bool(globalTimeDomain.globalTimeEthMaster.subTlvConfig.statusSubTlv)}},
+                    "timeSubTlv": {{to_bool(globalTimeDomain.globalTimeEthMaster.subTlvConfig.timeSubTlv)}},
+                    "userDataSubTlv": {{to_bool(globalTimeDomain.globalTimeEthMaster.subTlvConfig.userDataSubTlv)}}
+                }
+			},
+			"globalTimeSubDomain":[
+                    {% for globalTimeSubDomain in globalTimeDomain.globalTimeSubDomains %}
+
+                        "{{globalTimeSubDomain}}"{% if not loop.last %},{% endif %}
+
+                    {% endfor %}
+
+			 ],
+			"offsetTimeDomain": "{{globalTimeDomain.offsetTimeDomain}}",
+            "networkSegmentId": {{globalTimeDomain.networkSegmentId}},
+            "pduTriggering": "{{globalTimeDomain.pduTriggering}}",
+			"syncLossTimeout": {{globalTimeDomain.syncLossTimeout}},
+			"slave" :
+			[
+			{% for globalTimeEthSlave in globalTimeDomain.globalTimeEthSlaves %}
+
+		        {
+                    "name" :"{{globalTimeEthSlave.name}}",
+                    "followUpTimeoutValue" :{{globalTimeEthSlave.followUpTimeoutValue}},
+                    "timeLeapFutureThreshold" :{{globalTimeEthSlave.timeLeapFutureThreshold}},
+                    "timeLeapPastThreshold" :{{globalTimeEthSlave.timeLeapPastThreshold}},
+                    "timeLeapHealingCounter" :{{globalTimeEthSlave.timeLeapHealingCounter}},
+                    {% if globalTimeEthSlave.ethernetConnector %}
+                    "ethernetConnector":"{{ globalTimeEthSlave.ethernetConnector }}",
+                    {% endif %}
+                    {% if globalTimeEthSlave.vlanId %}
+                    "vlanId":{{ globalTimeEthSlave.vlanId }},
+                    {% endif %}
+                    "crcValidated" :"{{globalTimeEthSlave.crcValidated}}"
+	            }{% if not loop.last %},{% endif %}
+
+			{% endfor %}
+
+			]
+		}{% if not loop.last %},{% endif %}
+	{% endfor %}
+
+	],
+	"ptpConfig":
+    {
+        "crcSupport": true,
+        "rxResidenceTime": 0.001,
+        "txResidenceTime": 0.001,
+        "framePrio": true,
+        "globalTimeTxPdelayReqPeriod": 2.0,
+        "pdelayLatencyThreshold": 0.001,
+        "pdelayRespAndRespFollowUpTimeout": 1.0,
+        "globalTimePropagationDelay": 0.001,
+        "globalTimePdelayRespEnable": true,
+        "globalTimeTxPeriod": 2.0,
+        "globalTimeFollowUpTimeout": 1.0,
+        "masterSlaveConflictDetection": true,
+        "messageCompliance": true,
+        "rxCrcValidated": "CRC-OPTIONAL",
+        "crcFlagsRxValidated": true,
+        "crcMessageLength": true,
+        "crcDomainNumber": true,
+        "crcCorrectionField": true,
+        "crcSourcePortIdentity": true,
+        "crcSequenceId": true,
+        "crcPreciseOriginTimestamp": true,
+        "globalTimeUplinkToTxSwitchResidenceTime": 0.001,
+        "tlvFollowUpTimeSubTLV": true,
+        "tlvFollowUpStatusSubTLV": true,
+        "tlvFollowUpUserDataSubTLV": true,
+        "tsynTLVFollowUpOFSSubTLV": true,
+        "crcTimeFlagsTxSecured": 63,
+        "globalTimeTxCrcSecured": true,
+        "globalTimeSequenceCounterJumpWidth": 10,
+        "globalTimePdelayRespAndRespFollowUpTimeout": 1.0
+    },
+	"timeBase":
+	[
+	{% for time_base in configuration.time_bases %}
+		{
+			"name": "{{time_base.instanceSpecifier}}"
+            {% if time_base.storageInstanceSpecifier %}
+            ,"storageInstanceSpecifier":"{{ time_base.storageInstanceSpecifier }}"
+            {% endif %}
+            {% if time_base.storageKVKey %}
+            ,"storageKVKey":"{{ time_base.storageKVKey }}"
+            {% endif %}
+            {% if time_base.storageFile %}
+            ,"storageFile":"{{ time_base.storageFile }}"
+            {% endif %}
+			{% if time_base.type == "provider" %}
+			,"networkTimeProvider": "{{time_base.networkTimeProvider}}"
+			{% endif %}
+			{% if time_base.type == "consumer" %}
+			,"networkTimeConsumer": "{{time_base.networkTimeConsumer}}"
+			{% endif %}
+			{% if time_base.timeSyncCorrection %}
+			,"timeSyncCorrection":
+			{
+				"allowProviderRateCorrection": {{to_bool(time_base.timeSyncCorrection.allowProviderRateCorrection)}},
+				"offsetCorrectionAdaptionInterval": {{time_base.timeSyncCorrection.offsetCorrectionAdaptionInterval}},
+				"offsetCorrectionJumpThreshold": {{time_base.timeSyncCorrection.offsetCorrectionJumpThreshold}},
+				"rateCorrectionsPerMeasurementDuration": {{time_base.timeSyncCorrection.rateCorrectionsPerMeasurementDuration}},
+				"rateDeviationMeasurementDuration": {{time_base.timeSyncCorrection.rateDeviationMeasurementDuration}}
+			}
+			{% endif %}
+
+		}{% if not loop.last %},{% endif %}
+
+	{% endfor %}
+	]
+}
+
+{% block footer %}{% endblock %}

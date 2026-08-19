@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="1e1f530e-c3c3-4a5a-8650-dad261caac69">
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Idsm</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>Design</SHORT-NAME>
+              <ELEMENTS>
+                <SECURITY-EVENT-CONTEXT-MAPPING-APPLICATION S="">
+                  <SHORT-NAME>SecurityEventContextMappingApplication_firewall_daemon</SHORT-NAME>
+                  <FILTER-CHAINS>
+                    <SECURITY-EVENT-FILTER-CHAIN-REF-CONDITIONAL>
+                      <SECURITY-EVENT-FILTER-CHAIN-REF DEST="SECURITY-EVENT-FILTER-CHAIN">/ISOFT/Idsm/Design/SecurityEventFilterChain_fw</SECURITY-EVENT-FILTER-CHAIN-REF>
+                    </SECURITY-EVENT-FILTER-CHAIN-REF-CONDITIONAL>
+                  </FILTER-CHAINS>
+                  <IDSM-INSTANCES>
+                    <IDSM-INSTANCE-REF-CONDITIONAL>
+                      <IDSM-INSTANCE-REF DEST="IDSM-INSTANCE">/ISOFT/Idsm/Deployment/Idsm_Instance_1</IDSM-INSTANCE-REF>
+                    </IDSM-INSTANCE-REF-CONDITIONAL>
+                  </IDSM-INSTANCES>
+                  <MAPPED-SECURITY-EVENTS>
+                    <SECURITY-EVENT-CONTEXT-PROPS>
+                      <SHORT-NAME>SecurityEventContextProps_fw</SHORT-NAME>
+                      <DEFAULT-REPORTING-MODE>DETAILED</DEFAULT-REPORTING-MODE>
+                      <PERSISTENT-STORAGE>false</PERSISTENT-STORAGE>
+                      <SECURITY-EVENTS>
+                        <SECURITY-EVENT-DEFINITION-REF-CONDITIONAL>
+                          <SECURITY-EVENT-DEFINITION-REF DEST="SECURITY-EVENT-DEFINITION">/ISOFT/Custom/SecurityEventDefinition_fw</SECURITY-EVENT-DEFINITION-REF>
+                        </SECURITY-EVENT-DEFINITION-REF-CONDITIONAL>
+                      </SECURITY-EVENTS>
+                      <SENSOR-INSTANCE-ID>0</SENSOR-INSTANCE-ID>
+                    </SECURITY-EVENT-CONTEXT-PROPS>
+                  </MAPPED-SECURITY-EVENTS>
+                  <AFFECTED-APPLICATION>AP</AFFECTED-APPLICATION>
+                </SECURITY-EVENT-CONTEXT-MAPPING-APPLICATION>
+                <SECURITY-EVENT-FILTER-CHAIN>
+                  <SHORT-NAME>SecurityEventFilterChain_fw</SHORT-NAME>
+                  <ONE-EVERY-N>
+                    <SHORT-NAME>SampleFileter_fw</SHORT-NAME>
+                    <N>1</N>
+                  </ONE-EVERY-N>
+                </SECURITY-EVENT-FILTER-CHAIN>
+              </ELEMENTS>
+              <AR-PACKAGES>
+                <AR-PACKAGE>
+                  <SHORT-NAME>SecurityEventMapping</SHORT-NAME>
+                  <ELEMENTS>
+                    <SECURITY-EVENT-MAPPING>
+                      <SHORT-NAME>SecurityEventMapping_fw</SHORT-NAME>
+                      <ID>1</ID>
+                      <PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/fw/fwdaemon_proc</PROCESS-REF>
+                      <REPORTING-PORT-PROTOTYPE-IREF>
+                        <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/ISOFT/PlatformComponents/fw/exe/fwd/fw_root_swc</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+                        <TARGET-R-PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/ISOFT/PlatformComponents/fw/swc/fw_swc/rPort_fw</TARGET-R-PORT-PROTOTYPE-REF>
+                      </REPORTING-PORT-PROTOTYPE-IREF>
+                    </SECURITY-EVENT-MAPPING>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                  <SHORT-NAME>SecurityEventReportToSecurityEventDefinitionMapping</SHORT-NAME>
+                  <ELEMENTS>
+                    <SECURITY-EVENT-REPORT-TO-SECURITY-EVENT-DEFINITION-MAPPING>
+                      <SHORT-NAME>SecurityEventReportToSecurityEventDefinitionMapping_fw</SHORT-NAME>
+                      <REPORTED-SECURITY-EVENT-IREF S="">
+                        <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/ISOFT/PlatformComponents/fw/swc/fw_swc/rPort_fw</TARGET-R-PORT-REF>
+                      </REPORTED-SECURITY-EVENT-IREF>
+                      <SECURITY-EVENT-DEFINITION-REF DEST="SECURITY-EVENT-DEFINITION">/ISOFT/Custom/SecurityEventDefinition_fw</SECURITY-EVENT-DEFINITION-REF>
+                    </SECURITY-EVENT-REPORT-TO-SECURITY-EVENT-DEFINITION-MAPPING>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

@@ -1,0 +1,416 @@
+{
+    "ucm": {
+        "identifier": "DevelopmentMachineUCM1"
+    },
+    "defaultApplicationTimeout": {
+        "enterTimeout": 2.0,
+        "exitTimeout": 1.0
+    },
+    "environmentVariable": [],
+    "processor": [
+        0,
+        1
+    ],
+    "trustedPlatformExecutableLaunchBehavior": "MONITOR-MODE",
+    "functionGroups": [
+        {
+            "name": "/AUTOSAR/FunctionGroupSet/CommonFunctionGroups/MotiveFG",
+            "states": [
+                "Off",
+                "Verify",
+                "RunError",
+                "Running",
+                "Start"
+            ]
+        },
+        {
+            "name": "/FunctionGroups/HelloWorld_CM/FunctionGroupsSet/HelloWorldGroup",
+            "states": [
+                "Driving",
+                "Off",
+                "Parking",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/FunctionGroups/HelloWorld_Tsync/FunctionGroupsSet/TsyncDemoFG",
+            "states": [
+                "Startup",
+                "Off",
+                "Driving",
+                "Parking",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/FunctionGroups/Update_DemoV1/FunctionGroupsSet/UpdateDemoFG",
+            "states": [
+                "Driving",
+                "Parking",
+                "Stop",
+                "Verify",
+                "Off"
+            ]
+        },
+        {
+            "name": "/FunctionGroups/driver_if/DriverIfSet/DriverIfFG",
+            "states": [
+                "Run",
+                "Off",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/FunctionGroups/ota_client/FunctionGroupsSet/OTAUpdateFG",
+            "states": [
+                "Check",
+                "Continue",
+                "Off",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/FunctionGroups/ota_client_master/FunctionGroupsSet/OTAUpdateDFG",
+            "states": [
+                "Check",
+                "Continue",
+                "Off",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/ISOFT/FunctionGroupSet/Machine1/MachineFG",
+            "states": [
+                "Off",
+                "Restart",
+                "Shutdown",
+                "Startup",
+                "Fallback",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/ISOFT/HelloWorld/FunctionGroups/DemoFGSet_Keys/DemoGroupProto",
+            "states": [
+                "Startup",
+                "Off",
+                "Driving",
+                "Parking",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/ISOFT/HelloWorld/FunctionGroups/DemoFGSet_Per/DemoGroupProto",
+            "states": [
+                "Startup",
+                "Off",
+                "Driving",
+                "Parking",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/ISOFT/Idsm/HelloworldIdsmFGSet/HelloworldIdsmFG",
+            "states": [
+                "Off",
+                "Startup",
+                "Stop",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/ISOFT/NmDemoFGSet/NmDemoCommonFGs1/NMDemoFG",
+            "states": [
+                "Off",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_abc/FunctionGroupSet/FunctionGroupSet/DiagDemo_abc",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_communication_control/FunctionGroupSet/FunctionGroupSet/DiagDemo_communication_control",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_dem_aging_dtc/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_aging_dtc",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_dem_base/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_base",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_dem_control_dtc/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_control_dtc",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_dem_debounce_configurable/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_debounce_configurable",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_dem_debounce_internal/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_debounce_internal",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_dem_debounce_time/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_debounce_time",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_dem_displacement/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_displacement",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_dem_edr/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_edr",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_dem_indicator/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_indicator",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_did_dynamic/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_dynamic",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_did_generic/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_generic",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_did_generic_cancel/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_generic_cancel",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_did_generic_conversation/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_generic_conversation",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_did_generic_environmental/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_generic_environmental",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_did_generic_uds/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_generic_uds",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_did_periodic/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_periodic",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_did_response_on_event/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_response_on_event",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_did_typed/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_typed",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_did_typed_element/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_typed_element",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_did_typed_serialize_doipclient/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_typed_serialize_doipclient",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_download/FunctionGroupSet/FunctionGroupSet/DiagDemo_download",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_ecu_reset/FunctionGroupSet/FunctionGroupSet/DiagDemo_ecu_reset",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_filetransfer/FunctionGroupSet/FunctionGroupSet/DiagDemo_Filetransfer",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_routine_generic/FunctionGroupSet/FunctionGroupSet/DiagDemo_routine_generic",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_routine_typed/FunctionGroupSet/FunctionGroupSet/DiagDemo_routine_typed",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_security_access/FunctionGroupSet/FunctionGroupSet/DiagDemo_security_access",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_service_validation/FunctionGroupSet/FunctionGroupSet/DiagDemo_service_validation",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_session/FunctionGroupSet/FunctionGroupSet/DiagDemo_session",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        },
+        {
+            "name": "/Machine1/DiagDemo_upload/FunctionGroupSet/FunctionGroupSet/DiagDemo_upload",
+            "states": [
+                "Off",
+                "Shutdown",
+                "Startup",
+                "Verify"
+            ]
+        }
+    ],
+    "resourceGroups": [
+        {
+            "name": "DefaultResourceGroup",
+            "cpuUsage": 50,
+            "memUsage": 1024000000
+        }
+    ]
+}

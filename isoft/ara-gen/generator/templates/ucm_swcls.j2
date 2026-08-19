@@ -1,0 +1,108 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% macro to_bool(value) %}
+{% if value %}true{% else %}false{% endif %}
+{% endmacro %}
+{% macro to_transfer_part(softwareClusters) %}
+    {% if softwareClusters %}
+
+        [
+
+        {% for softwareCluster in softwareClusters %}
+           {% if softwareCluster.type == "software_cluster_dependency_formula_info" %}
+
+                {
+                    "category": "{{softwareCluster.category}}",
+                    "operator": "{{softwareCluster.operator}}"{{", " if softwareCluster.parts is not none}}
+                    {% if softwareCluster.parts is not none %}
+                    "part":   {{to_transfer_part(softwareCluster.parts)}}
+                    {% endif %}
+
+                 }{% if not loop.last %},{% endif %}
+
+           {% endif %}
+           {% if softwareCluster.type == "software_cluster_dependency_compare_condition_info" %}
+
+                {
+                    "compareType": "{{softwareCluster.compareType}}",
+                    "considerBuildNumber": {{to_bool(softwareCluster.considerBuildNumber)}},
+                    "softwareCluster": "{{softwareCluster.softwareCluster}}",
+                    "version": "{{softwareCluster.version}}"
+                }{% if not loop.last %},{% endif %}
+
+           {% endif %}
+        {% endfor %}
+
+        ]
+
+    {% endif %}
+{% endmacro %}
+[
+
+{% for softwareCluster in vehicle_package.software_cluster_infos %}
+    {
+        "category": "{{softwareCluster.category}}",
+{% if softwareCluster.conflictsTo %}
+         "conflictsTo": {
+             "category": "{{softwareCluster.conflictsTo.category}}",
+             "operator": "{{softwareCluster.conflictsTo.operator}}",
+             "part": {{to_transfer_part(softwareCluster.conflictsTo.parts)}}
+         },
+{% endif %}
+{% if softwareCluster.dependsOn %}
+         "dependsOn": {
+            "category": "{{softwareCluster.dependsOn.category}}",
+            "operator": "{{softwareCluster.dependsOn.operator}}",
+            "part": {{to_transfer_part(softwareCluster.dependsOn.parts)}}
+         },
+{% endif %}
+
+        "claimedFunctionGroups": [
+        {% for claimedFunctionGroup in softwareCluster.claimedFunctionGroups %}
+        "{{claimedFunctionGroup}}"{{ "," if not loop.last }}
+        {% endfor %}
+        ],
+        "licenses": [
+        {% for license in softwareCluster.licenses %}
+        "{{license}}"{{ "," if not loop.last }}
+        {% endfor %}
+        ],
+        "shortName": "{{softwareCluster.shortName}}",
+        "fqn": "{{softwareCluster.fqn}}",
+        {% if softwareCluster.containedProcess %}
+        "containedProcesses": [
+            {% for contained_process in softwareCluster.containedProcess %}
+                "{{contained_process}}"{{ "," if not loop.last }}
+            {% endfor %}
+        ],
+        {% endif %}
+        "vendorID": "{{softwareCluster.vendorID}}",
+        "version": "{{softwareCluster.version}}",
+        "typeApproval": "{{softwareCluster.typeApproval}}"
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+
+]
+{% block footer %}{% endblock %}

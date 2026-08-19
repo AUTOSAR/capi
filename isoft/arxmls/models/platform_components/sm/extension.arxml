@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR
+    xmlns="http://autosar.org/schema/r4.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+        <AR-PACKAGE>
+            <SHORT-NAME>ISOFT</SHORT-NAME>
+            <AR-PACKAGES>
+                <AR-PACKAGE>
+                    <SHORT-NAME>PlatformComponents</SHORT-NAME>
+                    <AR-PACKAGES>
+                        <AR-PACKAGE>
+                            <SHORT-NAME>sm</SHORT-NAME>
+                            <ELEMENTS>
+                                <SDG-DEF>
+                                    <SHORT-NAME>Extension</SHORT-NAME>
+                                    <SDG-CLASSES>
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>ARPackage</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <GID>iSOFT:sm:NmHandleToFunctionGroupStateMapping</GID>
+                                            <!-- 注意若要定义多个NM-NETWORK-HANDLE到功能组状态的映射,则需多个iSOFT:sm:NmHandleToFunctionGroupStateMapping -->
+                                            <EXTENDS-META-CLASS>ARPackage</EXTENDS-META-CLASS>
+                                            <ATTRIBUTES>
+                                                <SDG-AGGREGATION-WITH-VARIATION>
+                                                    <SHORT-NAME>NmHandleToFunctionGroupStateMappingSubclass</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:NmHandleToFunctionGroupStateMappingSubclass:Attributes</GID>
+                                                    <VARIATION>false</VARIATION>
+                                                    <SUB-SDG-REF DEST="SDG-CLASS">/ISOFT/PlatformComponents/sm/Extension/NmHandleToFunctionGroupStateMappingAttributes</SUB-SDG-REF>
+                                                </SDG-AGGREGATION-WITH-VARIATION>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>NmHandleToFunctionGroupStateMappingAttributes</SHORT-NAME>
+                                            <GID>iSOFT:sm:NmHandleToFunctionGroupStateMappingAttributes</GID>
+                                            <ATTRIBUTES>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>Type</SHORT-NAME>
+                                                <CATEGORY>ENUMERATION</CATEGORY>
+                                                <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:sm:NmHandleToFunctionGroupStateMappingSubclass:Type</GID>
+                                                <PATTERN>functionGroupStateToNmHandle|nmHandleActiveToFunctionGroupState|nmHandleInactiveToFunctionGroupState</PATTERN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>NmHandle</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:NmHandleToFunctionGroupStateMappingSubclass:NmHandle</GID>
+                                                    <DEST-META-CLASS>NmNetworkHandle</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-AGGREGATION-WITH-VARIATION>
+                                                    <SHORT-NAME>FunctionGroup</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+                                                    <GID>iSOFT:sm:NmHandleToFunctionGroupStateMappingSubclass:FunctionGroup</GID>
+                                                    <VARIATION>false</VARIATION>
+                                                    <SUB-SDG-REF DEST="SDG-CLASS">/ISOFT/PlatformComponents/sm/Extension/FunctionGroupInformation</SUB-SDG-REF>
+                                                </SDG-AGGREGATION-WITH-VARIATION>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>FunctionGroupInformation</SHORT-NAME>
+                                            <GID>iSOFT:sm:FunctionGroupInformation</GID>
+                                            <ATTRIBUTES>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>ContextModeDeclarationGroupPrototype</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:NmHandleToFunctionGroupStateMappingSubclass:ContextModeDeclarationGroupPrototype</GID>
+                                                    <DEST-META-CLASS>ModeDeclarationGroupPrototype</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>TargetModeDeclaration</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:NmHandleToFunctionGroupStateMappingSubclass:TargetModeDeclaration</GID>
+                                                    <DEST-META-CLASS>ModeDeclaration</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>NmHandleToFunctionGroupStateTimeControl</SHORT-NAME>
+                                            <GID>iSOFT:sm:NmHandleToFunctionGroupStateTimeControl</GID>
+                                            <!--  -->
+                                            <EXTENDS-META-CLASS>Machine</EXTENDS-META-CLASS>
+                                            <ATTRIBUTES>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>FGOffTime</SHORT-NAME>
+                                                <CATEGORY>FLOAT</CATEGORY>
+                                                <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:sm:NmHandleToFunctionGroupStateTimeControl:FGOffTime</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>NetworkOffTime</SHORT-NAME>
+                                                <CATEGORY>FLOAT</CATEGORY>
+                                                <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:sm:NmHandleToFunctionGroupStateTimeControl:NetworkOffTime</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>GenericModuleInstantiation</SHORT-NAME> 
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <GID>iSOFT:sm:GenericModuleInstantiation</GID>
+                                            <EXTENDS-META-CLASS>GenericModuleInstantiation</EXTENDS-META-CLASS>
+                                            <ATTRIBUTES>
+                                                <SDG-AGGREGATION-WITH-VARIATION>
+                                                    <SHORT-NAME>FGServerInstanceConfig</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+                                                    <GID>iSOFT:sm:GenericModuleInstantiation:FGServerInstanceConfig</GID>
+                                                    <VARIATION>false</VARIATION>
+                                                    <SUB-SDG-REF DEST="SDG-CLASS">/ISOFT/PlatformComponents/sm/Extension/FGServerInstanceConfigDefinition</SUB-SDG-REF>
+                                                </SDG-AGGREGATION-WITH-VARIATION>
+                                                <SDG-AGGREGATION-WITH-VARIATION>
+                                                    <SHORT-NAME>Notification</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+                                                    <GID>iSOFT:sm:GenericModuleInstantiation:Notification</GID>
+                                                    <VARIATION>false</VARIATION>
+                                                    <SUB-SDG-REF DEST="SDG-CLASS">/ISOFT/PlatformComponents/sm/Extension/StateManagementStateNotification</SUB-SDG-REF>
+                                                </SDG-AGGREGATION-WITH-VARIATION>
+                                                <SDG-AGGREGATION-WITH-VARIATION>
+                                                    <SHORT-NAME>ActionItemList</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+                                                    <GID>iSOFT:sm:GenericModuleInstantiation:ActionItemList</GID>
+                                                    <VARIATION>false</VARIATION>
+                                                    <SUB-SDG-REF DEST="SDG-CLASS">/ISOFT/PlatformComponents/sm/Extension/StateManagementActionList</SUB-SDG-REF>
+                                                </SDG-AGGREGATION-WITH-VARIATION>
+                                                <SDG-AGGREGATION-WITH-VARIATION>
+                                                    <SHORT-NAME>Request</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+                                                    <GID>iSOFT:sm:GenericModuleInstantiation:Request</GID>
+                                                    <VARIATION>false</VARIATION>
+                                                    <SUB-SDG-REF DEST="SDG-CLASS">/ISOFT/PlatformComponents/sm/Extension/StateManagementStateRequest</SUB-SDG-REF>
+                                                </SDG-AGGREGATION-WITH-VARIATION>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>FGServerInstanceConfigDefinition</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <ATTRIBUTES>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>FunctionGroup</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:FunctionGroup</GID>
+                                                    <DEST-META-CLASS>ModeDeclarationGroupPrototype</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>TriggerInIdentifier</SHORT-NAME>
+                                                    <CATEGORY>INTEGER</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInIdentifier</GID>
+                                                    <MAX>65534</MAX>
+                                                    <MIN>1</MIN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>TriggerInSomeipSdServerServiceInstanceConfig</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInSomeipSdServerServiceInstanceConfig</GID>
+                                                    <DEST-META-CLASS>SomeipSdServerServiceInstanceConfig</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>TriggerInConnector</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInConnector</GID>
+                                                    <DEST-META-CLASS>CommunicationConnector</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>TriggerInPort</SHORT-NAME>
+                                                    <CATEGORY>INTEGER</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInPort</GID>
+                                                    <MAX>65534</MAX>
+                                                    <MIN>1</MIN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>TriggerInOutIdentifier</SHORT-NAME>
+                                                    <CATEGORY>INTEGER</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInOutIdentifier</GID>
+                                                    <MAX>65534</MAX>
+                                                    <MIN>1</MIN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>TriggerInOutSomeipSdServerServiceInstanceConfig</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInOutSomeipSdServerServiceInstanceConfig</GID>
+                                                    <DEST-META-CLASS>SomeipSdServerServiceInstanceConfig</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>TriggerInOutConnector</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInOutConnector</GID>
+                                                    <DEST-META-CLASS>CommunicationConnector</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>TriggerInOutPort</SHORT-NAME>
+                                                    <CATEGORY>INTEGER</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:TriggerInOutPort</GID>
+                                                    <MAX>65534</MAX>
+                                                    <MIN>1</MIN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>TriggerOutIdentifier</SHORT-NAME>
+                                                    <CATEGORY>INTEGER</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:TriggerOutIdentifier</GID>
+                                                    <MAX>65534</MAX>
+                                                    <MIN>1</MIN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>TriggerOutSomeipSdServerServiceInstanceConfig</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:TriggerOutSomeipSdServerServiceInstanceConfig</GID>
+                                                    <DEST-META-CLASS>SomeipSdServerServiceInstanceConfig</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>TriggerOutConnector</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:TriggerOutConnector</GID>
+                                                    <DEST-META-CLASS>CommunicationConnector</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>TriggerOutPort</SHORT-NAME>
+                                                    <CATEGORY>INTEGER</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:FGServerInstanceConfigDefinition:TriggerOutPort</GID>
+                                                    <MAX>65534</MAX>
+                                                    <MIN>1</MIN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>StateManagementStateNotification</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <!-- 子SdgClass没有GID和EXTENDS-META-CLASS属性 -->
+                                            <CAPTION>true</CAPTION>
+                                            <ATTRIBUTES>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>TriggerOutIdentifier</SHORT-NAME>
+                                                    <CATEGORY>INTEGER</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementStateNotification:TriggerOutIdentifier</GID>
+                                                    <MAX>65534</MAX>
+                                                    <MIN>1</MIN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>TriggerOutSomeipSdServerServiceInstanceConfig</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementStateNotification:TriggerOutSomeipSdServerServiceInstanceConfig</GID>
+                                                    <DEST-META-CLASS>SomeipSdServerServiceInstanceConfig</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>TriggerOutConnector</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementStateNotification:TriggerOutConnector</GID>
+                                                    <DEST-META-CLASS>CommunicationConnector</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>TriggerOutPort</SHORT-NAME>
+                                                    <CATEGORY>INTEGER</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementStateNotification:TriggerOutPort</GID>
+                                                    <MAX>65534</MAX>
+                                                    <MIN>1</MIN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-AGGREGATION-WITH-VARIATION>
+                                                    <SHORT-NAME>StateMachine</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementStateNotification:StateMachine</GID>
+                                                    <VARIATION>false</VARIATION>
+                                                    <SUB-SDG-REF DEST="SDG-CLASS">/ISOFT/PlatformComponents/sm/Extension/StateMachine</SUB-SDG-REF>
+                                                </SDG-AGGREGATION-WITH-VARIATION>
+
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>StateMachineIdentifier</SHORT-NAME>
+                                                    <CATEGORY>INTEGER</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementStateNotification:StateMachineIdentifier</GID>
+                                                    <MAX>65534</MAX>
+                                                    <MIN>1</MIN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>StateMachineSomeipSdServerServiceInstanceConfig</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementStateNotification:StateMachineSomeipSdServerServiceInstanceConfig</GID>
+                                                    <DEST-META-CLASS>SomeipSdServerServiceInstanceConfig</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>StateMachineConnector</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementStateNotification:StateMachineConnector</GID>
+                                                    <DEST-META-CLASS>CommunicationConnector</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>StateMachinePort</SHORT-NAME>
+                                                    <CATEGORY>INTEGER</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementStateNotification:StateMachinePort</GID>
+                                                    <MAX>65534</MAX>
+                                                    <MIN>1</MIN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>StateMachine</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <!-- 子SdgClass没有GID和EXTENDS-META-CLASS属性 -->
+                                            <CAPTION>true</CAPTION>
+                                            <ATTRIBUTES>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>StateMachine</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateMachine</GID>
+                                                    <DEST-META-CLASS>ModeDeclarationGroup</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>StateManagementActionList</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <!-- 子SdgClass没有GID和EXTENDS-META-CLASS属性 -->
+                                            <CAPTION>true</CAPTION>
+                                            <ATTRIBUTES>
+                                                <SDG-AGGREGATION-WITH-VARIATION>
+                                                    <SHORT-NAME>ActionItem</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+                                                    <GID>iSOFT:sm:StateManagementActionList:ActionItem</GID>
+                                                    <VARIATION>false</VARIATION>
+                                                    <SUB-SDG-REF DEST="SDG-CLASS">/ISOFT/PlatformComponents/sm/Extension/StateManagementActionItem</SUB-SDG-REF>
+                                                </SDG-AGGREGATION-WITH-VARIATION>
+                                                <SDG-REFERENCE>
+                                                    <SHORT-NAME>ContextStateMachine</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <DEST-SDG-REF DEST="SDG-CLASS">/ISOFT/PlatformComponents/sm/Extension/StateMachine</DEST-SDG-REF>
+                                                </SDG-REFERENCE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>AffectedState</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementActionList:AffectedState</GID>
+                                                    <DEST-META-CLASS>ModeDeclaration</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>StateManagementActionItem</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <!-- 子SdgClass没有GID和EXTENDS-META-CLASS属性 -->
+                                            <ATTRIBUTES>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>ItemType</SHORT-NAME>
+                                                    <CATEGORY>ENUMERATION</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementActionItem:ItemType</GID>
+                                                    <PATTERN>SetFunctionGroupState|Sync</PATTERN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE> 
+                                                <SDG-FOREIGN-REFERENCE> 
+                                                    <SHORT-NAME>ContextModeDeclarationGroupPrototype</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementActionItem:SetFunctionGroupStateContextModeDeclarationGroupPrototype</GID>
+                                                    <DEST-META-CLASS>ModeDeclarationGroupPrototype</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>TargetModeDeclaration</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementActionItem:SetFunctionGroupStateTargetModeDeclaration</GID>
+                                                    <DEST-META-CLASS>ModeDeclaration</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>StateManagementStateRequest</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <!-- 子SdgClass没有GID和EXTENDS-META-CLASS属性 -->
+                                            <ATTRIBUTES>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>RequestType</SHORT-NAME>
+                                                    <CATEGORY>ENUMERATION</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementStateRequest:RequestType</GID>
+                                                    <PATTERN>RequestTrigger|RequestError</PATTERN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-AGGREGATION-WITH-VARIATION>
+                                                    <SHORT-NAME>Rule</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+                                                    <GID>iSOFT:sm:StateManagementStateRequest:Rule</GID>
+                                                    <VARIATION>false</VARIATION>
+                                                    <SUB-SDG-REF DEST="SDG-CLASS">/ISOFT/PlatformComponents/sm/Extension/StateManagementRequestRule</SUB-SDG-REF>
+                                                </SDG-AGGREGATION-WITH-VARIATION>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>StateManagementRequestRule</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <!-- 子SdgClass没有GID和EXTENDS-META-CLASS属性 -->
+                                            <ATTRIBUTES>
+                                                <SDG-REFERENCE>
+                                                    <SHORT-NAME>ContextStateMachine</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <DEST-SDG-REF DEST="SDG-CLASS">/ISOFT/PlatformComponents/sm/Extension/StateMachine</DEST-SDG-REF>
+                                                </SDG-REFERENCE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>AssumedCurrentState</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementRequestRule:AssumedCurrentState</GID>
+                                                    <DEST-META-CLASS>ModeDeclaration</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                    <SHORT-NAME>CompareValue</SHORT-NAME>
+                                                    <CATEGORY>STRING</CATEGORY>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementRequestRule:CompareValue</GID>
+                                                    <PATTERN>[1-9][0-9]*|0|ANY</PATTERN>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                    <SHORT-NAME>NextState</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                    <GID>iSOFT:sm:StateManagementRequestRule:NextState</GID>
+                                                    <DEST-META-CLASS>ModeDeclaration</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+
+                                    </SDG-CLASSES>
+                                </SDG-DEF>
+                            </ELEMENTS>
+                        </AR-PACKAGE>
+                    </AR-PACKAGES>
+                </AR-PACKAGE>
+            </AR-PACKAGES>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

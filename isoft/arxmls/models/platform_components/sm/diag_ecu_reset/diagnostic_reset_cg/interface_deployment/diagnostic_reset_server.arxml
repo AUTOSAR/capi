@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE >
+      <SHORT-NAME>iSOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>PlatformComponents</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>sm</SHORT-NAME>
+              <AR-PACKAGES>
+                <AR-PACKAGE>
+                  <SHORT-NAME>SomeipInterfaceDeployments</SHORT-NAME>
+                  <ELEMENTS>
+                    <SOMEIP-SERVICE-INTERFACE-DEPLOYMENT>
+                      <SHORT-NAME>DiagnosticResetServer</SHORT-NAME>
+                      <EVENT-DEPLOYMENTS>
+                        <SOMEIP-EVENT-DEPLOYMENT>
+                          <SHORT-NAME>response</SHORT-NAME>
+                          <EVENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/iSOFT/PlatformComponents/sm/DiagnosticResetServer/response</EVENT-REF>
+                          <EVENT-ID>0x0015</EVENT-ID>
+                          <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                        </SOMEIP-EVENT-DEPLOYMENT>
+                      </EVENT-DEPLOYMENTS>
+                      <METHOD-DEPLOYMENTS>
+                        <SOMEIP-METHOD-DEPLOYMENT>
+                          <SHORT-NAME>broadcast</SHORT-NAME>
+                          <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/iSOFT/PlatformComponents/sm/DiagnosticResetServer/broadcast</METHOD-REF>
+                          <METHOD-ID>0x002b</METHOD-ID>
+                          <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                        </SOMEIP-METHOD-DEPLOYMENT>
+                        <SOMEIP-METHOD-DEPLOYMENT>
+                          <SHORT-NAME>listClients</SHORT-NAME>
+                          <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/iSOFT/PlatformComponents/sm/DiagnosticResetServer/listClients</METHOD-REF>
+                          <METHOD-ID>45</METHOD-ID>
+                          <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                        </SOMEIP-METHOD-DEPLOYMENT>
+                        <SOMEIP-METHOD-DEPLOYMENT>
+                          <SHORT-NAME>message</SHORT-NAME>
+                          <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/iSOFT/PlatformComponents/sm/DiagnosticResetServer/message</METHOD-REF>
+                          <METHOD-ID>0x002c</METHOD-ID>
+                          <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+                        </SOMEIP-METHOD-DEPLOYMENT>
+                      </METHOD-DEPLOYMENTS>
+                      <SERVICE-INTERFACE-REF DEST="SERVICE-INTERFACE">/iSOFT/PlatformComponents/sm/DiagnosticResetServer</SERVICE-INTERFACE-REF>
+                      <EVENT-GROUPS>
+                        <SOMEIP-EVENT-GROUP>
+                          <SHORT-NAME>EventGroupDiagnosticResetServer</SHORT-NAME>
+                          <EVENT-GROUP-ID>0x0391</EVENT-GROUP-ID>
+                          <EVENT-REFS>
+                            <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/iSOFT/PlatformComponents/sm/SomeipInterfaceDeployments/DiagnosticResetServer/response</EVENT-REF>
+                          </EVENT-REFS>
+                        </SOMEIP-EVENT-GROUP>
+                      </EVENT-GROUPS>
+                      <SERVICE-INTERFACE-ID>44</SERVICE-INTERFACE-ID>
+                      <SERVICE-INTERFACE-VERSION>
+                        <MAJOR-VERSION>1</MAJOR-VERSION>
+                        <MINOR-VERSION>0</MINOR-VERSION>
+                      </SERVICE-INTERFACE-VERSION>
+                    </SOMEIP-SERVICE-INTERFACE-DEPLOYMENT>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

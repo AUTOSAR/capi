@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ara</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>nm</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>nmSomeipDeployments</SHORT-NAME>
+              <ELEMENTS>
+                <SOMEIP-SERVICE-INTERFACE-DEPLOYMENT>
+                  <SHORT-NAME>NetworkState</SHORT-NAME>
+                  <EVENT-DEPLOYMENTS>
+                    <SOMEIP-EVENT-DEPLOYMENT>
+                      <SHORT-NAME>NotifyEtherStateChanged</SHORT-NAME>
+                      <EVENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/NetworkStateServiceInterfaces/NetworkState/NotifyEtherStateChanged</EVENT-REF>
+                      <EVENT-ID>0x4021</EVENT-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-EVENT-DEPLOYMENT>
+                    <SOMEIP-EVENT-DEPLOYMENT>
+                      <SHORT-NAME>NotifyPresentNodeList</SHORT-NAME>
+                      <EVENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/NetworkStateServiceInterfaces/NetworkState/NotifyPresentNodeList</EVENT-REF>
+                      <EVENT-ID>0x4022</EVENT-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-EVENT-DEPLOYMENT>
+                    <SOMEIP-EVENT-DEPLOYMENT>
+                      <SHORT-NAME>NotifyPassivePnRequest</SHORT-NAME>
+                      <EVENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/NetworkStateServiceInterfaces/NetworkState/NotifyPassivePnRequest</EVENT-REF>
+                      <EVENT-ID>0x402E</EVENT-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-EVENT-DEPLOYMENT>
+                    <SOMEIP-EVENT-DEPLOYMENT>
+                      <SHORT-NAME>NotifyPassivePnRelease</SHORT-NAME>
+                      <EVENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/NetworkStateServiceInterfaces/NetworkState/NotifyPassivePnRelease</EVENT-REF>
+                      <EVENT-ID>0x402F</EVENT-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-EVENT-DEPLOYMENT>
+                  </EVENT-DEPLOYMENTS>
+                  <FIELD-DEPLOYMENTS>
+                    <SOMEIP-FIELD-DEPLOYMENT>
+                      <SHORT-NAME>NetworkCurrentState</SHORT-NAME>
+                      <FIELD-REF DEST="FIELD">/NetworkStateServiceInterfaces/NetworkState/NetworkCurrentState</FIELD-REF>
+                      <GET>
+                        <SHORT-NAME>NetworkCurrentState_getter</SHORT-NAME>
+                        <METHOD-ID>0x4422</METHOD-ID>
+                        <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                      </GET>
+                      <NOTIFIER>
+                        <SHORT-NAME>NetworkCurrentState_notifier</SHORT-NAME>
+                        <EVENT-ID>0x4423</EVENT-ID>
+                        <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                      </NOTIFIER>
+                    </SOMEIP-FIELD-DEPLOYMENT>
+                    <SOMEIP-FIELD-DEPLOYMENT>
+                      <SHORT-NAME>NetworkRequestedState</SHORT-NAME>
+                      <FIELD-REF DEST="FIELD">/NetworkStateServiceInterfaces/NetworkState/NetworkRequestedState</FIELD-REF>
+                      <GET>
+                        <SHORT-NAME>NetworkRequestedState_getter</SHORT-NAME>
+                        <METHOD-ID>0x4023</METHOD-ID>
+                        <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                      </GET>
+                      <NOTIFIER>
+                        <SHORT-NAME>NetworkRequestedState_notifier</SHORT-NAME>
+                        <EVENT-ID>0x4024</EVENT-ID>
+                        <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                      </NOTIFIER>
+                      <SET>
+                        <SHORT-NAME>NetworkRequestedState_setter</SHORT-NAME>
+                        <METHOD-ID>0x4025</METHOD-ID>
+                        <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                      </SET>
+                    </SOMEIP-FIELD-DEPLOYMENT>
+                  </FIELD-DEPLOYMENTS>
+                  <METHOD-DEPLOYMENTS>
+                    <SOMEIP-METHOD-DEPLOYMENT>
+                      <SHORT-NAME>SetDefaultEtherIp</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/NetworkStateServiceInterfaces/NetworkState/SetDefaultEtherIp</METHOD-REF>
+                      <METHOD-ID>0x4026</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT>
+                      <SHORT-NAME>SetEtherStateMachineSate</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/NetworkStateServiceInterfaces/NetworkState/SetEtherStateMachineSate</METHOD-REF>
+                      <METHOD-ID>0x4027</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT>
+                      <SHORT-NAME>GetEtherStateMachineState</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/NetworkStateServiceInterfaces/NetworkState/GetEtherStateMachineState</METHOD-REF>
+                      <METHOD-ID>0x4028</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT>
+                      <SHORT-NAME>RequestDetectNode</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/NetworkStateServiceInterfaces/NetworkState/RequestDetectNode</METHOD-REF>
+                      <METHOD-ID>0x4029</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT>
+                      <SHORT-NAME>NotifyWakeup</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/NetworkStateServiceInterfaces/NetworkState/NotifyWakeup</METHOD-REF>
+                      <METHOD-ID>0x402A</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                    <SOMEIP-METHOD-DEPLOYMENT>
+                      <SHORT-NAME>SetMessageCtrlType</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/NetworkStateServiceInterfaces/NetworkState/SetMessageCtrlType</METHOD-REF>
+                      <METHOD-ID>0x402B</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+
+                    <SOMEIP-METHOD-DEPLOYMENT>
+                      <SHORT-NAME>GetMessageCtrlType</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/NetworkStateServiceInterfaces/NetworkState/GetMessageCtrlType</METHOD-REF>
+                      <METHOD-ID>0x402C</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+
+                    <SOMEIP-METHOD-DEPLOYMENT>
+                      <SHORT-NAME>GetInitState</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/NetworkStateServiceInterfaces/NetworkState/GetInitState</METHOD-REF>
+                      <METHOD-ID>0x402D</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+
+                    <SOMEIP-METHOD-DEPLOYMENT>
+                      <SHORT-NAME>GetPassivePnRequestList</SHORT-NAME>
+                      <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/NetworkStateServiceInterfaces/NetworkState/GetPassivePnRequestList</METHOD-REF>
+                      <METHOD-ID>0x4030</METHOD-ID>
+                      <TRANSPORT-PROTOCOL>TCP</TRANSPORT-PROTOCOL>
+                    </SOMEIP-METHOD-DEPLOYMENT>
+                  </METHOD-DEPLOYMENTS>
+                  <SERVICE-INTERFACE-REF DEST="SERVICE-INTERFACE">/NetworkStateServiceInterfaces/NetworkState</SERVICE-INTERFACE-REF>
+
+                  <EVENT-GROUPS>
+                    <SOMEIP-EVENT-GROUP>
+                      <SHORT-NAME>NetworkCurrentStateEventgroup1</SHORT-NAME>
+                      <EVENT-GROUP-ID>1</EVENT-GROUP-ID>
+                      <EVENT-REFS>
+                        <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/ara/nm/nmSomeipDeployments/NetworkState/NetworkCurrentState/NetworkCurrentState_notifier</EVENT-REF>
+                      </EVENT-REFS>
+                    </SOMEIP-EVENT-GROUP>
+                    <SOMEIP-EVENT-GROUP>
+                      <SHORT-NAME>NetworkRequestedStateEventgroup</SHORT-NAME>
+                      <EVENT-GROUP-ID>2</EVENT-GROUP-ID>
+                      <EVENT-REFS>
+                        <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/ara/nm/nmSomeipDeployments/NetworkState/NetworkRequestedState/NetworkRequestedState_notifier</EVENT-REF>
+                      </EVENT-REFS>
+                    </SOMEIP-EVENT-GROUP>
+                    <SOMEIP-EVENT-GROUP>
+                      <SHORT-NAME>NotifyPresentNodeList1</SHORT-NAME>
+                      <EVENT-GROUP-ID>3</EVENT-GROUP-ID>
+                      <EVENT-REFS>
+                        <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/ara/nm/nmSomeipDeployments/NetworkState/NotifyPresentNodeList</EVENT-REF>
+                      </EVENT-REFS>
+                    </SOMEIP-EVENT-GROUP>
+                    <SOMEIP-EVENT-GROUP>
+                      <SHORT-NAME>NotifyEtherStateChanged1</SHORT-NAME>
+                      <EVENT-GROUP-ID>4</EVENT-GROUP-ID>
+                      <EVENT-REFS>
+                        <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/ara/nm/nmSomeipDeployments/NetworkState/NotifyEtherStateChanged</EVENT-REF>
+                      </EVENT-REFS>
+                    </SOMEIP-EVENT-GROUP>
+                    <SOMEIP-EVENT-GROUP>
+                      <SHORT-NAME>NotifyPassivePnRequest1</SHORT-NAME>
+                      <EVENT-GROUP-ID>5</EVENT-GROUP-ID>
+                      <EVENT-REFS>
+                        <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/ara/nm/nmSomeipDeployments/NetworkState/NotifyPassivePnRequest</EVENT-REF>
+                      </EVENT-REFS>
+                    </SOMEIP-EVENT-GROUP>
+                    <SOMEIP-EVENT-GROUP>
+                      <SHORT-NAME>NotifyPassivePnRelease1</SHORT-NAME>
+                      <EVENT-GROUP-ID>6</EVENT-GROUP-ID>
+                      <EVENT-REFS>
+                        <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/ara/nm/nmSomeipDeployments/NetworkState/NotifyPassivePnRelease</EVENT-REF>
+                      </EVENT-REFS>
+                    </SOMEIP-EVENT-GROUP>
+                  </EVENT-GROUPS>
+                  <SERVICE-INTERFACE-ID>60</SERVICE-INTERFACE-ID>
+                  <SERVICE-INTERFACE-VERSION>
+                    <MAJOR-VERSION>1</MAJOR-VERSION>
+                    <MINOR-VERSION>0</MINOR-VERSION>
+                  </SERVICE-INTERFACE-VERSION>
+                </SOMEIP-SERVICE-INTERFACE-DEPLOYMENT>
+              </ELEMENTS>
+            </AR-PACKAGE>          
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

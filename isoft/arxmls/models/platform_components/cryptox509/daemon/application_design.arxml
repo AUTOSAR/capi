@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+<AR-PACKAGES>
+<AR-PACKAGE>
+    <SHORT-NAME>ISOFT</SHORT-NAME>
+    <AR-PACKAGES>
+    <AR-PACKAGE>
+        <SHORT-NAME>PlatformComponents</SHORT-NAME>
+        <AR-PACKAGES>
+        <AR-PACKAGE>
+            <SHORT-NAME>cryptox509</SHORT-NAME>
+            <ELEMENTS>
+                <ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+                    <SHORT-NAME>swc_type_cryptox509</SHORT-NAME>
+                    <PORTS>
+                        <PR-PORT-PROTOTYPE>
+                            <SHORT-NAME>prPort_fileStorage_cert</SHORT-NAME>
+                            <PROVIDED-REQUIRED-INTERFACE-TREF DEST="PERSISTENCY-FILE-STORAGE-INTERFACE">/ISOFT/PlatformComponents/cryptox509/cryptox509d_FileStorage_interface_cert</PROVIDED-REQUIRED-INTERFACE-TREF>
+                        </PR-PORT-PROTOTYPE>
+                    </PORTS>
+                </ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+                <EXECUTABLE>
+                    <SHORT-NAME>cryptox509d</SHORT-NAME>
+                    <CATEGORY>PLATFORM_LEVEL</CATEGORY>
+                    <BUILD-TYPE>BUILD-TYPE-DEBUG</BUILD-TYPE>
+                    <LOGGING-BEHAVIOR>USES-LOGGING</LOGGING-BEHAVIOR>
+                    <MINIMUM-TIMER-GRANULARITY>0.001</MINIMUM-TIMER-GRANULARITY>
+                    <REPORTING-BEHAVIOR>REPORTS-EXECUTION-STATE</REPORTING-BEHAVIOR>
+                    <ROOT-SW-COMPONENT-PROTOTYPE>
+                        <SHORT-NAME>cryptox509d_swc_root</SHORT-NAME>
+                        <APPLICATION-TYPE-TREF DEST="ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE">/ISOFT/PlatformComponents/cryptox509/swc_type_cryptox509</APPLICATION-TYPE-TREF>
+                    </ROOT-SW-COMPONENT-PROTOTYPE>
+                    <VERSION>1.0.0</VERSION>
+                </EXECUTABLE>
+                <PROCESS-DESIGN>
+                    <SHORT-NAME>cryptox509_proc_design</SHORT-NAME>
+                    <EXECUTABLE-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/cryptox509/cryptox509d</EXECUTABLE-REF>
+                </PROCESS-DESIGN>
+            </ELEMENTS>
+        </AR-PACKAGE>
+        </AR-PACKAGES>
+    </AR-PACKAGE>
+    </AR-PACKAGES>
+</AR-PACKAGE>
+</AR-PACKAGES>
+</AUTOSAR>

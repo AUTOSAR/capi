@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>PlatformComponents</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>ucm_master</SHORT-NAME>
+              <ELEMENTS>
+                <COM-FIELD-GRANT-DESIGN>
+                  <SHORT-NAME>ucmm_ucmfieldgrantdesign</SHORT-NAME>
+                  <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">/ISOFT/PlatformComponents/ucm_master/ucmm_design</PROCESS-DESIGN-REF>
+                  <ROLE>GETTER</ROLE>
+                </COM-FIELD-GRANT-DESIGN>
+                <COM-FIND-SERVICE-GRANT-DESIGN>
+                  <SHORT-NAME>ucmm_ucmfindservicegrantdesign</SHORT-NAME>
+                  <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">/ISOFT/PlatformComponents/ucm_master/ucmm_design</PROCESS-DESIGN-REF>
+                  <REQUIRED-SERVICE-PORT-IREF>
+                    <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/ISOFT/PlatformComponents/ucm_master/exe/ucmmd/ucmm_root</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+                    <TARGET-R-PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/ISOFT/PlatformComponents/ucm_master/swc/ucm_master/PackageManagementRPort</TARGET-R-PORT-PROTOTYPE-REF>
+                  </REQUIRED-SERVICE-PORT-IREF>
+                </COM-FIND-SERVICE-GRANT-DESIGN>
+                <COM-OFFER-SERVICE-GRANT-DESIGN>
+                  <SHORT-NAME>ucmm_ucmofferservicegrantdesign1</SHORT-NAME>
+                  <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">/ISOFT/PlatformComponents/ucm_master/ucmm_design</PROCESS-DESIGN-REF>
+                  <PROVIDED-SERVICE-PORT-IREF>
+                    <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/ISOFT/PlatformComponents/ucm_master/exe/ucmmd/ucmm_root</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+                    <TARGET-P-PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/ISOFT/PlatformComponents/ucm_master/swc/ucm_master/VehicleDriverApplicationPPort</TARGET-P-PORT-PROTOTYPE-REF>
+                  </PROVIDED-SERVICE-PORT-IREF>
+                </COM-OFFER-SERVICE-GRANT-DESIGN>
+                <COM-OFFER-SERVICE-GRANT-DESIGN>
+                  <SHORT-NAME>ucmm_ucmofferservicegrantdesign2</SHORT-NAME>
+                  <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">/ISOFT/PlatformComponents/ucm_master/ucmm_design</PROCESS-DESIGN-REF>
+                  <PROVIDED-SERVICE-PORT-IREF>
+                    <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/ISOFT/PlatformComponents/ucm_master/exe/ucmmd/ucmm_root</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+                    <TARGET-P-PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/ISOFT/PlatformComponents/ucm_master/swc/ucm_master/VehiclePackageManagementPPort</TARGET-P-PORT-PROTOTYPE-REF>
+                  </PROVIDED-SERVICE-PORT-IREF>
+                </COM-OFFER-SERVICE-GRANT-DESIGN>
+                <COM-OFFER-SERVICE-GRANT-DESIGN>
+                  <SHORT-NAME>ucmm_ucmofferservicegrantdesign3</SHORT-NAME>
+                  <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">/ISOFT/PlatformComponents/ucm_master/ucmm_design</PROCESS-DESIGN-REF>
+                  <PROVIDED-SERVICE-PORT-IREF>
+                    <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/ISOFT/PlatformComponents/ucm_master/exe/ucmmd/ucmm_root</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+                    <TARGET-P-PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/ISOFT/PlatformComponents/ucm_master/swc/ucm_master/VehicleStateManagerPPort</TARGET-P-PORT-PROTOTYPE-REF>
+                  </PROVIDED-SERVICE-PORT-IREF>
+                </COM-OFFER-SERVICE-GRANT-DESIGN>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

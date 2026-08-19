@@ -1,0 +1,146 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+
+#include "ara/com/internal/proxy/ara_proxy_base.h"
+#include "{{ service.standard_name }}_common.h"
+
+{% if service.namespaces %}{% for ns in service.namespaces %}
+namespace {{ns}} {
+{% endfor %}{% endif %}
+namespace proxy {
+
+{% if service.methods %}
+namespace methods {
+{% for method in service.methods -%}
+{% if loop.first %}
+  /// @uptrace{SWS_CM_00006, 1e195fc70668640e8872e00d924e5fde731c9efb}
+{% endif %}
+{% if method.get_output_args %}
+  using {{ method.name }} = ara::com::internal::proxy::Method<{{service.qualified_cpp_name}}::{{ method.name }}Output({% for argument in method.get_input_args -%} const {{argument.type_declaration}}&{% if not loop.last %},{% endif %}{% endfor -%})>;
+{% elif method.is_fire_and_forget %}
+  using {{ method.name }} = ara::com::internal::proxy::FireAndForgetMethod<void({% for argument in method.get_input_args -%} const {{argument.type_declaration}}&{% if not loop.last %},{% endif %}{% endfor -%})>;
+{% else %}
+  using {{ method.name }} = ara::com::internal::proxy::Method<void({% for argument in method.get_input_args -%} const {{argument.type_declaration}}&{% if not loop.last %},{% endif %}{% endfor -%})>;
+{% endif %}
+{% endfor -%}
+} // namespace methods
+{% endif %}
+
+{% if service.all_fields %}
+namespace fields {
+{% for field in service.all_fields %}
+  using {{ field.name }} = ara::com::internal::proxy::{{field.get_mutable}}Field<{{field.get_impl_type_name}}>;
+{% endfor %}
+} // namespace fields
+{% endif %}
+
+{% if service.events %}
+namespace events {
+{% for event in service.events %}
+{% if loop.first %}
+  /// @uptrace{SWS_CM_00005, 385d7e7bb84a234534776af8faa3661024ad95af}
+{% endif %}
+  using {{ event.name }} = ara::com::internal::proxy::Event<{{event.type_declaration}}>;
+{% endfor %}
+} // namespace events
+{% endif %}
+
+class {{ service.service_deployment.name }}ProxyBase : public ara::com::internal::proxy::ProxyBindingBase, public {{ service.absolute_namespace }}::{{ service.name }} {
+public:
+{% for method in service.methods %}
+  virtual methods::{{ method.name }}& Get{{ method.name }}() = 0;
+{% endfor %}
+{% for field in service.all_fields %}
+  virtual fields::{{ field.name }}& Get{{ field.name }}() = 0;
+{% endfor %}
+{% for event in service.events %}
+  virtual events::{{ event.name }}& Get{{ event.name }}() = 0;
+{% endfor %}
+};
+
+/// @uptrace{SWS_CM_00004, ce1931d4c48cc641db129498d3f088bf54573b86}
+class {{ service.service_deployment.name }}Proxy : public ara::com::internal::proxy::ProxyBase<{{ service.service_deployment.name }}ProxyBase>, public {{ service.absolute_namespace }}::{{ service.name }} {
+public:
+  /// @brief Proxy constructor.
+  ///
+  /// @uptrace{SWS_CM_00131, 4dbc501350571efc37be84e68c998c95a73adbda}
+  explicit {{ service.service_deployment.name }}Proxy(const HandleType& proxy_base_factory)
+      : ara::com::internal::proxy::ProxyBase<{{ service.service_deployment.name }}ProxyBase>(proxy_base_factory)
+{% for method in service.methods %}
+      , {{ method.name }}(proxy_base_->Get{{ method.name }}())
+{% endfor %}
+{% for field in service.all_fields %}
+      , {{ field.name }}(proxy_base_->Get{{ field.name }}())
+{% endfor %}
+{% for event in service.events %}
+      , {{ event.name }}(proxy_base_->Get{{ event.name }}())
+{% endfor %}
+  {}
+
+  /// @brief Proxy shall be move constructable.
+  ///
+  /// @uptrace{SWS_CM_00137, 2d21d32d40ded075af0febca1a8c7352c48ad66a}
+  explicit {{ service.service_deployment.name }}Proxy({{ service.service_deployment.name }}Proxy&&) = default;
+
+  /// @brief Proxy shall be move assignable.
+  ///
+  /// @uptrace{SWS_CM_00137, 2d21d32d40ded075af0febca1a8c7352c48ad66a}
+  {{ service.service_deployment.name }}Proxy& operator=({{ service.service_deployment.name }}Proxy&&) = default;
+
+  /// @brief Proxy shall not be copy constructable.
+  ///
+  /// @uptrace{SWS_CM_00136, fade9f890eaa65b96d0de7d38abe137c4b50ebe5}
+  explicit {{ service.service_deployment.name }}Proxy(const {{ service.service_deployment.name }}Proxy&) = delete;
+
+  /// @brief Proxy shall not be copy assignable.
+  ///
+  /// @uptrace{SWS_CM_00136, fade9f890eaa65b96d0de7d38abe137c4b50ebe5}
+  {{ service.service_deployment.name }}Proxy& operator=(const {{ service.service_deployment.name }}Proxy&) = delete;
+
+{% for method in service.methods %}
+{% if loop.first %}
+  /// @uptrace{SWS_CM_00196, fb06dcfffae0a5496c4e395606b96843b5c41ef9}
+{% endif %}
+  methods::{{ method.name }}& {{ method.name }};
+{% endfor %}
+{% for field in service.all_fields %}
+  fields::{{ field.name }}& {{ field.name }};
+{% endfor %}
+{% for event in service.events %}
+  events::{{ event.name }}& {{ event.name }};
+{% endfor %}
+};
+
+} // namespace proxy
+{% if service.namespaces %}{% for ns in service.namespaces|reverse %}
+} // namespace {{ ns }}
+{% endfor %}{% endif %}
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

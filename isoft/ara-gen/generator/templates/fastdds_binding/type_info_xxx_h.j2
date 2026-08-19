@@ -1,0 +1,75 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+#include "ara/com/types.h"
+#include "ara/com/internal/fastdds/dds_idl_types_binding.h"
+#include "ara/com/internal/fastdds/fastdds_types.h"
+{% for desc_path in dds_type.desc_paths %}
+#include "{{ desc_path }}"
+{% endfor %}
+{% if ara_type %}
+{% if ara_type.self_include %}
+// Header generated from ARXML
+#include {{ara_type.self_include}}
+{% endif %}
+{% endif %}
+
+
+namespace ara
+{
+namespace com
+{
+namespace internal
+{
+namespace fastdds
+{
+{% for ddsName in dds_type.info_dds_names %}
+
+template<>
+struct DDSTypeInfo<{% if ara_type %}{{ara_type.qualified_cpp_name}}{% else %}{{dds_type.qualified_idl_type_cpp_name_fastdds}}{% endif %}, {{ ddsName }}>
+{
+    using dds_type_t =  {{dds_type.qualified_idl_type_cpp_name_fastdds}};
+    using dds_type_seq_t = eprosima::fastdds::dds::LoanableSequence<dds_type_t>;
+    using dds_type_support_t = {{dds_type.qualified_idl_type_cpp_name_fastdds}}PubSubType;
+   // using dds_data_writer_t =  typename eprosima::fastdds::dds::DataWriter;
+   // using dds_data_reader_t = typename eprosima::fastdds::dds::DataReader;
+#ifndef FASTDDS_ROS2
+    static inline char const* type_name() { return "{{dds_type.qualified_idl_type_cpp_name_fastdds}}"; }
+#else
+    static inline char const* type_name() { return "{{dds_type.qualified_idl_type_cpp_name_fastdds_ROS2}}"; }
+#endif
+};
+
+{% endfor %}
+}  // namespace fastdds
+}  // namespace internal
+}  // namespace com
+}  // namespace ara
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

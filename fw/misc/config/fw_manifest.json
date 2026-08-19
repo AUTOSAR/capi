@@ -1,0 +1,311 @@
+{
+  "adaptiveFirewallToPortPrototypeMapping": [
+    {
+      "instanceName": "xxx/xxxx/xxx/xxxx/A1",
+      "stateDepFirewall": [
+        {
+          "firewallState": 1,
+          "defaultAction": 1,
+          "firewallRuleProps": [
+            {
+              "action": 1,
+              "matchingEgressRule": [
+                {
+                  "bucketSize": 10,
+                  "refillAmount": 50,
+                  "dataLinkLayerRule": [
+                    {
+                      "ruleName": "destinationMacAddress",
+                      "ruleData": "ff:ff:ff:ff:ff:ff"
+                    },
+                    {
+                      "ruleName": "destinationMacAddressMask",
+                      "ruleData": "ff:ff:ff:ff:00:00"
+                    },
+                    {
+                      "ruleName": "etherType",
+                      "ruleData": "1"
+                    },
+                    {
+                      "ruleName": "vlanId",
+                      "ruleData": "1"
+                    },
+                    {
+                      "ruleName": "vlanPriority",
+                      "ruleData": "1"
+                    }
+                  ],
+                  "ipv4Rule": [
+                    {
+                      "ruleName": "checksumVerification",
+                      "ruleData": "1"
+                    },
+                    {
+                      "ruleName": "destinationIpAddress",
+                      "ruleData": "192.168.14.98"
+                    },
+                    {
+                      "ruleName": "destinationNetworkMask",
+                      "ruleData": "255.255.225.0"
+                    },
+                    {
+                      "ruleName": "differentiatedServiceCodePoint",
+                      "ruleData": "1"
+                    },
+                    {
+                      "ruleName": "doNotFragment",
+                      "ruleData": "1"
+                    },
+                    {
+                      "ruleName": "explicitCongestionNotification",
+                      "ruleData": "1"
+                    },
+                    {
+                      "ruleName": "icmpCheckSum",
+                      "ruleData": "255"
+                    },
+                    {
+                      "ruleName": "icmpCode",
+                      "ruleData": "1"
+                    },
+                    {
+                      "ruleName": "icmpType",
+                      "ruleData": "3"
+                    },
+                    {
+                      "ruleName": "internetHeaderLength",
+                      "ruleData": "1"
+                    },
+                    {
+                      "ruleName": "moreFragments",
+                      "ruleData": "1"
+                    },
+                    {
+                      "ruleName": "protocol",
+                      "ruleData": "1"
+                    },
+                    {
+                      "ruleName": "sourceIpAddress",
+                      "ruleData": "192.168.14.98"
+                    },
+                    {
+                      "ruleName": "sourceNetworkMask",
+                      "ruleData": "255.255.255.0"
+                    },
+                    {
+                      "ruleName": "ttlMax",
+                      "ruleData": "8"
+                    },
+                    {
+                      "ruleName": "ttlMin",
+                      "ruleData": "1"
+                    }
+                  ],
+                  "ipv6Rule": [],
+                  "udpRule": [],
+                  "tcpRule": [
+                    {
+                      "ruleName": "checksumVerification",
+                      "ruleData": "1"
+                    },
+                    {
+                      "ruleName": "maxDestinationPortNumber",
+                      "ruleData": "65535"
+                    },
+                    {
+                      "ruleName": "maxSourcePortNumber",
+                      "ruleData": "65535"
+                    },
+                    {
+                      "ruleName": "minDestinationPortNumber",
+                      "ruleData": "0"
+                    },
+                    {
+                      "ruleName": "minSourcePortNumber",
+                      "ruleData": "0"
+                    },
+                    {
+                      "ruleName": "numberOfParallelTcpSessions",
+                      "ruleData": "10"
+                    },
+                    {
+                      "ruleName": "stateManagementBasedOnTcpFlags",
+                      "ruleData": "65535"
+                    },
+                    {
+                      "ruleName": "timeoutCheck",
+                      "ruleData": "20"
+                    }
+                  ],
+                  "someipRule": [],
+                  "someipSdRule": [],
+                  "ddsRule": [],
+                  "doipRule": [],
+                  "payloadRule": [
+                    {
+                      "offset": "5",
+                      "value": "200"
+                    },
+                    {
+                      "offset": "20",
+                      "value": "204"
+                    }
+                  ]
+                }
+              ],
+              "matchingIngressRule": [
+                {
+                  "refillAmount": -1,
+                  "bucketSize": 1,
+                  "dataLinkLayerRule": [
+                    {
+                      "ruleName": "destinationMacAddress",
+                      "ruleData": "ff:ff:ff:ff:ff:ff"
+                    },
+                    {
+                      "ruleName": "destinationMacAddressMask",
+                      "ruleData": "ff:ff:ff:ff:00:00"
+                    },
+                    {
+                      "ruleName": "etherType",
+                      "ruleData": "2"
+                    },
+                    {
+                      "ruleName": "vlanId",
+                      "ruleData": "2"
+                    },
+                    {
+                      "ruleName": "vlanPriority",
+                      "ruleData": "2"
+                    }
+                  ],
+                  "ipv4Rule": [
+                    {
+                      "ruleName": "checksumVerification",
+                      "ruleData": "255"
+                    },
+                    {
+                      "ruleName": "destinationIpAddress",
+                      "ruleData": "192.168.14.99"
+                    },
+                    {
+                      "ruleName": "destinationNetworkMask",
+                      "ruleData": "255.255.225.10"
+                    },
+                    {
+                      "ruleName": "differentiatedServiceCodePoint",
+                      "ruleData": "2"
+                    },
+                    {
+                      "ruleName": "doNotFragment",
+                      "ruleData": "2"
+                    },
+                    {
+                      "ruleName": "explicitCongestionNotification",
+                      "ruleData": "2"
+                    },
+                    {
+                      "ruleName": "icmpchecksum",
+                      "ruleData": "250"
+                    },
+                    {
+                      "ruleName": "icmpcode",
+                      "ruleData": "2"
+                    },
+                    {
+                      "ruleName": "icmptype",
+                      "ruleData": "2"
+                    },
+                    {
+                      "ruleName": "internetHeaderLength",
+                      "ruleData": "3"
+                    },
+                    {
+                      "ruleName": "moreFragments",
+                      "ruleData": "5"
+                    },
+                    {
+                      "ruleName": "protocol",
+                      "ruleData": "6"
+                    },
+                    {
+                      "ruleName": "sourceIpAddress",
+                      "ruleData": "192.168.14.99"
+                    },
+                    {
+                      "ruleName": "sourceNetworkMask",
+                      "ruleData": "255.255.255.10"
+                    },
+                    {
+                      "ruleName": "ttlMax",
+                      "ruleData": "10"
+                    },
+                    {
+                      "ruleName": "ttlMin",
+                      "ruleData": "1"
+                    }
+                  ],
+                  "ipv6Rule": [],
+                  "udpRule": [],
+                  "tcpRule": [
+                    {
+                      "ruleName": "checksumVerification",
+                      "ruleData": "2"
+                    },
+                    {
+                      "ruleName": "maxDestinationPortNumber",
+                      "ruleData": "65535"
+                    },
+                    {
+                      "ruleName": "maxSourcePortNumber",
+                      "ruleData": "65535"
+                    },
+                    {
+                      "ruleName": "minDestinationPortNumber",
+                      "ruleData": "0"
+                    },
+                    {
+                      "ruleName": "minSourcePortNumber",
+                      "ruleData": "0"
+                    },
+                    {
+                      "ruleName": "numberOfParallelTcpSessions",
+                      "ruleData": "20"
+                    },
+                    {
+                      "ruleName": "stateManagementBasedOnTcpFlags",
+                      "ruleData": "1"
+                    },
+                    {
+                      "ruleName": "timeoutCheck",
+                      "ruleData": "20"
+                    }
+                  ],
+                  "someipRule": [],
+                  "someipSdRule": [],
+                  "ddsRule": [],
+                  "doipRule": [],
+                  "payloadRule": [
+                    {
+                      "offset": "5",
+                      "value": "200"
+                    },
+                    {
+                      "offset": "20",
+                      "value": "204"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "firewallStatesAll": [
+        {
+          "StateEnumValue": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+// Disclaimer
+//
+// This work (specification and/or software implementation) and the material
+// contained in it, as released by AUTOSAR, is for the purpose of information
+// only. AUTOSAR and the companies that have contributed to it shall not be
+// liable for any use of the work.
+//
+// The material contained in this work is protected by copyright and other
+// types of intellectual property rights. The commercial exploitation of the
+// material contained in this work requires a license to such intellectual
+// property rights.
+//
+// This work may be utilized or reproduced without any modification, in any
+// form or by any means, for informational purposes only. For any other
+// purpose, no part of the work may be utilized or reproduced, in any form
+// or by any means, without permission in writing from the publisher.
+//
+// The work has been developed for automotive applications only. It has
+// neither been developed, nor tested for non-automotive applications.
+//
+// The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+// --------------------------------------------------------------------------
+
+cc_library_static {
+    name: "libnsomeip",
+    //overrides: ["libnsomeip"],
+    srcs: ["src/nsomeip/*/*.c"],
+    vendor: true,
+
+    //stl: "none",
+    c_std: "c99",
+    cflags: [
+        "-DDEBUG",
+        "-fexceptions",
+        "-Wno-macro-redefined",
+        "-Wno-error=missing-field-initializers",
+        "-Wno-error=typedef-redefinition",
+        "-Wno-error=sometimes-uninitialized",
+    ],
+    cppflags: [
+        "-Wno-error=c++11-narrowing",
+        "-Wno-error=uninitialized",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wno-error=deprecated-copy"
+    ],
+    local_include_dirs: ["include", "src"],
+    export_include_dirs: ["include/"],
+    shared_libs: ["libm"],
+    static_libs: ["libnai"],
+    export_generated_headers: ["gen_nsi_config_h"],
+    generated_headers: [
+        "gen_nsi_config_h"
+    ],
+    compile_multilib: "64",
+    min_sdk_version: "33"
+}
+genrule {
+    name: "gen_nsi_config_h",
+    cmd : "touch $(out)",
+    srcs: ["include/nsomeip/nsi_config.h"],
+    out: ["nsomeip/config/nsi_config.h"],    
+}

@@ -1,0 +1,109 @@
+#  Disclaimer
+#
+#  This work (specification and/or software implementation) and the material
+#  contained in it, as released by AUTOSAR, is for the purpose of information
+#  only. AUTOSAR and the companies that have contributed to it shall not be
+#  liable for any use of the work.
+#
+#  The material contained in this work is protected by copyright and other
+#  types of intellectual property rights. The commercial exploitation of the
+#  material contained in this work requires a license to such intellectual
+#  property rights.
+#
+#  This work may be utilized or reproduced without any modification, in any
+#  form or by any means, for informational purposes only. For any other
+#  purpose, no part of the work may be utilized or reproduced, in any form
+#  or by any means, without permission in writing from the publisher.
+#
+#  The work has been developed for automotive applications only. It has
+#  neither been developed, nor tested for non-automotive applications.
+#
+#  The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+#  --------------------------------------------------------------------------
+
+# ================================================================
+#
+# File description:
+# ----------------
+# @file       toolchain.cmake
+# @brief      Build toolchain configuration
+# @details
+# @date       by: james.feng
+# @author     fengjian
+# @version    1.2.0
+#
+# ================================================================
+
+set(TOOLCHAIN_DIR ${CMAKE_CURRENT_LIST_DIR})
+# Set the SYSROOT variable
+if(NOT DEFINED SYSROOT)
+    # This must be an absolute path; otherwise, the cmake_install_prefix path of some modules may be incorrectly recognized and need further investigation.
+    get_filename_component(SYSROOT ${TOOLCHAIN_DIR}/../ara-sysroot ABSOLUTE)
+endif()
+
+# After the compiler is installed, placeholders enclosed by @@ will be replaced with actual values
+set(_framework_path "${SYSROOT}/ara/framework")
+# Get all subdirectories under this path (directory names only, without path prefix)
+file(GLOB _framework_subdirs RELATIVE "${_framework_path}" "${_framework_path}/*")
+# Initialize the version variable
+set(SDK_VERSION "")
+# Iterate over all entries, looking for directory names matching the xx.xx.xx format
+foreach(_dir IN LISTS _framework_subdirs)
+    # Check if it is a directory and the name matches the version number format
+    if(IS_DIRECTORY "${_framework_path}/${_dir}" AND _dir MATCHES "^[0-9]+\\.[0-9]+\\.[0-9]+$")
+        set(SDK_VERSION "${_dir}")
+        break() # Exit the loop immediately after finding the first match
+    endif()
+endforeach()
+
+option(IS_CROSS_COMPILE "Enable cross compilation" @IS_CROSS_COMPILER@)
+
+############### Setting CMAKE variables #################l
+if(IS_CROSS_COMPILE)
+    set(CMAKE_SYSTEM_NAME "@CMAKE_SYSTEM_NAME@")
+    set(CMAKE_SYSTEM_PROCESSOR "@CMAKE_SYSTEM_PROCESSOR@")
+    if(${CMAKE_SYSTEM_NAME} STREQUAL "Android")
+        set(CMAKE_SYSTEM_VERSION @CMAKE_SYSTEM_VERSION@)
+    endif()
+    set(CMAKE_SYSROOT "${SYSROOT}")
+    # This feature cannot be enabled temporarily, as it would cause aragen to not be found
+    #set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+    set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+    set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+    set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+    # TODO: Cannot take effect, needs investigation
+
+    set(ENV{DESTDIR} "${SYSROOT}")
+    set(ENV{LIBRARY_PATH} "${SYSROOT}/lib:${SYSROOT}/usr/lib:$ENV{LD_LIBRARY_PATH}")
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem ${SYSROOT}/usr/include" CACHE STRING "c++ flags" FORCE)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -isystem ${SYSROOT}/usr/include" CACHE STRING "c flags" FORCE)
+    set(CMAKE_SHARED_LINKER_FLAGS "-L${SYSROOT}/usr/lib ${CMAKE_SHARED_LINKER_FLAGS}" CACHE STRING "linker flags" FORCE)
+    set(CMAKE_EXE_LINKER_FLAGS "-L${SYSROOT}/usr/lib ${CMAKE_EXE_LINKER_FLAGS}" CACHE STRING "linker flags" FORCE)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath-link=${SYSROOT}/lib" CACHE STRING "linker flags" FORCE)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath-link=${SYSROOT}/usr/lib" CACHE STRING "linker flags" FORCE)
+endif()
+
+set(CMAKE_CXX_COMPILER "@CXX@" CACHE STRING "c++ compiler")
+set(CMAKE_C_COMPILER "@CC@" CACHE STRING "c compiler")
+
+# The following configurations are enabled as needed
+set(CMAKE_CXX_FLAGS "@CXXFLAGS@ ${CMAKE_CXX_FLAGS}" CACHE STRING "c++ flags")
+set(CMAKE_C_FLAGS "@CFLAGS@ ${CMAKE_C_FLAGS}" CACHE STRING "c flags")
+set(CMAKE_EXE_LINKER_FLAGS "@LDFLAGS@ ${CMAKE_EXE_LINKER_FLAGS}" CACHE STRING "ld flags")
+
+# Do not set CMAKE_MODULE_PATH, because the SDK does not provide any cmake module configuration, nor should it. This mode is limited to distribution OS usage; details can be found by searching for cmake module mode principles.
+#set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" CACHE STRING "cmake moudule search path")
+
+set(CMAKE_PREFIX_PATH
+    ${CMAKE_PREFIX_PATH}
+    "${SYSROOT}/usr"
+    "${SYSROOT}/ara/framework/${SDK_VERSION}"
+    CACHE PATH "cmake find_package search path" FORCE)
+
+# note: FORCE cannot be added, as it would prevent the command line's -DCMAKE_INSTALL_PREFIX from taking effect.
+#set(CMAKE_INSTALL_PREFIX "/usr" CACHE PATH "Installation directory" FORCE)
+set(CMAKE_INSTALL_PREFIX "/usr" CACHE PATH "Installation directory")
+set(CMAKE_INSTALL_LIBDIR "lib" CACHE PATH "Installation directory" FORCE)
+set(TOOLCHAIN_NAME "@TOOLCHAIN_NAME@" CACHE STRING "Toolchain name")
+#message("CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}")

@@ -1,0 +1,99 @@
+#  Disclaimer
+#
+#  This work (specification and/or software implementation) and the material
+#  contained in it, as released by AUTOSAR, is for the purpose of information
+#  only. AUTOSAR and the companies that have contributed to it shall not be
+#  liable for any use of the work.
+#
+#  The material contained in this work is protected by copyright and other
+#  types of intellectual property rights. The commercial exploitation of the
+#  material contained in this work requires a license to such intellectual
+#  property rights.
+#
+#  This work may be utilized or reproduced without any modification, in any
+#  form or by any means, for informational purposes only. For any other
+#  purpose, no part of the work may be utilized or reproduced, in any form
+#  or by any means, without permission in writing from the publisher.
+#
+#  The work has been developed for automotive applications only. It has
+#  neither been developed, nor tested for non-automotive applications.
+#
+#  The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+#  --------------------------------------------------------------------------
+
+
+## 本文件依据所选项目中接口及实例的配置，生成了以下实例标识，以供技术人员编程使用。
+
+- interface ()
+    - smd
+        -instSpec = "smd/state_manager/DiagnosticEcuResetDependence"
+
+- interface (DiagnosticEcuResetInterface)
+    - smd
+        -instSpec = "smd/state_manager/DiagnosticEcuResetPPort"
+
+- interface (EcuResetRequest)
+    - dmd
+        -instSpec = "dmd/root/Machine1_core_DiagnosticEcuResetDependence"
+    - smd
+        -instSpec = "smd/state_manager/DiagnosticEcuResetDependence__DiagnosticInterfaceDeployment__"
+
+- interface (NetworkState)
+    - smd
+        -instSpec = "smd/state_manager/NetworkState_ln1"
+    - nmd
+        -instSpec = "nmd/network_manager_root/NetworkState_ln1"
+
+- interface (PackageManagement)
+    - ucmd
+        -instSpec = "ucmd/package_manager_root/PackageManagementPPort"
+    - ucmmd
+        -instSpec = "ucmmd/ucmm_root/PackageManagementRPort"
+
+- interface (ServiceHelloWorld)
+    - clientd
+        -instSpec = "clientd/client/helloworld_RPort"
+    - serverd
+        -instSpec = "serverd/server/helloworld_PPort"
+
+- interface (TriggerInOut_State)
+    - smd
+        -instSpec = "smd/state_manager/TriggerInOut_State"
+
+- interface (TriggerIn_State)
+    - smd
+        -instSpec = "smd/state_manager/TriggerIn_State"
+
+- interface (TriggerOut_State)
+    - smd
+        -instSpec = "smd/state_manager/TriggerOut_State"
+
+- interface (UpdateRequest)
+    - smd
+        -instSpec = "smd/state_manager/UpdateRequest"
+    - ucmd
+        -instSpec = "ucmd/package_manager_root/UpdateRequestRPort"
+
+- interface (VehicleDriverApplication)
+    - ucmmd
+        -instSpec = "ucmmd/ucmm_root/VehicleDriverApplicationPPort"
+
+- interface (VehiclePackageManagement)
+    - ucmmd
+        -instSpec = "ucmmd/ucmm_root/VehiclePackageManagementPPort"
+
+- interface (VehicleStateManager)
+    - ucmmd
+        -instSpec = "ucmmd/ucmm_root/VehicleStateManagerPPort"
+
+- interface (cryptod_keySlot_Interface_app)
+    - cryptod
+        -instSpec = "cryptod/cryptod_swc_root/pPort_keySlot_app"
+
+- interface (cryptod_keySlot_Interface_machine)
+    - cryptod
+        -instSpec = "cryptod/cryptod_swc_root/pPort_keySlot_machine"
+
+- interface (cryptod_provider_interface_puhua)
+    - cryptod
+        -instSpec = "cryptod/cryptod_swc_root/pPort_cryptoProvider_puhua"

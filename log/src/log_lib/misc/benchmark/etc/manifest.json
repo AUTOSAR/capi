@@ -1,0 +1,58 @@
+{
+    "name": "log_demo_process",
+    "fullQualifiedName": "/iSOFT/Development/log_demo_process",
+    "executable": {
+        "name": "log_demo_exe",
+        "fullQualifiedName": "/iSOFT/exe/log_demo_exe",
+        "buildType": "Debug",
+        "loggingBehavior": true,
+        "mininumTimerGranularity": 0,
+        "reportingBehavior": "",
+        "version": "1.0.0",
+        "platform_application": false
+    },
+    "functionClusterAffiliation": "",
+    "numberOfRestartAttempts": 0,
+    "preMapping": false,
+    "stateDependentStartupConfig": [],
+    "service_instance_to_port_prototype_mapping": [
+        {
+            "instance_specifier": "log_demo_exe/RootSwC_log_demo_exe/PPort_IDC_HMIDisplay_0x000B_0x000B",
+            "service_instance": "/iSOFT/Development/someipInstance/provided/Provided_IDC_HMIDisplay_IDC_0x000B_instance"
+        },
+        {
+            "instance_specifier": "log_demo_exe/RootSwC_log_demo_exe/PPort_IDC_MapNavigation_0x000C_0x000C",
+            "service_instance": "/iSOFT/Development/someipInstance/provided/Provided_IDC_MapNavigation_IDC_0x000C_instance"
+        },
+        {
+            "instance_specifier": "log_demo_exe/RootSwC_log_demo_exe/PPort_IDC_SWSaleable_0x000D_0x000D",
+            "service_instance": "/iSOFT/Development/someipInstance/provided/Provided_IDC_SWSaleable_IDC_0x000D_instance"
+        },
+        {
+            "instance_specifier": "log_demo_exe/RootSwC_log_demo_exe/PPort_IDC_SystemParameter_0x000F_0x000F",
+            "service_instance": "/iSOFT/Development/someipInstance/provided/Provided_IDC_SystemParameter_IDC_0x000F_instance"
+        },
+        {
+            "instance_specifier": "log_demo_exe/RootSwC_log_demo_exe/PPort_IDC_VehiclePositionInfo_0x000A_0x000A",
+            "service_instance": "/iSOFT/Development/someipInstance/provided/Provided_IDC_VehiclePositionInfo_IDC_0x000A_instance"
+        },
+        {
+            "instance_specifier": "log_demo_exe/RootSwC_log_demo_exe/RPort_Media_MapNavigation_0x8000_0x8000",
+            "service_instance": "/iSOFT/Development/someipInstance/required/Required_Media_MapNavigation_IDC_0x8000_instance"
+        },
+        {
+            "instance_specifier": "log_demo_exe/RootSwC_log_demo_exe/RPort_Media_SWSaleable_0x8003_0x8003",
+            "service_instance": "/iSOFT/Development/someipInstance/required/Required_Media_SWSaleable_IDC_0x8003_instance"
+        },
+        {
+            "instance_specifier": "log_demo_exe/RootSwC_log_demo_exe/RPort_Media_SysemParameter_0x8001_0x8001",
+            "service_instance": "/iSOFT/Development/someipInstance/required/Required_Media_SysemParameter_IDC_0x8001_instance"
+        },
+        {
+            "instance_specifier": "log_demo_exe/RootSwC_log_demo_exe/RPort_Media_SysemState_0x8002_0x8002",
+            "service_instance": "/iSOFT/Development/someipInstance/required/Required_Media_SysemState_IDC_0x8002_instance"
+        }
+    ],
+    "logicnetwork_to_serviceinstance_mapping": [],
+    "recovery_notification_info": []
+}

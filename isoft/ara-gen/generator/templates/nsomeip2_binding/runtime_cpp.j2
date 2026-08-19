@@ -1,0 +1,235 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+
+#include "ara/com/internal/runtime.h"
+#include "ara/core/future.h"
+
+{% for domain in error_domains %}
+#include {{domain.include_name}}
+{% endfor %}
+#ifdef HAS_NSOMEIP_BINDING
+#include "ara/com/internal/nsomeip/nsomeip_runtime.h"
+#endif
+
+#ifdef HAS_NPC_BINDING
+#include "ara/com/internal/npc/npc_runtime.h"
+#endif
+
+#ifdef HAS_ICC_BINDING
+#include "ara/com/internal/icc/icc_runtime.h"
+#endif
+
+#ifdef HAS_FASTDDS_BINDING
+#include "ara/com/internal/fastdds/fastdds_runtime.h"
+#endif
+
+#ifdef HAS_ARA_CG
+#include "ara/com/internal/cg/cg_runtime.h"
+#endif
+
+#ifdef HAS_ARA_RAW
+#include "ara/com/internal/raw/raw_runtime.h"
+#endif
+
+namespace ara {
+namespace com {
+namespace internal {
+
+{% for service in services %}
+ara::core::Result<void> Initialize{{service.name}}() noexcept ;
+ara::core::Result<void> Deinitialize{{service.name}}() noexcept ;
+{% endfor %}
+#ifdef ARA_FC_LIB_DIAG
+#define ARA_FC_LIB
+ara::core::Result<void> Runtime::InitializeForDiag() noexcept{
+#elif ARA_FC_LIB_COM_CG
+#define ARA_FC_LIB
+
+ara::core::Result<void> Runtime::InitializeForComCG() noexcept{
+#else
+ara::core::Result<void> Runtime::Initialize() noexcept{
+#endif
+    using Result = ara::core::Result<void>;
+    Result result{};
+    {% if error_domains | length >0 %}
+    auto& comRuntime{ara::com::internal::GetInstance()};
+    {%endif%}
+    {% for domain in error_domains %}
+    comRuntime.RegisterErrorDomain({{domain.qualified_cpp_namespace_prefix}}::Get{{domain.name}}ErrorDomain());
+    {%endfor%}
+#ifdef HAS_NSOMEIP_BINDING
+{
+#ifndef ARA_FC_LIB
+    if(auto res = ara::com::internal::nsomeip::Initialize()) {
+#endif
+    auto& runtime = ara::com::internal::nsomeip::runtime::GetInstance();
+
+    std::ignore = runtime;
+#ifndef ARA_FC_LIB
+    } else {
+        result = std::move(res);
+    }
+#endif
+}
+#endif // HAS_NSOMEIP_BINDING
+#ifdef HAS_NPC_BINDING
+{
+#ifndef ARA_FC_LIB
+    if(auto res = ara::com::internal::npc::Initialize()) {
+#endif
+    auto& runtime = ara::com::internal::npc::runtime::GetInstance();
+
+    std::ignore = runtime;
+#ifndef ARA_FC_LIB
+    } else {
+        result = std::move(res);
+    }
+#endif
+}
+#endif // HAS_NPC_BINDING
+#ifdef HAS_ICC_BINDING
+{
+#ifndef ARA_FC_LIB
+    if(auto res = ara::com::internal::icc::Initialize()) {
+#endif
+    auto& runtime = ara::com::internal::icc::runtime::GetInstance();
+
+    std::ignore = runtime;
+#ifndef ARA_FC_LIB
+    } else {
+        result = std::move(res);
+    }
+#endif
+}
+#endif // HAS_ICC_BINDING
+#ifdef HAS_FASTDDS_BINDING
+{
+#ifndef ARA_FC_LIB
+    if(auto res = ara::com::internal::fastdds::Initialize()) {
+#endif
+    auto& runtime = ara::com::internal::fastdds::runtime::GetInstance();
+
+    std::ignore = runtime;
+#ifndef ARA_FC_LIB
+    } else {
+        result = std::move(res);
+    }
+#endif
+}
+#endif // HAS_FASTDDS_BINDING
+#ifdef HAS_ARA_RAW
+{
+#ifndef ARA_FC_LIB
+    if(auto res = ara::com::internal::raw::Initialize()) {
+#endif
+
+#ifndef ARA_FC_LIB
+    } else {
+        result = std::move(res);
+    }
+#endif
+}
+#endif // HAS_ARA_RAW
+#ifdef HAS_ARA_CG
+{
+#ifndef ARA_FC_LIB
+    if(auto res = ara::com::internal::cg::Initialize()) {
+#endif
+
+#ifndef ARA_FC_LIB
+    } else {
+        result = std::move(res);
+    }
+#endif
+}
+#endif // HAS_ARA_CG
+    if(!result) return result;
+
+{% for service in services %}
+    if(!(result = Initialize{{service.name}}())) return result;
+{% endfor %}
+
+    return result;
+}
+
+#ifndef ARA_FC_LIB
+ara::core::Result<void> Runtime::Deinitialize() noexcept{
+    using Result = ara::core::Result<void>;
+    Result result{};
+#ifdef HAS_ARA_CG
+    if(auto res = ara::com::internal::cg::Deinitialize()) {
+    }
+    else {
+        result = std::move(res);
+    }
+#endif // HAS_ARA_CG
+#ifdef HAS_NSOMEIP_BINDING
+    if(auto res = ara::com::internal::nsomeip::Deinitialize()) {
+    }
+    else {
+        result = std::move(res);
+    }
+#endif // HAS_NSOMEIP_BINDING
+#ifdef HAS_NPC_BINDING
+    if(auto res = ara::com::internal::npc::Deinitialize()) {
+    }
+    else {
+        result = std::move(res);
+    }
+#endif // HAS_NPC_BINDING
+#ifdef HAS_ICC_BINDING
+    if(auto res = ara::com::internal::icc::Deinitialize()) {
+    }
+    else {
+        result = std::move(res);
+    }
+#endif // HAS_ICC_BINDING
+#ifdef HAS_FASTDDS_BINDING
+    if(auto res = ara::com::internal::fastdds::Deinitialize()) {
+    }
+    else {
+        result = std::move(res);
+    }
+#endif // HAS_FASTDDS_BINDING
+#ifdef HAS_ARA_RAW
+    if(auto res = ara::com::internal::raw::Deinitialize()) {
+    }
+    else {
+        result = std::move(res);
+    }
+#endif // HAS_ARA_RAW
+
+
+
+{% for service in services %}
+    if(!(result = Deinitialize{{service.name}}())) return result;
+{% endfor %}
+
+    return result;
+}
+#endif
+} // namespace internal
+} // namespace com
+} // namespace ara

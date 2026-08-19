@@ -1,0 +1,10 @@
+{
+    "name": "fast-cdr",
+    "version": "2.3.0",
+    "depend":[],
+    "url": "https://github.com/eProsima/Fast-CDR/archive/refs/tags/v2.3.0.tar.gz",
+    "patch": ["fast-cdr.patch"],
+    "configure": "cmake @CMAKE_ARGS@ .",
+    "build": "make -j@JOBS@",
+    "install": "make install DESTDIR=@SYSROOT@"
+}

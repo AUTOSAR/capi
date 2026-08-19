@@ -1,0 +1,68 @@
+{
+	"PhmCheckPointGrants": [
+		{
+			"processname": "/home/radar",
+			"checkpointid": [
+				1011,
+				1012,
+				1013,
+				1014,
+				1015
+			]
+		},
+		{
+			"processname": "/homeTest/Client",
+			"checkpointid": [
+				1011,
+				1012,
+				1013,
+				1014,
+				1015,
+				1017
+			]
+		},
+		{
+			"processname": "radar",
+			"checkpointid": [
+				1011,
+				1012,
+				1013,
+				1014,
+				1015
+			]
+		}
+	],
+	"PhmChannelGrants": [
+		{
+			"processname": "/home/radar",
+			"channelid": [
+				1011,
+				1012,
+				1013,
+				1014,
+				1015
+			]
+		},
+		{
+			"processname": "/homeTest/Client",
+			"channelid": [
+				1011,
+				1012,
+				1013,
+				1014,
+				1030,
+				1032
+			]
+		},
+		{
+			"processname": "radar",
+			"channelid": [
+				1011,
+				1012,
+				1013,
+				1014,
+				1015
+			]
+		}
+	]
+}

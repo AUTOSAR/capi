@@ -1,0 +1,1623 @@
+{
+  "development_machines1": {
+    "name": "machines1件包",
+    "description": "包括machines1相关组件，应该都是copy。TODO 拆进程、Module以支持用户选择启停某功能集",
+    "components": [
+      {
+        "type": "base",
+        "id": "intergration-machine1",
+        "dirname": "intergration-machine1",
+        "name": "集成-机器1",
+        "description": "集成-机器1",
+        "copy": true,
+        "depends": [
+          "autosar-standard-types",
+          "common-shared-types",
+          "diagnostic-extract",
+          "ara-com-daemon",
+          "ara-com-cg-daemon",
+          "ara-com-cg-common",
+          "ara-com-extension",
+          "ara-crypto-daemon",
+          "ara-crypto-x509-daemon",
+          "ara-crypto-hsm-daemon",
+          "ara-diag-daemon",
+          "ara-diag-extension",
+          "ara-fw-extension",
+          "ara-fw-daemon",
+          "isoft-doip-gateway",
+          "ara-exec-extension",
+          "ara-idsm-daemon",
+          "ara-idsm-security-event",
+          "ara-log-daemon",
+          "ara-log-extension",
+          "ara-nm-daemon",
+          "ara-nm-service-interface",
+          "ara-nm-service-interface-someip",
+          "ara-nm-extension",
+          "ara-phm-daemon",
+          "ara-sm-daemon",
+          "ara-sm-diag-ecu-reset-swc",
+          "ara-sm-diag-ecu-reset-cg-server-swc",
+          "ara-sm-power-mode-cg-server-swc",
+          "ara-sm-nm-network-state-swc",
+          "ara-sm-persistency-swc",
+          "ara-sm-state-machine-swc",
+          "ara-sm-trigger-function-group-swc",
+          "ara-sm-ucm-update-request-swc",
+          "ara-sm-trigger-state-swc",
+          "ara-sm-diag-ecu-reset-cg-server-service-interface-someip",
+          "ara-sm-power-mode-cg-server-service-interface-someip",
+          "ara-sm-trigger-function-group-service-interface-someip",
+          "ara-sm-trigger-state-service-interface-someip",
+          "ara-sm-update-request-service-interface-someip",
+          "ara-sm-state-machine-service-interface-someip",
+          "ara-sm-extension",
+          "ara-sm-nm-network-state-service-interface-grant",
+          "ara-sm-nm-hello-world-mode-group",
+          "ara-sm-ucm-update-request-service-interface-grant",
+          "ara-sm-shell-command-request-service-interface-grant",
+          "ara-sm-shell-command-request-service-interface-someip",
+          "ara-sm-shell-command-request-swc",
+          "ara-reset-machine-daemon",
+          "ara-shutdown-daemon",
+          "ara-shell-command-client",
+          "ara-tsync-daemon",
+          "ara-tsync-extension",
+          "ara-ucm-daemon",
+          "ara-ucm-extension",
+          "ara-ucm-service-interface-common",
+          "ara-ucm-service-interface",
+          "ara-ucm-service-interface-someip",
+          "ara-ucm-master-daemon",
+          "ara-ucm-master-service-interface",
+          "ara-ucm-master-service-interface-someip",
+          "intergration-base"
+        ],
+        "locations": [
+          "development_machines/machine1"
+        ]
+      }
+    ]
+  },
+  "development_machines2": {
+    "name": "Machines2件包",
+    "description": "包括Machines2相关组件，应该都是copy。TODO 拆进程、Module以支持用户选择启停某功能集",
+    "components": [
+      {
+        "type": "base",
+        "id": "intergration-machine2",
+        "dirname": "intergration-machine2",
+        "name": "集成-机器2",
+        "description": "集成-机器2",
+        "copy": true,
+        "depends": [
+          "autosar-standard-types",
+          "common-shared-types",
+          "diagnostic-extract",
+          "ara-com-daemon",
+          "ara-com-cg-common",
+          "ara-com-cg-daemon",
+          "ara-com-extension",
+          "ara-crypto-daemon",
+          "ara-diag-daemon",
+          "ara-diag-extension",
+          "isoft-doip-gateway",
+          "ara-exec-extension",
+          "ara-idsm-daemon",
+          "ara-idsm-security-event",
+          "ara-log-daemon",
+          "ara-log-extension",
+          "ara-nm-daemon",
+          "ara-nm-service-interface",
+          "ara-nm-service-interface-someip",
+          "ara-nm-extension",
+          "ara-phm-daemon",
+          "ara-sm-daemon",
+          "ara-sm-diag-ecu-reset-swc",
+          "ara-sm-diag-ecu-reset-cg-server-swc",
+          "ara-sm-power-mode-cg-server-swc",
+          "ara-sm-nm-network-state-swc",
+          "ara-sm-persistency-swc",
+          "ara-sm-state-machine-swc",
+          "ara-sm-trigger-function-group-swc",
+          "ara-sm-ucm-update-request-swc",
+          "ara-sm-trigger-state-swc",
+          "ara-sm-diag-ecu-reset-cg-server-service-interface-someip",
+          "ara-sm-power-mode-cg-server-service-interface-someip",
+          "ara-sm-trigger-function-group-service-interface-someip",
+          "ara-sm-trigger-state-service-interface-someip",
+          "ara-sm-update-request-service-interface-someip",
+          "ara-sm-state-machine-service-interface-someip",
+          "ara-sm-extension",
+          "ara-sm-nm-network-state-service-interface-grant",
+          "ara-sm-nm-hello-world-mode-group",
+          "ara-sm-ucm-update-request-service-interface-grant",
+          "ara-sm-shell-command-request-service-interface-grant",
+          "ara-sm-shell-command-request-service-interface-someip",
+          "ara-sm-shell-command-request-swc",
+          "ara-reset-machine-daemon",
+          "ara-shutdown-daemon",
+          "ara-shell-command-client",
+          "ara-tsync-daemon",
+          "ara-tsync-extension",
+          "ara-ucm-daemon",
+          "ara-ucm-extension",
+          "ara-ucm-service-interface-common",
+          "ara-ucm-service-interface",
+          "ara-ucm-service-interface-someip",
+          "ara-ucm-master-daemon",
+          "ara-ucm-master-service-interface",
+          "ara-ucm-master-service-interface-someip",
+          "intergration-base"
+        ],
+        "locations": [
+          "development_machines/machine2"
+        ]
+      }
+    ]
+  },
+  "development_machines_common": {
+    "name": "开发机公共组件包",
+    "description": "包含不属于两台开发机器的组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "diagnostic-extract",
+        "dirname": "diagnostic-extract",
+        "name": "诊断提取",
+        "description": "诊断提取",
+        "copy": true,
+        "depends": [],
+        "locations": [
+          "development_machines/diagnostic_extract"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "intergration-base",
+        "dirname": "intergration-base",
+        "name": "集成-基础",
+        "description": "集成-基础",
+        "copy": true,
+        "depends": [],
+        "locations": [
+          "development_machines/system"
+        ]
+      }
+    ]
+  },
+  "platform_component_com": {
+    "name": "平台COM组件包",
+    "description": "包括COM相关平台组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "ara-com-daemon",
+        "dirname": "ara-com-daemon",
+        "name": "com 守护程序",
+        "description": "com 守护程序",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/com/daemon/applcation_desisn.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-com-cg-common",
+        "dirname": "ara-com-cg-common",
+        "name": "cg 错误域和自定义类型",
+        "description": "cg 错误域和自定义类型",
+        "copy": false,
+        "depends": [
+          "autosar-standard-types"
+        ],
+        "locations": [
+          "platform_components/com/cg/cg_errors.arxml",
+          "platform_components/com/cg/cg_usertypes.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-com-cg-daemon",
+        "dirname": "ara-com-cg-daemon",
+        "name": "cg 守护程序",
+        "description": "cg 守护程序",
+        "copy": false,
+        "depends": [
+          "ara-sm-diag-ecu-reset-cg-server-service-interfaces",
+          "ara-sm-diag-ecu-reset-cg-server-service-interface-someip",
+          "ara-sm-diag-ecu-reset-cg-client-service-interfaces",
+          "ara-sm-diag-ecu-reset-cg-client-service-interface-someip",
+          "ara-sm-power-mode-cg-client-service-interfaces",
+          "ara-sm-power-mode-cg-client-service-interface-someip",
+          "ara-sm-power-mode-cg-server-service-interfaces",
+          "ara-sm-power-mode-cg-server-service-interface-someip"
+        ],
+        "locations": [
+          "platform_components/com/cg/daemon/application_desisn.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-com-extension",
+        "dirname": "ara-com-extension",
+        "name": "com 扩展模型",
+        "description": "通信组的扩展模型",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/com/extension.arxml"
+        ]
+      },
+      {
+        "type": "internal",
+        "id": "ara-com-trace",
+        "dirname": "ara-com-trace",
+        "name": "com 打点消息",
+        "description": "打点消息",
+        "copy": false,
+        "depends": [
+          "usability-base-type",
+          "ara-com-extension"
+        ],
+        "locations": [
+          "platform_components/com/trace.arxml"
+        ]
+      }
+    ]
+  },
+  "platform_component_common": {
+    "name": "平台基础组件包",
+    "description": "包括平台基础组件，公共组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "autosar-standard-types",
+        "dirname": "autosar-standard-types",
+        "name": "服务接口基础数据类型",
+        "description": "适用于服务接口的基础数据类型",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "common/AUTOSAR_MOD_StandardTypes.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "common-shared-types",
+        "dirname": "common-shared-types",
+        "name": "公共数据类型",
+        "description": "平台预置的数据类型，如 String 等",
+        "copy": false,
+        "depends": [
+          "autosar-standard-types"
+        ],
+        "locations": [
+          "common/shared_types.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "usability-base-type",
+        "dirname": "usability-base-type",
+        "name": "基础数据类型",
+        "description": "指定了编码方式的基础数据类型",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "common/base_type.arxml"
+        ]
+      }
+    ]
+  },
+  "platform_component_crypto": {
+    "name": "平台Crypto组件包",
+    "description": "包括Crypto相关平台组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "ara-crypto-daemon",
+        "dirname": "ara-crypto-daemon",
+        "name": "crypto 守护程序",
+        "description": "crypto 守护程序",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/crypto/daemon"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-crypto-hsm-daemon",
+        "dirname": "ara-crypto-hsm-daemon",
+        "name": "crypto HSM 守护程序",
+        "description": "crypto HSM 守护程序",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/cryptohsm/daemon"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-crypto-x509-daemon",
+        "dirname": "ara-crypto-x509-daemon",
+        "name": "crypto X509 守护程序",
+        "description": "crypto X509 守护程序",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/cryptox509/daemon"
+        ]
+      }
+    ]
+  },
+  "platform_component_diag": {
+    "name": "平台Diag组件包",
+    "description": "包括Diag相关平台组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "ara-diag-daemon",
+        "dirname": "ara-diag-daemon",
+        "name": "diag 守护程序",
+        "description": "诊断管理器",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/diag/daemon"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-diag-extension",
+        "dirname": "ara-diag-extension",
+        "name": "diag 扩展模型",
+        "description": "诊断功能集的扩展模型",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/diag/extension.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "isoft-doip-gateway",
+        "dirname": "isoft-doip-gateway",
+        "name": "DoIP 网关",
+        "description": "DoIP 网关",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/diag/doipd"
+        ]
+      }
+    ]
+  },
+  "platform_component_exec": {
+    "name": "平台EM组件包",
+    "description": "包括EM相关组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "ara-exec-extension",
+        "dirname": "ara-exec-extension",
+        "name": "exec 扩展模型",
+        "description": "执行管理功能集的扩展模型",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/exec/extension.arxml"
+        ]
+      }
+    ]
+  },
+  "platform_component_ids": {
+    "name": "平台IDS组件包",
+    "description": "包括IDSM/IDSR相关组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "ara-idsm-daemon",
+        "dirname": "ara-idsm-daemon",
+        "name": "idsm 守护程序",
+        "description": "idsm 守护程序",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/idsm/daemon"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-idsm-extension",
+        "dirname": "ara-idsm-extension",
+        "name": "idsm 扩展模型",
+        "description": "入侵检测系统管理功能集的扩展模型",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/idsm/extension.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-idsm-security-event",
+        "dirname": "ara-idsm-security-event",
+        "name": "idsm 安全事件",
+        "description": "idsm 安全事件",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/idsm/security_event.arxml"
+        ]
+      }
+    ]
+  },
+  "platform_component_fw": {
+    "name": "平台FW组件包",
+    "description": "包括FWDaemon和extension相关组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "ara-fw-daemon",
+        "dirname": "ara-fw-daemon",
+        "name": "fw 守护程序",
+        "description": "fw 守护程序",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/fw/application_design.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-fw-extension",
+        "dirname": "ara-fw-extension",
+        "name": "fw 扩展模型",
+        "description": "防火墙功能集的扩展模型",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/fw/extension.arxml"
+        ]
+      }
+    ]
+  },
+  "platform_component_log": {
+    "name": "平台Log组件包",
+    "description": "包括Log相关组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "ara-log-daemon",
+        "dirname": "ara-log-daemon",
+        "name": "log 守护程序",
+        "description": "log 守护程序",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/log/daemon/application_design.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-log-extension",
+        "dirname": "ara-log-extension",
+        "name": "log 扩展模型",
+        "description": "log的扩展模型",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/log/extension.arxml"
+        ]
+      }
+    ]
+  },
+  "platform_component_nm": {
+    "name": "平台NM组件包",
+    "description": "包括NM相关平台组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "ara-nm-daemon",
+        "dirname": "ara-nm-daemon",
+        "name": "nm 守护程序",
+        "description": "nm 守护程序",
+        "copy": false,
+        "depends": [
+          "ara-nm-service-interface-someip",
+          "ara-nm-service-interface"
+        ],
+        "locations": [
+          "platform_components/nm/daemon"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-nm-service-interface",
+        "dirname": "ara-nm-service-interface",
+        "name": "nm 服务接口",
+        "description": "nm 服务接口",
+        "copy": false,
+        "depends": [
+          "autosar-standard-types",
+          "common-shared-types"
+        ],
+        "locations": [
+          "platform_components/nm/service_interface"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-nm-service-interface-someip",
+        "dirname": "ara-nm-service-interface-someip",
+        "name": "nm 服务接口的 SOMEIP 部署",
+        "description": "nm 服务接口的 SOMEIP 部署",
+        "copy": false,
+        "depends": [
+          "ara-nm-service-interface"
+        ],
+        "locations": [
+          "platform_components/nm/service_interface_someip"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-nm-extension",
+        "dirname": "ara-nm-extension",
+        "name": "nm 扩展模型",
+        "description": "nm的扩展模型",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/nm/extension.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-tsync-extension",
+        "dirname": "ara-tsync-extension",
+        "name": "tsync 扩展模型",
+        "description": "tsync的扩展模型",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/tsync/extension.arxml"
+        ]
+      }
+    ]
+  },
+  "platform_component_obsoleted": {
+    "name": "平台废弃组件包",
+    "description": "包括平台已废弃组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "common-mode-groups",
+        "dirname": "common-mode-groups",
+        "name": "公共模式组",
+        "description": "平台预置的模式组，如机器功能组、进程状态机等(已经清空并废弃)",
+        "copy": false,
+        "depends": [],
+        "locations": []
+      },
+      {
+        "type": "base",
+        "id": "common-mode-groups-v2",
+        "dirname": "common-mode-groups-v2",
+        "name": "预制模式组模板",
+        "description": "平台预置的模式组，如机器功能组、进程状态机等(已经清空并废弃)",
+        "copy": true,
+        "depends": [],
+        "locations": []
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-service-interface-trigger",
+        "dirname": "ara-sm-service-interface-trigger",
+        "name": "sm Trigger 服务接口",
+        "description": "sm Trigger 服务接口(已经清空并废弃)",
+        "copy": false,
+        "depends": [],
+        "locations": []
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-service-interface-trigger-someip",
+        "dirname": "ara-sm-service-interface-trigger-someip(已经清空并废弃)",
+        "name": "sm Trigger 服务接口的 SOMEIP 部署",
+        "description": "sm Trigger 服务接口的 SOMEIP 部署",
+        "copy": false,
+        "depends": [],
+        "locations": []
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-service-interface-update-request",
+        "dirname": "ara-sm-service-interface-update-request",
+        "name": "sm UpdateRequest 服务接口",
+        "description": "sm UpdateRequest 服务接口(已经清空并废弃)",
+        "copy": false,
+        "depends": [
+          "ara-sm-update-request-service-interfaces"
+        ],
+        "locations": []
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-service-interface-update-request-someip",
+        "dirname": "ara-sm-service-interface-update-request-someip",
+        "name": "sm UpdateRequest 服务接口的 SOMEIP 部署",
+        "description": "sm UpdateRequest 服务接口的 SOMEIP 部署(已经清空并废弃)",
+        "copy": false,
+        "depends": [
+          "ara-sm-update-request-service-interface-someip"
+        ],
+        "locations": []
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-service-interface-cg-diagnostic-reset",
+        "dirname": "ara-sm-service-interface-cg-diagnostic-reset",
+        "name": "sm CG DiagnosticReset 服务接口",
+        "description": "sm CG DiagnosticReset 服务接口(已经清空并废弃)",
+        "copy": false,
+        "depends": [],
+        "locations": []
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-service-interface-cg-diagnostic-reset-someip",
+        "dirname": "ara-sm-service-interface-cg-diagnostic-reset-someip",
+        "name": "sm CG DiagnosticReset 服务接口的 SOMEIP 部署",
+        "description": "sm CG DiagnosticReset 服务接口的 SOMEIP 部署(已经清空并废弃)",
+        "copy": false,
+        "depends": [],
+        "locations": []
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-service-interface-cg-power-mode",
+        "dirname": "ara-sm-service-interface-cg-power-mode",
+        "name": "sm CG PowerMode 服务接口",
+        "description": "sm CG PowerMode 服务接口(已经清空并废弃)",
+        "copy": false,
+        "depends": [],
+        "locations": []
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-service-interface-cg-power-mode-someip",
+        "dirname": "ara-sm-service-interface-cg-power-mode-someip",
+        "name": "sm CG PowerMode 服务接口的 SOMEIP 部署",
+        "description": "sm CG PowerMode 服务接口的 SOMEIP 部署(已经清空并废弃)",
+        "copy": false,
+        "depends": [],
+        "locations": []
+      },
+      {
+        "type": "base",
+        "id": "ara-diag-interface",
+        "dirname": "ara-diag-interface",
+        "name": "diag 接口",
+        "description": "诊断接口(已经清空并废弃)",
+        "copy": false,
+        "depends": [],
+        "locations": []
+      }
+    ]
+  },
+  "platform_component_sm": {
+    "name": "平台SM组件包",
+    "description": "包括SM相关平台组件,但用户自定义SM时也只需引用,而不需要copy",
+    "components": [
+      {
+        "type": "base",
+        "id": "ara-sm-diag-ecu-reset-interface",
+        "dirname": "ara-sm-diag-ecu-reset-interface",
+        "name": "诊断重置接口",
+        "description": "诊断重置接口",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/sm/diag_ecu_reset/diagnostic/interfaces"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-diag-ecu-reset-swc",
+        "dirname": "ara-sm-diag-ecu-reset-swc",
+        "name": "诊断重置 swc",
+        "description": "诊断重置 swc",
+        "copy": false,
+        "depends": [
+          "ara-sm-diag-ecu-reset-interface"
+        ],
+        "locations": [
+          "platform_components/sm/diag_ecu_reset/diagnostic/swc"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-diag-ecu-reset-cg-service-interface-common",
+        "dirname": "ara-sm-diag-ecu-reset-cg-service-interface-common",
+        "name": "诊断重置通信组接口 公共类型",
+        "description": "诊断重置通信组接口 公共类型 ",
+        "copy": false,
+        "depends": [
+          "common-shared-types"
+        ],
+        "locations": [
+          "platform_components/sm/diag_ecu_reset/diagnostic_reset_cg/interfaces/diagnostic_reset_common.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-diag-ecu-reset-cg-client-service-interfaces",
+        "dirname": "ara-sm-diag-ecu-reset-cg-client-service-interfaces",
+        "name": "诊断重置通信组客户端接口",
+        "description": "诊断重置通信组客户端接口",
+        "copy": false,
+        "depends": [
+          "ara-sm-diag-ecu-reset-cg-service-interface-common",
+          "ara-com-cg-common"
+        ],
+        "locations": [
+          "platform_components/sm/diag_ecu_reset/diagnostic_reset_cg/interfaces/diagnostic_reset_client.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-diag-ecu-reset-cg-client-service-interface-someip",
+        "dirname": "ara-sm-diag-ecu-reset-cg-client-service-interface-someip",
+        "name": "诊断重置通信组客户端接口部署",
+        "description": "诊断重置通信组客户端接口部署",
+        "copy": false,
+        "depends": [
+          "ara-sm-diag-ecu-reset-cg-client-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/diag_ecu_reset/diagnostic_reset_cg/interface_deployment/diagnostic_reset_client.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-diag-ecu-reset-cg-server-service-interfaces",
+        "dirname": "ara-sm-diag-ecu-reset-cg-server-service-interfaces",
+        "name": "诊断重置通信组服务端接口",
+        "description": "诊断重置通信组服务端接口",
+        "copy": false,
+        "depends": [
+          "ara-sm-diag-ecu-reset-cg-service-interface-common",
+          "ara-com-cg-common"
+        ],
+        "locations": [
+          "platform_components/sm/diag_ecu_reset/diagnostic_reset_cg/interfaces/diagnostic_reset_server.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-diag-ecu-reset-cg-server-service-interface-someip",
+        "dirname": "ara-sm-diag-ecu-reset-cg-server-service-interface-someip",
+        "name": "诊断重置通信组服务端接口部署",
+        "description": "诊断重置通信组服务端接口部署",
+        "copy": false,
+        "depends": [
+          "ara-sm-diag-ecu-reset-cg-server-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/diag_ecu_reset/diagnostic_reset_cg/interface_deployment/diagnostic_reset_server.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-diag-ecu-reset-cg-server-swc",
+        "dirname": "ara-sm-diag-ecu-reset-cg-server-swc",
+        "name": "诊断重置通信组服务端 swc",
+        "description": "诊断重置通信组服务端 swc",
+        "copy": false,
+        "depends": [
+          "ara-sm-diag-ecu-reset-cg-server-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/diag_ecu_reset/diagnostic_reset_cg/swc"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-power-mode-cg-interface-common",
+        "dirname": "ara-sm-power-mode-cg-interface-common",
+        "name": "电源模式通信组接口 公共类型",
+        "description": "电源模式通信组接口 公共类型 ",
+        "copy": false,
+        "depends": [
+          "common-shared-types"
+        ],
+        "locations": [
+          "platform_components/sm/power_mode_cg/interfaces/power_mode_common.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-power-mode-cg-client-service-interfaces",
+        "dirname": "ara-sm-power-mode-cg-client-service-interfaces",
+        "name": "电源模式通信组客户端接口",
+        "description": "电源模式通信组客户端接口",
+        "copy": false,
+        "depends": [
+          "ara-sm-power-mode-cg-interface-common",
+          "ara-com-cg-common"
+        ],
+        "locations": [
+          "platform_components/sm/power_mode_cg/interfaces/power_mode_client.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-power-mode-cg-client-service-interface-someip",
+        "dirname": "ara-sm-power-mode-cg-client-service-interface-someip",
+        "name": "电源模式通信组客户端接口部署",
+        "description": "电源模式通信组客户端接口部署",
+        "copy": false,
+        "depends": [
+          "ara-sm-power-mode-cg-client-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/power_mode_cg/interface_deployment/power_mode_client.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-power-mode-cg-server-service-interfaces",
+        "dirname": "ara-sm-power-mode-cg-server-service-interfaces",
+        "name": "电源模式通信组服务端接口",
+        "description": "电源模式通信组服务端接口",
+        "copy": false,
+        "depends": [
+          "ara-sm-power-mode-cg-interface-common",
+          "ara-com-cg-common"
+        ],
+        "locations": [
+          "platform_components/sm/power_mode_cg/interfaces/power_mode_server.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-power-mode-cg-server-service-interface-someip",
+        "dirname": "ara-sm-power-mode-cg-server-service-interface-someip",
+        "name": "电源模式通信组服务端接口部署",
+        "description": "电源模式通信组服务端接口部署",
+        "copy": false,
+        "depends": [
+          "ara-sm-power-mode-cg-server-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/power_mode_cg/interface_deployment/power_mode_server.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-power-mode-cg-server-swc",
+        "dirname": "ara-sm-power-mode-cg-server-swc",
+        "name": "电源模式通信组服务端 swc",
+        "description": "电源模式通信组服务端 swc",
+        "copy": false,
+        "depends": [
+          "ara-sm-power-mode-cg-server-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/power_mode_cg/swc"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-extension",
+        "dirname": "ara-sm-extension",
+        "name": "sm 扩展模型",
+        "description": "状态管理功能集的扩展模型",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/sm/extension.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-service-interface-common",
+        "dirname": "ara-sm-service-interface-common",
+        "name": "sm服务接口涉及的公共类型",
+        "description": "sm服务接口涉及的公共类型",
+        "copy": false,
+        "depends": [
+          "common-shared-types"
+        ],
+        "locations": [
+          "platform_components/sm/service_interface_common"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-trigger-function-group-service-interfaces",
+        "dirname": "ara-sm-trigger-function-group-service-interfaces",
+        "name": "sm Trigger功能组 服务接口",
+        "description": "sm Trigger功能组 服务接口",
+        "copy": false,
+        "depends": [
+          "common-shared-types",
+          "ara-sm-service-interface-common"
+        ],
+        "locations": [
+          "platform_components/sm/trigger_function_group/interfaces"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-trigger-function-group-service-interface-someip",
+        "dirname": "ara-sm-trigger-function-group-service-interface-someip",
+        "name": "sm Trigger功能组 服务接口的 SOMEIP 部署",
+        "description": "sm Trigger功能组 服务接口的 SOMEIP 部署",
+        "copy": false,
+        "depends": [
+          "ara-sm-trigger-function-group-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/trigger_function_group/interface_deployment"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-trigger-function-group-swc",
+        "dirname": "ara-sm-trigger-function-group-swc",
+        "name": "sm Trigger功能组 服务接口的 swc",
+        "description": "sm Trigger功能组 服务接口的 swc",
+        "copy": false,
+        "depends": [
+          "ara-sm-trigger-function-group-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/trigger_function_group/swc"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-nm-network-state-swc",
+        "dirname": "ara-sm-nm-network-state-swc",
+        "name": "sm NetworkState 服务接口的 swc",
+        "description": "sm NetworkState 服务接口的 swc",
+        "copy": false,
+        "depends": [
+          "ara-nm-service-interface"
+        ],
+        "locations": [
+          "platform_components/sm/nm_network_state/swc"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-nm-hello-world-mode-group",
+        "dirname": "ara-sm-nm-hello-world-mode-group",
+        "name": "sm hello world nm的 mode group",
+        "description": "sm hello world nm的 mode group",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/sm/nm_network_state/mode_group"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-persistency-interfaces",
+        "dirname": "ara-sm-persistency-interfaces",
+        "name": "sm 持久化接口",
+        "description": "sm 持久化接口",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/sm/persistency/interfaces"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-persistency-swc",
+        "dirname": "ara-sm-persistency-swc",
+        "name": "sm 持久化的swc",
+        "description": "sm 持久化的swc",
+        "copy": false,
+        "depends": [
+          "ara-sm-persistency-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/persistency/swc"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-update-request-service-interfaces",
+        "dirname": "ara-sm-update-request-service-interfaces",
+        "name": "sm UpdateRequest 服务接口",
+        "description": "sm UpdateRequest 服务接口",
+        "copy": false,
+        "depends": [
+          "ara-sm-service-interface-common"
+        ],
+        "locations": [
+          "platform_components/sm/ucm_update_request/interfaces"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-ucm-update-request-swc",
+        "dirname": "ara-sm-ucm-update-request-swc",
+        "name": "sm UpdateRequest swc",
+        "description": "sm UpdateRequest swc",
+        "copy": false,
+        "depends": [
+          "ara-sm-update-request-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/ucm_update_request/swc"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-shell-command-request-service-interfaces",
+        "dirname": "ara-sm-shell-command-request-service-interfaces",
+        "name": "sm ShellCommandRequest 服务接口",
+        "description": "sm ShellCommandRequest 服务接口",
+        "copy": false,
+        "depends": [
+          "ara-sm-service-interface-common"
+        ],
+        "locations": [
+          "platform_components/sm/shell_request/interfaces"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-shell-command-request-swc",
+        "dirname": "ara-sm-shell-command-request-swc",
+        "name": "sm ShellCommandRequest swc",
+        "description": "sm ShellCommandRequest swc",
+        "copy": false,
+        "depends": [
+          "ara-sm-shell-command-request-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/shell_request/swc"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-state-machine-service-interfaces",
+        "dirname": "ara-sm-state-machine-service-interfaces",
+        "name": "sm StateMachineService 服务接口",
+        "description": "sm StateMachineService 服务接口",
+        "copy": false,
+        "depends": [
+          "ara-sm-service-interface-common"
+        ],
+        "locations": [
+          "platform_components/sm/state_machine/interfaces"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-state-machine-service-interface-someip",
+        "dirname": "ara-sm-state-machine-service-interface-someip",
+        "name": "sm StateMachineService 服务接口的 SOMEIP 部署",
+        "description": "sm StateMachineService 服务接口的 SOMEIP 部署",
+        "copy": false,
+        "depends": [
+          "ara-sm-state-machine-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/state_machine/interface_deployment"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-state-machine-swc",
+        "dirname": "ara-sm-state-machine-swc",
+        "name": "sm StateMachineService 服务接口的 swc",
+        "description": "sm StateMachineService 服务接口的 swc",
+        "copy": false,
+        "depends": [
+          "ara-sm-state-machine-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/state_machine/swc"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-update-request-service-interface-someip",
+        "dirname": "ara-sm-update-request-service-interface-someip",
+        "name": "sm UpdateRequest 服务接口的 SOMEIP 部署",
+        "description": "sm UpdateRequest 服务接口的 SOMEIP 部署",
+        "copy": false,
+        "depends": [
+          "ara-sm-update-request-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/ucm_update_request/interface_deployment"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-shell-command-request-service-interface-someip",
+        "dirname": "ara-sm-shell-command-request-service-interface-someip",
+        "name": "sm ShellCommandRequest 服务接口的 SOMEIP 部署",
+        "description": "sm ShellCommandRequest 服务接口的 SOMEIP 部署",
+        "copy": false,
+        "depends": [
+          "ara-sm-shell-command-request-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/shell_request/interface_deployment"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-shell-command-client",
+        "dirname": "ara-shell-command-client",
+        "name": "ShellCommand客户端程序",
+        "description": "ShellCommand客户端程序",
+        "copy": false,
+        "depends": [
+          "ara-sm-shell-command-request-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/daemon/shell_request_client_design.arxml",
+          "platform_components/sm/shell_request_client/grant_design/grant_design.arxml"
+        ]
+      }
+    ]
+  },
+  "platform_component_sm_copy": {
+    "name": "平台SM组件包",
+    "description": "包括SM中用户需要copy的组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "ara-sm-daemon",
+        "dirname": "ara-sm-daemon",
+        "name": "sm 守护程序",
+        "description": "sm 守护程序",
+        "copy": true,
+        "depends": [],
+        "locations": [
+          "platform_components/sm/daemon/app_design.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-reset-machine-daemon",
+        "dirname": "ara-reset-machine-daemon",
+        "name": "reset-machine 守护程序",
+        "description": "reset-machine 守护程序",
+        "copy": true,
+        "depends": [],
+        "locations": [
+          "platform_components/sm/daemon/reset_machine.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-shutdown-daemon",
+        "dirname": "ara-shutdown-daemon",
+        "name": "shutdown 守护程序",
+        "description": "shutdown 守护程序",
+        "copy": true,
+        "depends": [],
+        "locations": [
+          "platform_components/sm/daemon/shutdown_app.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-trigger-state-service-interfaces",
+        "dirname": "ara-sm-trigger-state-service-interfaces",
+        "name": "sm Trigger状态 服务接口",
+        "description": "sm Trigger状态 服务接口",
+        "copy": true,
+        "depends": [
+          "common-shared-types",
+          "ara-sm-service-interface-common"
+        ],
+        "locations": [
+          "platform_components/sm/trigger_state/interfaces"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-trigger-state-service-interface-someip",
+        "dirname": "ara-sm-trigger-state-service-interface-someip",
+        "name": "sm Trigger状态 服务接口的 SOMEIP 部署",
+        "description": "sm Trigger状态 服务接口的 SOMEIP 部署",
+        "copy": true,
+        "depends": [
+          "ara-sm-trigger-state-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/trigger_state/interface_deployment"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-trigger-state-swc",
+        "dirname": "ara-sm-trigger-state-swc",
+        "name": "sm Trigger状态 服务接口的 swc",
+        "description": "sm Trigger状态 服务接口的 swc",
+        "copy": true,
+        "depends": [
+          "ara-sm-trigger-state-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/sm/trigger_state/swc"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-nm-network-state-service-interface-grant",
+        "dirname": "ara-sm-nm-network-state-service-interface-grant",
+        "name": "sm NetworkState 服务接口的 授权设计",
+        "description": "sm NetworkState 服务接口的 授权设计",
+        "copy": true,
+        "depends": [
+          "ara-sm-nm-network-state-swc",
+          "ara-sm-daemon"
+        ],
+        "locations": [
+          "platform_components/sm/nm_network_state/grant_design"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-ucm-update-request-service-interface-grant",
+        "dirname": "ara-sm-ucm-update-request-service-interface-grant",
+        "name": "sm ucm UpdateRequest 服务接口的 授权设计",
+        "description": "sm UpdateRequest 服务接口的 授权设计",
+        "copy": true,
+        "depends": [
+          "ara-sm-ucm-update-request-swc",
+          "ara-sm-daemon"
+        ],
+        "locations": [
+          "platform_components/sm/ucm_update_request/grant_design"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-sm-shell-command-request-service-interface-grant",
+        "dirname": "ara-sm-shell-command-request-service-interface-grant",
+        "name": "sm ShellCommandRequest 服务接口的 授权设计",
+        "description": "sm ShellCommandRequest 服务接口的 授权设计",
+        "copy": true,
+        "depends": [
+          "ara-sm-shell-command-request-swc",
+          "ara-sm-daemon"
+        ],
+        "locations": [
+          "platform_components/sm/shell_request/grant_design"
+        ]
+      }
+    ]
+  },
+  "platform_component_ucm": {
+    "name": "平台UCM组件包",
+    "description": "包括UCM相关平台组件",
+    "components": [
+      {
+        "type": "base",
+        "id": "ara-ucm-daemon",
+        "dirname": "ara-ucm-daemon",
+        "name": "ucm 守护程序",
+        "description": "ucm 守护程序",
+        "copy": false,
+        "depends": [
+          "ara-ucm-service-interface",
+          "ara-sm-update-request-service-interfaces"
+        ],
+        "locations": [
+          "platform_components/ucm/daemon"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-ucm-extension",
+        "dirname": "ara-ucm-extension",
+        "name": "ucm 扩展模型",
+        "description": "更新与配置管理功能集的扩展模型",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/ucm/extension.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-ucm-service-interface-common",
+        "dirname": "ara-ucm-service-interface-common",
+        "name": "ucm 服务接口的公共元模型",
+        "description": "ucm 服务接口的公共元模型",
+        "copy": false,
+        "depends": [
+          "autosar-standard-types",
+          "common-shared-types"
+        ],
+        "locations": [
+          "platform_components/ucm/service_interface/common.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-ucm-service-interface",
+        "dirname": "ara-ucm-service-interface",
+        "name": "ucm 服务接口",
+        "description": "ucm 服务接口",
+        "copy": false,
+        "depends": [
+          "ara-ucm-service-interface-common"
+        ],
+        "locations": [
+          "platform_components/ucm/service_interface/package_management.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-ucm-service-interface-someip",
+        "dirname": "ara-ucm-service-interface-someip",
+        "name": "ucm 服务接口的 SOMEIP 部署",
+        "description": "ucm 服务接口的 SOMEIP 部署",
+        "copy": false,
+        "depends": [
+          "ara-ucm-service-interface-common",
+          "ara-ucm-service-interface"
+        ],
+        "locations": [
+          "platform_components/ucm/service_interface_someip/package_management.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-ucm-master-daemon",
+        "dirname": "ara-ucm-master-daemon",
+        "name": "ucm-master 守护程序",
+        "description": "ucm-master 守护程序",
+        "copy": false,
+        "depends": [
+          "ara-ucm-service-interface",
+          "ara-ucm-master-service-interface"
+        ],
+        "locations": [
+          "platform_components/ucmm/daemon"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-ucm-master-service-interface",
+        "dirname": "ara-ucm-master-service-interface",
+        "name": "ucm-master 服务接口",
+        "description": "ucm-master 服务接口",
+        "copy": false,
+        "depends": [
+          "ara-ucm-service-interface-common"
+        ],
+        "locations": [
+          "platform_components/ucmm/service_interface"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-ucm-master-service-interface-someip",
+        "dirname": "ara-ucm-master-service-interface-someip",
+        "name": "ucm-master 服务接口的 SOMEIP 部署",
+        "description": "ucm-master 服务接口的 SOMEIP 部署",
+        "copy": false,
+        "depends": [
+          "ara-ucm-master-service-interface"
+        ],
+        "locations": [
+          "platform_components/ucmm/service_interface_someip"
+        ]
+      }
+    ]
+  },
+  "platform_components": {
+    "name": "平台组件包",
+    "description": "平台组件相关的元模型",
+    "components": [
+      {
+        "type": "base",
+        "id": "ara-adi-sensor-interface",
+        "dirname": "ara-adi-sensor-interface",
+        "name": "adi 传感器接口",
+        "description": "以 Service Interface 方式实现的 ISO-21350 接口",
+        "copy": false,
+        "depends": [
+          "autosar-standard-types"
+        ],
+        "locations": [
+          "platform_components/adi/sensoritf"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-phm-daemon",
+        "dirname": "ara-phm-daemon",
+        "name": "phm 守护程序",
+        "description": "phm 守护程序",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/phm/daemon/application_design.arxml"
+        ]
+      },
+      {
+        "type": "base",
+        "id": "ara-tsync-daemon",
+        "dirname": "ara-tsync-daemon",
+        "name": "tsync 守护程序",
+        "description": "tsync 守护程序",
+        "copy": false,
+        "depends": [],
+        "locations": [
+          "platform_components/tsync/daemon/application_design.arxml"
+        ]
+      }
+    ]
+  },
+  "product_components": {
+    "name": "产品组件包-V2.1",
+    "description": "2.1版产品组件包",
+    "components": [
+      {
+        "type": "logical",
+        "id": "former-machine1",
+        "name": "Single Machine1 - Time Master",
+        "description": "原machine1",
+        "project_type": [
+          "mi"
+        ],
+        "category": "former-development-machines",
+        "depends": [
+          "intergration-machine1"
+        ]
+      },
+      {
+        "type": "logical",
+        "id": "former-machine2",
+        "name": "Single Machine2 - Time Slave",
+        "description": "原machine2",
+        "project_type": [
+          "mi"
+        ],
+        "category": "former-development-machines",
+        "depends": [
+          "intergration-machine2"
+        ]
+      },
+      {
+        "type": "logical",
+        "id": "common-extenstion-pack",
+        "name": "Service Extension",
+        "description": "library默认包含",
+        "project_type": [
+          "mi",
+          "app",
+          "lib"
+        ],
+        "category": "common-shared",
+        "depends": [
+          "ara-com-extension",
+          "ara-diag-extension",
+          "ara-sm-extension",
+          "ara-ucm-extension",
+          "ara-fw-extension"
+        ]
+      },
+      {
+        "type": "logical",
+        "id": "common-types",
+        "name": "Common Data Types",
+        "description": "提供了建模常用的数据类型",
+        "project_type": [
+          "mi",
+          "app",
+          "lib"
+        ],
+        "category": "common-shared",
+        "depends": [
+          "autosar-standard-types",
+          "common-shared-types"
+        ]
+      },
+      {
+        "type": "logical",
+        "id": "common-interface-pack-UCM",
+        "name": "UCM Service Interface",
+        "description": "应用可使用的服务接口_UCM",
+        "project_type": [
+          "app",
+          "lib"
+        ],
+        "category": "interface",
+        "depends": [
+          "ara-ucm-service-interface-common",
+          "ara-ucm-service-interface",
+          "ara-ucm-service-interface-someip",
+          "ara-ucm-master-service-interface",
+          "ara-ucm-master-service-interface-someip"
+        ]
+      },
+      {
+        "type": "logical",
+        "id": "common-interface-pack-SM",
+        "name": "SM Service Interface",
+        "description": "SM能力接口,重置ECU、PowerMode,机器状态机切换接口",
+        "project_type": [
+          "app",
+          "lib"
+        ],
+        "category": "interface",
+        "depends": [
+          "ara-sm-diag-ecu-reset-cg-client-service-interfaces",
+          "ara-sm-diag-ecu-reset-cg-client-service-interface-someip",
+          "ara-sm-power-mode-cg-client-service-interfaces",
+          "ara-sm-power-mode-cg-client-service-interface-someip",
+          "ara-sm-state-machine-service-interfaces",
+          "ara-sm-state-machine-service-interface-someip",
+          "ara-sm-trigger-function-group-service-interfaces",
+          "ara-sm-trigger-function-group-service-interface-someip"
+        ]
+      },
+      {
+        "type": "logical",
+        "id": "common-interface-pack-NM",
+        "name": "NM Service Interface",
+        "description": "NM能力接口,提供请求/释放网络、请求节点探测、获取内部状态机状态",
+        "project_type": [
+          "app",
+          "lib"
+        ],
+        "category": "interface",
+        "depends": [
+          "ara-nm-service-interface",
+          "ara-nm-service-interface-someip"
+        ]
+      },
+      {
+        "type": "logical",
+        "id": "common-interface-pack-ADI",
+        "name": "ADI Sensor Service Interface",
+        "description": "预定义的ADI传感器接口",
+        "project_type": [
+          "app",
+          "lib"
+        ],
+        "category": "interface",
+        "depends": [
+          "ara-adi-sensor-interface"
+        ]
+      },
+      {
+        "type": "logical",
+        "id": "common-usability-types",
+        "name": "Usability Basic Data Types",
+        "description": "预定义的(SwBaseType)基础数据类型",
+        "project_type": [
+          "app",
+          "lib",
+          "mi"
+        ],
+        "category": "common-shared",
+        "depends": [
+          "usability-base-type"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,240 @@
+=============================================================
+AUTOSAR Common Adaptive Platform Implementation – NOTICE File
+=============================================================
+
+1. Initial Baseline Contribution Notice
+---------------------------------------
+
+The initial baseline of CAPI was developed by iSOFT Infrastructure Software Co., Ltd.
+Copyright (c) 2024-2026 by iSOFT Infrastructure Software Co., Ltd.
+
+
+2. Community Contribution Notice
+--------------------------------
+
+
+3. THIRD-PARTY OPEN SOURCE COMPONENTS
+-------------------------------------
+
+This section documents third-party software that is included in the repository, referenced as an external dependency, or targeted by a project-specific patch distributed with this source release.
+
+The applicable distribution relationship is described in each subsection.
+
+
+3.1. Third-party source code included in the project repository
+----------------------------------------------------------------
+
+3.1.1. FindLibreSSL.cmake
+    Version: LibreSSL portable 4.0.0 
+    Location: isoft/nai/misc/cmake/FindLibreSSL.cmake 
+    Source Address: https://github.com/libressl/portable/blob/v4.0.0/FindLibreSSL.cmake 
+    Copyright: Copyright (c) 2019 John Norrbin <jlnorrbin@johnex.se>. 
+    License: ISC 
+    License Notice: Retained in isoft/nai/misc/cmake/FindLibreSSL.cmake 
+    Remark: This product uses this CMake script for searching the LibreSSL encryption library (Crypto, SSL, TLS components), without modifying its source code.
+
+3.1.2. FindWolfSSL.cmake
+    Version:  curl 8.4
+    Location: isoft/nai/misc/cmake/FindWolfSSL.cmake 
+    Source Address: https://github.com/curl/curl/blob/tiny-curl-8_4/CMake/FindWolfSSL.cmake
+    Copyright: Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al. 
+    License: curl 
+    License File: LICENSES/LICENSE-curl.txt 
+    Remark: This product uses this CMake script, originally from the curl project, for searching the WolfSSL library, without modifying its source code.
+
+3.1.3. wildmatch
+    Version: Commit db5e911
+    Location: isoft/nai/src/nai/thirdparty/wildmatch/{wildmatch.h, wildmatch.c}
+    Source Address: https://github.com/davvid/wildmatch/tree/db5e911d2fdae3e4534cb39a9ffd9e940b2d9bf6
+    Copyright:
+        Copyright (c) 2016 David Aguilar.
+        Copyright (c) 1989, 1992, 1993, 1994 The Regents of the University of California.
+    License Notice: Retained in wildmatch.c and wildmatch.h
+    License: BSD-3-Clause
+    Remark: This product uses source code from this open source project for filename wildcard pattern matching, without modifying its source code.
+
+3.1.4. queue.h (sys/queue.h)
+    Version: Berkeley queue.h v8.5 (1994-08-20)
+    Location: isoft/ipc/src/queue.h
+    Copyright: Copyright (c) 1991, 1993 The Regents of the University of California.
+    Origin: Originally from BSD operating systems (sys/queue.h), distributed as part of FreeBSD.
+    License: BSD-3-Clause
+    License Notice: Retained in isoft/ipc/src/queue.h
+    Remark: This product uses this header file for linked-list data structures (SLIST, LIST, TAILQ), without modifying its source code.
+
+3.1.5. W3C XML Namespace Schema (xml.xsd)
+    Version: 2001-03 dated snapshot
+    Source Address: https://www.w3.org/2001/03/xml.xsd
+    License: W3C Software Notice and License (1998-07-20)
+    Copyright: Copyright (c) 1994-2002 World Wide Web Consortium, (Massachusetts Institute of Technology, Institut National de Recherche en Informatique et en Automatique, Keio University). All Rights Reserved.
+    Usage: This schema resource is packaged with aragen and declares the standard XML namespace attributes, including xml:space, required to load and validate AUTOSAR XML schemas and process ARXML models.
+
+
+3.2. Patched externally obtained third-party source code
+------------------------------------------------------------
+
+Only the project-specific patch files and the stated license information are included in this source release. The corresponding upstream source code and binaries are obtained separately.
+
+3.2.1. Fast-DDS
+    Version: 3.4.0
+    Source Address: https://github.com/eProsima/Fast-DDS/releases/tag/v3.4.0
+    Copyright: Copyright (c) 2019-2024 eProsima.
+    License: Apache-2.0
+    License File: LICENSES/LICENSE-Apache-2.0.txt
+    Patch file: isoft/sdk-utils/etc/package/patch/fast-dds.patch
+    Modifications:
+        - Lowers cmake_minimum_required from 3.20 to 3.16 across 18 CMakeLists.txt files in the Fast-DDS source tree.
+        - Affected areas include the root, examples, tests, tools, third-party, and fuzz directories.
+        - No functional code modifications.
+    Usage: DDS middleware used as an ara::com binding option (ARA_ENABLE_COM_FASTDDS). Linked as a shared library via sysroot.
+
+3.2.2. Fast-CDR
+    Version: 2.3.0
+    Source Address: https://github.com/eProsima/Fast-CDR/releases/tag/v2.3.0
+    Copyright: Copyright 2016, 2023 Proyectos y Sistemas de Mantenimiento SL (eProsima).
+    License: Apache-2.0
+    License File: LICENSES/LICENSE-Apache-2.0.txt
+    Relationship: Transitive dependency
+    Introduced by: Fast-DDS 3.4.0
+    Patch file: isoft/sdk-utils/etc/package/patch/fast-cdr.patch
+    Modifications:
+        - Lowers the required CMake version from 3.20 to 3.16 in the Fast-CDR root CMakeLists.txt and test/cmake/CMakeLists.txt.
+        - No functional library code modifications.
+    Usage: CDR serialization library used by Fast-DDS.
+
+3.2.3. tinyxml2
+    Version: 9.0.0
+    Source Address: https://github.com/leethomason/tinyxml2/releases/tag/9.0.0
+    License: Zlib
+    License File: LICENSES/LICENSE-tinyxml2-9.0.0.txt
+    Relationship: Transitive dependency
+    Introduced by: Fast-DDS 3.4.0
+    Patch file: isoft/sdk-utils/etc/package/patch/tinyxml2.patch
+    Modifications:
+        - Adds the -fPIC compiler option to the TinyXML2 CMake build configuration.
+        - No functional TinyXML2 source-code modifications.
+    Usage: XML parsing dependency introduced by Fast-DDS.
+
+3.2.4. RapidJSON
+    Version: 1.1.0
+    Source Address: https://github.com/Tencent/rapidjson/releases/tag/v1.1.0
+    Copyright:
+        Copyright (C) 2015 THL A29 Limited, a Tencent company, and Milo Yip.
+        Copyright (c) 2006-2013 Alexander Chemeris
+    License:
+        MIT
+        BSD-3-Clause (msinttypes)
+    License File: LICENSES/LICENSE-rapidjson-1.1.0.txt
+    Patch file: isoft/sdk-utils/etc/package/patch/rapidjson.patch
+    Modifications:
+        - Adds CONFIGURE_FILE and INSTALL statements for RapidJSON-targets.cmake.
+        - Adds a new RapidJSON-targets.cmake.in file.
+        - Rewrites RapidJSONConfig.cmake.in to improve CMake integration.
+        - No modifications to the RapidJSON library headers or source code.
+    Usage: JSON parsing library used by fw, log, exec, nm, phm, isoft-manifestreader, and isoft-ara-fsh modules.
+
+
+3.3. Modified vendored third-party source code included in this project
+------------------------------------------------------------------------------
+
+3.3.1. abseil-cpp
+    Version: 20220623.2
+    Source Address: https://github.com/abseil/abseil-cpp/releases/tag/20220623.2
+    Copyright: Copyright (c) 2017 The Abseil Authors.
+    License: Apache-2.0
+    License File: LICENSES/LICENSE-Apache-2.0.txt
+    License Notice: Retained in the vendored Abseil source files under core/src/core-types/.
+    Modifications: A vendored subset of Abseil C++ is located under core/src/core-types/. The following modifications were applied, as documented in core/src/core-types/include/phsl/README.md:
+                   - Namespace renamed from `absl` to `phsl`
+                   - Macros renamed from `ABSL_*` to `PBSL_*`
+                   - Include paths adjusted accordingly
+                   - No functional modifications made.
+    Modified files:
+                   - core/src/core-types/include/phsl/base/config.h
+                   - core/src/core-types/include/phsl/base/options.h
+                   - core/src/core-types/include/phsl/meta/type_traits.h
+                   - core/src/core-types/include/phsl/types/internal/variant.h
+                   - core/src/core-types/src/phsl/types/bad_variant_access.cc
+    Usage: Augments the C++ standard library.
+
+3.3.2. minizip
+    Version: Commit 643e17b
+    Location: ucm/ucmlibs/src/libextraction/{unzip.h, unzip.cc, ioapi.h, ioapi.cc}
+    Source Address: https://github.com/madler/zlib/tree/643e17b7498d12ab8d15565662880579692f769d/contrib/minizip
+    Copyright:
+        Copyright (C) 1998-2010 Gilles Vollant
+        Copyright (C) 2007-2008 Even Rouault (Zip64 support modifications for unzip).
+        Copyright (C) 2009-2010 Mathias Svensson (Zip64 support modifications for ioapi).
+        Copyright (c) 1990-2000 Info-ZIP. All rights reserved.
+    License: Zlib; Info-ZIP (decryption-related code in unzip.cc)
+    License File: 
+                - LICENSES/LICENSE-zlib.txt
+                - LICENSES/LICENSE-Info-ZIP.txt
+    Modifications: The following modifications were applied:
+                   - Added Doxygen-style comments to generate the specified documentation.
+                   - Modified the variable names according to clang-tidy requirements
+                   - Ported C to C++
+                   - Changed the C-format file to C++ format file (unzip.c -> unzip.cc, ioapi.c -> ioapi.cc)
+                   - No functional modifications made.
+
+3.3.3. tree.h
+    Version: commit 571a1a6
+    Location: isoft/ipc/src/tree.h
+    Source Address: https://github.com/freebsd/freebsd-src/blob/571a1a64b1992f917f6af60ca80e5a465986305e/sys/sys/tree.h
+    Copyright: Copyright 2002 Niels Provos <provos@citi.umich.edu>.
+    License: BSD-2-Clause-FreeBSD
+    License Notice: Retained in isoft/ipc/src/tree.h
+    Modifications: The following modifications were applied:
+                   - Add some comments
+                   - Add some MACRO definition
+                   - Include a header file (stdint.h)
+                   - No other functional modifications made.
+
+3.3.4. FindPCRE.cmake
+    Version: 7.6
+    Location: isoft/nai/misc/cmake/FindPCRE.cmake
+    Source Address: https://github.com/LuaDist/pcre/blob/7.6/FindPCRE.cmake
+    Copyright: Copyright (C) 2007-2009 LuaDist; Created by Peter Kapec <kapecp@gmail.com>.
+    License: MIT
+    License File: LICENSES/LICENSE-FindPCRE.txt
+    Modifications: The following modifications were applied:
+                   - Add support for locating a static PCRE library
+                   - Add the detected dynamic and static libraries to PCRE_LIBRARIES
+                   - Change the package validation from PCRE_LIBRARY to PCRE_LIBRARIES
+                   - Introduces the additional output variable PCRE_STATIC_LIBRARIES
+
+3.3.5. mln_utils.h
+    Version: commit b351360
+    Location: isoft/npc/include/npc/cpi/cpi_types.h
+    Source Address: https://github.com/Water-Melon/Melon/blob/b3513605e578fbfd92aa2ef2f2f01803671136b6/include/mln_utils.h
+    Copyright: Copyright (C) Niklaus F.Schen.
+    License: BSD-3-Clause
+    License File: LICENSES/LICENSE-Melon.txt
+    Modifications: The following modifications were applied:
+                   - Extract a source-code subset containing basic type definitions and macros for doubly linked-list operations
+                   - Rename the MLN/mln identifiers to CPI/cpi
+                   - Replace the original include guard with a project-specific include guard
+                   - Add project-specific NPC includes and type aliases
+                   - Apply formatting changes
+
+3.3.6. OpenSSL
+    Version: 3.5.1
+    Location:
+        - crypto/src/lib_isoft/src/openssl/isoft_openssl_gencrl.cpp
+        - crypto/src/lib_isoft/src/openssl/isoft_openssl_encrypt.cpp
+        - crypto/src/lib_isoft/src/openssl/isoft_openssl_cmac.cpp
+        - crypto/src/lib_isoft/include/ara/crypto/openssl/isoft_openssl_gencrl.h
+        - crypto/src/lib_isoft/include/ara/crypto/openssl/isoft_openssl_encrypt.h
+        - crypto/src/lib_isoft/include/ara/crypto/openssl/isoft_openssl_cmac.h
+    Source Address: https://github.com/openssl/openssl/tree/openssl-3.5.1
+    Copyright: The OpenSSL Project Authors. The applicable original file-specific copyright and attribution notices are retained in the affected source files.
+    License: Apache-2.0
+    License File: LICENSES/LICENSE-Apache-2.0.txt
+    Modifications: The following modifications were applied:
+                   - Adapted OpenSSL source code for integration into the project's C++ and AUTOSAR-specific codebase.
+                   - Renamed functions, variables, data structures, constants, and macros according to project conventions.
+                   - Added project-specific namespaces, interfaces, documentation, logging, error handling, and resource-cleanup logic.
+                   - Reorganized and split upstream functionality into project-specific functions and source files.
+                   - Added compatibility handling for different OpenSSL API versions.
+                   - Applied further functional and non-functional modifications throughout the affected source code.
+    Usage: Provides cryptographic functionality for CMAC processing, encryption and key operations, certificate revocation, CRL generation, and OCSP response handling.

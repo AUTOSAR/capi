@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Development</SHORT-NAME>
+          <ELEMENTS>
+            <SYSTEM>
+              <SHORT-NAME>systemnm</SHORT-NAME>
+              <!--<ADMIN-DATA>
+                <SDGS>
+                  <SDG GID="iSOFT:nm:SystemCustomization">
+                      <SD GID="iSOFT:nm:SystemCustomization:SkipTimerCheck">true</SD>
+                  </SDG>
+                </SDGS>
+              </ADMIN-DATA>-->
+              <MAPPINGS>
+                <SYSTEM-MAPPING>
+                  <SHORT-NAME>systemmapping1</SHORT-NAME>
+                  <PNC-MAPPINGS>
+                    <PNC-MAPPING>
+                      <IDENT>
+                        <SHORT-NAME>parking</SHORT-NAME>
+                      </IDENT>
+                      <PHYSICAL-CHANNEL-REFS>
+                        <PHYSICAL-CHANNEL-REF DEST="ETHERNET-PHYSICAL-CHANNEL">/ISOFT/Development/Network/EthCluster1/EthPhysChannel1</PHYSICAL-CHANNEL-REF>
+                      </PHYSICAL-CHANNEL-REFS>
+                      <PNC-IDENTIFIER>16</PNC-IDENTIFIER>
+                    </PNC-MAPPING>
+                  </PNC-MAPPINGS>
+                </SYSTEM-MAPPING>
+              </MAPPINGS>
+              <PNC-VECTOR-LENGTH>55</PNC-VECTOR-LENGTH>
+              <PNC-VECTOR-OFFSET>2</PNC-VECTOR-OFFSET>
+            </SYSTEM>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

@@ -1,0 +1,2569 @@
+{
+    "shortName": "machine1",
+    "supervisionMode": [
+        {
+            "fqn": "/AUTOSAR/FunctionGroupSet/CommonFunctionGroups/MotiveFG",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "RunError",
+                    "phmSupervision": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineLocal/engine_alive",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/local_testunit/alive_testunit",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineLocal/logical",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_lb",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_lt",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_rb",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_rt"
+                    ],
+                    "processes": [
+                        {
+                            "processName": "/AUTOSAR/Processes/phm_motive",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Running",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Start",
+                    "phmSupervision": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineLocal/engine_alive",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/local_testunit/alive_testunit",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineLocal/logical",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_lb",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_lt",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_rb",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_rt"
+                    ],
+                    "processes": [
+                        {
+                            "processName": "/AUTOSAR/Processes/phm_motive",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/ISOFT/FunctionGroupSet/Machine1/MachineFG",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Restart",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/PlatformComponents/cg/cgd_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/crypto/cryptod_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/cryptohsm/cryptohsmd_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/cryptox509/cryptox509d_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/diag/Process/dmd",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/log/dlt_daemon_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/com/nsomeip_routing_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/phm/phmd_process1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/sm1/state_manager",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/tsync/tsync_daemon_proc1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/Idsm/Processes/idsm_process1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm1/package_manager",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm_master/ucmm",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/nm/nm_daemon_proc1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ResetMachineApp1/reset_machine_process",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/PlatformComponents/sm1/state_manager",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ShutdownApp1/shutdown_process",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/PlatformComponents/cg/cgd_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/crypto/cryptod_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/cryptohsm/cryptohsmd_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/cryptox509/cryptox509d_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/diag/Process/dmd",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/log/dlt_daemon_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/com/nsomeip_routing_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/phm/phmd_process1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/sm1/state_manager",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/tsync/tsync_daemon_proc1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/Idsm/Processes/idsm_process1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm1/package_manager",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm_master/ucmm",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/nm/nm_daemon_proc1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Fallback",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/PlatformComponents/diag/Process/dmd",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/com/nsomeip_routing_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/phm/phmd_process1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/sm1/state_manager",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm1/package_manager",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/PlatformComponents/cg/cgd_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/crypto/cryptod_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/cryptohsm/cryptohsmd_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/cryptox509/cryptox509d_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/diag/Process/dmd",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/log/dlt_daemon_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/com/nsomeip_routing_proc",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/phm/phmd_process1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/sm1/state_manager",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/tsync/tsync_daemon_proc1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/Idsm/Processes/idsm_process1",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm1/package_manager",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/ucm_master/ucmm",
+                            "executionError": -1
+                        },
+                        {
+                            "processName": "/ISOFT/PlatformComponents/nm/nm_daemon_proc1",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/ISOFT/Idsm/HelloworldIdsmFGSet/HelloworldIdsmFG",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/Idsm/Processes/helloworld_idsm_process1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Stop",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/Idsm/Processes/helloworld_idsm_process1",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/ISOFT/HelloWorld/FunctionGroups/DemoFGSet_Keys/DemoGroupProto",
+            "fgStates": [
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/HelloWorld/proc/helloworld_keys_proc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Driving",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/HelloWorld/proc/helloworld_keys_proc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Parking",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/HelloWorld/proc/helloworld_keys_proc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/HelloWorld/proc/helloworld_keys_proc",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/ISOFT/HelloWorld/FunctionGroups/DemoFGSet_Per/DemoGroupProto",
+            "fgStates": [
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/HelloWorld/proc/helloworld_per_proc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Driving",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/HelloWorld/proc/helloworld_per_proc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Parking",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/HelloWorld/proc/helloworld_per_proc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/HelloWorld/proc/helloworld_per_proc",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/ISOFT/NmDemoFGSet/NmDemoCommonFGs1/NMDemoFG",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/nm_demo/nm_demo_proc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": []
+                }
+            ]
+        },
+        {
+            "fqn": "/FunctionGroups/HelloWorld_CM/FunctionGroupsSet/HelloWorldGroup",
+            "fgStates": [
+                {
+                    "shortName": "Driving",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ClientDeployment/client_process",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Parking",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ClientDeployment/client_process",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": []
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_abc/FunctionGroupSet/FunctionGroupSet/DiagDemo_abc",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_abc/Process/abc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_abc/Process/abc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_abc/Process/abc",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_communication_control/FunctionGroupSet/FunctionGroupSet/DiagDemo_communication_control",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_communication_control/Process/communication_control",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_communication_control/Process/communication_control",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_communication_control/Process/communication_control",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_dem_aging_dtc/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_aging_dtc",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_aging_dtc/Process/dem_aging_dtc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_aging_dtc/Process/dem_aging_dtc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_aging_dtc/Process/dem_aging_dtc",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_dem_base/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_base",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_base/Process/dem_base",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_base/Process/dem_base",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_base/Process/dem_base",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_dem_control_dtc/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_control_dtc",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_control_dtc/Process/dem_control_dtc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_control_dtc/Process/dem_control_dtc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_control_dtc/Process/dem_control_dtc",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_dem_debounce_configurable/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_debounce_configurable",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_debounce_configurable/Process/dem_debounce_configurable",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_debounce_configurable/Process/dem_debounce_configurable",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_debounce_configurable/Process/dem_debounce_configurable",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_dem_debounce_internal/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_debounce_internal",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_debounce_internal/Process/dem_debounce_internal",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_debounce_internal/Process/dem_debounce_internal",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_debounce_internal/Process/dem_debounce_internal",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_dem_debounce_time/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_debounce_time",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_debounce_time/Process/dem_debounce_time",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_debounce_time/Process/dem_debounce_time",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_debounce_time/Process/dem_debounce_time",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_dem_displacement/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_displacement",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_displacement/Process/dem_displacement",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_displacement/Process/dem_displacement",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_displacement/Process/dem_displacement",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_dem_edr/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_edr",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_edr/Process/dem_edr",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_edr/Process/dem_edr",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_edr/Process/dem_edr",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_dem_indicator/FunctionGroupSet/FunctionGroupSet/DiagDemo_dem_indicator",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_indicator/Process/dem_indicator",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_indicator/Process/dem_indicator",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_dem_indicator/Process/dem_indicator",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_did_dynamic/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_dynamic",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_dynamic/Process/did_dynamic",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_dynamic/Process/did_dynamic",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_dynamic/Process/did_dynamic",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_did_generic/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_generic",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic/Process/did_generic",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic/Process/did_generic",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic/Process/did_generic",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_did_generic_cancel/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_generic_cancel",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic_cancel/Process/did_generic_cancel",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic_cancel/Process/did_generic_cancel",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic_cancel/Process/did_generic_cancel",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_did_generic_conversation/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_generic_conversation",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic_conversation/Process/did_generic_conversation",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic_conversation/Process/did_generic_conversation",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic_conversation/Process/did_generic_conversation",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_did_generic_environmental/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_generic_environmental",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic_environmental/Process/did_generic_environmental",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic_environmental/Process/did_generic_environmental",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic_environmental/Process/did_generic_environmental",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_did_generic_uds/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_generic_uds",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic_uds/Process/did_generic_uds",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic_uds/Process/did_generic_uds",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_generic_uds/Process/did_generic_uds",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_did_periodic/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_periodic",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_periodic/Process/did_periodic",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_periodic/Process/did_periodic",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_periodic/Process/did_periodic",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_did_response_on_event/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_response_on_event",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_response_on_event/Process/did_response_on_event",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_response_on_event/Process/did_response_on_event",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_response_on_event/Process/did_response_on_event",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_did_typed/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_typed",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_typed/Process/did_typed",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_typed/Process/did_typed",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_typed/Process/did_typed",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_did_typed_element/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_typed_element",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_typed_element/Process/did_typed_element",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_typed_element/Process/did_typed_element",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_typed_element/Process/did_typed_element",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_did_typed_serialize_doipclient/FunctionGroupSet/FunctionGroupSet/DiagDemo_did_typed_serialize_doipclient",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_typed_serialize_doipclient/Process/did_typed_serialize_doipclient",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_typed_serialize_doipclient/Process/did_typed_serialize_doipclient",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_did_typed_serialize_doipclient/Process/did_typed_serialize_doipclient",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_doip_activation/FunctionGroupSet/FunctionGroupSet/DiagDemo_doip_activation",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_doip_activation/Process/doip_activation",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_doip_activation/Process/doip_activation",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_doip_activation/Process/doip_activation",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_doip_group_identification/FunctionGroupSet/FunctionGroupSet/DiagDemo_doip_group_identification",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_doip_group_identification/Process/doip_group_identification",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_doip_group_identification/Process/doip_group_identification",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_doip_group_identification/Process/doip_group_identification",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_doip_power_mode/FunctionGroupSet/FunctionGroupSet/DiagDemo_doip_power_mode",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_doip_power_mode/Process/doip_power_mode",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_doip_power_mode/Process/doip_power_mode",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_doip_power_mode/Process/doip_power_mode",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_doip_trigger_vehicle_announcement/FunctionGroupSet/FunctionGroupSet/DiagDemo_doip_trigger_vehicle_announcement",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_doip_trigger_vehicle_announcement/Process/doip_trigger_vehicle_announcement",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_doip_trigger_vehicle_announcement/Process/doip_trigger_vehicle_announcement",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_doip_trigger_vehicle_announcement/Process/doip_trigger_vehicle_announcement",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_download/FunctionGroupSet/FunctionGroupSet/DiagDemo_download",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_download/Process/download",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_download/Process/download",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_download/Process/download",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_ecu_reset/FunctionGroupSet/FunctionGroupSet/DiagDemo_ecu_reset",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_ecu_reset/Process/ecu_reset",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_ecu_reset/Process/ecu_reset",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_ecu_reset/Process/ecu_reset",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_filetransfer/FunctionGroupSet/FunctionGroupSet/DiagDemo_Filetransfer",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_filetransfer/Process/filetransfer",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_filetransfer/Process/filetransfer",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_filetransfer/Process/filetransfer",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_routine_generic/FunctionGroupSet/FunctionGroupSet/DiagDemo_routine_generic",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_routine_generic/Process/routine_generic",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_routine_generic/Process/routine_generic",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_routine_generic/Process/routine_generic",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_routine_typed/FunctionGroupSet/FunctionGroupSet/DiagDemo_routine_typed",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_routine_typed/Process/routine_typed",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_routine_typed/Process/routine_typed",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_routine_typed/Process/routine_typed",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_security_access/FunctionGroupSet/FunctionGroupSet/DiagDemo_security_access",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_security_access/Process/security_access",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_security_access/Process/security_access",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_security_access/Process/security_access",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_service_validation/FunctionGroupSet/FunctionGroupSet/DiagDemo_service_validation",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_service_validation/Process/service_validation",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_service_validation/Process/service_validation",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_service_validation/Process/service_validation",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_session/FunctionGroupSet/FunctionGroupSet/DiagDemo_session",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_session/Process/session",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_session/Process/session",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_session/Process/session",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/Machine1/DiagDemo_upload/FunctionGroupSet/FunctionGroupSet/DiagDemo_upload",
+            "fgStates": [
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Shutdown",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_upload/Process/upload",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_upload/Process/upload",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/Machine1/DiagDemo_upload/Process/upload",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/FunctionGroups/HelloWorld_Tsync/FunctionGroupsSet/TsyncDemoFG",
+            "fgStates": [
+                {
+                    "shortName": "Startup",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/TsyncDemoProviderApp/tsync_demo_provider_proc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Driving",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/TsyncDemoProviderApp/tsync_demo_provider_proc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Parking",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/TsyncDemoProviderApp/tsync_demo_provider_proc",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/TsyncDemoProviderApp/tsync_demo_provider_proc",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/FunctionGroups/driver_if/DriverIfSet/DriverIfFG",
+            "fgStates": [
+                {
+                    "shortName": "Run",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/ucm/driver_if/driver_if_process1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/ucm/driver_if/driver_if_process1",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/FunctionGroups/ota_client/FunctionGroupsSet/OTAUpdateFG",
+            "fgStates": [
+                {
+                    "shortName": "Check",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ara/ucm_ota_client/processes/ota_client1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Continue",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ara/ucm_ota_client/processes/ota_client1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ara/ucm_ota_client/processes/ota_client1",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/FunctionGroups/ota_client_master/FunctionGroupsSet/OTAUpdateDFG",
+            "fgStates": [
+                {
+                    "shortName": "Check",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/ucm/ota_master_client/ota_master_client_process1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Continue",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/ucm/ota_master_client/ota_master_client_process1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/ISOFT/ucm/ota_master_client/ota_master_client_process1",
+                            "executionError": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "fqn": "/FunctionGroups/Update_DemoV1/FunctionGroupsSet/UpdateDemoFG",
+            "fgStates": [
+                {
+                    "shortName": "Driving",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/UpdateDemoApp/Update_Demo_process1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Parking",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/UpdateDemoApp/Update_Demo_process1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Stop",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/UpdateDemoApp/Update_Demo_process1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Verify",
+                    "phmSupervision": [],
+                    "processes": [
+                        {
+                            "processName": "/UpdateDemoApp/Update_Demo_process1",
+                            "executionError": -1
+                        }
+                    ]
+                },
+                {
+                    "shortName": "Off",
+                    "phmSupervision": [],
+                    "processes": []
+                }
+            ]
+        }
+    ],
+    "contributes": [
+        {
+            "shortName": "deployment_phm_motive",
+            "globalSupervision": [
+                {
+                    "shortName": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/suGlobal_engine",
+                    "supervisionCycle": 9.0,
+                    "expiredSupervisonCycleTolerance": 1,
+                    "localSupervision": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineLocal"
+                    ]
+                },
+                {
+                    "shortName": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/suGlobal_wheel",
+                    "supervisionCycle": 7.0,
+                    "expiredSupervisonCycleTolerance": 2,
+                    "localSupervision": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal"
+                    ]
+                }
+            ],
+            "healthChannelSupervision": [
+                {
+                    "shortName": "healthChannelSupervision_engine",
+                    "metaModelIdentifier": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelSupervision_engine",
+                    "supervision": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/suGlobal_engine",
+                    "recoveryNotification": {
+                        "recoveryNotificationRetry": 3,
+                        "recoveryNotificationTimeout": 2.6
+                    }
+                },
+                {
+                    "shortName": "healthChannelSupervision_wheel",
+                    "metaModelIdentifier": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelSupervision_wheel",
+                    "supervision": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/suGlobal_wheel",
+                    "recoveryNotification": {
+                        "recoveryNotificationRetry": 3,
+                        "recoveryNotificationTimeout": 6.2
+                    }
+                }
+            ],
+            "healthChannelExternalStatus": [
+                {
+                    "shortName": "healthChannelExternalStatus_tyre",
+                    "metaModelIdentifier": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelExternalStatus_tyre",
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_tyre",
+                    "phmHealthChannelInterface": "tyre_pressure",
+                    "healthChannelPoint": [
+                        "/ara/phm/Interfaces/tyre_pressure/kVeryLow",
+                        "/ara/phm/Interfaces/tyre_pressure/kVeryHigh"
+                    ],
+                    "recoveryNotification": {
+                        "recoveryNotificationRetry": 3,
+                        "recoveryNotificationTimeout": 4.0
+                    },
+                    "processName": "/AUTOSAR/Processes/phm_motive"
+                },
+                {
+                    "shortName": "healthChannelExternalStatus_voltage",
+                    "metaModelIdentifier": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelExternalStatus_voltage",
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_vol",
+                    "phmHealthChannelInterface": "vol",
+                    "healthChannelPoint": [
+                        "/ara/phm/Interfaces/vol/kLow",
+                        "/ara/phm/Interfaces/vol/kHigh"
+                    ],
+                    "recoveryNotification": {
+                        "recoveryNotificationRetry": 3,
+                        "recoveryNotificationTimeout": 5.5
+                    },
+                    "processName": "/AUTOSAR/Processes/phm_motive"
+                }
+            ],
+            "localSupervision": [
+                {
+                    "shortName": "engineLocal",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineLocal",
+                    "failedSupervisionCyclesTolerance": 1,
+                    "aliveSupervision": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineLocal/engine_alive"
+                    ],
+                    "deadlineSupervision": [],
+                    "logicalSupervision": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineLocal/logical"
+                    ]
+                },
+                {
+                    "shortName": "wheelLocal",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal",
+                    "failedSupervisionCyclesTolerance": 2,
+                    "aliveSupervision": [],
+                    "deadlineSupervision": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_lb",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_lt",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_rb",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_rt"
+                    ],
+                    "logicalSupervision": []
+                }
+            ],
+            "aliveSupervision": [
+                {
+                    "shortName": "engine_alive",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineLocal/engine_alive",
+                    "checkpointFqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineAlive",
+                    "expectedAliveIndications": 6,
+                    "maxMargin": 2,
+                    "minMargin": 2,
+                    "aliveRefrenceCycle": 15.2
+                }
+            ],
+            "deadlineSupervision": [
+                {
+                    "shortName": "deadline_lb",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_lb",
+                    "checkpointTransition": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelStarted_lb",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelFinished_lb"
+                    ],
+                    "maxDeadline": 0.1,
+                    "minDeadline": 0.01
+                },
+                {
+                    "shortName": "deadline_lt",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_lt",
+                    "checkpointTransition": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelStarted_lt",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelFinished_lt"
+                    ],
+                    "maxDeadline": 0.1,
+                    "minDeadline": 0.01
+                },
+                {
+                    "shortName": "deadline_rb",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_rb",
+                    "checkpointTransition": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelStarted_rb",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelFinished_rb"
+                    ],
+                    "maxDeadline": 0.1,
+                    "minDeadline": 0.01
+                },
+                {
+                    "shortName": "deadline_rt",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelLocal/deadline_rt",
+                    "checkpointTransition": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelStarted_rt",
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelFinished_rt"
+                    ],
+                    "maxDeadline": 0.1,
+                    "minDeadline": 0.01
+                }
+            ],
+            "logicalSupervision": [
+                {
+                    "shortName": "logical",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineLocal/logical",
+                    "initialCheckpoint": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineInitializing"
+                    ],
+                    "finalCheckpoint": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineStartup"
+                    ],
+                    "transition": [
+                        {
+                            "shortName": "transition_0",
+                            "sourceCheckpoint": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineInitializing",
+                            "targetCheckpoint": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineInitializingFinished"
+                        },
+                        {
+                            "shortName": "transition_1",
+                            "sourceCheckpoint": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineInitializingFinished",
+                            "targetCheckpoint": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineStartup"
+                        }
+                    ]
+                }
+            ],
+            "supervisionCheckpoint": [
+                {
+                    "shortName": "engineAlive",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineAlive",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kAlive",
+                    "checkpointId": 4,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_engine"
+                },
+                {
+                    "shortName": "engineInitializing",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineInitializing",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kInitializing",
+                    "checkpointId": 1,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_engine"
+                },
+                {
+                    "shortName": "engineInitializingFinished",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineInitializingFinished",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kInitializingFinished",
+                    "checkpointId": 3,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_engine"
+                },
+                {
+                    "shortName": "engineStartup",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/engineStartup",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kStartup",
+                    "checkpointId": 2,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_engine"
+                },
+                {
+                    "shortName": "wheelFinished_lb",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelFinished_lb",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kFinished",
+                    "checkpointId": 2,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_lb"
+                },
+                {
+                    "shortName": "wheelFinished_lt",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelFinished_lt",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kFinished",
+                    "checkpointId": 2,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_lt"
+                },
+                {
+                    "shortName": "wheelFinished_rb",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelFinished_rb",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kFinished",
+                    "checkpointId": 2,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_rb"
+                },
+                {
+                    "shortName": "wheelFinished_rt",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelFinished_rt",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kFinished",
+                    "checkpointId": 2,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_rt"
+                },
+                {
+                    "shortName": "wheelStarted_lb",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelStarted_lb",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kStart",
+                    "checkpointId": 1,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_lb"
+                },
+                {
+                    "shortName": "wheelStarted_lt",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelStarted_lt",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kStart",
+                    "checkpointId": 1,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_lt"
+                },
+                {
+                    "shortName": "wheelStarted_rb",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelStarted_rb",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kStart",
+                    "checkpointId": 1,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_rb"
+                },
+                {
+                    "shortName": "wheelStarted_rt",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/wheelStarted_rt",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kStart",
+                    "checkpointId": 1,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_wheel_rt"
+                }
+            ],
+            "healthChannelPoint": [
+                {
+                    "shortName": "tyre_pressure",
+                    "healthStatus": [
+                        {
+                            "shortName": "kHigh",
+                            "statusId": 3,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kLow",
+                            "statusId": 1,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kOk",
+                            "statusId": 2,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kVeryHigh",
+                            "statusId": 4,
+                            "triggersRecoveryNotification": true
+                        },
+                        {
+                            "shortName": "kVeryLow",
+                            "statusId": 0,
+                            "triggersRecoveryNotification": true
+                        }
+                    ]
+                },
+                {
+                    "shortName": "vol",
+                    "healthStatus": [
+                        {
+                            "shortName": "kHigh",
+                            "statusId": 3,
+                            "triggersRecoveryNotification": true
+                        },
+                        {
+                            "shortName": "kLow",
+                            "statusId": 2,
+                            "triggersRecoveryNotification": true
+                        },
+                        {
+                            "shortName": "kOk",
+                            "statusId": 1,
+                            "triggersRecoveryNotification": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "shortName": "deployment_phm_motive_testunit",
+            "globalSupervision": [
+                {
+                    "shortName": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/suGlobal_testunit",
+                    "supervisionCycle": 7.0,
+                    "expiredSupervisonCycleTolerance": 2,
+                    "localSupervision": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/local_testunit"
+                    ]
+                }
+            ],
+            "healthChannelSupervision": [
+                {
+                    "shortName": "healthChannelSupervision_testunit",
+                    "metaModelIdentifier": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/healthChannelSupervision_testunit",
+                    "supervision": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/suGlobal_testunit",
+                    "recoveryNotification": {
+                        "recoveryNotificationRetry": 3,
+                        "recoveryNotificationTimeout": 2.6
+                    }
+                }
+            ],
+            "healthChannelExternalStatus": [
+                {
+                    "shortName": "healthChannelExternalStatus_testunit",
+                    "metaModelIdentifier": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/healthChannelExternalStatus_testunit",
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_hc_testunit",
+                    "phmHealthChannelInterface": "hc_testunit",
+                    "healthChannelPoint": [
+                        "/ara/phm/Interfaces/hc_testunit/kTestVeryLow",
+                        "/ara/phm/Interfaces/hc_testunit/kTestVeryHigh"
+                    ],
+                    "recoveryNotification": {
+                        "recoveryNotificationRetry": 3,
+                        "recoveryNotificationTimeout": 4.0
+                    },
+                    "processName": "/AUTOSAR/Processes/phm_motive"
+                }
+            ],
+            "localSupervision": [
+                {
+                    "shortName": "local_testunit",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/local_testunit",
+                    "failedSupervisionCyclesTolerance": 1,
+                    "aliveSupervision": [
+                        "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/local_testunit/alive_testunit"
+                    ],
+                    "deadlineSupervision": [],
+                    "logicalSupervision": []
+                }
+            ],
+            "aliveSupervision": [
+                {
+                    "shortName": "alive_testunit",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/local_testunit/alive_testunit",
+                    "checkpointFqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/alive_testunit",
+                    "expectedAliveIndications": 6,
+                    "maxMargin": 2,
+                    "minMargin": 2,
+                    "aliveRefrenceCycle": 15.2
+                }
+            ],
+            "deadlineSupervision": [],
+            "logicalSupervision": [],
+            "supervisionCheckpoint": [
+                {
+                    "shortName": "alive_testunit",
+                    "fqn": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/alive_testunit",
+                    "processName": "/AUTOSAR/Processes/phm_motive",
+                    "status": "kTestAlive",
+                    "checkpointId": 1,
+                    "IdentifierR": "phm_motive/rootSwComponentPrototype_phm_motive/rPort_hc_testunit"
+                }
+            ],
+            "healthChannelPoint": [
+                {
+                    "shortName": "hc_testunit",
+                    "healthStatus": [
+                        {
+                            "shortName": "kTestHigh",
+                            "statusId": 3,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kTestLow",
+                            "statusId": 1,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kTestOk",
+                            "statusId": 2,
+                            "triggersRecoveryNotification": false
+                        },
+                        {
+                            "shortName": "kTestVeryHigh",
+                            "statusId": 4,
+                            "triggersRecoveryNotification": true
+                        },
+                        {
+                            "shortName": "kTestVeryLow",
+                            "statusId": 0,
+                            "triggersRecoveryNotification": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "recovery_notification_to_pport_prototype_mapping": [
+        {
+            "instance_specifier": "smd/state_manager/EngineSupervisionRecoveryNotification",
+            "healthChannelId": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelSupervision_engine"
+        },
+        {
+            "instance_specifier": "smd/state_manager/WheelSupervisionRecoveryNotification",
+            "healthChannelId": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelSupervision_wheel"
+        },
+        {
+            "instance_specifier": "smd/state_manager/TyrePressureHealthChannelRecoveryNotification",
+            "healthChannelId": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelExternalStatus_tyre"
+        },
+        {
+            "instance_specifier": "smd/state_manager/VoltagePressureHealthChannelRecoveryNotification",
+            "healthChannelId": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive/healthChannelExternalStatus_voltage"
+        },
+        {
+            "instance_specifier": "smd/state_manager/TestUnitHealthSupervisionRecoveryNotification",
+            "healthChannelId": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/healthChannelSupervision_testunit"
+        },
+        {
+            "instance_specifier": "smd/state_manager/TestUnitHealthChannelRecoveryNotification",
+            "healthChannelId": "/AUTOSAR/PlatformHealthManagement/deployment_phm_motive_testunit/healthChannelExternalStatus_testunit"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "routing",
+    "logtrace_process_id": "routing",
+    "logtrace_process_desc": "",
+    "logtrace_log_modes": [
+        "CONSOLE",
+        "FILE",
+        "NETWORK"
+    ],
+    "logtrace_default_log_level": "INFO",
+    "logtrace_file_path": "/tmp/log/routing",
+    "executable": {
+        "name": "routing",
+        "platform_application": true,
+        "loggingBehavior": true
+    },
+    "startup_configs": [
+        {
+            "config_name_for_convenience": "Config1",
+            "self_terminating_process": false,
+            "depends": [],
+            "function_group_states": {
+                "name": "Function",
+                "states": [
+                    {
+                        "name": "F1"
+                    },
+                    {
+                        "name": "F2"
+                    }
+                ]
+            },
+            "scheduling_policy": "SCHEDULING-POLICY-ROUND-ROBIN",
+            "scheduling_priority": 12,
+            "arguments": [],
+            "enter_exit_timeout": {}
+        }
+    ],
+    "service_instance_to_port_prototype_mapping": []
+}

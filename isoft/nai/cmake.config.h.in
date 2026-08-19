@@ -1,0 +1,599 @@
+// Disclaimer
+//
+// This work (specification and/or software implementation) and the material
+// contained in it, as released by AUTOSAR, is for the purpose of information
+// only. AUTOSAR and the companies that have contributed to it shall not be
+// liable for any use of the work.
+//
+// The material contained in this work is protected by copyright and other
+// types of intellectual property rights. The commercial exploitation of the
+// material contained in this work requires a license to such intellectual
+// property rights.
+//
+// This work may be utilized or reproduced without any modification, in any
+// form or by any means, for informational purposes only. For any other
+// purpose, no part of the work may be utilized or reproduced, in any form
+// or by any means, without permission in writing from the publisher.
+//
+// The work has been developed for automotive applications only. It has
+// neither been developed, nor tested for non-automotive applications.
+//
+// The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+// --------------------------------------------------------------------------
+
+/// ================================================================
+///
+/// File description:
+/// ----------------
+/// @file       cmake.config.h.in
+/// @brief
+/// @details
+/// @date       2020-11-27
+/// @author     xn
+/// @version    1.2.0
+///
+/// ================================================================
+
+
+/* Define to 1 if you on darwin. */
+#cmakedefine __darwin__ 1
+
+/* Define to 1 if you on freebsd. */
+#cmakedefine __freebsd__ 1
+
+/* Define to 1 if you on linux. */
+#cmakedefine __linux__ 1
+
+/* Define to 1 if you on solaris. */
+#cmakedefine __solaris__ 1
+
+/* Define to 1 if you on windows. */
+#cmakedefine __windows__ 1
+
+/* Define to 1 if you on android. */
+#cmakedefine __android__ 1
+
+/* Define to 1 if you on qnx. */
+#cmakedefine __qnx__ 1
+
+/* Define to 1 if you on sylixos. */
+#cmakedefine __sylixos__ 1
+
+
+
+/* Defined if require this standard */
+#cmakedefine _GNU_SOURCE @_GNU_SOURCE@
+
+/* Defined if require this standard */
+#cmakedefine _BSD_SOURCE @_BSD_SOURCE@
+
+/* Defined if require this standard */
+#cmakedefine _QNX_SOURCE @_QNX_SOURCE@
+
+/* Defined if require this standard */
+#cmakedefine _POSIX_SOURCE @_POSIX_SOURCE@
+
+/* Defined if require this standard */
+#cmakedefine _POSIX_C_SOURCE @_POSIX_C_SOURCE@
+
+/* Defined if require this standard */
+#cmakedefine _DARWIN_C_SOURCE @_DARWIN_C_SOURCE@
+
+/* Defined if require this standard */
+#cmakedefine _DEFAULT_SOURCE @_DEFAULT_SOURCE@
+
+/* Defined if require this standard */
+#cmakedefine _LARGEFILE64_SOURCE @_LARGEFILE64_SOURCE@
+
+/* Defined if require this standard */
+#cmakedefine _XOPEN_SOURCE @_XOPEN_SOURCE@
+
+/* Defined if require this standard */
+#cmakedefine __BSD_VISIBLE @__BSD_VISIBLE@
+
+
+
+/* Define to 1 if you required 'http'. */
+#cmakedefine NAI_WITH_HTTP 1
+
+
+
+/* Define to 1 if you have this standard */
+#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+#define NAI_HAVE_C99            1
+#endif
+
+
+/* Define to 1 if you have the 'm' library (-lm). */
+#cmakedefine NAI_HAVE_LIBM 1
+
+/* Define if we have a threads library. */
+#cmakedefine NAI_HAVE_THREADS 1
+
+/* Define if we have the openssl. */
+#cmakedefine NAI_HAVE_OPENSSL 1
+
+/* Define if we have the wolfssl. */
+#cmakedefine NAI_HAVE_WOLFSSL 1
+
+/* Define if we have the libressl. */
+#cmakedefine NAI_HAVE_LIBRESSL 1
+
+/* Define if we have the pcre. */
+#cmakedefine NAI_HAVE_PCRE 1
+
+/* Define if we have the pcre2. */
+#cmakedefine NAI_HAVE_PCRE2 1
+
+/* Define if we have the gcc atomic. */
+#cmakedefine NAI_HAVE_GCC_ATOMIC 1
+
+/* Define if we have the atomic_ops. */
+#cmakedefine NAI_HAVE_ATOMIC_OPS 1
+
+
+
+/* Define to 1 to make mprotect behavior compatible with posix on win32 */
+#cmakedefine NAI_COMPAT_POSIX_MPROTECT 1
+
+
+
+/* Define to 1 if you have the ANSI C header files. */
+#define STDC_HEADERS 1
+
+/* Define to 1 if you have <alloca.h> and it should be used (not on Ultrix).
+   */
+#cmakedefine NAI_HAVE_ALLOCA_H 1
+
+/* Define to 1 if you have the <fcntl.h> header file. */
+#cmakedefine NAI_HAVE_FCNTL_H 1
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#cmakedefine NAI_HAVE_INTTYPES_H 1
+
+/* Define to 1 if you have the <limits.h> header file. */
+#cmakedefine NAI_HAVE_LIMITS_H 1
+
+/* Define to 1 if you have the <malloc.h> header file. */
+#cmakedefine NAI_HAVE_MALLOC_H 1
+
+/* Define to 1 if you have the <ifaddrs.h> header file. */
+#cmakedefine NAI_HAVE_IFADDRS_H 1
+
+/* Define to 1 if you have the <netdb.h> header file. */
+#cmakedefine NAI_HAVE_NETDB_H 1
+
+/* Define to 1 if you have the <net/if.h> header file. */
+#cmakedefine NAI_HAVE_NET_IF_H 1
+
+/* Define to 1 if you have the <net/if_dl.h> header file. */
+#cmakedefine NAI_HAVE_NET_IF_DL_H 1
+
+/* Define to 1 if you have the <netinet/udp.h> header file. */
+#cmakedefine NAI_HAVE_NETINET_UDP_H 1
+
+/* Define to 1 if you have the <memory.h> header file. */
+#cmakedefine NAI_HAVE_MEMORY_H 1
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#cmakedefine NAI_HAVE_DLFCN_H 1
+
+/* Define to 1 if you have the <pthread.h> header file. */
+#cmakedefine NAI_HAVE_PTHREAD_H 1
+
+/* Define to 1 if you have the <resolv.h> header file. */
+#cmakedefine NAI_HAVE_RESOLV_H 1
+
+/* Define to 1 if you have the <sched.h> header file. */
+#cmakedefine NAI_HAVE_SCHED_H 1
+
+/* Define to 1 if you have the <semaphore.h> header file. */
+#cmakedefine NAI_HAVE_SEMAPHORE_H 1
+
+/* Define to 1 if you have the <signal.h> header file. */
+#cmakedefine NAI_HAVE_SIGNAL_H 1
+
+/* Define to 1 if you have the <stddef.h> header file. */
+#cmakedefine NAI_HAVE_STDDEF_H 1
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#cmakedefine NAI_HAVE_STDINT_H 1
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#cmakedefine NAI_HAVE_STDLIB_H 1
+
+/* Define to 1 if you have the <string.h> header file. */
+#cmakedefine NAI_HAVE_STRING_H 1
+
+/* Define to 1 if you have the <sys/cpuset.h> header file. */
+#cmakedefine NAI_HAVE_SYS_CPUSET_H 1
+
+/* Define to 1 if you have the <sys/file.h> header file. */
+#cmakedefine NAI_HAVE_SYS_FILE_H 1
+
+/* Define to 1 if you have the <sys/mman.h> header file. */
+#cmakedefine NAI_HAVE_SYS_MMAN_H 1
+
+/* Define to 1 if you have the <sys/inotify.h> header file. */
+#cmakedefine NAI_HAVE_SYS_INOTIFY_H 1
+
+/* Define to 1 if you have the <sys/ioctl.h> header file. */
+#cmakedefine NAI_HAVE_SYS_IOCTL_H 1
+
+/* Define to 1 if you have the <sys/resource.h> header file. */
+#cmakedefine NAI_HAVE_SYS_RESOURCE_H 1
+
+/* Define to 1 if you have the <sys/socket.h> header file. */
+#cmakedefine NAI_HAVE_SYS_SOCKET_H 1
+
+/* Define to 1 if you have the <sys/select.h> header file. */
+#cmakedefine NAI_HAVE_SYS_SELECT_H 1
+
+/* Define to 1 if you have the <sys/sendfile.h> header file. */
+#cmakedefine NAI_HAVE_SYS_SENDFILE_H 1
+
+/* Define to 1 if you have the <sys/sendfilev.h> header file. */
+#cmakedefine NAI_HAVE_SYS_SENDFILEV_H 1
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#cmakedefine NAI_HAVE_SYS_STAT_H 1
+
+/* Define to 1 if you have the <sys/sysinfo.h> header file. */
+#cmakedefine NAI_HAVE_SYS_SYSINFO_H 1
+
+/* Define to 1 if you have the <sys/time.h> header file. */
+#cmakedefine NAI_HAVE_SYS_TIME_H 1
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#cmakedefine NAI_HAVE_SYS_TYPES_H 1
+
+/* Define to 1 if you have the <sys/uio.h> header file. */
+#cmakedefine NAI_HAVE_SYS_UIO_H 1
+
+/* Define to 1 if you have the <sys/un.h> header file. */
+#cmakedefine NAI_HAVE_SYS_UN_H 1
+
+/* Define to 1 if you have the <sys/wait.h> header file. */
+#cmakedefine NAI_HAVE_SYS_WAIT_H 1
+
+/* Define to 1 if you have the <time.h> header file. */
+#cmakedefine NAI_HAVE_TIME_H 1
+
+/* Define to 1 if you have the <uintptr.h> header file. */
+#cmakedefine NAI_HAVE_UINTPTR_H 1
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#cmakedefine NAI_HAVE_UNISTD_H 1
+
+/* Define to 1 if you have the <aio.h> header file. */
+#cmakedefine NAI_HAVE_AIO_H 1
+
+/* Define to 1 if you have the <linux/aio_abi.h> header file. */
+#cmakedefine NAI_HAVE_AIO_LINUX_H 1
+
+/* Define to 1 if you have the <liburing.h> header file. */
+#cmakedefine NAI_HAVE_LIBURING_H 1
+
+
+/* Define to 1 if you have the 'static_assert' function. */
+#cmakedefine NAI_HAVE_STATIC_ASSERT 1
+
+
+/* Define to 1 if you have the 'memset' function. */
+#define NAI_HAVE_MEMSET 1
+
+/* Define to 1 if you have the 'sqrt' function. */
+#define NAI_HAVE_SQRT 1
+
+/* Define to 1 if you have the 'alloca' function. */
+#cmakedefine NAI_HAVE_ALLOCA 1
+
+/* Define to 1 if you have the 'memalign' function. */
+#cmakedefine NAI_HAVE_MEMALIGN 1
+
+
+/* Define to 1 if you have the 'clock_gettime' function. */
+#cmakedefine NAI_HAVE_CLOCK_GETTIME 1
+
+/* Define to 1 if you have the 'nanosleep' function. */
+#cmakedefine NAI_HAVE_NANOSLEEP 1
+
+/* Define to 1 if you have the 'gettimeofday' function. */
+#cmakedefine NAI_HAVE_GETTIMEOFDAY 1
+
+/* Define to 1 if you have the 'utimes' function. */
+#cmakedefine NAI_HAVE_UTIMES 1
+
+/* Define to 1 if you have the 'utime' function. */
+#cmakedefine NAI_HAVE_UTIME 1
+
+/* Define to 1 if you have the 'gmtime_r' function. */
+#cmakedefine NAI_HAVE_GMTIME_R 1
+
+/* Define to 1 if you have the 'localtime_r' function. */
+#cmakedefine NAI_HAVE_LOCALTIME_R 1
+
+/* Define to 1 if you have the 'timer_create' function. */
+#cmakedefine NAI_HAVE_TIMER_CREATE 1
+
+/* Define to 1 if you have the 'timerfd_create' function. */
+#cmakedefine NAI_HAVE_TIMERFD_CREATE 1
+
+
+/* Define to 1 if you have the 'fork' function. */
+#cmakedefine NAI_HAVE_FORK 1
+
+/* Define to 1 if you have the 'execv' function. */
+#cmakedefine NAI_HAVE_EXECV 1
+
+
+/* Define to 1 if you have the 'pthread_yield' function. */
+#cmakedefine NAI_HAVE_PTHREAD_YIELD 1
+
+/* Define to 1 if you have the 'pthread_spinlock'. */
+#cmakedefine NAI_HAVE_PTHREAD_SPINLOCK 1
+
+/* Define to 1 if you have the 'pthread_setaffinity_np'. */
+#cmakedefine NAI_HAVE_PTHREAD_GETAFFINITY_NP 1
+
+/* Define to 1 if you have the 'pthread_setaffinity_np'. */
+#cmakedefine NAI_HAVE_PTHREAD_SETAFFINITY_NP 1
+
+/* Define to 1 if you have the 'pthread_attr_setaffinity_np'. */
+#cmakedefine NAI_HAVE_PTHREAD_ATTR_GETAFFINITY_NP 1
+
+/* Define to 1 if you have the 'pthread_attr_setaffinity_np'. */
+#cmakedefine NAI_HAVE_PTHREAD_ATTR_SETAFFINITY_NP 1
+
+/* Define to 1 if you have the 'pthread_condattr_setclock'. */
+#cmakedefine NAI_HAVE_PTHREAD_CONDATTR_SETCLOCK 1
+
+/* Define to 1 if you have the 'posix_memalign' function. */
+#cmakedefine NAI_HAVE_POSIX_MEMALIGN 1
+
+/* Define to 1 if you have the 'sched_yield' function. */
+#cmakedefine NAI_HAVE_SCHED_YIELD 1
+
+/* Define to 1 if you have the 'sched_setscheduler' function. */
+#cmakedefine NAI_HAVE_SCHED_SETSCHEDULER 1
+
+/* Define to 1 if you have the 'sched_get_priority_min/max' function. */
+#cmakedefine NAI_HAVE_SCHED_CLASS_PRIORITY 1
+
+/* Define to 1 if you have the 'sched_getaffinity' function. */
+#cmakedefine NAI_HAVE_SCHED_GETAFFINITY 1
+
+/* Define to 1 if you have the 'sched_setaffinity' function. */
+#cmakedefine NAI_HAVE_SCHED_SETAFFINITY 1
+
+/* Define to 1 if you have the 'cpuset_getaffinity' function. */
+#cmakedefine NAI_HAVE_CPUSET_GETAFFINITY 1
+
+/* Define to 1 if you have the 'cpuset_setaffinity' function. */
+#cmakedefine NAI_HAVE_CPUSET_SETAFFINITY 1
+
+
+/* Define to 1 if you have the 'sem_timedwait' function. */
+#cmakedefine NAI_HAVE_SEM_TIMEDWAIT 1
+
+/* Define to 1 if you have the 'sigaction' function. */
+#cmakedefine NAI_HAVE_SIGACTION 1
+
+/* Define to 1 if you have the 'setsid' function. */
+#cmakedefine NAI_HAVE_SETSID 1
+
+/* Define to 1 if you have the 'getpwnam' function. */
+#cmakedefine NAI_HAVE_GETPWNAM 1
+
+/* Define to 1 if you have the 'getpwnam_r' function. */
+#cmakedefine NAI_HAVE_GETPWNAM_R 1
+
+/* Define to 1 if you have the 'getgrnam' function. */
+#cmakedefine NAI_HAVE_GETGRNAM 1
+
+/* Define to 1 if you have the 'getgrnam_r' function. */
+#cmakedefine NAI_HAVE_GETGRNAM_R 1
+
+/* Define to 1 if you have the 'getrlimit' function. */
+#cmakedefine NAI_HAVE_GETRLIMIT 1
+
+/* Define to 1 if you have the 'setrlimit' function. */
+#cmakedefine NAI_HAVE_SETRLIMIT 1
+
+/* Define to 1 if you have the 'get_nprocs' function. */
+#cmakedefine NAI_HAVE_GET_NPROCS 1
+
+/* Define to 1 if you have the 'getpagesize' function. */
+#cmakedefine NAI_HAVE_GETPAGESIZE 1
+
+
+/* Define to 1 if you have the 'gethostbyname_r' function. */
+#cmakedefine NAI_HAVE_GETHOSTBYNAME_R 1
+
+/* Define to 1 if you have the 'getaddrinfo' function. */
+#cmakedefine NAI_HAVE_GETADDRINFO 1
+
+
+/* Define to 1 if you have the 'res_init' function. */
+#cmakedefine NAI_HAVE_RES_INIT 1
+
+/* Define to 1 if you have the 'res_state' structure. */
+#cmakedefine NAI_HAVE_RES_STATE 1
+
+/* Define to 1 if you have the 'res_getservers' function. */
+#cmakedefine NAI_HAVE_RES_GETSERVERS 1
+
+
+/* Define to 1 if you have the 'aio_readv' function. */
+#cmakedefine NAI_HAVE_AIO_READV 1
+
+/* Define to 1 if you have the 'aio_writev' function. */
+#cmakedefine NAI_HAVE_AIO_WRITEV 1
+
+
+/* Define to 1 if you have the 'openat' function. */
+#cmakedefine NAI_HAVE_OPENAT 1
+
+/* Define to 1 if you have the 'stat64' function. */
+#cmakedefine NAI_HAVE_STAT64 1
+
+/* Define to 1 if you have the 'fstatat' function. */
+#cmakedefine NAI_HAVE_FSTATAT 1
+
+/* Define to 1 if you have the 'fstat64' function. */
+#cmakedefine NAI_HAVE_FSTAT64 1
+
+/* Define to 1 if you have the 'ftruncate64' function. */
+#cmakedefine NAI_HAVE_FTRUNCATE64 1
+
+/* Define to 1 if you have the 'lseek64' function. */
+#cmakedefine NAI_HAVE_LSEEK64 1
+
+/* Define to 1 if you have the 'pread' function. */
+#cmakedefine NAI_HAVE_PREAD 1
+
+/* Define to 1 if you have the 'preadv' function. */
+#cmakedefine NAI_HAVE_PREADV 1
+
+/* Define to 1 if you have the 'pwrite' function. */
+#cmakedefine NAI_HAVE_PWRITE 1
+
+/* Define to 1 if you have the 'pwritev' function. */
+#cmakedefine NAI_HAVE_PWRITEV 1
+
+/* Define to 1 if you have the 'readv' function. */
+#cmakedefine NAI_HAVE_READV 1
+
+/* Define to 1 if you have the 'writev' function. */
+#cmakedefine NAI_HAVE_WRITEV 1
+
+/* Define to 1 if you have the 'dup2' function. */
+#cmakedefine NAI_HAVE_DUP2 1
+
+/* Define to 1 if you have the 'dup3' function. */
+#cmakedefine NAI_HAVE_DUP3 1
+
+/* Define to 1 if you have the 'pipe2' function. */
+#cmakedefine NAI_HAVE_PIPE2 1
+
+/* Define to 1 if you have the 'accept4' function. */
+#cmakedefine NAI_HAVE_ACCEPT4 1
+
+/* Define to 1 if you have the 'recvmsg' function. */
+#cmakedefine NAI_HAVE_RECVMSG 1
+
+/* Define to 1 if you have the 'recvmmsg' function. */
+#cmakedefine NAI_HAVE_RECVMMSG 1
+
+/* Define to 1 if you have the 'sendmsg' function. */
+#cmakedefine NAI_HAVE_SENDMSG 1
+
+/* Define to 1 if you have the 'sendmmsg' function. */
+#cmakedefine NAI_HAVE_SENDMMSG 1
+
+/* Define to 1 if you have the 'sendfile' function. */
+#cmakedefine NAI_HAVE_SENDFILE_FREEBSD 1
+
+/* Define to 1 if you have the 'sendfile' function. */
+#cmakedefine NAI_HAVE_SENDFILE_LINUX 1
+
+/* Define to 1 if you have the 'sendfilev' function. */
+#cmakedefine NAI_HAVE_SENDFILEV 1
+
+/* Define to 1 if you have the 'if_nametoindex' function. */
+#cmakedefine NAI_HAVE_IF_NAMETOINDEX 1
+
+/* Define to 1 if you have the 'if_indextoname' function. */
+#cmakedefine NAI_HAVE_IF_INDEXTONAME 1
+
+/* Define to 1 if you have the 'inotify_init1' function. */
+#cmakedefine NAI_HAVE_INOTIFY_INIT1 1
+
+/* Define if you have epoll. */
+#cmakedefine NAI_HAVE_EPOLL 1
+
+/* Define if you have eventfd. */
+#cmakedefine NAI_HAVE_EVENTFD 1
+
+/* Define if you have port. */
+#cmakedefine NAI_HAVE_PORT 1
+
+/* Define if you have select. */
+#cmakedefine NAI_HAVE_SELECT 1
+
+/* Define if you have poll. */
+#cmakedefine NAI_HAVE_POLL 1
+
+/* Define if you have kqueue. */
+#cmakedefine NAI_HAVE_KQUEUE 1
+
+/* Define if you have devpoll. */
+#cmakedefine NAI_HAVE_DEVPOLL 1
+
+
+/* Define to 1 if the system has defined 'UDP_SEGMENT'. */
+#cmakedefine NAI_HAVE_UDP_SEGMENT 1
+
+
+/* Define to 1 if the system has the struct 'sockaddr_in'. */
+#define NAI_HAVE_SOCKADDR_IN 1
+
+/* Define to 1 if the system has the struct 'sockaddr_un'. */
+#cmakedefine NAI_HAVE_SOCKADDR_UN 1
+
+/* Define to 1 if the system has the struct 'sockaddr_in6'. */
+#cmakedefine NAI_HAVE_SOCKADDR_IN6 1
+
+/* Define to 1 if the system has the member 'len' of sockaddr. */
+#cmakedefine NAI_HAVE_SOCKADDR_LEN 1
+
+
+/* Define to 1 if the system has the member 'tm_gmtoff' of tm. */
+#cmakedefine NAI_HAVE_TM_GMTOFF 1
+
+
+/* Define to 1 if the system has the type 'uintptr_t'. */
+#define NAI_HAVE_UINTPTR_T 1
+
+
+/* Define to 1 if the system has the type 'off64_t'. */
+#cmakedefine NAI_HAVE_OFF64_T 1
+
+
+/* The size of 'double', as computed by sizeof. */
+#cmakedefine NAI_SIZEOF_DOUBLE @NAI_SIZEOF_DOUBLE@
+
+/* The size of 'float', as computed by sizeof. */
+#cmakedefine NAI_SIZEOF_FLOAT @NAI_SIZEOF_FLOAT@
+
+/* The size of 'int', as computed by sizeof. */
+#cmakedefine NAI_SIZEOF_INT @NAI_SIZEOF_INT@
+
+/* The size of 'long', as computed by sizeof. */
+#cmakedefine NAI_SIZEOF_LONG @NAI_SIZEOF_LONG@
+
+/* The size of 'long long', as computed by sizeof. */
+#cmakedefine NAI_SIZEOF_LONG_LONG @NAI_SIZEOF_LONG_LONG@
+
+/* The size of 'ptrdiff_t', as computed by sizeof. */
+#cmakedefine NAI_SIZEOF_PTRDIFF_T @NAI_SIZEOF_PTRDIFF_T@
+
+/* The size of 'size_t', as computed by sizeof. */
+#cmakedefine NAI_SIZEOF_SIZE_T @NAI_SIZEOF_SIZE_T@
+
+/* The size of 'unsigned int', as computed by sizeof. */
+#cmakedefine NAI_SIZEOF_UNSIGNED_INT @NAI_SIZEOF_UNSIGNED_INT@
+
+/* The size of 'unsigned long', as computed by sizeof. */
+#cmakedefine NAI_SIZEOF_UNSIGNED_LONG @NAI_SIZEOF_UNSIGNED_LONG@
+
+/* The size of 'unsigned long long', as computed by sizeof. */
+#cmakedefine NAI_SIZEOF_UNSIGNED_LONG_LONG @NAI_SIZEOF_UNSIGNED_LONG_LONG@
+
+/* The size of 'void *', as computed by sizeof. */
+#define NAI_SIZEOF_VOID_P @CMAKE_SIZEOF_VOID_P@
+
+
+
+
+

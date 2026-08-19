@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR
+    xmlns="http://autosar.org/schema/r4.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+        <AR-PACKAGE>
+            <SHORT-NAME>ISOFT</SHORT-NAME>
+            <AR-PACKAGES>
+                <AR-PACKAGE>
+                    <SHORT-NAME>PlatformComponents</SHORT-NAME>
+                    <AR-PACKAGES>
+                        <AR-PACKAGE>
+                            <SHORT-NAME>nm</SHORT-NAME>
+                            <ELEMENTS>
+                                <SDG-DEF>
+                                    <SHORT-NAME>Extension</SHORT-NAME>
+                                    <SDG-CLASSES>
+                                        <!-- autosar NM 各种定时器有关联限制，如果不符合autosar标准，请设置SkipTimerCheck为true-->
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>SystemCustomization</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <GID>iSOFT:nm:SystemCustomization</GID>
+                                            <EXTENDS-META-CLASS>System</EXTENDS-META-CLASS>
+                                            <ATTRIBUTES>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>SkipTimerCheck</SHORT-NAME>
+                                                <CATEGORY>Boolean</CATEGORY>
+                                                <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:SystemCustomization:SkipTimerCheck</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+                                        <!-- autosar NM 用户数据填充-->
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>UdpNmNodeExtension</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <GID>iSOFT:nm:UdpNmNodeExtension</GID>
+                                            <EXTENDS-META-CLASS>UdpNmNode</EXTENDS-META-CLASS>
+                                            <ATTRIBUTES>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>UserDataString</SHORT-NAME>
+                                                <CATEGORY>String</CATEGORY>
+                                                <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:UdpNmNodeExtension:UserDataString</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+                                        <!-- autosar NM 规定只有节点主动请求网络进入repeatMesssgeState，才是快发，如果要求节点在repeatMesssgeState都是快发，需要设置SendImmediateInRepeateMessage为true-->
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>UdpNmClusterExtension</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <GID>iSOFT:nm:UdpNmClusterExtension</GID>
+                                            <EXTENDS-META-CLASS>UdpNmCluster</EXTENDS-META-CLASS>
+                                            <ATTRIBUTES>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>SendImmediateInRepeatMessage</SHORT-NAME>
+                                                <CATEGORY>Boolean</CATEGORY>
+                                                <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:UdpNmClusterExtension:SendImmediateInRepeatMessage</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>RepeatMessageRequestPnCheck</SHORT-NAME>
+                                                <CATEGORY>Boolean</CATEGORY>
+                                                <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:UdpNmClusterExtension:RepeatMessageRequestPnCheck</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>SetActiveWakeupBit</SHORT-NAME>
+                                                <CATEGORY>Boolean</CATEGORY>
+                                                <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:UdpNmClusterExtension:SetActiveWakeupBit</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>NmStateInUserDataOffset</SHORT-NAME>
+                                                <CATEGORY>INTEGER</CATEGORY>
+                                                <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:UdpNmClusterExtension:NmStateInUserDataOffset</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <!-- nm state， one bit for each change-->
+                                                <!-- from BusSleep to RepeatMessageState-->
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>BusSleepToRepeatMessageState</SHORT-NAME>
+                                                <CATEGORY>INTEGER</CATEGORY>
+                                                <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:UdpNmClusterExtension:BusSleepToRepeatMessageState</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <!-- nm state: from PrepareBusSleep to RepeatMessageState-->
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>PrepareBusSleepToRepeatMessageState</SHORT-NAME>
+                                                <CATEGORY>INTEGER</CATEGORY>
+                                                <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:UdpNmClusterExtension:PrepareBusSleepToRepeatMessageState</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <!-- nm state: from Repeat Message State to Normal Operation State-->
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>RepeatMessageStateToNormalOperationState</SHORT-NAME>
+                                                <CATEGORY>INTEGER</CATEGORY>
+                                                <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:UdpNmClusterExtension:RepeatMessageStateToNormalOperationState</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <!-- nm state: from Ready Sleep State to Normal Operation State-->
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>ReadySleepStateToNormalOperationState</SHORT-NAME>
+                                                <CATEGORY>INTEGER</CATEGORY>
+                                                <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:UdpNmClusterExtension:ReadySleepStateToNormalOperationState</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <!-- nm state: from Ready Sleep State to Repeat Message State-->
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>ReadySleepStateToRepeatMessageState</SHORT-NAME>
+                                                <CATEGORY>INTEGER</CATEGORY>
+                                                <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:UdpNmClusterExtension:ReadySleepStateToRepeatMessageState</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                                <!-- nm state: from Normal Operation State to Repeat Message State-->
+                                                <SDG-PRIMITIVE-ATTRIBUTE>
+                                                <SHORT-NAME>NormalOperationStateToRepeatMessageState</SHORT-NAME>
+                                                <CATEGORY>INTEGER</CATEGORY>
+                                                <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:UdpNmClusterExtension:NormalOperationStateToRepeatMessageState</GID>
+                                                </SDG-PRIMITIVE-ATTRIBUTE>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+
+                                        <!-- 如果AA用户进程需要使用逻辑网络和网络通信通信，需要定义此SDG 
+                                            -->
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>NetworkHandleToUserProcessMapping</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <GID>iSOFT:nm:NetworkHandleToUserProcessMapping</GID>
+                                            <EXTENDS-META-CLASS>NmInstantiation</EXTENDS-META-CLASS>
+                                            <ATTRIBUTES>
+                                                <SDG-AGGREGATION-WITH-VARIATION>
+                                                    <SHORT-NAME>NetworkHandleToUserProcessMappingSubclass</SHORT-NAME>
+                                                    <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                                                    <UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+                                                    <GID>iSOFT:nm:NetworkHandleToUserProcessMappingSubclass:Attributes</GID>
+                                                    <VARIATION>false</VARIATION>
+                                                    <SUB-SDG-REF DEST="SDG-CLASS">/ISOFT/PlatformComponents/nm/Extension/NetworkHandleToUserProcessSubMapping</SUB-SDG-REF>
+                                                </SDG-AGGREGATION-WITH-VARIATION>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+                                        <SDG-CLASS>
+                                            <SHORT-NAME>NetworkHandleToUserProcessSubMapping</SHORT-NAME>
+                                            <CATEGORY>ISOFT_EXTENSION</CATEGORY>
+                                            <ATTRIBUTES>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                <SHORT-NAME>NetworkHandle</SHORT-NAME>
+                                                <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                                                <GID>iSOFT:nm:NetworkHandleToUserProcessSubMapping:NetworkHandle</GID>
+                                                <DEST-META-CLASS>NmNetworkHandle</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                                <SDG-FOREIGN-REFERENCE>
+                                                <SHORT-NAME>UserProcess</SHORT-NAME>
+                                                <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                                                <UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+                                                <GID>iSOFT:nm:NetworkHandleToUserProcessSubMapping:UserProcess</GID>
+                                                <DEST-META-CLASS>Process</DEST-META-CLASS>
+                                                </SDG-FOREIGN-REFERENCE>
+                                            </ATTRIBUTES>
+                                        </SDG-CLASS>
+                                    </SDG-CLASSES>
+                                </SDG-DEF>
+                            </ELEMENTS>
+                        </AR-PACKAGE>
+                    </AR-PACKAGES>
+                </AR-PACKAGE>
+            </AR-PACKAGES>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

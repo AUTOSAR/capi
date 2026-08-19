@@ -1,0 +1,11 @@
+{
+    "name": "libseccomp",
+    "version": "2.5.1",
+    "url": "https://github.com/seccomp/libseccomp/archive/refs/tags/v2.5.1.tar.gz",
+    "configure": [
+        "./autogen.sh",
+        "./configure --host=@TARGET@ --prefix=@PREFIX@"
+    ],
+    "build": "make -j@JOBS@",
+    "install": "make install DESTDIR=@SYSROOT@"
+}

@@ -1,0 +1,67 @@
+#  Disclaimer
+#
+#  This work (specification and/or software implementation) and the material
+#  contained in it, as released by AUTOSAR, is for the purpose of information
+#  only. AUTOSAR and the companies that have contributed to it shall not be
+#  liable for any use of the work.
+#
+#  The material contained in this work is protected by copyright and other
+#  types of intellectual property rights. The commercial exploitation of the
+#  material contained in this work requires a license to such intellectual
+#  property rights.
+#
+#  This work may be utilized or reproduced without any modification, in any
+#  form or by any means, for informational purposes only. For any other
+#  purpose, no part of the work may be utilized or reproduced, in any form
+#  or by any means, without permission in writing from the publisher.
+#
+#  The work has been developed for automotive applications only. It has
+#  neither been developed, nor tested for non-automotive applications.
+#
+#  The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+#  --------------------------------------------------------------------------
+
+# ================================================================
+#
+# File description:
+# ----------------
+# @file       CMakeLists.txt
+# @brief
+# @details
+# @date       2024-10-12
+# @author     kai.ju
+# @version    1.2.0
+#
+# ================================================================
+
+cmake_minimum_required(VERSION 3.4)
+
+project(ara-diag VERSION 1.0.0 LANGUAGES CXX)
+
+find_package(isoft-cmake-common REQUIRED)
+include(GNUInstallDirs)
+if( ARA_MAJOR_VERSION EQUAL 3)
+    add_compile_definitions(NMODEL)
+endif()
+
+set(DIAG_COMMON_LIB diag-common)
+# Check if the target exists
+if(TARGET diag-common)
+    message(STATUS "Target 'diag-common' exists, can link safely")
+else()
+    find_package(diag-common REQUIRED)
+    set(DIAG_COMMON_LIB ara::diag-common)
+endif()
+
+
+include_directories(
+    PUBLIC
+        $<INSTALL_INTERFACE:include>
+        ${ARA_SYSROOT}/usr/include
+    PRIVATE
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
+)
+
+add_subdirectory(gen_code)
+
+add_subdirectory(src)

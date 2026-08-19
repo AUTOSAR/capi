@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+	<AR-PACKAGE>
+		<SHORT-NAME>ara</SHORT-NAME>
+		<AR-PACKAGES>
+			<AR-PACKAGE>
+				<SHORT-NAME>sm</SHORT-NAME>
+				<AR-PACKAGES>
+					<AR-PACKAGE>
+						<SHORT-NAME>Errors</SHORT-NAME>
+						<ELEMENTS>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>Rejected</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">Requested operation was rejected due to State Managements/machines internal state.</L-2>
+								</DESC>
+								<ERROR-CODE>5</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>PrepareFailed</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">Preparation step of update failed.</L-2>
+								</DESC>
+								<ERROR-CODE>7</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>VerifyFailed</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">Verification step of update failed.</L-2>
+								</DESC>
+								<ERROR-CODE>6</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>RollbackFailed</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">Rollback step of update failed.</L-2>
+								</DESC>
+								<ERROR-CODE>8</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<!-- <AP-APPLICATION-ERROR>
+								<SHORT-NAME>GeneralReject</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">Requested operation was rejected due to State Managements/machines internal state.</L-2>
+								</DESC>
+								<ERROR-CODE>101</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR> -->
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>FGNameIllegal</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">The name of the function group can't be found.</L-2>
+								</DESC>
+								<ERROR-CODE>102</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>FGStateIllegal</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">The state of the function group can't be found.</L-2>
+								</DESC>
+								<ERROR-CODE>103</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>UpdateSessionIsActive</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">There is a update session active.</L-2>
+								</DESC>
+								<ERROR-CODE>104</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>FGDeactived</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">The function group is deactived.</L-2>
+								</DESC>
+								<ERROR-CODE>105</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>AlreadyInState</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">The function group/state machine is already in requested state.</L-2>
+								</DESC>
+								<ERROR-CODE>106</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>FailedToSetStateFromEM</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">Can't SetState From EM successfully.</L-2>
+								</DESC>
+								<ERROR-CODE>107</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>TimeOutWhenCalling</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">Time out when calling.</L-2>
+								</DESC>
+								<ERROR-CODE>108</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>NotFoundNetworkStateService</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">Hasn't fount NetworkState service needed yet.</L-2>
+								</DESC>
+								<ERROR-CODE>109</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>SMNotFound</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">The state machine can't be found.</L-2>
+								</DESC>
+								<ERROR-CODE>110</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+							<AP-APPLICATION-ERROR>
+								<SHORT-NAME>SMStateNotFound</SHORT-NAME>
+								<DESC>
+									<L-2 L="EN">The state machine state can't be found.</L-2>
+								</DESC>
+								<ERROR-CODE>111</ERROR-CODE>
+								<ERROR-DOMAIN-REF DEST="AP-APPLICATION-ERROR-DOMAIN">/ara/sm/ErrorDomains/SM</ERROR-DOMAIN-REF>
+							</AP-APPLICATION-ERROR>
+						</ELEMENTS>
+					</AR-PACKAGE>
+					<AR-PACKAGE>
+						<SHORT-NAME>ErrorDomains</SHORT-NAME>
+						<ELEMENTS>
+							<AP-APPLICATION-ERROR-DOMAIN>
+								<SHORT-NAME>SM</SHORT-NAME>
+								<NAMESPACES>
+									<SYMBOL-PROPS>
+										<SHORT-NAME>ara</SHORT-NAME>
+										<SYMBOL>ara</SYMBOL>
+									</SYMBOL-PROPS>
+									<SYMBOL-PROPS>
+										<SHORT-NAME>sm</SHORT-NAME>
+										<SYMBOL>sm</SYMBOL>
+									</SYMBOL-PROPS>
+								</NAMESPACES>
+								<VALUE>46</VALUE>
+							</AP-APPLICATION-ERROR-DOMAIN>
+						</ELEMENTS>
+					</AR-PACKAGE>
+				</AR-PACKAGES>
+			</AR-PACKAGE>
+		</AR-PACKAGES>
+	</AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

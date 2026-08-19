@@ -1,0 +1,23 @@
+{
+    "IdsmGrants": [
+        {
+            "processname": "/ISOFT/Idsm/Processes/helloworld_idsm_process1",
+            "secureeventid": [
+                123,
+                3,
+                4,
+                5,
+                32773,
+                40000
+            ]
+        },
+        {
+            "processname": "/ISOFT/Idsm/Processes/helloworld_idsm_process2",
+            "secureeventid": [
+                154,
+                1314,
+                1208
+            ]
+        }
+    ]
+}

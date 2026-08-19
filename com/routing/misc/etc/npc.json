@@ -1,0 +1,8 @@
+{
+    "netname": "ara_com_npc",
+    "mode": "discovery",
+    "appname": "routing",
+    "appid": 0,
+    "svc_net_type": "unixsock",
+    "svc_access_handle": "ds.sock"
+}

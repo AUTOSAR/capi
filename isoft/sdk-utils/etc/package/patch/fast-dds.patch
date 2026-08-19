@@ -1,0 +1,293 @@
+#  Disclaimer
+#
+#  This work (specification and/or software implementation) and the material
+#  contained in it, as released by AUTOSAR, is for the purpose of information
+#  only. AUTOSAR and the companies that have contributed to it shall not be
+#  liable for any use of the work.
+#
+#  The material contained in this work is protected by copyright and other
+#  types of intellectual property rights. The commercial exploitation of the
+#  material contained in this work requires a license to such intellectual
+#  property rights.
+#
+#  This work may be utilized or reproduced without any modification, in any
+#  form or by any means, for informational purposes only. For any other
+#  purpose, no part of the work may be utilized or reproduced, in any form
+#  or by any means, without permission in writing from the publisher.
+#
+#  The work has been developed for automotive applications only. It has
+#  neither been developed, nor tested for non-automotive applications.
+#
+#  The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+#  --------------------------------------------------------------------------
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fd2c949..ad581ab 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -15,7 +15,7 @@
+ ###############################################################################
+ # CMake build rules for Fast DDS
+ ###############################################################################
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ # Set CMAKE_BUILD_TYPE to Release by default.
+ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+diff --git a/examples/cpp/benchmark/CMakeLists.txt b/examples/cpp/benchmark/CMakeLists.txt
+index 912e2dc..7c6512a 100644
+--- a/examples/cpp/benchmark/CMakeLists.txt
++++ b/examples/cpp/benchmark/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_benchamrk_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/configuration/CMakeLists.txt b/examples/cpp/configuration/CMakeLists.txt
+index e64fe00..8efea91 100644
+--- a/examples/cpp/configuration/CMakeLists.txt
++++ b/examples/cpp/configuration/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_configuration_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/content_filter/CMakeLists.txt b/examples/cpp/content_filter/CMakeLists.txt
+index 4454874..5bc08e9 100644
+--- a/examples/cpp/content_filter/CMakeLists.txt
++++ b/examples/cpp/content_filter/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_content_filter_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/custom_payload_pool/CMakeLists.txt b/examples/cpp/custom_payload_pool/CMakeLists.txt
+index fb6b583..a634840 100644
+--- a/examples/cpp/custom_payload_pool/CMakeLists.txt
++++ b/examples/cpp/custom_payload_pool/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(custom_payload_pool VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/delivery_mechanisms/CMakeLists.txt b/examples/cpp/delivery_mechanisms/CMakeLists.txt
+index f07a74b..29cd65d 100644
+--- a/examples/cpp/delivery_mechanisms/CMakeLists.txt
++++ b/examples/cpp/delivery_mechanisms/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_delivery_mechanisms_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/discovery_server/CMakeLists.txt b/examples/cpp/discovery_server/CMakeLists.txt
+index b2ad4f5..9000ee8 100644
+--- a/examples/cpp/discovery_server/CMakeLists.txt
++++ b/examples/cpp/discovery_server/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_discovery_server_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/flow_control/CMakeLists.txt b/examples/cpp/flow_control/CMakeLists.txt
+index 532f37d..d173b1b 100644
+--- a/examples/cpp/flow_control/CMakeLists.txt
++++ b/examples/cpp/flow_control/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_flow_control_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/hello_world/CMakeLists.txt b/examples/cpp/hello_world/CMakeLists.txt
+index a2706c4..f34d3cc 100644
+--- a/examples/cpp/hello_world/CMakeLists.txt
++++ b/examples/cpp/hello_world/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_hello_world_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/rpc/CMakeLists.txt b/examples/cpp/rpc/CMakeLists.txt
+index d6cb60d..bdd6890 100644
+--- a/examples/cpp/rpc/CMakeLists.txt
++++ b/examples/cpp/rpc/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_rpc_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/rtps/CMakeLists.txt b/examples/cpp/rtps/CMakeLists.txt
+index 9b5ea87..d2a18c0 100644
+--- a/examples/cpp/rtps/CMakeLists.txt
++++ b/examples/cpp/rtps/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_rtps_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/security/CMakeLists.txt b/examples/cpp/security/CMakeLists.txt
+index 18797ef..6ea5bdd 100644
+--- a/examples/cpp/security/CMakeLists.txt
++++ b/examples/cpp/security/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_security_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/static_edp_discovery/CMakeLists.txt b/examples/cpp/static_edp_discovery/CMakeLists.txt
+index f807358..86dcbb4 100644
+--- a/examples/cpp/static_edp_discovery/CMakeLists.txt
++++ b/examples/cpp/static_edp_discovery/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_static_edp_discovery_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/topic_instances/CMakeLists.txt b/examples/cpp/topic_instances/CMakeLists.txt
+index c7ea4a3..72449d1 100644
+--- a/examples/cpp/topic_instances/CMakeLists.txt
++++ b/examples/cpp/topic_instances/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_topic_instances_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/examples/cpp/xtypes/CMakeLists.txt b/examples/cpp/xtypes/CMakeLists.txt
+index c242752..d679d8e 100644
+--- a/examples/cpp/xtypes/CMakeLists.txt
++++ b/examples/cpp/xtypes/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_xtypes_example VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/fuzz/C++/fuzz_XMLProfiles/CMakeLists.txt b/fuzz/C++/fuzz_XMLProfiles/CMakeLists.txt
+index e06af4c..0dd7fe9 100644
+--- a/fuzz/C++/fuzz_XMLProfiles/CMakeLists.txt
++++ b/fuzz/C++/fuzz_XMLProfiles/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fuzz_XMLProfiles VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/fuzz/C++/fuzz_processCDRMsg/CMakeLists.txt b/fuzz/C++/fuzz_processCDRMsg/CMakeLists.txt
+index ea93ded..a965a6a 100644
+--- a/fuzz/C++/fuzz_processCDRMsg/CMakeLists.txt
++++ b/fuzz/C++/fuzz_processCDRMsg/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fuzz_processCDRMsg VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/test/profiling/allocations/CMakeLists.txt b/test/profiling/allocations/CMakeLists.txt
+index b422176..9f2d8e0 100644
+--- a/test/profiling/allocations/CMakeLists.txt
++++ b/test/profiling/allocations/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fastdds_allocation_test VERSION 1 LANGUAGES CXX)
+ 
+diff --git a/test/unittest/cmake/force_cxx/CMakeLists.txt b/test/unittest/cmake/force_cxx/CMakeLists.txt
+index c3e5c67..7c57f5e 100644
+--- a/test/unittest/cmake/force_cxx/CMakeLists.txt
++++ b/test/unittest/cmake/force_cxx/CMakeLists.txt
+@@ -15,7 +15,7 @@
+ ###############################################################################
+ # Auxiliary project for check_configuration.cmake module testing
+ ###############################################################################
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ # setup
+ option(TEST_FALLBACK "Ignore CMake builtin instrospection and use our original fallback" OFF)
+diff --git a/thirdparty/optionparser/CMakeLists.txt b/thirdparty/optionparser/CMakeLists.txt
+index 6615873..1897457 100644
+--- a/thirdparty/optionparser/CMakeLists.txt
++++ b/thirdparty/optionparser/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ #####################################################################################
+ #                             Interface Library
+diff --git a/tools/fds/CMakeLists.txt b/tools/fds/CMakeLists.txt
+index 190bd9a..c611095 100644
+--- a/tools/fds/CMakeLists.txt
++++ b/tools/fds/CMakeLists.txt
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-cmake_minimum_required(VERSION 3.20)
++cmake_minimum_required(VERSION 3.16)
+ 
+ project(fast-discovery-server VERSION 1.0.1 LANGUAGES CXX)
+ 

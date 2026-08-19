@@ -1,0 +1,303 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% macro hex_to_dec(value) %}{{value|int(0, 16)}}{% endmacro %}
+{% macro to_bool(value) %}
+{%- if value -%}"reliable"{%- else -%}"unreliable"{%- endif -%}
+{% endmacro %}
+{
+    "netname" : "nsomeip",
+    {#"host" : "0.0.0.0",#}
+    "host" : "{{machine.ip_address}}",
+{% if hex_to_dec(process.id) == '0' %}
+    "mode": "route",
+{%else%}
+    "mode": "proxy",
+{% endif %}
+    "application" : [
+        {
+            "name": "{{process.name}}",
+            "client": "{{hex_to_dec(process.id)}}"
+        }
+    ],
+{% if machine.maxtransmissunit >0 %}
+    "network": {
+{% if process.networkConfig %}
+{% if process.networkConfig["sendTimeout"] %}
+        "send_timeo": "{{ process.networkConfig["sendTimeout"] }}",
+{% endif %}
+{% if process.networkConfig["recvTimeout"] %}
+        "recv_timeo": "{{ process.networkConfig["recvTimeout"] }}",
+{% endif %}
+{% if process.networkConfig["queueMixLimit"] %}
+        "queue_mix_limit": "{{ process.networkConfig["queueMixLimit"] }}",
+{% endif %}
+{% if process.networkConfig["tcpEnable"] %}
+        "tcp_keepalive_enable": "{{ process.networkConfig["tcpEnable"] }}",
+{% endif %}
+{% if process.networkConfig["tcpIdle"] %}
+        "tcp_keepalive_idle": "{{ process.networkConfig["tcpIdle"] }}",
+{% endif %}
+{% if process.networkConfig["tcpInterval"] %}
+        "tcp_keepalive_interval": "{{ process.networkConfig["tcpInterval"] }}",
+{% endif %}
+{% if process.networkConfig["tcpCnt"] %}
+        "tcp_keepalive_cnt": "{{ process.networkConfig["tcpCnt"] }}",
+{% endif %}
+{% endif %}
+        "mss": {{machine.maxtransmissunit}}
+    },
+{% endif %}
+{% if machine.usd_sd_option != -1 %}
+    "compatible": {
+	    "use_sd_option": {{ machine.usd_sd_option }}
+    },
+{% endif %}
+{%if bindinfos%}
+    "bind":[
+{%for bindinfo in bindinfos%}
+    {
+        "reliability":{%if bindinfo.type == "tcp"%}"reliable"{%else%}"unreliable"{%endif%},
+        "address":"{{bindinfo.ipaddress}}:{{bindinfo.bindport}}",
+        "port":[
+{% for port in bindinfo.port %}
+            {"port_start":{{port['start']}},"port_end":{{port['end']}}}{% if not loop.last  %},{% endif %}
+{%endfor%}
+
+        ]
+    }{% if not loop.last %},{% endif %}
+{%endfor%}
+    ],
+{%endif%}
+    "service" : [
+{% for service in services %}
+        {
+            "service" : "{{hex_to_dec(service.deployment_id)}}",
+            "instance" : "{{hex_to_dec(service.someip_specific_instance_id)}}",
+            "major":  "{{hex_to_dec(service.service_version_major)}}",
+            "minor":  "{{hex_to_dec(service.service_version_minor)}}",
+{% if service.deployment.sd_config["ttl"] %}
+        "ttl" : "{{service.deployment.sd_config["ttl"]}}",
+{% endif %}
+{% if service.deployment.sd_config["cyclic_delay"] %}
+        "cyclic_delay" : "{{service.deployment.sd_config["cyclic_delay"]}}",
+{% endif %}
+
+
+{% if service.ports['tcp'] and service.ports['host'] %}
+            "reliable" :"{{ service.ports['host'] }}:{{ service.ports['tcp'] }}",
+{% elif service.ports['tcp'] %}
+            "reliable" :"{{ service.ports['tcp'] }}",
+{% endif %}
+{% if service.ports['udp'] and service.ports['host'] %}
+            "unreliable" : "{{ service.ports['host'] }}:{{ service.ports['udp'] }}",
+{% elif service.ports['udp'] %}
+            "unreliable" : "{{ service.ports['udp'] }}",
+{% endif %}
+
+            "signal" :[
+{% for event in service.signalevent %}
+                {
+                    "signal" : "{{hex_to_dec(event.deployment_id)}}",
+                    "reliability" : {{to_bool(event.is_reliable)}}
+                }{% if not loop.last  %},{% endif %}
+{% endfor %}
+            ],
+            "event" :[
+{% for event in service.unsignalevent %}
+                {
+                    "event" : "{{hex_to_dec(event.deployment_id)}}",
+                    "type" : "event",
+                    "reliability" : {{to_bool(event.is_reliable)}}
+                }{% if not loop.last or service.fields_with_notifier %},{% endif %}
+{% endfor %}
+{% for field in service.fields_with_notifier %}
+                {
+                    "event" : "{{hex_to_dec(field.event_id)}}",
+                    "type" : "field",
+                    "reliability" : {{to_bool(field.has_reliable_notifier)}}
+                }{% if not loop.last %},{% endif %}
+{% endfor %}
+            ],
+            "group" : [
+{% for event_group in service.event_groups %}
+                {
+                    "group" : "{{hex_to_dec(event_group.event_group_id)}}"
+{% if service.ports['udp'] %},
+                    "threshold":{{event_group.threshold}},
+{%if event_group.multicast_ip%}
+                     "multicast" : "{{event_group.multicast_ip}}:{{event_group.muticast_port}}"
+{% else %}
+                     "multicast" : "{{machine.sd_address}}:{{machine.sd_port}}"
+{% endif %}
+{% endif %}
+{% if event_group.getSubs | length > 0 %},
+                    "subs":[
+    {% for sub in event_group.getSubs %}
+                            {
+        {% if sub.unicastTcpIp %}
+                                "reliable": "{{ sub.unicastTcpIp }}"{{ "," if sub.unicastUdpIp }}
+        {% endif %}
+        {% if sub.unicastUdpIp %}
+                                "unreliable": "{{ sub.unicastUdpIp }}"
+        {% endif %}
+                            }{% if not loop.last %},{% endif %}
+    {% endfor %}
+    ]
+{% endif %}
+                }{% if not loop.last %},{% endif %}
+{% endfor %}
+            ]
+{% if service.ports['tlsCryptoCipherSuiteOb'] %}
+    , "tls_version":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_version"] }}",
+    "tls_ciphersuite_name":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_ciphersuite_name"] }}",
+    "tls_psk_key_hex":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_psk_key_hex"] }}",
+    "tls_verify_client":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_verify_client"] }}",
+    "tls_peer_ca":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_peer_ca"] }}",
+    "tls_local_cert":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_local_cert"] }}",
+    "tls_local_privkey":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_local_privkey"] }}"
+{% endif %}
+        }{% if not loop.last %},{% endif %}
+{% endfor %}
+    ],
+
+    "service_exist":[
+{%for service in servicesrequirds%}
+    {
+            "service" : "{{hex_to_dec(service.deployment_id)}}",
+{%if "ANY" != service.someip_specific_instance_id%}
+            "instance" : "{{hex_to_dec(service.someip_specific_instance_id)}}",
+{% endif %}
+            "major":  "{{hex_to_dec(service.service_version_major)}}",
+            "minor":  "{{hex_to_dec(service.service_version_minor)}}",
+{% if service.ports["strategy"] == "Static" %}
+{% if service.ports['unicastTcpIp'] or service.ports['unicastUdpIp'] %}
+    {% if service.ports['unicastTcpIp'] %}
+                "reliable" :"{{service.ports['unicastTcpIp']}}",
+    {% endif %}
+    {% if service.ports['unicastUdpIp'] %}
+                "unreliable" : "{{service.ports['unicastUdpIp']}}",
+    {% endif %}
+{% endif %}
+{% endif %}
+            "signal" :[
+{% for event in service.signalevent %}
+                {
+                    "signal" : "{{hex_to_dec(event.deployment_id)}}",
+                    "reliability" : {{to_bool(event.is_reliable)}}
+                }{% if not loop.last  %},{% endif %}
+{% endfor %}
+            ],
+            "event" :[
+{% for event in service.unsignalevent %}
+                {
+                    "event" : "{{hex_to_dec(event.deployment_id)}}",
+                    "type" : "event",
+                    "reliability" : {{to_bool(event.is_reliable)}}
+                }{% if not loop.last or service.fields_with_notifier %},{% endif %}
+{% endfor %}
+{% for field in service.fields_with_notifier %}
+                {
+                    "event" : "{{hex_to_dec(field.event_id)}}",
+                    "type" : "field",
+                    "reliability" : {{to_bool(field.has_reliable_notifier)}}
+                }{% if not loop.last %},{% endif %}
+{% endfor %}
+            ],
+            "group" : [
+{% for event_group in service.event_groups %}
+                {
+                "group" : "{{hex_to_dec(event_group.event_group_id)}}"
+{% if event_group.subscribe_timeo != None%},
+                     "subscribe_timeo" : {{event_group.subscribe_timeo}}
+{% endif %}
+{% if event_group.subscribe_renew != None%},
+                     "subscribe_renew" : {{event_group.subscribe_renew}}
+{% endif %}
+{% if event_group.ttl != None %},
+                     "ttl" : {{event_group.ttl}}
+{% endif %}
+{%if service.forsignal%},
+
+{%if event_group.multicast_ip%}
+                     "multicast" : "{{event_group.multicast_ip}}:{{event_group.muticast_port}}"
+{% else %}
+                     "multicast" : "{{service.machine.sd_address}}:{{service.machine.sd_port}}",
+{% endif %}
+                    "threshold":{{event_group.threshold}}
+{% endif %}
+
+
+                }{% if not loop.last %},{% endif %}
+{% endfor %}
+            ]
+{% if service.ports['tlsCryptoCipherSuiteOb'] %}
+    , "tls_version":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_version"] }}",
+    "tls_ciphersuite_name":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_ciphersuite_name"] }}",
+    "tls_psk_key_hex":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_psk_key_hex"] }}",
+    "tls_peer_ca":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_peer_ca"] }}",
+    "tls_local_cert":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_local_cert"] }}",
+    "tls_local_privkey":"{{ service.ports['tlsCryptoCipherSuiteOb']["tls_local_privkey"] }}"
+{% endif %}
+    }{% if not loop.last %},{% endif %}
+{%endfor%}
+    ],
+
+    "service_discovery" : {
+{% if machine  %}
+{% if machine.sd_config.get("initial_delay_min")!= None %}
+        "init_delay_min" : "{{machine.sd_config["initial_delay_min"]}}",
+{% endif %}
+{% if machine.sd_config.get("initial_delay_max")!= None %}
+        "init_delay_max" : "{{machine.sd_config["initial_delay_max"]}}",
+{% endif %}
+{% if machine.sd_config.get("initial_repetitions_base_delay")!= None %}
+        "repetitions_delay" : "{{machine.sd_config["initial_repetitions_base_delay"]}}",
+{% endif %}
+{% if machine.sd_config.get("initial_repetitions_max")!= None %}
+        "repetitions_max" : "{{machine.sd_config["initial_repetitions_max"]}}",
+{% endif %}
+{% if machine.sd_config.get("ttl")!= None %}
+        "ttl" : "{{machine.sd_config["ttl"]}}",
+{% endif %}
+{% if machine.sd_config.get("cyclic_delay")!= None %}
+        "offer_cyclic_delay" : "{{machine.sd_config["cyclic_delay"]}}",
+{% endif %}
+        "multicast" : "{{machine.sd_address}}",
+        "unicast" : "{{machine.sd_port}}"
+{% endif %}
+    }
+{% if machine.multiple_host | length > 0 %},
+    "multiple_host":[
+{% for item in machine.multiple_host %}
+    {
+        "host": "{{ item.host }}",
+        "sd_multicast": "{{ item.sd_multicast }}",
+        "sd_unicast": "{{ item.sd_unicast }}"
+    }{{ "," if not loop.last }}
+{% endfor %}
+    ]
+{% endif %}
+}
+{% block footer %}{% endblock %}

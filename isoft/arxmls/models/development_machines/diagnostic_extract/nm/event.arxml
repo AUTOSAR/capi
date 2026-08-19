@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>DiagnosticEvent</SHORT-NAME>
+          <ELEMENTS>
+            <DIAGNOSTIC-EVENT>
+              <SHORT-NAME>DiagnosticEvent_nm</SHORT-NAME>
+              <ASSOCIATED-EVENT-IDENTIFICATION>0</ASSOCIATED-EVENT-IDENTIFICATION>
+              <CLEAR-EVENT-ALLOWED-BEHAVIOR>ONLY-THIS-CYCLE-AND-READINESS</CLEAR-EVENT-ALLOWED-BEHAVIOR>
+              <CONFIRMATION-THRESHOLD>1</CONFIRMATION-THRESHOLD>
+              <EVENT-CLEAR-ALLOWED>ALWAYS</EVENT-CLEAR-ALLOWED>
+              <RECOVERABLE-IN-SAME-OPERATION-CYCLE>true</RECOVERABLE-IN-SAME-OPERATION-CYCLE>
+            </DIAGNOSTIC-EVENT>
+            <DIAGNOSTIC-EVENT-TO-ENABLE-CONDITION-GROUP-MAPPING>
+              <SHORT-NAME>DiagnosticEvent_nm_EnableConditionGroup</SHORT-NAME>
+              <DIAGNOSTIC-EVENT-REF DEST="DIAGNOSTIC-EVENT">/ISOFT/DiagnosticEvent/DiagnosticEvent_nm</DIAGNOSTIC-EVENT-REF>
+              <ENABLE-CONDITION-GROUP-REF DEST="DIAGNOSTIC-ENABLE-CONDITION-GROUP">/ISOFT/DiagnosticEnableConditionGroup/DiagnosticEnableConditionGroup_nm</ENABLE-CONDITION-GROUP-REF>
+            </DIAGNOSTIC-EVENT-TO-ENABLE-CONDITION-GROUP-MAPPING>
+            <DIAGNOSTIC-EVENT-TO-OPERATION-CYCLE-MAPPING>
+              <SHORT-NAME>DiagnosticEvent_nm_OperationCycle</SHORT-NAME>
+              <DIAGNOSTIC-EVENT-REF DEST="DIAGNOSTIC-EVENT">/ISOFT/DiagnosticEvent/DiagnosticEvent_nm</DIAGNOSTIC-EVENT-REF>
+              <OPERATION-CYCLE-REF DEST="DIAGNOSTIC-OPERATION-CYCLE">/ISOFT/DiagnosticOperationCycle/DiagnosticOperationCycle_nm</OPERATION-CYCLE-REF>
+            </DIAGNOSTIC-EVENT-TO-OPERATION-CYCLE-MAPPING>
+            <DIAGNOSTIC-EVENT-TO-TROUBLE-CODE-UDS-MAPPING>
+              <SHORT-NAME>DiagnosticEvent_nm_TroubleCodeUds</SHORT-NAME>
+              <DIAGNOSTIC-EVENT-REF DEST="DIAGNOSTIC-EVENT">/ISOFT/DiagnosticEvent/DiagnosticEvent_nm</DIAGNOSTIC-EVENT-REF>
+              <TROUBLE-CODE-UDS-REF DEST="DIAGNOSTIC-TROUBLE-CODE-UDS">/ISOFT/DiagnosticTroubleCodeUds/DiagnosticTroubleCodeUds_nm</TROUBLE-CODE-UDS-REF>
+            </DIAGNOSTIC-EVENT-TO-TROUBLE-CODE-UDS-MAPPING>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

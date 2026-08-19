@@ -1,0 +1,9 @@
+{
+	"name": "concurrentqueue",
+	"version": "1.0.4",
+	"url": "https://github.com/cameron314/concurrentqueue/archive/refs/tags/v1.0.4.tar.gz",
+	"preproc": "${CAPI_SRC_DIR}/isoft/sdk-utils/etc/package/package-source-cleanup/cleanup-concurrentqueue-sources.sh",
+	"configure": "cmake @CMAKE_ARGS@ .",
+    "build": "make -j@JOBS@",
+    "install": "make install DESTDIR=@SYSROOT@"
+}

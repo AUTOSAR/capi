@@ -1,0 +1,61 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+
+#include "ara/diag/{{item.lowerName}}.h"
+
+#include <ara/diag/diag_error_domain.h>
+
+{% if item.namespaces %}{% for ns in item.namespaces %}
+namespace {{ns}} {
+{% endfor %}{% endif %}
+
+{{item.name}}::{{item.name}}(const ara::core::InstanceSpecifier& specifier,
+                                     ara::diag::ReentrancyType reentrancyType)
+    : RawDataElement(specifier, reentrancyType) {}
+
+{% if item.read %}
+ara::core::Future<ara::diag::internal::Chunk> {{item.name}}::RawRead(
+    ara::diag::MetaInfo& metaInfo, ara::diag::CancellationHandler cancellationHandler) {
+    ara::core::Future<{{item.read.name}}> requestResult{std::move(Read(metaInfo, std::move(cancellationHandler)))};
+    ara::core::Result<{{item.read.name}}> result{std::move(requestResult.GetResult())};
+    ara::core::Promise<ara::diag::internal::Chunk> promise;
+    if(result.HasValue()) {
+        ara::diag::internal::Chunk payload;
+        std::int32_t const res = result.Value().Serialize(payload);
+        if (res >= 0) {
+            promise.set_value(payload);
+        }else{
+            promise.SetError(ara::diag::MakeErrorCode(ara::diag::DiagErrc::kGenericError, res));
+        }
+    }else{
+        promise.SetError(result.Error());
+    }
+
+    return promise.get_future();
+}
+{% endif %}
+{% if item.namespaces %}{% for ns in item.namespaces|reverse %}
+}  // namespace {{ ns }}
+{% endfor %}{% endif %}

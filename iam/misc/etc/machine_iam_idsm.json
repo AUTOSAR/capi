@@ -1,0 +1,21 @@
+{
+	"IdsmGrants": [
+		{
+			"processname": "/homeTest/Client",
+			"secureeventid": [
+				123,
+				3,
+				4,
+				5
+			]
+		},
+		{
+			"processname": "/homeTest/slot1",
+			"secureeventid": [
+				154,
+				1314,
+				1208
+			]
+		}
+	]
+}

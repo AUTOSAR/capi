@@ -1,0 +1,36 @@
+{
+    "defaultApplicationTimeout": {
+        "enterTimeout": 1.0,
+        "exitTimeout": 1.0
+    },
+    "environmentVariable": ["LD_LIBRARY_PATH=/usr/lib", "FOO=bar"],
+    "processor": [0,1,2,3],
+    "trustedPlatformExecutableLaunchBehavior": "Monitor|Strict|NoSupport",
+    "functionGroups": [
+        {
+            "name": "/ISOFT/FunctionGroupSet/MachineFG",
+            "states": ["Startup", "Off", "Shutdown", "Verify", "Restart"]
+        },
+        {
+            "name": "/ISOFT/FunctionGroupSet/FgCamera",
+            "states": ["Off", "Verify", "NearRange", "FarRange"]
+        }
+    ],
+    "resourceGroups": [
+        {
+            "name": "ResourceGroupFull",
+            "cpuUsage": 100,
+            "memUsage": 1024000000
+        },
+        {
+            "name": "ResourceGroupCore",
+            "cpuUsage": 100,
+            "memUsage": 512000000
+        },
+        {
+            "name": "ResourceGroupUser",
+            "cpuUsage": 80,
+            "memUsage": 128000000
+        }
+    ]
+}

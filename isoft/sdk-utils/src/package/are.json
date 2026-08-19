@@ -1,0 +1,28 @@
+{
+    "#说明": {
+        "ara-sysroot.path": "键和值必填，且值为绝对路径",
+        "components.XXX.export": "键和值必填，值为true/false",
+        "components.XXX.path": "键和值都选填，值为绝对路径"
+    },
+    "ara-sysroot": {
+        "path": "/home/fj/test/ara-sysroot"
+    },
+    "components": {
+        "framework": {
+            "export": true,
+            "path": "/home/fj/test/test-f/ara"
+        },
+        "core": {
+            "export": true,
+            "path": "/home/fj/test/test-c/ara"
+        },
+        "swcls": {
+            "export": true,
+            "!path": "/home/fj/test/test-s/ara"
+        },
+        "var": {
+            "export": true,
+            "path": "/home/fj/test/ara-sysroot/ara"
+        }
+    }
+}

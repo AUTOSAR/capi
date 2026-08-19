@@ -1,0 +1,104 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{%- extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+#include "ara/core/error_code.h"
+#include "ara/core/exception.h"
+
+{% for namespace in error_domain.namespace -%}
+namespace {{namespace}} {
+{% endfor %}
+
+enum class {{error_domain.name}}Errc : ara::core::ErrorDomain::CodeType{
+{%- for ap_err in error_domain.errors %}
+  k{{ap_err.name}} = {{ap_err.error_code}},{% if ap_err.description is not none %} ///< {{ap_err.description}}{% endif %}
+{%- endfor %}
+};
+
+class {{error_domain.name}}Exception
+            : public ara::core::Exception{
+public:
+    explicit {{error_domain.name}}Exception(ara::core::ErrorCode code) noexcept
+        : ara::core::Exception(code){}
+};
+
+class {{error_domain.name}}ErrorDomain final
+        : public ara::core::ErrorDomain{
+    /// @uptrace{SWS_CORE_00010, 6030e05894afe0e82becfbe039bb421e7f92ad2b}
+    static constexpr ara::core::ErrorDomain::IdType kId = {{error_domain.value}};
+
+public:
+    using Errc = {{error_domain.name}}Errc;
+
+    using Exception = {{error_domain.name}}Exception;
+
+    /// @brief Default constructor
+    constexpr {{error_domain.name}}ErrorDomain() noexcept
+        : ara::core::ErrorDomain(kId){}
+
+    /// @brief Return the "shortname" ApApplicationErrorDomain.SN of this error domain.
+    const char* Name() const noexcept override{
+        return "{{error_domain.name}}";
+    }
+
+    const char* Message(ara::core::ErrorDomain::CodeType code) const noexcept override{
+        switch (static_cast<Errc>(code)) {
+{%- for ap_err in error_domain.errors %}
+        case Errc::k{{ap_err.name}}:
+{%- if ap_err.description is not none %}
+            return "{{ap_err.description}}";
+{%- else %}
+            return "Message text for {{ap_err.name}} is not defined";
+{%- endif %}
+{%- endfor %}
+        default:
+            return "Unknown error";
+        }
+    }
+
+    void ThrowAsException(const ara::core::ErrorCode& code) const noexcept(false) override{
+        ara::core::internal::ThrowOrTerminate<Exception>(code);
+    }
+};
+
+namespace internal{
+constexpr {{error_domain.name}}ErrorDomain g_{{error_domain.name}}ErrorDomain;
+}
+
+ constexpr  const ara::core::ErrorDomain& Get{{error_domain.name}}ErrorDomain() noexcept{
+    return internal::g_{{error_domain.name}}ErrorDomain;
+}
+
+ constexpr  ara::core::ErrorCode MakeErrorCode({{error_domain.name}}Errc code,ara::core::ErrorDomain::SupportDataType data) noexcept{
+    return ara::core::ErrorCode{static_cast<ara::core::ErrorDomain::CodeType>(code), Get{{error_domain.name}}ErrorDomain(), data};
+}
+
+{% for namespace in error_domain.namespace | reverse -%}
+} // namespace {{namespace}}
+{% endfor %}
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

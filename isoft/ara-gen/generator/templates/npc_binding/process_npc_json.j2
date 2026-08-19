@@ -1,0 +1,93 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{
+{% if process.ipcConfiguration.netName %}
+    "netname": "{{ process.ipcConfiguration.netName }}",
+{% else %}
+    "netname" : "ara_com_npc",
+{% endif %}
+{% if process.ipcConfiguration.appName %}
+    "appname": "{{ process.ipcConfiguration.appName }}",
+{% else %}
+    "appname": "{{process.npc_id}}.app",
+{% endif %}
+    "appid": {{ process.npc_id }},
+{% if process.ipcConfiguration.serviceNetType %}
+    "svc_net_type": "{{ process.ipcConfiguration.serviceNetType }}",
+{% else %}
+    "svc_net_type": "unixsock",
+{% endif %}
+{% if process.ipcConfiguration.serviceAccessHandle %}
+    "svc_access_handle": "{{ process.ipcConfiguration.serviceAccessHandle }}",
+{% else %}
+    "svc_access_handle": "{{process.npc_id}}.sock",
+{% endif %}
+{% if process.npc_id == 0 %}
+    {% if process.ipcConfiguration.mode %}
+        "mode": "{{ process.ipcConfiguration.mode }}",
+    {% else %}
+        "mode": "discovery",
+    {% endif %}
+{% else %}
+    {% if process.ipcConfiguration.discoveryNetType %}
+        "dis_net_type": "{{ process.ipcConfiguration.discoveryNetType }}",
+    {% else %}
+        "dis_net_type": "unixsock",
+    {% endif %}
+    {% if process.ipcConfiguration.discoveryAccessHandle %}
+        "dis_access_handle": "{{ process.ipcConfiguration.discoveryAccessHandle }}",
+    {% else %}
+        "dis_access_handle": "ds.sock",
+    {% endif %}
+    {% if process.ipcConfiguration.mode %}
+        "mode": "{{ process.ipcConfiguration.mode }}",
+    {% else %}
+        "mode": "application",
+    {% endif %}
+{% endif %}
+
+{% if process.ipcConfiguration.sendTimeout %}
+    "send_timeout": {{ process.ipcConfiguration.sendTimeout }},
+{% else %}
+    "send_timeout": 100,
+{% endif %}
+    "nservice":{{servicemun}},
+    "service" : [
+{% for service in services %}
+        {
+            "service" : {{ service.ipc_service.serviceId }},
+            "instance" : {{ service.ipc_shm.instanceId }},
+            "major":  {{ service.ipc_service.major }},
+            "minor":  {{ service.ipc_service.minor }},
+            "shm_path": "{{ service.ipc_shm.shmPath }}",
+            "shm_seg_size": {{ service.ipc_shm.shmSegSize }},
+            "shm_seg_count": {{ service.ipc_shm.shmSegCount }},
+            "msg_queue_len": {{ service.ipc_shm.msgQueueLen }}
+        }{% if not loop.last %},{% endif %}
+{% endfor %}
+    ]
+
+}
+{% block footer %}{% endblock %}

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="02c5e172-fa71-4367-9d55-2edc74941f8a">
+      <SHORT-NAME>ara</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>phm</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE UUID="c657d2b0-dbcc-4c54-a502-cb88bd3fc718">
+              <SHORT-NAME>Interfaces</SHORT-NAME>
+              <ELEMENTS>
+                <PHM-SUPERVISED-ENTITY-INTERFACE UUID="9a711c39-9de3-4c41-a724-214cbf1cfb8c">
+                  <SHORT-NAME>sv_testunit</SHORT-NAME>
+                  <IS-SERVICE>false</IS-SERVICE>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ara</SHORT-NAME>
+                      <SYMBOL>ara</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>phm</SHORT-NAME>
+                      <SYMBOL>phm</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>supervised_entities</SHORT-NAME>
+                      <SYMBOL>supervised_entities</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <CHECKPOINTS>
+                    <PHM-CHECKPOINT>
+                      <SHORT-NAME>kTestAlive</SHORT-NAME>
+                      <CHECKPOINT-ID>1</CHECKPOINT-ID>
+                    </PHM-CHECKPOINT>
+                  </CHECKPOINTS>
+                </PHM-SUPERVISED-ENTITY-INTERFACE>
+                <PHM-SUPERVISED-ENTITY-INTERFACE UUID="9a711c39-9de3-4c41-a724-214cbf1cfb8c">
+                  <SHORT-NAME>engine</SHORT-NAME>
+                  <IS-SERVICE>false</IS-SERVICE>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ara</SHORT-NAME>
+                      <SYMBOL>ara</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>phm</SHORT-NAME>
+                      <SYMBOL>phm</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>supervised_entities</SHORT-NAME>
+                      <SYMBOL>supervised_entities</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <CHECKPOINTS>
+                    <PHM-CHECKPOINT>
+                      <SHORT-NAME>kAlive</SHORT-NAME>
+                      <CHECKPOINT-ID>4</CHECKPOINT-ID>
+                    </PHM-CHECKPOINT>
+                    <PHM-CHECKPOINT UUID="38911105-904c-4fab-8d06-d7e7ad70c090">
+                      <SHORT-NAME>kInitializing</SHORT-NAME>
+                      <CHECKPOINT-ID>1</CHECKPOINT-ID>
+                    </PHM-CHECKPOINT>
+                    <PHM-CHECKPOINT UUID="84353699-6ee6-4aa4-b187-c2dc57462621">
+                      <SHORT-NAME>kInitializingFinished</SHORT-NAME>
+                      <CHECKPOINT-ID>3</CHECKPOINT-ID>
+                    </PHM-CHECKPOINT>
+                    <PHM-CHECKPOINT UUID="705359ce-46ff-4b55-b9c1-3a311d121ce9">
+                      <SHORT-NAME>kStartup</SHORT-NAME>
+                      <CHECKPOINT-ID>2</CHECKPOINT-ID>
+                    </PHM-CHECKPOINT>
+                    <PHM-CHECKPOINT>
+                      <SHORT-NAME>tdeadlineA</SHORT-NAME>
+                      <CHECKPOINT-ID>5</CHECKPOINT-ID>
+                    </PHM-CHECKPOINT>
+                    <PHM-CHECKPOINT>
+                      <SHORT-NAME>tdeadlineB</SHORT-NAME>
+                      <CHECKPOINT-ID>6</CHECKPOINT-ID>
+                    </PHM-CHECKPOINT>
+                  </CHECKPOINTS>
+                </PHM-SUPERVISED-ENTITY-INTERFACE>
+                <PHM-SUPERVISED-ENTITY-INTERFACE UUID="9d6e8ccf-c9d2-4345-b4e8-d1e93cf0e507">
+                  <SHORT-NAME>wheel</SHORT-NAME>
+                  <SHORT-NAME-PATTERN>oem/drivetrain/supervised_entities/wheel</SHORT-NAME-PATTERN>
+                  <IS-SERVICE>false</IS-SERVICE>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ara</SHORT-NAME>
+                      <SYMBOL>ara</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>phm</SHORT-NAME>
+                      <SYMBOL>phm</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>supervised_entities</SHORT-NAME>
+                      <SYMBOL>supervised_entities</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <CHECKPOINTS>
+                    <PHM-CHECKPOINT UUID="e119325a-613d-47de-8c3c-43acbec24b74">
+                      <SHORT-NAME>kFinished</SHORT-NAME>
+                      <CHECKPOINT-ID>2</CHECKPOINT-ID>
+                    </PHM-CHECKPOINT>
+                    <PHM-CHECKPOINT UUID="a88cafdc-6e3a-4ca3-a958-5ff0eee9e26a">
+                      <SHORT-NAME>kStart</SHORT-NAME>
+                      <CHECKPOINT-ID>1</CHECKPOINT-ID>
+                    </PHM-CHECKPOINT>
+                  </CHECKPOINTS>
+                </PHM-SUPERVISED-ENTITY-INTERFACE>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

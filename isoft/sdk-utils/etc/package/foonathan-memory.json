@@ -1,0 +1,9 @@
+{
+    "name": "foonathan-memory",
+    "version": "0.7",
+    "depend":[],
+    "url": "https://github.com/foonathan/memory/archive/refs/tags/v0.7-2.tar.gz",
+    "configure": "cmake @CMAKE_ARGS@ -DFOONATHAN_MEMORY_BUILD_TOOLS=OFF -DFOONATHAN_MEMORY_BUILD_EXAMPLES=OFF -DFOONATHAN_MEMORY_BUILD_TESTS=OFF .",
+    "build": "make -j@JOBS@",
+    "install": "make install DESTDIR=@SYSROOT@"
+}

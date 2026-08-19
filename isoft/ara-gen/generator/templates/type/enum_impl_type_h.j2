@@ -1,0 +1,72 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+#include "ara/com/internal/format/format.h"
+
+{% for include in type_view.includes %}
+#include {{include}}
+{% endfor %}
+{% for namespace in type_view.namespace %}
+namespace {{namespace}} {
+{% endfor %}
+
+enum class {{type_view.type_name}} : {{type_view.element_typename}}
+{
+{% for literal_elem_decl in type_view.literal_decl_list %}
+{{literal_elem_decl}}{% if not loop.last %},{% endif %}
+
+{% endfor %}
+};
+
+{% for namespace in type_view.namespace | reverse %}
+} // namespace {{namespace}}
+{% endfor %}
+
+namespace ara {
+namespace com {
+namespace internal {
+namespace format {
+
+template<typename R>
+struct Formatter<R, {% for n in type_view.namespace %}{{n}}::{%endfor%}{{type_view.type_name}}> {
+    static R& ToString(R& r, {% for n in type_view.namespace %}{{n}}::{%endfor%}{{type_view.type_name}} arg) {
+        switch(arg)
+        {
+{% for literal_elem_decl_key in type_view.literal_decl_key_list %}
+        case {% for n in type_view.namespace %}{{n}}::{%endfor%}{{type_view.type_name}}::{{literal_elem_decl_key}}: return r += "{{literal_elem_decl_key}}";
+{% endfor %}
+        default: return r += "unknown";
+        }
+    }
+};
+} // namespace format
+} // namespace internal
+} // namespace com
+} // namespace ara
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

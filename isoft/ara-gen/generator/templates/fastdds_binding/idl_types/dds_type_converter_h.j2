@@ -1,0 +1,173 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{% extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+#include "ara/com/internal/fastdds/dds_idl_types_binding.h"
+#include "ara/com/internal/fastdds/dds_type_mapping.h"
+
+
+{% for service in services%}
+#include "{% for namespace in service.namespaces %}{{namespace|lower}}/{% endfor %}{{service.standard_name}}_common.h"
+{%endfor%}
+
+{% for conversion in conversions %}
+{% if not conversion['ara_type'].interface_type %}
+{%for idl_type_support_includes_fastdds in conversion['dds_type'].idl_type_support_includes_fastdds%}
+#include {{idl_type_support_includes_fastdds}}
+{%endfor%}
+{% endif %}
+{% endfor %}
+
+
+
+namespace ara {
+namespace com {
+namespace internal {
+namespace fastdds {
+
+{% for conversion in conversions %}
+{% if conversion['dds_type'].interface_type %}
+inline void ConvertToIdl({{conversion['ara_type'].qualified_cpp_name}} const& source, {{conversion['dds_type'].qualified_cpp_name_fastdds}}& result);
+inline void ConvertFromIdl({{conversion['dds_type'].qualified_cpp_name_fastdds}} const& source, {{conversion['ara_type'].qualified_cpp_name}}& result);
+
+{% else %}
+inline void ConvertToIdl({{conversion['ara_type'].qualified_cpp_name}} const& source, {{conversion['dds_type'].qualified_cpp_name}}& result);
+inline void ConvertFromIdl({{conversion['dds_type'].qualified_cpp_name}} const& source, {{conversion['ara_type'].qualified_cpp_name}}& result);
+{% endif %}
+
+{% endfor %}
+
+
+
+/// @brief
+/// @tparam T
+/// @tparam
+/// @param source
+/// @param result
+template < typename T, typename RType, typename = std::enable_if_t< !std::is_fundamental< T >::value > >
+inline void ConvertFromIdl(std::vector< T > const& source, RType& result)
+{
+    // using RType = typename DDSType2Ara<T>::value_type;
+    result.resize(source.size());
+    for (std::size_t i{0}; i < source.size(); ++i) {
+        ConvertFromIdl(source[i], result[i]);
+    }
+    return;
+}
+
+/// @brief
+/// @tparam T
+/// @tparam
+/// @param source
+/// @param result
+template < typename T, typename RType, typename = std::enable_if_t< !std::is_fundamental< T >::value > >
+inline void ConvertToIdl(ara::core::Vector< T > const& source, ara::core::Vector< RType >& result)
+{
+    // using RType = typename AraType2DDS<T>::value_type;
+    result.resize(source.size());
+    for (std::size_t i{0}; i < source.size(); ++i) {
+        ConvertToIdl(source[i], result[i]);
+    }
+    return;
+}
+
+/// @brief
+/// @tparam K
+/// @tparam V
+/// @tparam
+/// @param source
+/// @param result
+template < typename K,
+           typename V,
+           typename RK,
+           typename RV,
+           typename = std::enable_if_t< !std::is_fundamental< K >::value || !std::is_fundamental< V >::value > >
+inline void ConvertFromIdl(std::map< K, V > const& source, ara::core::Map< RK, RV >& result)
+{
+    for (auto it{source.begin()}; it != source.end(); it++) {
+        ConvertFromIdl(it->second, result[ConvertFromIdl(it->first)]);
+    }
+    return;
+}
+
+/// @brief
+/// @tparam K
+/// @tparam V
+/// @tparam
+/// @param source
+/// @param result
+template < typename K,
+           typename V,
+           typename RK,
+           typename RV,
+           typename = std::enable_if_t< !std::is_fundamental< K >::value || !std::is_fundamental< V >::value > >
+inline void ConvertToIdl(ara::core::Map< K, V > const& source, std::map< RK, RV >& result)
+{
+    for (auto it{source.begin()}; it != source.end(); it++) {
+        RK first{};
+        ConvertToIdl(it->first, first);
+        ConvertToIdl(it->second, result[first]);
+    }
+    return;
+}
+
+/// @brief
+/// @tparam T
+/// @tparam
+/// @tparam N
+/// @param source
+/// @param result
+template < typename T, typename RType, std::size_t N, typename = std::enable_if_t< !std::is_fundamental< T >::value > >
+inline void ConvertFromIdl(std::array< T, N > const& source, ara::core::Array< RType, N >& result)
+{
+    for (std::size_t i{0}; i < source.size(); ++i) {
+        ConvertFromIdl(source[i], result[i]);
+    }
+    return;
+}
+
+/// @brief
+/// @tparam T
+/// @tparam
+/// @tparam N
+/// @param source
+/// @param result
+template < typename T, typename RType, std::size_t N, typename = std::enable_if_t< !std::is_fundamental< T >::value > >
+inline void ConvertToIdl(ara::core::Array< T, N > const& source, std::array< RType, N >& result)
+{
+    for (std::size_t i{0}; i < source.size(); ++i) {
+        ConvertToIdl(source[i], result[i]);
+    }
+    return;
+}
+
+}  // namespace fastdds
+}  // namespace internal
+}  // namespace com
+}  // namespace ara
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

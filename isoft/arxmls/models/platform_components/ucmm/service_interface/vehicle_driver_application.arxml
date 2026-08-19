@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ara</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>ucm</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>pkgmgr</SHORT-NAME>
+              <AR-PACKAGES>
+                <AR-PACKAGE>
+                  <SHORT-NAME>portinterfaces</SHORT-NAME>
+                  <ELEMENTS>
+                    <SERVICE-INTERFACE>
+                      <SHORT-NAME>VehicleDriverApplication</SHORT-NAME>
+                      <IS-SERVICE>true</IS-SERVICE>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ara</SHORT-NAME>
+                          <SYMBOL>ara</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ucm</SHORT-NAME>
+                          <SYMBOL>ucm</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>vdai</SHORT-NAME>
+                          <SYMBOL>vdai</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <FIELDS>
+                        <!-- ApprovalRequired -->
+                        <FIELD>
+                          <SHORT-NAME>ApprovalRequired</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">Flag to inform Adaptive Application if approval from Vehicle Driver is required at current state based on Vehicle Package Manifest.</L-2>
+                          </DESC>
+                          <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/bool</TYPE-TREF>
+                          <HAS-GETTER>true</HAS-GETTER>
+                          <HAS-NOTIFIER>true</HAS-NOTIFIER>
+                          <HAS-SETTER>false</HAS-SETTER>
+                        </FIELD>
+                        <!-- CampaignState -->
+                        <FIELD>
+                          <SHORT-NAME>CampaignState</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">The current status of Campaign.</L-2>
+                          </DESC>
+                          <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/ara/ucm/datatypes/ImplementationDataTypes/CampaignStateType</TYPE-TREF>
+                          <HAS-GETTER>true</HAS-GETTER>
+                          <HAS-NOTIFIER>true</HAS-NOTIFIER>
+                          <HAS-SETTER>false</HAS-SETTER>
+                        </FIELD>
+                        <!-- SafetyPolicy -->
+                        <FIELD>
+                          <SHORT-NAME>SafetyPolicy</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN"> Safety policy from the Vehicle Package to be computed by the Vehicle State Manager Adaptive Application.</L-2>
+                          </DESC>
+                          <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/ara/ucm/datatypes/ImplementationDataTypes/SafetyPolicyType</TYPE-TREF>
+                          <HAS-GETTER>true</HAS-GETTER>
+                          <HAS-NOTIFIER>true</HAS-NOTIFIER>
+                          <HAS-SETTER>false</HAS-SETTER>
+                        </FIELD>
+
+                        <!-- SafetyState -->
+                        <FIELD>
+                          <SHORT-NAME>SafetyState</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">Vehicle state computed by the Vehicle State Manager Adaptive Application.</L-2>
+                          </DESC>
+                          <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/bool</TYPE-TREF>
+                          <HAS-GETTER>true</HAS-GETTER>
+                          <HAS-NOTIFIER>true</HAS-NOTIFIER>
+                          <HAS-SETTER>false</HAS-SETTER>
+                        </FIELD>
+                      </FIELDS>
+
+                      <METHODS>
+                        <!-- CancelCampaign -->
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>CancelCampaign</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">This method aborts an ongoing campaign processing of a Vehicle Package. </L-2>
+                          </DESC>
+                          <ARGUMENTS>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>DisableCampaign</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="EN">To forbid new campaign</L-2>
+                              </DESC>
+                              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/bool</TYPE-TREF>
+                              <DIRECTION>IN</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <FIRE-AND-FORGET>false</FIRE-AND-FORGET>
+                          <POSSIBLE-AP-ERROR-REFS>
+                            <POSSIBLE-AP-ERROR-REF DEST="AP-APPLICATION-ERROR">/ara/ucm/ApApplicationErrors/CancelFailed</POSSIBLE-AP-ERROR-REF>
+                            <POSSIBLE-AP-ERROR-REF DEST="AP-APPLICATION-ERROR">/ara/ucm/ApApplicationErrors/InvalidTransferId</POSSIBLE-AP-ERROR-REF>
+                            <POSSIBLE-AP-ERROR-REF DEST="AP-APPLICATION-ERROR">/ara/ucm/ApApplicationErrors/OperationNotPermitted</POSSIBLE-AP-ERROR-REF>
+                          </POSSIBLE-AP-ERROR-REFS>
+                        </CLIENT-SERVER-OPERATION>
+
+                        <!-- AllowCampaign -->
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>AllowCampaign</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">To allow a new campaign to start</L-2>
+                          </DESC>
+                          <FIRE-AND-FORGET>false</FIRE-AND-FORGET>
+                        </CLIENT-SERVER-OPERATION>
+
+                        <!-- DriverApproval -->
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>DriverApproval</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">Called by Adaptive Application to inform UCM Master of the driver's notification resolution (approve or reject)</L-2>
+                          </DESC>
+                          <ARGUMENTS>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>Approval</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="EN">Driver’s notification resolution</L-2>
+                              </DESC>
+                              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/bool</TYPE-TREF>
+                              <DIRECTION>IN</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>SafetyPolicy</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="EN">Safety policy computed by the Vehicle State Manager Adaptive Application</L-2>
+                              </DESC>
+                              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/ara/ucm/datatypes/ImplementationDataTypes/SafetyPolicyType</TYPE-TREF>
+                              <DIRECTION>IN</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <FIRE-AND-FORGET>false</FIRE-AND-FORGET>
+                        </CLIENT-SERVER-OPERATION>
+
+                        <!-- GetCampaignHistory -->
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>GetCampaignHistory</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">Getter method to retrieve all actions that have been performed by UCM Master.</L-2>
+                          </DESC>
+                          <ARGUMENTS>
+                           <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>timestampGE</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="EN">Earliest timestamp (inclusive)</L-2>
+                              </DESC>
+                              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint64_t</TYPE-TREF>
+                              <DIRECTION>IN</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>timestampLT</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="EN">Latest timestamp (exclusive)</L-2>
+                              </DESC>
+                              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint64_t</TYPE-TREF>
+                              <DIRECTION>IN</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                            <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>history</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="EN">The history of all actions that have been performed by UCM Master.</L-2>
+                              </DESC>
+                              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/ara/ucm/datatypes/ImplementationDataTypes/CampaignHistoryVectorType</TYPE-TREF>
+                              <DIRECTION>OUT</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <FIRE-AND-FORGET>false</FIRE-AND-FORGET>
+                        </CLIENT-SERVER-OPERATION>
+
+                        <!-- GetSwClusterDescription -->
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>GetSwClusterDescription</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">This method returns the general information of the Software Clusters present in the Adaptive Platform</L-2>
+                          </DESC>
+                          <ARGUMENTS>
+                           <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>SoftwareClusterDescriptions</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="EN">List of SoftwareClusters general information.</L-2>
+                              </DESC>
+                              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/ara/ucm/datatypes/ImplementationDataTypes/SwDescVectorType</TYPE-TREF>
+                              <DIRECTION>OUT</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <FIRE-AND-FORGET>false</FIRE-AND-FORGET>
+                        </CLIENT-SERVER-OPERATION>
+
+                        <!-- GetSwPackageDescription -->
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>GetSwPackageDescription</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">This method returns the general information of the Software Packages that are part of current campaign handled by UCM Master.</L-2>
+                          </DESC>
+                          <ARGUMENTS>
+                           <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>Packages</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="EN">List of Software Packages.</L-2>
+                              </DESC>
+                              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/ara/ucm/datatypes/ImplementationDataTypes/SwDescVectorType</TYPE-TREF>
+                              <DIRECTION>OUT</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <FIRE-AND-FORGET>false</FIRE-AND-FORGET>
+                        </CLIENT-SERVER-OPERATION>
+
+                        <!-- GetSwProcessProgress -->
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>GetSwProcessProgress</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">Get the progress (0 - 100%) of the currently package processing.</L-2>
+                          </DESC>
+                          <ARGUMENTS>
+                           <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>progress</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="EN">List of Software Packages.</L-2>
+                              </DESC>
+                              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint8_t</TYPE-TREF>
+                              <DIRECTION>OUT</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <FIRE-AND-FORGET>false</FIRE-AND-FORGET>
+                        </CLIENT-SERVER-OPERATION>
+
+                        <!-- GetSwTransferProgress -->
+                        <CLIENT-SERVER-OPERATION>
+                          <SHORT-NAME>GetSwTransferProgress</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">Get the progress (0 - 100%) of the currently package transferring.</L-2>
+                          </DESC>
+                          <ARGUMENTS>
+                           <ARGUMENT-DATA-PROTOTYPE>
+                              <SHORT-NAME>progress</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="EN">The progress of the current package transferring (0% - 100%). 0x00 ... 0x64, 0xFF for 'No information available'</L-2>
+                              </DESC>
+                              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint8_t</TYPE-TREF>
+                              <DIRECTION>OUT</DIRECTION>
+                            </ARGUMENT-DATA-PROTOTYPE>
+                          </ARGUMENTS>
+                          <FIRE-AND-FORGET>false</FIRE-AND-FORGET>
+                        </CLIENT-SERVER-OPERATION>
+                      </METHODS>
+                    </SERVICE-INTERFACE>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

@@ -1,0 +1,365 @@
+// Disclaimer
+//
+// This work (specification and/or software implementation) and the material
+// contained in it, as released by AUTOSAR, is for the purpose of information
+// only. AUTOSAR and the companies that have contributed to it shall not be
+// liable for any use of the work.
+//
+// The material contained in this work is protected by copyright and other
+// types of intellectual property rights. The commercial exploitation of the
+// material contained in this work requires a license to such intellectual
+// property rights.
+//
+// This work may be utilized or reproduced without any modification, in any
+// form or by any means, for informational purposes only. For any other
+// purpose, no part of the work may be utilized or reproduced, in any form
+// or by any means, without permission in writing from the publisher.
+//
+// The work has been developed for automotive applications only. It has
+// neither been developed, nor tested for non-automotive applications.
+//
+// The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+// --------------------------------------------------------------------------
+
+
+演示异步事件循环创建和流操作
+
+
+1. 启动事件循环
+
+
+int event_loop(void* p)
+{
+    int r;
+    nai_evloop_t* l;
+
+    l = (nai_evloop_t*)p;
+    r = nai_evloop_dispatch(l);
+    return r;
+};
+
+int main()
+{
+    int r;
+    nai_task_t task;
+    nai_evloop_t* l;
+
+
+    nai_task_init(&task, 0);
+
+    /* create a new event loop */
+    l = nai_evloop_new();
+    if (l == 0) {
+        r = -1;
+        goto _fail;
+    };
+
+    /* open event loop, choose the right backend by the system */
+    r = nai_evloop_open(l, 0, 0, 0);
+    if (r < 0) {
+        goto _end;
+    };
+
+    /* start one thread with default thread attr */
+    r = nai_task_open(&task, 1, 0);
+    if (r < 0) {
+        goto _end;
+    };
+
+    /* start event loop */
+    r = nai_task_queue(&task, event_loop, l, 0);
+    if (r < 0) {
+        goto _end;
+    };
+
+    /* todo something */
+    /* ie, wait signal from other process */
+
+
+    /* break event loop */
+    r = nai_evloop_break(l, 0);
+    if (r < 0) {
+        goto _end;
+    };
+
+    /* wait event loop exit */
+    r = nai_task_wait(&task);
+    if (r < 0) {
+        goto _end;
+    };
+
+
+_end:
+    nai_task_close(&task);
+    if (l != 0) {
+        nai_evloop_close(l);
+    };
+    return r;
+};
+
+
+2. 开始监听
+
+
+int handle_client(nai_stream_t* c, int event)
+{
+    /* ... */
+    return 0;
+};
+
+int handle_accept(nai_listen_t* s, int event)
+{
+    int r;
+    nai_fd_t f;
+    nai_stream_t* c = 0;
+
+
+    f = nai_listen_accept(s, 0, 0);
+    if (f == NAI_FD_INVALID) {
+        r = -1;
+        goto _end;
+    };
+
+    c = (nai_stream_t*)nai_malloc(sizeof(*c));
+    if (c == 0) {
+        r = -1;
+        goto _end;
+    };
+
+    nai_stream_init(c);
+    nai_stream_set_cb(c, handle_client);
+    nai_stream_set_fd(c, fd, NAI_IO_SOCK);
+    nai_stream_set_fdown(c, 1); /* stream will close fd on stream close */
+    nai_stream_set_opt(c, NAI_IO_RECVTIMEO, 30*1000);
+    nai_stream_set_opt(c, NAI_IO_SENDTIMEO, 30*1000);
+    nai_stream_inherit(c, s);   /* inherit properties from listen */
+    r = nai_stream_open(c, nai_listen_get_loop(s));
+    if (r < 0) {
+        goto _end;
+    };
+
+_end:
+    if (r < 0) {
+        if (c != 0) {
+            nai_stream_close(c);
+            nai_free(c);
+        };
+    };
+    return r;
+};
+
+int start_listen(nai_evloop_t* l)
+{
+    int r;
+    nai_listen_t* s;
+    nai_socknbuf_in_t nbuf;
+
+    nbuf.len = sizeof(nbuf.storage);
+    r = nai_sockaddr_pton("127.0.0.1:5000", -1, &nbuf.addr, &nbuf.len);
+    if (r < 0) {
+        goto _end;
+    };
+
+    s = (nai_listen_t*)nai_malloc(sizeof(*s));
+    if (s == 0) {
+        r = -1;
+        goto _end;
+    };
+
+    nai_listen_init(s);
+    nai_listen_set_backlog(s, 100);
+    nai_listen_set_cb(s, handle_accept);
+    r = nai_listen_bind(s, l, &nbuf.addr, nbuf.len);
+    if (r < 0) {
+        goto _end;
+    };
+
+_end:
+    if (r < 0) {
+        if (s != 0) {
+            nai_listen_close(s);
+            nai_free(s);
+        };
+    };
+    return r;
+};
+
+
+3. 读写事件处理
+
+
+int handle_stream(nai_stream_t* s, int events)
+{
+    int r;
+    int error;
+    int notify_id;
+
+    switch (events & 0x1f) { /* for demo only */
+    case NAI_IO_READ:
+    case NAI_IO_WRITE:
+    case NAI_IO_READ|NAI_IO_WRITE:
+        /* 读写事件 */
+        break;
+
+    case NAI_IO_ERROR:
+        /* 连接错误 */
+        error = nai_ev_error_code(events);
+        break;
+
+    case NAI_IO_READ|NAI_IO_TIMEOUT:
+        /* 读超时 */
+        break;
+
+    case NAI_IO_WRITE|NAI_IO_TIMEOUT:
+        /* 写超时 */
+        break;
+
+    case NAI_IO_TIMEOUT:
+        /* 用户自定义定时器 */
+        break;
+
+    caee NAI_IO_NOTIFY:
+        /* 用户自定义事件 */ 
+        notify_id = nai_ev_notify_code(events);
+        switch (notify_id) {
+        case 0:
+        case 1:
+        case 2:
+            break;
+        };
+        break;
+    };
+};
+
+
+4. 读写操作
+
+
+int handle_readwrite(nai_stream_t* s)
+{
+    intptr_t r;
+    int ec;
+    int bytes;
+    char* buf;
+    size_t buflen;
+
+
+    /* other versions: nai_stream_readv|readq */
+    r = nai_stream_read(s, buf, buflen);
+    if (r < 0) {
+        ec = nai_errno;
+        if (ec == NAI_AGAIN || ec == NAI_INPROCESS) {
+            /* 操作阻塞或未完成 */
+            /* 当操作处于未完成时，不可释放传入的缓冲区，直到下次读取成功 */
+            goto _wait;
+        };
+
+        /* 其它错误 */
+        goto _fail;
+    };
+
+    /* 数据处理 */
+    bytes = r;
+    /* ... */
+
+
+    /* other versions: nai_stream_writev|writeq */
+    r = nai_stream_write(s, buf, buflen);
+    if (r < 0) {
+        ec = nai_errno;
+        if (ec == NAI_AGAIN || ec == NAI_INPROCESS) {
+            /* 操作阻塞或未完成 */
+            /* 当操作处于未完成时，不可释放传入的缓冲区，直到下次写入成功 */
+            r = 0;
+            goto _wait;
+        };
+
+        /* 其它错误 */
+        goto _fail;
+    };
+
+    /* 结果处理 */
+    bytes = r;
+    /* ... */
+
+_wait:
+    return 0;
+
+_fail:
+    nai_stream_close(s);
+    return -1;
+};
+
+
+5. 文件或管道
+
+
+int start_file(nai_fd_t fd, nai_evloop_t* l)
+{
+    int r;
+    nai_stream_t* c;
+
+
+    c = (nai_stream_t*)nai_malloc(sizeof(*c));
+    if (c == 0) {
+        r = -1;
+        goto _end;
+    };
+
+    /* 注意，非阻塞和异步文件在linux下不支持 */
+    nai_stream_init(c);
+    nai_stream_set_cb(c, handle_client);
+    nai_stream_set_fd(c, fd, NAI_IO_FILE); /* or NAI_IO_PIPE */
+    nai_stream_set_fdown(c, 1); /* stream will close fd on stream close */
+    r = nai_stream_open(c, l);
+    if (r < 0) {
+        goto _end;
+    };
+
+_end:
+    if (r < 0) {
+        if (c != 0) {
+            nai_stream_close(c);
+            nai_free(c);
+        };
+    };
+    return r;
+};
+
+
+6. 用户定时和信号
+
+    nai_stream_t* s;
+
+    /* 设置等待一秒 */
+    r = nai_stream_set_timeout(s, NAI_TIMEOP_SET, 1000);
+    if (r < 0) {
+        goto _end;
+    };
+
+    /* 发送信号 */
+    r = nai_stream_signal(s, 1); /* available value is 0, 1, 2 */
+    if (r < 0) {
+        goto _end;
+    };
+
+
+7. 切换阻塞模式
+
+    nai_task_t* t;
+    nai_stream_t* s;
+
+    /* in event loop thread */
+    /* set blocking and post to other thread */
+    nai_stream_set_blocking(s, 1);
+    nai_task_queue(t, handle_blocked, s, 0);
+
+
+    /* in other thread */
+    nai_stream_read(s, buf, buflen);
+    /* todo */
+    /* post stream back to event loop and auto switch to non-block */
+    nai_stream_return_loop(s);
+
+
+

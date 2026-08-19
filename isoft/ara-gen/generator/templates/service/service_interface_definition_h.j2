@@ -1,0 +1,143 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+
+{% extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+
+
+#include "ara/com/types.h"
+
+{% for include in service.includes %}
+#include {{include}}
+{% endfor %}
+{% if service.namespaces %}{% for fragment in service.namespaces %}
+namespace {{fragment}} {
+{% endfor %}{% endif %}
+
+class {{service.name}} {
+ public:
+    static const ara::com::internal::ServiceIdentifier serviceIdentifier;
+    static const ara::com::internal::ServiceVersion serviceVersion;
+    static ara::com::internal::ServiceContractVersion serviceContractVersionMajor;
+    static ara::com::internal::ServiceContractVersion serviceContractVersionMinor;
+public:
+{% for method in service.methods %}
+{% if method.get_output_args %}
+  struct {{method.name}}Output {
+{% for argument in method.get_output_args %}
+    {{argument.type_declaration}} {{argument.name}};
+{% endfor %}
+{% if method.isArgsTag %}
+    using IsArgsTag = void;
+{% else %}
+    using IsEnumerableTag = void;
+{% endif %}
+    template<typename F>
+    void enumerate(F& fun) {
+{% for argument in method.get_output_args %}
+      fun({{argument.name}});
+{% endfor %}
+    }
+  };
+
+{% endif %}
+{% endfor %}
+{% for method in service.methods %}
+{% if method.errors | length >0 %}
+    static constexpr ara::core::Array<ara::core::ErrorCode, {{method.errors | length}}> {{method.name}}Errors{
+{% for err in method.errors %}
+        {{err.qualified_cpp_namespace_prefix}}::MakeErrorCode({{err.qualified_cpp_namespace_prefix}}::{{err.domain.name}}Errc::k{{err.name}}, 0),
+{% endfor %}
+  };
+{%else%}
+     static constexpr ara::core::Array<ara::core::ErrorCode, {{method.errors | length}}> {{method.name}}Errors{};
+{% endif %}
+{% endfor %}
+
+};
+
+
+
+{% for error in service.possible_errors %}
+
+
+class {{error.name}} : public ara::com::ApplicationErrorException {
+public:
+    {{error.name}}() :
+        ara::com::ApplicationErrorException()
+        {}
+
+{% if error.has_non_default_constr %}
+    {{error.name}}({% for error_context in error.error_contexts %}
+{{error_context.type_declaration}} {{service.get_error_method_name(error)}}_{{error_context.name}}{% if not loop.last %},{% endif %}
+{% endfor %}) : 
+        ara::com::ApplicationErrorException(),
+{% for error_context in error.error_contexts %}
+        {{service.get_error_method_name(error)}}_{{error_context.name}}_(std::move({{service.get_error_method_name(error)}}_{{error_context.name}})){% if not loop.last %},{% endif %}
+
+{% endfor %}
+        {}
+
+{% endif %}
+{% for error_context in error.error_contexts %}
+    const {{error_context.type_declaration}}& get_{{service.get_error_method_name(error)}}_{{error_context.name}}() const { return {{service.get_error_method_name(error)}}_{{error_context.name}}_; }
+{% endfor %}
+
+  const char *what() const final override { return errorMessage_; }
+
+    using IsEnumerableTag = void;
+    template<typename F>
+    void enumerate(F& fun) {
+        fun(errorCode_);
+{% for error_context in error.error_contexts %}
+        fun({{service.get_error_method_name(error)}}_{{error_context.name}}_);
+{% endfor %}
+    }
+    template<typename F>
+    void enumerate(F& fun) const {
+        fun(errorCode_);
+{% for error_context in error.error_contexts %}
+        fun({{service.get_error_method_name(error)}}_{{error_context.name}}_);
+{% endfor %}
+    }
+
+private:
+    std::uint8_t errorCode_ = {{error.error_code}} & 0x3F;
+    static constexpr const char* errorMessage_ = "{{error.name}} in {{service.name}} with ErrorCode: {{error.error_code}} & 0x3F";
+{% for error_context in error.error_contexts %}
+    {{error_context.type_declaration}} {{service.get_error_method_name(error)}}_{{error_context.name}}_;
+{% endfor %}
+};
+{% endfor %}
+
+{% if service.namespaces %}{% for fragment in service.namespaces|reverse %}
+} // namespace {{fragment}}
+{% endfor %}{% endif %}
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}
+

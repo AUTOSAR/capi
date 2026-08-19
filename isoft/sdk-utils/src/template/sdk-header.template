@@ -1,0 +1,123 @@
+#!/bin/bash
+
+#  Disclaimer
+#
+#  This work (specification and/or software implementation) and the material
+#  contained in it, as released by AUTOSAR, is for the purpose of information
+#  only. AUTOSAR and the companies that have contributed to it shall not be
+#  liable for any use of the work.
+#
+#  The material contained in this work is protected by copyright and other
+#  types of intellectual property rights. The commercial exploitation of the
+#  material contained in this work requires a license to such intellectual
+#  property rights.
+#
+#  This work may be utilized or reproduced without any modification, in any
+#  form or by any means, for informational purposes only. For any other
+#  purpose, no part of the work may be utilized or reproduced, in any form
+#  or by any means, without permission in writing from the publisher.
+#
+#  The work has been developed for automotive applications only. It has
+#  neither been developed, nor tested for non-automotive applications.
+#
+#  The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+#  --------------------------------------------------------------------------
+
+# ================================================================
+#
+# File description:
+# ----------------
+# @file         sdk-header.template
+# @details      SDK file header template, essentially a bash script. When making an SDK,
+#               replace the placeholders in the template with actual values to use as
+#               the SDK file header, then append the SDK compressed package after the header.
+# @date         by: james.feng
+# @author       fengjian
+# @version      1.2.0
+#
+# ================================================================
+
+# @TEMPLATE_PLACEHOLDERS_BEGIN@ Placeholder replacement area start flag; characters wrapped in @@ within this area will be replaced by the renderer.
+SDK_BODY_SIZE=@SDK_BODY_SIZE@
+SDK_BODY_MD5SUM=@SDK_BODY_MD5SUM@
+TOOLCHAIN_BIN_DIR=@TOOLCHAIN_BIN@
+RELEASE_INFO=$(cat << 'EOF'
+@RELEASE_INFO@
+EOF
+)
+# @TEMPLATE_PLACEHOLDERS_END@ Placeholder area end marker; lines after this will no longer be replaced.
+
+SDK_INSTALL_DIR=$(readlink -m "$1" 2>/dev/null)
+SYSROOT_DIR=${SDK_INSTALL_DIR}/ara-sysroot
+TOOLCHAIN_DIR=${SDK_INSTALL_DIR}/toolchain
+SDK_BUILD_SCRIPT=${SYSROOT_DIR}/build.sh
+SDK_RUN_SCRIPT=${SYSROOT_DIR}/run.sh
+VSCODE_SETTING_FILE="${SYSROOT_DIR}/vscode-settings.json"
+    
+function unpack_sdk()
+{
+    # TODO: Record the MD5 value of the SDK compressed package, verify during extraction
+    if ! mkdir -p ${SDK_INSTALL_DIR};then
+        exit
+    fi
+    echo "Unpacking SDK ..."
+    # Extract compressed package
+    tail -c $SDK_BODY_SIZE $0 | tar xz -C ${SDK_INSTALL_DIR}
+    # Modify the runtime script according to the actual installation directory
+    if [ -f ${SDK_RUN_SCRIPT} ];then
+        SDK_VERSION=$(grep -E '"version"' "${SDK_INSTALL_DIR}/ara-sysroot/.release.json" | head -n 1 | \
+                      sed -E 's/.*"version"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/' | \
+                      sed -E 's/^([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+        sed -i "/export ARA_PLATFORM_VERSION=/c export ARA_PLATFORM_VERSION=${SDK_VERSION}" ${SDK_RUN_SCRIPT}
+    fi
+    # Modify VSCode configuration according to the actual installation directory
+    #SS="s#@PATH@#${TOOLCHAIN_BIN_DIR}:${PATH}#"
+    #sed -i ${SS} ${VSCODE_SETTING_FILE}
+    #SS="s#@SYSROOT@#${SYSROOT_DIR}#g"
+    #sed -i ${SS} ${VSCODE_SETTING_FILE}
+
+    if [ -f ${TOOLCHAIN_DIR}/install.sh ];then
+        ${TOOLCHAIN_DIR}/install.sh
+    fi
+}
+
+SDK_FILE_USAGE=$(cat << EOF
+Usage:
+    install SDK:
+        $0 INSTALL_DIR"
+    show release info:
+        $0 -v"
+EOF
+)
+
+BUILD_SCRIPT_USAGE=$(cat << EOF
+two compilation modes are provided:
+Subshell Execution Mode: Runs the script in a new subshell process. 
+    Command: ${SDK_BUILD_SCRIPT} PROJECT_DIR
+Sourcing Execution Mode: Load all the environment variables required for compilation into the current shell. and provide a function command for compilation.
+    Command: source ${SDK_BUILD_SCRIPT}; cd PROJECT_DIR; ab
+EOF
+)
+
+############ main #########
+
+
+
+case $# in
+    1)
+        if [ $1 == "-v" ];then
+            echo "${RELEASE_INFO}"
+            exit 0
+        fi
+
+        unpack_sdk
+        echo "${BUILD_SCRIPT_USAGE}"
+        ;;
+    *)
+        echo "${SDK_FILE_USAGE}"
+        exit 1
+        ;;
+esac
+
+exit 0
+# NOTE: Do not delete the trailing blank line; a compressed package will be appended after this script template

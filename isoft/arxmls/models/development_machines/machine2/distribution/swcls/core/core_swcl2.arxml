@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Development</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE >
+              <SHORT-NAME>SoftwareClusters2</SHORT-NAME>
+              <ELEMENTS>
+                <SOFTWARE-CLUSTER >
+                  <SHORT-NAME>core</SHORT-NAME>
+                  <CATEGORY>PLATFORM_CORE</CATEGORY>
+                  <CLAIMED-FUNCTION-GROUP-REFS>
+                    <CLAIMED-FUNCTION-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/ISOFT/FunctionGroupSet/Machine2/MachineFG</CLAIMED-FUNCTION-GROUP-REF>
+                  </CLAIMED-FUNCTION-GROUP-REFS>
+                  <CONTAINED-AR-ELEMENT-REFS>
+                    <CONTAINED-AR-ELEMENT-REF DEST="MACHINE">/ISOFT/Development/Machine2</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/sm/exe/smd</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ResetMachineApp/exe/ResetMachine</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ShutdownApp/exe/shutdown</CONTAINED-AR-ELEMENT-REF>
+                    <CONTAINED-AR-ELEMENT-REF DEST="EXECUTABLE">/ara/sm_shell_request_client/executables/shell_request_client</CONTAINED-AR-ELEMENT-REF>
+                  </CONTAINED-AR-ELEMENT-REFS>
+                  <CONTAINED-PROCESS-REFS>
+                    <CONTAINED-PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/cg/cgd_proc2</CONTAINED-PROCESS-REF>
+                    <CONTAINED-PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/com/nsomeip_routing_proc2</CONTAINED-PROCESS-REF>
+                    <CONTAINED-PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/log/daemon_proc2</CONTAINED-PROCESS-REF>
+                    <CONTAINED-PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/nm/nm_daemon_proc2</CONTAINED-PROCESS-REF>
+                    <CONTAINED-PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/phm/phmd_process2</CONTAINED-PROCESS-REF>
+                    <CONTAINED-PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/sm2/state_manager</CONTAINED-PROCESS-REF>
+                    <CONTAINED-PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/tsync/tsync_daemon_proc2</CONTAINED-PROCESS-REF>
+                    <CONTAINED-PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/ucm2/package_manager</CONTAINED-PROCESS-REF>
+                    <CONTAINED-PROCESS-REF DEST="PROCESS">/ISOFT/PlatformComponents/ucm_master/ucmm2</CONTAINED-PROCESS-REF>
+                    <CONTAINED-PROCESS-REF DEST="PROCESS">/ResetMachineApp2/reset_machine_process</CONTAINED-PROCESS-REF>
+                    <CONTAINED-PROCESS-REF DEST="PROCESS">/ShutdownApp2/shutdown_process</CONTAINED-PROCESS-REF>
+                    <CONTAINED-PROCESS-REF DEST="PROCESS">/ara/sm_shell_request_client/processes2/shell_request_proc</CONTAINED-PROCESS-REF>
+                  </CONTAINED-PROCESS-REFS>
+                  <DEPENDS-ON>
+                    <CATEGORY>FUNCTIONAL_DEPENDENCY</CATEGORY>
+                    <OPERATOR>LOGICAL-AND</OPERATOR>
+                    <PARTS>
+                      <SOFTWARE-CLUSTER-DEPENDENCY-COMPARE-CONDITION>
+                        <COMPARE-TYPE>IS-GREATER-THAN-OR-EQUAL</COMPARE-TYPE>
+                        <CONSIDER-BUILD-NUMBER>false</CONSIDER-BUILD-NUMBER>
+                        <SOFTWARE-CLUSTER-REF DEST="SOFTWARE-CLUSTER">/ISOFT/Development/SoftwareClusters2/framework</SOFTWARE-CLUSTER-REF>
+                        <VERSION>1.0.0</VERSION>
+                      </SOFTWARE-CLUSTER-DEPENDENCY-COMPARE-CONDITION>
+                      <SOFTWARE-CLUSTER-DEPENDENCY-COMPARE-CONDITION>
+                        <COMPARE-TYPE>IS-GREATER-THAN-OR-EQUAL</COMPARE-TYPE>
+                        <CONSIDER-BUILD-NUMBER>false</CONSIDER-BUILD-NUMBER>
+                        <SOFTWARE-CLUSTER-REF DEST="SOFTWARE-CLUSTER">/ISOFT/Development/SoftwareClusters2/os</SOFTWARE-CLUSTER-REF>
+                        <VERSION>20.4.2</VERSION>
+                      </SOFTWARE-CLUSTER-DEPENDENCY-COMPARE-CONDITION>
+                    </PARTS>
+                  </DEPENDS-ON>
+                  <DIAGNOSTIC-ADDRESSS>
+                    <SOFTWARE-CLUSTER-DOIP-DIAGNOSTIC-ADDRESS>
+                      <ADDRESS-SEMANTICS>PHYSICAL-ADDRESS</ADDRESS-SEMANTICS>
+                      <DIAGNOSTIC-ADDRESS>1002</DIAGNOSTIC-ADDRESS>
+                    </SOFTWARE-CLUSTER-DOIP-DIAGNOSTIC-ADDRESS>
+                  </DIAGNOSTIC-ADDRESSS>
+                  <DIAGNOSTIC-EXTRACT-REF DEST="DIAGNOSTIC-CONTRIBUTION-SET">/ISOFT/Development/DiagnosticContributionSet/Machine2/DiagnosticContributionSet_core</DIAGNOSTIC-EXTRACT-REF>
+                  <MODULE-INSTANTIATION-REFS>
+                    <MODULE-INSTANTIATION-REF DEST="DO-IP-INSTANTIATION">/ISOFT/Development/Machine2/doip</MODULE-INSTANTIATION-REF>
+                  </MODULE-INSTANTIATION-REFS>
+                  <TYPE-APPROVAL>e1*2024/123*4567*89</TYPE-APPROVAL>
+                  <VENDOR-ID>1</VENDOR-ID>
+                  <!-- <VENDOR-SIGNATURE-REF DEST="CRYPTO-SERVICE-CERTIFICATE">/ISOFT/Development/CryptoServiceCertificates2/vendorServiceCert</VENDOR-SIGNATURE-REF> -->
+                  <VERSION>1.0.0</VERSION>
+                </SOFTWARE-CLUSTER>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

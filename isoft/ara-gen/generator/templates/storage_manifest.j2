@@ -1,0 +1,216 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+
+{% macro to_bool(value) %}
+{% if value == "P-PORT-PROTOTYPE" %}PPort{% endif %}
+{% if value == "R-PORT-PROTOTYPE" %}RPort{% endif %}
+{% if value == "PR-PORT-PROTOTYPE" %}PRPort{% endif %}
+{% endmacro %}
+{
+    "versionApp": "{{ process.executable.exe_version }}",
+	"PersistencyPortPrototypeToFileStorageMapping" :
+	[
+        {% for persistency_mapping in process.persistency_mappings.file %}{
+			"portIns" : "{{persistency_mapping.instance_specifier}}",
+			"portType" : "{{to_bool(persistency_mapping.port_type_raw)}}",
+            "storageIns": "{{persistency_mapping.storageIns}}"
+		}{% if not loop.last %},{% endif %}
+	{% endfor %}
+
+	],
+	"PersistencyPortPrototypeToKeyValueStorageMapping" :
+	[
+		{% for persistency_mapping in process.persistency_mappings.kvs %}{
+			"portIns" : "{{persistency_mapping.instance_specifier}}",
+			"portType" : "{{to_bool(persistency_mapping.port_type_raw)}}",
+            "storageIns": "{{persistency_mapping.storageIns}}"
+		}{% if not loop.last %},{% endif %}
+		{% endfor %}
+		
+	],
+    "PersistencyDeploymentToCryptoKeySlotMapping" :
+	[
+    {% for item in no_mapping %}{
+            "keySlotIns" : "{{item.keySlotIns}}",
+			"keySlotUsage" : "{{item.keySlotUsage}}",
+			"storageIns" : "{{item.persistencyDeployment}}",
+			"verificationHash" : "{{item.verificationHash}}"
+		}{% if not loop.last %},{% endif %}
+	{% endfor %}
+
+	],
+    "PersistencyDeploymentElementToCryptoKeySlotMapping" :
+	[
+    {% for item in element_mapping %}{
+            "keySlotIns" : "{{item.keySlotIns}}",
+			"keySlotUsage" : "{{item.keySlotUsage}}",
+            "storageIns": "{{ item.storageIns }}",
+			"elementIns" : "{{item.persistencyDeploymentElement}}",
+			"verificationHash" : "{{item.verificationHash}}"
+		}{% if not loop.last %},{% endif %}
+	{% endfor %}
+
+	],
+    "FileStorageSet" :
+    [
+        {% for persistency_mapping in process.persistency_mappings.file %}{
+            "storageIns": "{{persistency_mapping.storageIns}}",
+            "storage":{
+                "name" : "{{persistency_mapping.storage.name}}",
+                "uri" : "{{persistency_mapping.storage.uri}}",
+                {% if persistency_mapping.storage.versionPer %}
+                "versionPer": "{{ persistency_mapping.storage.versionPer }}",
+                {% else %}
+                "versionPer": "{{ process.swcl_info.softwareclusterversion }}",
+                {% endif %}
+                "minimumSustainedSize" : {{persistency_mapping.storage.minimum_sustained_size}},
+                "maximumAllowedSize" : {{persistency_mapping.storage.maximum_allowed_size}},
+                "updateStrategy" : "{{persistency_mapping.storage.update_strategy}}",
+                "redundancy" : "{{persistency_mapping.storage.redundancy}}",
+                "redundancyHandling":{
+{% if persistency_mapping.storage.redundancy_handlings.redundancy_crc | length >0 %}
+                    "PersistencyRedundancyCrc":[
+                        {% for redundancy_crc in persistency_mapping.storage.redundancy_handlings.redundancy_crc %}{
+                            "algorithmFamily": "{{redundancy_crc.algorithm_family}}",
+                            "length": {{redundancy_crc.length}}
+                            {% if redundancy_crc.scope %}
+                                ,"scope": "{{ redundancy_crc.scope }}"
+                            {% endif %}
+                        }{% if not loop.last %},{% endif %}{% endfor %}
+
+                    ]{{", " if persistency_mapping.storage.redundancy_handlings.redundancy_hash |length >0 or persistency_mapping.storage.redundancy_handlings.redundancy_m_out_of_n |length >0}}{% endif %}
+{% if persistency_mapping.storage.redundancy_handlings.redundancy_hash | length >0 %}
+                    "PersistencyRedundancyHash":[
+                        {% for redundancy_hash in persistency_mapping.storage.redundancy_handlings.redundancy_hash %}{
+                            "algorithmFamily": "{{redundancy_hash.algorithm_family}}",
+                            "length": {{redundancy_hash.length}}
+                            {% if redundancy_hash.scope %}
+                                ,"scope": "{{ redundancy_hash.scope }}"
+                            {% endif %}
+                            {% if redundancy_hash.vector_length %}
+                                ,"initVectorLength": {{ redundancy_hash.vector_length }}
+                            {% endif %}
+                        }{% if not loop.last %},{% endif %}{% endfor %}
+
+                    ]{{", " if persistency_mapping.storage.redundancy_handlings.redundancy_m_out_of_n |length >0}}{% endif %}
+{% if persistency_mapping.storage.redundancy_handlings.redundancy_m_out_of_n | length > 0 %}
+                    "PersistencyRedundancyMOutOfN":[
+                        {% for redundancy_m_out_of_n in persistency_mapping.storage.redundancy_handlings.redundancy_m_out_of_n %}{
+                            "m": {{redundancy_m_out_of_n.M}},
+                            "n": {{redundancy_m_out_of_n.N}}
+                            {% if redundancy_m_out_of_n.scope %}
+                                ,"scope": "{{ redundancy_m_out_of_n.scope }}"
+                            {% endif %}
+                        }{% if not loop.last %},{% endif %}{% endfor %}
+
+                    ]{% endif %}
+
+                }
+            },
+            "fileStorage" :{
+                "maxNumberOfFiles" :{{persistency_mapping.fileStorage.max_number_of_files}},
+                "initFileList" : [
+{% for init_file in persistency_mapping.fileStorage.init_file_list %}
+                    {
+                        "updateStrategy" : "{{init_file.updateStrategy}}",
+                        "contentUri" : "{{init_file.contentUri}}",
+                        "fileName" : "{{init_file.fileName}}"
+                    }{% if not loop.last %},{% endif %}{% endfor %}
+
+                ]
+            }
+        }{% if not loop.last %},{% endif %}
+    {% endfor %}
+
+    ],
+    "KeyValueStorageSet" :
+    [
+        {% for persistency_mapping in process.persistency_mappings.kvs %}{
+            "storageIns": "{{persistency_mapping.storageIns}}",
+            "storage" :{
+                "name" : "{{persistency_mapping.storage.name}}",
+                "uri" : "{{persistency_mapping.storage.uri}}",
+                {% if persistency_mapping.storage.versionPer %}
+                "versionPer": "{{ persistency_mapping.storage.versionPer }}",
+                {% else %}
+                "versionPer": "{{ process.swcl_info.softwareclusterversion }}",
+                {% endif %}
+                "minimumSustainedSize" : {{persistency_mapping.storage.minimum_sustained_size}},
+                "maximumAllowedSize" : {{persistency_mapping.storage.maximum_allowed_size}},
+                "updateStrategy" : "{{persistency_mapping.storage.update_strategy}}",
+                "redundancy" : "{{persistency_mapping.storage.redundancy}}",
+                "redundancyHandling":{
+{% if persistency_mapping.storage.redundancy_handlings.redundancy_crc | length >0 %}
+                    "PersistencyRedundancyCrc":[
+                        {% for redundancy_crc in persistency_mapping.storage.redundancy_handlings.redundancy_crc %}{
+                            "algorithmFamily": "{{redundancy_crc.algorithm_family}}",
+                            "length": {{redundancy_crc.length}}
+                            {% if redundancy_crc.scope %}
+                                ,"scope": "{{ redundancy_crc.scope }}"
+                            {% endif %}
+                        }{% if not loop.last %},{% endif %}{% endfor %}
+
+                    ]{{", " if persistency_mapping.storage.redundancy_handlings.redundancy_hash |length >0 or persistency_mapping.storage.redundancy_handlings.redundancy_m_out_of_n |length >0}}{% endif %}
+{% if persistency_mapping.storage.redundancy_handlings.redundancy_hash | length >0 %}
+                    "PersistencyRedundancyHash":[
+                        {% for redundancy_hash in persistency_mapping.storage.redundancy_handlings.redundancy_hash %}{
+                            "algorithmFamily": "{{redundancy_hash.algorithm_family}}",
+                            "length": {{redundancy_hash.length}}
+                            {% if redundancy_hash.scope %}
+                                ,"scope": "{{ redundancy_hash.scope }}"
+                            {% endif %}
+                            {% if redundancy_hash.vector_length %}
+                                ,"initVectorLength": {{ redundancy_hash.vector_length }}
+                            {% endif %}
+                        }{% if not loop.last %},{% endif %}{% endfor %}
+
+                    ]{{", " if persistency_mapping.storage.redundancy_handlings.redundancy_m_out_of_n |length >0}}{% endif %}
+{% if persistency_mapping.storage.redundancy_handlings.redundancy_m_out_of_n | length > 0 %}
+                    "PersistencyRedundancyMOutOfN":[
+                        {% for redundancy_m_out_of_n in persistency_mapping.storage.redundancy_handlings.redundancy_m_out_of_n %}{
+                            "m": {{redundancy_m_out_of_n.M}},
+                            "n": {{redundancy_m_out_of_n.N}}
+                            {% if redundancy_m_out_of_n.scope %}
+                                ,"scope": "{{ redundancy_m_out_of_n.scope }}"
+                            {% endif %}
+                        }{% if not loop.last %},{% endif %}{% endfor %}
+
+                    ]{% endif %}
+
+                }
+            },
+            "kvStorage" :{
+                "initKvPairUri" : "./{{persistency_mapping.name}}_init.per"
+            }
+
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+
+    ]
+
+
+}
+
+{% block footer %}{% endblock %}

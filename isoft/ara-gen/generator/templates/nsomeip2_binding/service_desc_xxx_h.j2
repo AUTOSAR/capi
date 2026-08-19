@@ -1,0 +1,578 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{%- extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+{% macro method_or_unknown(value) %}
+{% if value %}{{value}}{% else %}ara::com::internal::nsomeip::types::kUndefinedMethodId{% endif %}
+{% endmacro %}
+{% macro event_or_unknown(value) %}
+{% if value %}{{value}}{% else %}ara::com::internal::nsomeip::types::kUndefinedEventId{% endif %}
+{% endmacro %}
+
+#include "{{service.namespacepath}}{{service.standard_name}}_common.h"
+#include "ara/com/internal/nsomeip/nsomeip_types.h"
+{%if service.signals%}
+#include "ara/com/internal/nsomeip/nsomeip_signal.h"
+{%endif%}
+
+
+
+{% if service.namespaces %}{% for namespace in service.namespaces %}
+namespace {{namespace}} {
+{% endfor %}{% endif %}
+namespace nsomeip {
+
+struct {{service.service_deployment.name}}ServiceDesc: {{service.name}}{
+    static constexpr auto serviceId() {
+        return ara::com::internal::nsomeip::types::ServiceId{ {{service.deployment_id}} };
+    }
+    static constexpr auto serviceVersionMajor() {
+        return ara::com::internal::nsomeip::types::ServiceVersionMajor{ {{service.service_version_major}} };
+    }
+    static constexpr auto serviceVersionMinor() {
+        return ara::com::internal::nsomeip::types::ServiceVersionMinor{ {{service.service_version_minor}} };
+    }
+    static constexpr auto requiredMinimumMinor() {
+        return ara::com::internal::nsomeip::types::ServiceVersionMinor{ {{service.required_minimum_minor_version}} };
+    }
+    static constexpr auto enabledMinimumMinorPolicy() {
+        return bool{ {% if service.is_minimum_minor_policy_enabled %}true{% else %}false{% endif %} };
+    }
+    static constexpr auto blacklistedVersionsNumber() {
+        return uint32_t{ {{service.blacklisted_versions|length}} };
+    }
+{% if service.blacklisted_versions %}
+{% for bl_version in service.blacklisted_versions %}
+    static constexpr auto blacklistedVersions() {
+        return ara::com::internal::nsomeip::types::ToArray<ara::com::internal::nsomeip::types::BlacklistedVersion>({ ara::com::internal::nsomeip::types::BlacklistedVersion{ {{ bl_version["major"] }}, {{ bl_version["minor"] }} } });
+    }
+{% endfor %}
+{% else %}
+    static constexpr auto blacklistedVersions() {
+        return ara::com::internal::nsomeip::types::ToArray<ara::com::internal::nsomeip::types::BlacklistedVersion>({ ara::com::internal::nsomeip::types::BlacklistedVersion{ 0x0, 0x0 } });
+    }
+{% endif %}
+};
+
+{% for event in service.get_events_from_group() %}
+struct {{service.service_deployment.name}}{{event.name}}Desc :{{service.service_deployment.name}}ServiceDesc {
+{%if event.event_deployment.serializer == "SIGNAL-BASED"%}
+    using IsSignalBasedTag = void;
+{%endif%}
+    static constexpr auto eventId() {
+        return ara::com::internal::nsomeip::types::EventId{ {{event_or_unknown(event.deployment_id)}} };
+    }
+    static constexpr auto eventGroups() {
+        return ara::com::internal::nsomeip::types::ToArray<ara::com::internal::nsomeip::types::EventGroupId>({ {% for event_group_id in event.event_group_id %} ara::com::internal::nsomeip::types::EventGroupId{ {{event_group_id}} }{{ "," if not loop.last }}{% endfor %} });
+    }
+{% if event.is_reliable %}
+    static constexpr auto isReliable() {
+        return bool{true};
+    }
+{% else %}
+    static constexpr auto isReliable() {
+        return bool{false};
+    }
+{% endif %}
+    static constexpr auto byteOrder(){
+{% if event.transformationprops and event.transformationprops.byteorder != ""%}
+        return ara::com::internal::nsomeip::serialize::ByteOrder::{{event.transformationprops.byteorder}};
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::byteOrder();
+{% endif %}
+    }
+    static constexpr auto sessionHandling(){
+{% if event.transformationprops and event.transformationprops.sessionhandling != ""%}
+        return ara::com::internal::nsomeip::serialize::SessionHandling::{{event.transformationprops.sessionhandling}};
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sessionHandling();
+{% endif %}
+    }
+    static constexpr auto alignment(){
+{% if event.transformationprops and event.transformationprops.alignment != None%}
+        return uint16_t{ {{event.transformationprops.alignment}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::alignment();
+{% endif %}
+    }
+    static constexpr auto implementsLegacyStringSerialization(){
+{% if event.transformationprops and event.transformationprops.implementslegacyStringSerialization != None%}
+        return bool{ {{event.transformationprops.implementslegacyStringSerialization}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::implementsLegacyStringSerialization();
+{% endif %}
+    }
+    static constexpr auto isDynamicLengthFieldSize(){
+{% if event.transformationprops and event.transformationprops.isDynamicLengthFieldsize != None%}
+        return bool{ {{event.transformationprops.isDynamicLengthFieldsize}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::isDynamicLengthFieldSize();
+{% endif %}
+    }
+    static constexpr auto sizeofArrayLengthField(){
+{% if event.transformationprops and event.transformationprops.sizeofArrayLengthField != None %}
+        return uint8_t{ {{event.transformationprops.sizeofArrayLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofArrayLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofFixedArrayLengthField(){
+{% if event.transformationprops and event.transformationprops.sizeofFixedArrayLengthField != None %}
+        return uint8_t{ {{event.transformationprops.sizeofFixedArrayLengthField}} };
+{% elif event.transformationprops and event.transformationprops.sizeofArrayLengthField != None %}
+        return uint8_t{ {{event.transformationprops.sizeofArrayLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofFixedArrayLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofStringLengthField(){
+{% if event.transformationprops and event.transformationprops.sizeofstringLengthField != None and event.transformationprops.sizeofstringLengthField != 0%}
+        return uint8_t{ {{event.transformationprops.sizeofstringLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofStringLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofFixedStringLengthField(){
+{% if event.transformationprops and event.transformationprops.sizeofFixedStringLengthField != None %}
+        return uint8_t{ {{event.transformationprops.sizeofFixedStringLengthField}} };
+{% elif event.transformationprops and event.transformationprops.sizeofstringLengthField != None and event.transformationprops.sizeofstringLengthField != 0%}
+        return uint8_t{ {{event.transformationprops.sizeofstringLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofFixedStringLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofStructLengthField(){
+{% if event.transformationprops and event.transformationprops.sizeofstructLengthField != None and event.transformationprops.sizeofstructLengthField != 0%}
+        return uint8_t{ {{event.transformationprops.sizeofstructLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofStructLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofUnionLengthField(){
+{% if event.transformationprops and event.transformationprops.sizeofUnionLengthField != None %}
+        return uint8_t{ {{event.transformationprops.sizeofUnionLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofUnionLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofUnionTypeSelectorField(){
+{% if event.transformationprops and event.transformationprops.sizeofUnionTypeselectorField != None%}
+        return uint8_t{ {{event.transformationprops.sizeofUnionTypeselectorField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofUnionTypeSelectorField();
+{% endif %}
+    }
+    static constexpr auto stringEncoding(){
+{% if event.transformationprops and event.transformationprops.stringEncoding != None%}
+        return ara::com::internal::nsomeip::serialize::StringEncoding::{{event.transformationprops.stringEncoding}};
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::stringEncoding();
+{% endif %}
+    }
+
+};
+{% endfor %}
+
+{% for method in service.methods %}
+struct {{service.service_deployment.name}}{{method.name}}Desc:{{service.service_deployment.name}}ServiceDesc {
+    static constexpr auto methodId() {
+        return ara::com::internal::nsomeip::types::MethodId{ {{method.deployment_id}} };
+    }
+    static constexpr auto possibleErrors() {return {{method.name}}Errors;}
+{% if method.is_reliable %}
+    static constexpr auto isReliable() {
+        return bool{true};
+    }
+{% else %}
+    static constexpr auto isReliable() {
+        return bool{false};
+    }
+{% endif %}
+    static constexpr auto byteOrder(){
+{% if method.transformationprops and method.transformationprops.byteorder != ""%}
+        return ara::com::internal::nsomeip::serialize::ByteOrder::{{method.transformationprops.byteorder}};
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::byteOrder();
+{% endif %}
+    }
+    static constexpr auto sessionHandling(){
+{% if method.transformationprops and method.transformationprops.sessionhandling !=""%}
+        return ara::com::internal::nsomeip::serialize::SessionHandling::{{method.transformationprops.sessionhandling}};
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sessionHandling();
+{% endif %}
+    }
+    static constexpr auto alignment(){
+{% if method.transformationprops and method.transformationprops.alignment != None%}
+        return uint16_t{ {{method.transformationprops.alignment}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::alignment();
+{% endif %}
+    }
+    static constexpr auto implementsLegacyStringSerialization(){
+{% if method.transformationprops and method.transformationprops.implementslegacyStringSerialization != None%}
+        return bool{ {{method.transformationprops.implementslegacyStringSerialization}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::implementsLegacyStringSerialization();
+{% endif %}
+    }
+    static constexpr auto isDynamicLengthFieldSize(){
+{% if method.transformationprops and method.transformationprops.isDynamicLengthFieldsize != None%}
+        return bool{ {{method.transformationprops.isDynamicLengthFieldsize}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::isDynamicLengthFieldSize();
+{% endif %}
+    }
+    static constexpr auto sizeofArrayLengthField(){
+{% if method.transformationprops and method.transformationprops.sizeofArrayLengthField != None %}
+        return uint8_t{ {{method.transformationprops.sizeofArrayLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofArrayLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofFixedArrayLengthField(){
+{% if method.transformationprops and method.transformationprops.sizeofFixedArrayLengthField != None %}
+        return uint8_t{ {{method.transformationprops.sizeofFixedArrayLengthField}} };
+{% elif method.transformationprops and method.transformationprops.sizeofArrayLengthField != None %}
+        return uint8_t{ {{method.transformationprops.sizeofArrayLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofFixedArrayLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofStringLengthField(){
+{% if method.transformationprops and method.transformationprops.sizeofstringLengthField != None and method.transformationprops.sizeofstringLengthField != 0%}
+        return uint8_t{ {{method.transformationprops.sizeofstringLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofStringLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofFixedStringLengthField(){
+{% if method.transformationprops and method.transformationprops.sizeofFixedStringLengthField != None %}
+        return uint8_t{ {{method.transformationprops.sizeofFixedStringLengthField}} };
+{% elif method.transformationprops and method.transformationprops.sizeofstringLengthField != None and method.transformationprops.sizeofstringLengthField != 0%}
+        return uint8_t{ {{method.transformationprops.sizeofstringLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofFixedStringLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofStructLengthField(){
+{% if method.transformationprops and method.transformationprops.sizeofstructLengthField != None and method.transformationprops.sizeofstructLengthField != 0%}
+        return uint8_t{ {{method.transformationprops.sizeofstructLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofStructLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofUnionLengthField(){
+{% if method.transformationprops and method.transformationprops.sizeofUnionLengthField != None %}
+        return uint8_t{ {{method.transformationprops.sizeofUnionLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofUnionLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofUnionTypeSelectorField(){
+{% if method.transformationprops and method.transformationprops.sizeofUnionTypeselectorField != None%}
+        return uint8_t{ {{method.transformationprops.sizeofUnionTypeselectorField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofUnionTypeSelectorField();
+{% endif %}
+    }
+    static constexpr auto stringEncoding(){
+{% if method.transformationprops and method.transformationprops.stringEncoding != None%}
+        return ara::com::internal::nsomeip::serialize::StringEncoding::{{method.transformationprops.stringEncoding}};
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::stringEncoding();
+{% endif %}
+    }
+};
+{% endfor %}
+
+
+{% for field in service.all_fields %}
+struct {{service.service_deployment.name}}{{field.name}}Desc : {{service.service_deployment.name}}ServiceDesc {
+{% if field.has_notifier%}
+    static constexpr auto eventId() {
+        return ara::com::internal::nsomeip::types::EventId{ {{event_or_unknown(field.event_id)}} };
+    }
+{% if field.has_reliable_notifier %}
+    static constexpr auto isReliable() {
+        return bool{true};
+    }
+{% else %}
+    static constexpr auto isReliable() {
+        return bool{false};
+    }
+{% endif %}
+
+{% if service.get_field_event_group(field) %}
+    static constexpr auto eventGroups() {
+        return ara::com::internal::nsomeip::types::ToArray<ara::com::internal::nsomeip::types::EventGroupId>({ {% for event_group_id in service.get_field_event_group(field) %} ara::com::internal::nsomeip::types::EventGroupId{ {{event_group_id}} }{{ "," if not loop.last }}{% endfor %} });
+    }
+{% else %}
+    // Just a placeholder due to field notifier absence. Value will never be used but required for compilation.
+    static constexpr auto eventGroups() {
+        return ara::com::internal::nsomeip::types::ToArray<ara::com::internal::nsomeip::types::EventGroupId>({ara::com::internal::nsomeip::types::EventGroupId{ 0x0 }});
+    }
+{% endif %}
+{% endif %}
+{% if field.has_setter %}
+    static constexpr auto setMethodId() {
+        return ara::com::internal::nsomeip::types::MethodId{ {{method_or_unknown(field.set_method_id)}} };
+    }
+{% if field.has_reliable_setter %}
+    static constexpr auto isSetterReliable() {
+        return bool{true};
+    }
+{% else %}
+    static constexpr auto isSetterReliable() {
+        return bool{false};
+    }
+{% endif %}
+{% endif %}
+{%if field.has_getter%}
+    static constexpr auto getMethodId() {
+        return ara::com::internal::nsomeip::types::MethodId{ {{method_or_unknown(field.get_method_id)}} };
+    }
+{% if field.has_reliable_getter %}
+    static constexpr auto isGetterReliable() {
+        return bool{true};
+    }
+{% else %}
+    static constexpr auto isGetterReliable() {
+        return bool{false};
+    }
+{% endif %}
+{% endif %}
+    static constexpr auto byteOrder(){
+{% if field.transformationprops and field.transformationprops.byteorder != ""%}
+        return ara::com::internal::nsomeip::serialize::ByteOrder::{{field.transformationprops.byteorder}};
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::byteOrder();
+{% endif %}
+    }
+    static constexpr auto sessionHandling(){
+{% if field.transformationprops and field.transformationprops.sessionhandling != ""%}
+        return ara::com::internal::nsomeip::serialize::SessionHandling::{{field.transformationprops.sessionhandling}};
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sessionHandling();
+{% endif %}
+    }
+    static constexpr auto alignment(){
+{% if field.transformationprops and field.transformationprops.alignment != None%}
+        return uint16_t{ {{field.transformationprops.alignment}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::alignment();
+{% endif %}
+    }
+    static constexpr auto implementsLegacyStringSerialization(){
+{% if field.transformationprops and field.transformationprops.implementslegacyStringSerialization != None%}
+        return bool{ {{field.transformationprops.implementslegacyStringSerialization}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::implementsLegacyStringSerialization();
+{% endif %}
+    }
+    static constexpr auto isDynamicLengthFieldSize(){
+{% if field.transformationprops and field.transformationprops.isDynamicLengthFieldsize != None%}
+        return bool{ {{field.transformationprops.isDynamicLengthFieldsize}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::isDynamicLengthFieldSize();
+{% endif %}
+    }
+    static constexpr auto sizeofArrayLengthField(){
+{% if field.transformationprops and field.transformationprops.sizeofArrayLengthField != None %}
+        return uint8_t{ {{field.transformationprops.sizeofArrayLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofArrayLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofFixedArrayLengthField(){
+{% if field.transformationprops and field.transformationprops.sizeofFixedArrayLengthField != None %}
+        return uint8_t{ {{field.transformationprops.sizeofFixedArrayLengthField}} };
+{% elif field.transformationprops and field.transformationprops.sizeofArrayLengthField != None %}
+        return uint8_t{ {{field.transformationprops.sizeofArrayLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofFixedArrayLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofStringLengthField(){
+{% if field.transformationprops and field.transformationprops.sizeofstringLengthField != None and field.transformationprops.sizeofstringLengthField != 0%}
+        return uint8_t{ {{field.transformationprops.sizeofstringLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofStringLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofFixedStringLengthField(){
+{% if field.transformationprops and field.transformationprops.sizeofFixedStringLengthField != None %}
+        return uint8_t{ {{field.transformationprops.sizeofFixedStringLengthField}} };
+{% elif field.transformationprops and field.transformationprops.sizeofstringLengthField != None and field.transformationprops.sizeofstringLengthField != 0%}
+        return uint8_t{ {{field.transformationprops.sizeofstringLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofFixedStringLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofStructLengthField(){
+{% if field.transformationprops and field.transformationprops.sizeofstructLengthField != None and field.transformationprops.sizeofstructLengthField != 0%}
+        return uint8_t{ {{field.transformationprops.sizeofstructLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofStructLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofUnionLengthField(){
+{% if field.transformationprops and field.transformationprops.sizeofUnionLengthField != None %}
+        return uint8_t{ {{field.transformationprops.sizeofUnionLengthField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofUnionLengthField();
+{% endif %}
+    }
+    static constexpr auto sizeofUnionTypeSelectorField(){
+{% if field.transformationprops and field.transformationprops.sizeofUnionTypeselectorField != None%}
+        return uint8_t{ {{field.transformationprops.sizeofUnionTypeselectorField}} };
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::sizeofUnionTypeSelectorField();
+{% endif %}
+    }
+    static constexpr auto stringEncoding(){
+{% if field.transformationprops and field.transformationprops.stringEncoding != None%}
+        return ara::com::internal::nsomeip::serialize::StringEncoding::{{field.transformationprops.stringEncoding}};
+{% else %}
+        return ara::com::internal::nsomeip::serialize::TransformationProps::stringEncoding();
+{% endif %}
+    }
+};
+{% endfor %}
+
+
+
+
+} // namespace nsomeip
+{% if service.namespaces %}{% for namespace in service.namespaces|reverse %}
+} // namespace {{namespace}}
+{% endfor %}{% endif %}
+
+{%if service.signals%}
+namespace ara::com::internal::nsomeip::signal {
+{%for signal in service.signals%}
+{%if not signal.userevent%}
+struct {{service.service_deployment.name}}{{signal.name}}Desc {
+    using IsSignalBasedTag = void;
+    static constexpr auto serviceId() {
+       ara::com::internal::nsomeip::types::ServiceId{ {{service.deployment_id}} };
+    }
+    static constexpr auto eventId() {
+        return ara::com::internal::nsomeip::types::EventId{ {{event_or_unknown(signal.eventid_hex)}} };
+    }
+};
+struct {{service.service_deployment.name}}{{signal.name}}Type {
+{%for typeitem in signal.typeitems%}
+    {{typeitem.datatype}} {{typeitem.name}};
+{%endfor%}
+    using IsEnumerableTag = void;
+    template<typename F>
+    void enumerate(F& fun) {
+{%for typeitem in signal.typeitems%}
+    fun({{typeitem.name}});
+{%endfor%}
+    }
+};
+{%endif%}
+{%endfor%}
+{%for etosmaaping in service.etosmappings%}
+{%if not etosmaaping.EinS%}
+{%if etosmaaping.userevent%}
+template<>
+struct S2SProps::Value<headerId<{{service.absolute_namespace}}::nsomeip::{{service.service_deployment.name}}{{etosmaaping.event}}Desc>()> {
+    using ValueType = {{etosmaaping.eventtype}};
+    using SourceIds = HeaderIds<headerId<{{service.absolute_namespace}}::nsomeip::{{service.service_deployment.name}}{{etosmaaping.event}}Desc>()>;
+    using TargetIds = HeaderIds<headerId<{{service.absolute_namespace}}::nsomeip::{{service.service_deployment.name}}{{etosmaaping.event}}Desc>()>;
+    template<typename F>
+    static void enumerate(F& fun, ValueType& val) {
+{%for typeitem in service.get_signalbyname(etosmaaping.signals[0]).typeitems%}
+        fun(val.{{typeitem.eventnamevalue}}, {{typeitem.start_position}}, {{typeitem.byteordertype}});
+{%endfor%}
+    }
+{%else%}
+template<>
+struct S2SProps::Value<headerId<{{service.absolute_namespace}}::nsomeip::{{service.service_deployment.name}}{{etosmaaping.event}}Desc>()> {
+   using ValueType = {{etosmaaping.eventtype}};
+    using SourceIds = HeaderIds<headerId<{{service.absolute_namespace}}::nsomeip::{{service.service_deployment.name}}{{etosmaaping.event}}Desc>()>;
+    using SourceIds = HeaderIds<{%for signal in etosmaaping.signals%}headerId<{{service.service_deployment.name}}{{event}}Desc>(){%endfor%}{% if not loop.last %},{% endif %}>;
+{%endif%}
+};
+{%for ordermapping in etosmaaping.order_submapping%}
+{%if not ordermapping.userevent%}
+template<>
+bool S2SProps::Mapping<headerId<{{ordermapping.event}}Desc>(), headerId<{{ordermapping.signal}}Desc>()>::Write(const {{ordermapping.event}}Type& e1, {{ordermapping.signal}}Type& s1) {
+{%for submaping in ordermapping.submappinglist%}
+    s1.{{submaping.signaltypevalue}} = e1.{{submaping.eventtypevalue}};
+{%endfor%}
+    return {%if ordermapping.transmissiontrigger%}true{%else%}false{%endif%};
+}
+{%endif%}
+{%endfor%}
+{%endif%}
+{%endfor%}
+{%for stoemapping in service.stoemappings%}
+{%if stoemapping.userevent%}
+template<>
+struct S2SProps::Value<headerId<{{service.absolute_namespace}}::nsomeip::{{service.service_deployment.name}}{{stoemapping.event[0]}}Desc>()> {
+    using ValueType =  {{stoemapping.eventtype}};
+    using SourceIds = HeaderIds<headerId<{{service.absolute_namespace}}::nsomeip::{{service.service_deployment.name}}{{stoemapping.event[0]}}Desc>()>;
+    using TargetIds = HeaderIds<headerId<{{service.absolute_namespace}}::nsomeip::{{service.service_deployment.name}}{{stoemapping.event[0]}}Desc>()>;
+    template<typename F>
+    static void enumerate(F& fun,ValueType& val) {
+{%for typeitem in service.get_signalbyname(stoemapping.signal).typeitems%}
+        fun(val.{{typeitem.eventnamevalue}}, {{typeitem.start_position}}, {{typeitem.byteordertype}});
+{%endfor%}
+    }
+{%else%}
+template<>
+struct S2SProps::Value<headerId<{{service.service_deployment.name}}{{stoemapping.signal}}Desc>()> {
+    using ValueType = S1Type;
+    using SourceIds = HeaderIds<{%for event in stoemapping.event%}headerId<{{service.absolute_namespace}}::nsomeip::{{service.service_deployment.name}}{{event}}Desc>(){%endfor%}{% if not loop.last %},{% endif %}>;
+    using TargetIds = HeaderIds<headerId<{{service.service_deployment.name}}{{stoemapping.signal}}Desc>()>;
+    template<typename F>
+    static void enumerate(F& fun, {{service.service_deployment.name}}{{stoemapping.signal}}Type& val) {
+{%for typeitem in service.get_signalbyname(stoemapping.signal).typeitems%}
+        fun(val.{{typeitem.name}}, {{typeitem.start_position}}, {{typeitem.byteordertype}});
+{%endfor%}
+    }
+{%endif%}
+};
+{%for ordermapping in stoemapping.order_submapping%}
+{%if not ordermapping.userevent%}
+template<>
+bool S2SProps::Mapping<headerId<{{service.absolute_namespace}}::nsomeip::{{service.service_deployment.name}}{{ordermapping.event}}Desc>(), headerId<{{ordermapping.signal}}Desc>()>::Read(const {{service.absolute_namespace}}::nsomeip::{{service.service_deployment.name}}{{ordermapping.event}}Type& e1, {{ordermapping.signal}}Type& s1) {
+{%for submaping in ordermapping.submappinglist%}
+    e1.{{submaping.eventtypevalue}} = s1.{{submaping.signaltypevalue}};
+{%endfor%}
+    return {%if ordermapping.transmissiontrigger%}true{%else%}false{%endif%};
+}
+{%endif%}
+{%endfor%}
+{%endfor%}
+}
+{%endif%}
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

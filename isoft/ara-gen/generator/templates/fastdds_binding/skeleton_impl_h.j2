@@ -1,0 +1,75 @@
+{#
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+--------------------------------------------------------------------------
+#}
+{%- extends "utils/header_base.j2" %}
+{% block header %}{{super()}}{% endblock %}
+{% block source %}
+
+
+#include "{{service.namespacepath}}{{service.standard_name}}_skeleton.h"
+#include "ara/com/internal/fastdds/dds_type_converter.h"
+{% for include in includes %}
+#include {{include}}
+{% endfor %}
+#include "ara/com/internal/fastdds/skeleton/fastdds_skeleton.h"
+#include "{{service.service_deployment.standard_name}}_service_desc.h"
+
+
+{% if service.namespaces %}{% for namespace in service.namespaces %}
+namespace {{namespace}} {
+{% endfor %}{% endif %}
+namespace fastdds {
+struct {{service.service_deployment.name}}SkeletonImpl
+    : {{service.service_deployment.name}}ServiceDesc
+     , {% if not service.namespaces %}::{% endif %}skeleton::{{service.name}}Skeleton /* for protected */{
+    using Skeleton = {% if not service.namespaces %}::{% endif %}skeleton::{{service.name}}Skeleton;
+    static auto CreateBindSkeleton(Skeleton& skeleton,ara::com::InstanceIdentifier const& instanceIdentifier) {
+        auto bindSkeleton{ara::com::internal::fastdds::skeleton::Create<{{ service.service_deployment.name }}ServiceDesc>(skeleton,instanceIdentifier)};
+        if (bindSkeleton == nullptr) return bindSkeleton;
+{% for event in service.events %}
+        auto {{event.name}} = bindSkeleton->Create<{{service.service_deployment.name}}{{ event.name }}Desc, decltype(skeleton.{{ event.name }})>();
+{% endfor %}
+{% for method in service.methods %}
+       bindSkeleton->Create<{{service.service_deployment.name}}{{method.name}}Desc>(&{{service.service_deployment.name}}SkeletonImpl::{{method.name}});
+{% endfor %}
+{% for field in service.all_fields %}
+       auto {{field.name}} = bindSkeleton->Create<{{service.service_deployment.name}}{{field.name}}Desc, decltype(skeleton.{{field.name}})>();
+{% endfor %}
+{% for event in service.events %}
+       skeleton.{{event.name}} += {{event.name}};
+{% endfor %}
+{% for field in service.all_fields %}
+       skeleton.{{field.name}} += {{field.name}};
+{% endfor %}
+       return bindSkeleton;
+    }
+};
+} // namespace fastdds
+{% if service.namespaces %}{% for namespace in service.namespaces|reverse %}
+} // namespace {{namespace}}
+{% endfor %}{% endif %}
+
+
+{% endblock source %}
+{% block footer %}{{super()}}{% endblock %}

@@ -1,0 +1,31 @@
+{
+    "loggingBehavior": true,
+    "appId": "CMSD",
+    "defaultLevel": 4,
+    "channels": [
+        {
+            "modes": 4,
+            "level": 4,
+            "fileName": "/var/redirected/",
+            "ctxId": "#LOG"
+        },
+        {
+            "modes": 4,
+            "level": 4,
+            "fileName": "/var/redirected/",
+            "ctxId": "#DFT"
+        },
+        {
+            "modes": 4,
+            "level": 3,
+            "fileName": "/var/redirected/",
+            "ctxId": "#COM"
+        },
+        {
+            "modes": 4,
+            "level": 3,
+            "fileName": "/var/redirected/",
+            "ctxId": "#NAI"
+        }
+    ]
+}

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Disclaimer
+
+This work (specification and/or software implementation) and the material
+contained in it, as released by AUTOSAR, is for the purpose of information
+only. AUTOSAR and the companies that have contributed to it shall not be
+liable for any use of the work.
+
+The material contained in this work is protected by copyright and other
+types of intellectual property rights. The commercial exploitation of the
+material contained in this work requires a license to such intellectual
+property rights.
+
+This work may be utilized or reproduced without any modification, in any
+form or by any means, for informational purposes only. For any other
+purpose, no part of the work may be utilized or reproduced, in any form
+or by any means, without permission in writing from the publisher.
+
+The work has been developed for automotive applications only. It has
+neither been developed, nor tested for non-automotive applications.
+
+The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+    <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>PlatformComponents</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>cg</SHORT-NAME>
+              <ELEMENTS>
+                <PROCESS>
+                  <SHORT-NAME>cgd_proc2</SHORT-NAME>
+                  <DESIGN-REF DEST="PROCESS-DESIGN">/ISOFT/PlatformComponents/com/cg/cgd_proc_design</DESIGN-REF>
+                  <EXECUTABLE-REF DEST="EXECUTABLE">/ISOFT/PlatformComponents/com/cg/exe/cgd</EXECUTABLE-REF>
+                  <PROCESS-STATE-MACHINE>
+                    <SHORT-NAME>processStatMachine</SHORT-NAME>
+                    <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/ISOFT/ProcessModes/ProcessStateMachine</TYPE-TREF>
+                  </PROCESS-STATE-MACHINE>
+                  <STATE-DEPENDENT-STARTUP-CONFIGS>
+                    <STATE-DEPENDENT-STARTUP-CONFIG>
+                      <EXECUTION-DEPENDENCYS>
+                        <EXECUTION-DEPENDENCY>
+                          <PROCESS-STATE-IREF>
+                            <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/ISOFT/PlatformComponents/com/nsomeip_routing_proc2/processStatMachine</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                            <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/ISOFT/ProcessModes/ProcessStateMachine/Running</TARGET-MODE-DECLARATION-REF>
+                          </PROCESS-STATE-IREF>
+                        </EXECUTION-DEPENDENCY>
+                      </EXECUTION-DEPENDENCYS>
+                      <FUNCTION-GROUP-STATE-IREFS>
+                        <FUNCTION-GROUP-STATE-IREF>
+                          <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/ISOFT/FunctionGroupSet/Machine2/MachineFG</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                          <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/ISOFT/FunctionGroupModes/MachineFG/Restart</TARGET-MODE-DECLARATION-REF>
+                        </FUNCTION-GROUP-STATE-IREF>
+                        <FUNCTION-GROUP-STATE-IREF>
+                          <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/ISOFT/FunctionGroupSet/Machine2/MachineFG</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                          <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/ISOFT/FunctionGroupModes/MachineFG/Startup</TARGET-MODE-DECLARATION-REF>
+                        </FUNCTION-GROUP-STATE-IREF>
+                        <FUNCTION-GROUP-STATE-IREF>
+                          <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/ISOFT/FunctionGroupSet/Machine2/MachineFG</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                          <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/ISOFT/FunctionGroupModes/MachineFG/Verify</TARGET-MODE-DECLARATION-REF>
+                        </FUNCTION-GROUP-STATE-IREF>
+                      </FUNCTION-GROUP-STATE-IREFS>
+                      <RESOURCE-GROUP-REF DEST="RESOURCE-GROUP">/ISOFT/Development/Machine2/OS/DefaultResourceGroup</RESOURCE-GROUP-REF>
+                      <STARTUP-CONFIG-REF DEST="STARTUP-CONFIG">/ISOFT/PlatformComponents/cg/cgd_startup_configs2/server</STARTUP-CONFIG-REF>
+                    </STATE-DEPENDENT-STARTUP-CONFIG>
+                  </STATE-DEPENDENT-STARTUP-CONFIGS>
+                </PROCESS>
+                <STARTUP-CONFIG-SET>
+                  <SHORT-NAME>cgd_startup_configs2</SHORT-NAME>
+                  <STARTUP-CONFIGS>
+                    <STARTUP-CONFIG>
+                      <SHORT-NAME>server</SHORT-NAME>
+                      <SCHEDULING-POLICY>SCHED_OTHER</SCHEDULING-POLICY>
+                      <SCHEDULING-PRIORITY>12</SCHEDULING-PRIORITY>
+                      <TERMINATION-BEHAVIOR>PROCESS-IS-NOT-SELF-TERMINATING</TERMINATION-BEHAVIOR>
+                    </STARTUP-CONFIG>
+                    <STARTUP-CONFIG>
+                      <SHORT-NAME>verify</SHORT-NAME>
+                      <SCHEDULING-POLICY>SCHED_OTHER</SCHEDULING-POLICY>
+                      <SCHEDULING-PRIORITY>12</SCHEDULING-PRIORITY>
+                      <TERMINATION-BEHAVIOR>PROCESS-IS-NOT-SELF-TERMINATING</TERMINATION-BEHAVIOR>
+                    </STARTUP-CONFIG>
+                  </STARTUP-CONFIGS>
+                </STARTUP-CONFIG-SET>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

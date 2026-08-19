@@ -1,0 +1,27 @@
+{
+    "LocalComAccessControlEnabled": true,
+    "StrictVerificationMode": true,
+    "RawDataStreamGrants": [
+        {
+            "processname": "/homeTest/Client",
+            "ip": "192.168.14.98",
+            "udpPort": 0,
+            "tcpPort": 100,
+            "mulCastUdpPort": 0
+        },
+        {
+            "processname": "/homeTest/Client",
+            "ip": "192.168.14.99",
+            "udpPort": 1,
+            "tcpPort": 0,
+            "mulCastUdpPort": 0
+        },
+        {
+            "processname": "/homeTest/Client",
+            "ip": "192.168.14.98",
+            "udpPort": 0,
+            "tcpPort": 0,
+            "mulCastUdpPort": 100
+        }
+    ]
+}

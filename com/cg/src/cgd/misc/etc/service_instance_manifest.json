@@ -1,0 +1,192 @@
+{
+    "ap_service_instances": {
+        "provided_ap_service_instances": [
+            {
+                "type": "some/ip",
+                "name": "/iSOFT/Machine1/core/cg/DiagnosticReset/Provided/SomeipProvidedDiagnosticResetServerInstance",
+                "service_id": "NSomeipDiagnosticResetServer",
+                "instance_id": "NSOMEIP:100",
+                "service_interface_id": 44,
+                "service_interface_version": {
+                    "major_version": 1,
+                    "minor_version": 0
+                },
+                "sd_server_config": {
+                    "initial_offer_behavior": {
+                        "initial_delay_max_value": 100,
+                        "initial_delay_min_value": 10,
+                        "initial_repetitions_base_delay": 200,
+                        "initial_repetitions_max": 3
+                    },
+                    "offer_cyclic_delay": 2000,
+                    "service_offer_time_to_live": 8,
+                    "request_response_delay": {
+                        "max_value": 1500,
+                        "min_value": 1500
+                    }
+                },
+                "event_groups": [
+                    {
+                        "event_group_id": 913,
+                        "multicast_threshold": 10,
+                        "events": [
+                            32789
+                        ]
+                    }
+                ],
+                "events": [
+                    {
+                        "event_id": 32789,
+                        "transport_protocol": "UDP"
+                    }
+                ],
+                "methods": [
+                    {
+                        "method_id": 43,
+                        "transport_protocol": "UDP"
+                    },
+                    {
+                        "method_id": 45,
+                        "transport_protocol": "UDP"
+                    },
+                    {
+                        "method_id": 44,
+                        "transport_protocol": "UDP"
+                    }
+                ]
+            },
+            {
+                "type": "some/ip",
+                "name": "/iSOFT/Machine1/core/cg/PowerMode/Provided/SomeipProvidedPowerModeServerInstance",
+                "service_id": "NSomeipPowerModeServer",
+                "instance_id": "NSOMEIP:100",
+                "service_interface_id": 42,
+                "service_interface_version": {
+                    "major_version": 1,
+                    "minor_version": 0
+                },
+                "sd_server_config": {
+                    "initial_offer_behavior": {
+                        "initial_delay_max_value": 100,
+                        "initial_delay_min_value": 10,
+                        "initial_repetitions_base_delay": 200,
+                        "initial_repetitions_max": 3
+                    },
+                    "offer_cyclic_delay": 2000,
+                    "service_offer_time_to_live": 8,
+                    "request_response_delay": {
+                        "max_value": 1500,
+                        "min_value": 1500
+                    }
+                },
+                "event_groups": [
+                    {
+                        "event_group_id": 911,
+                        "multicast_threshold": 10,
+                        "events": [
+                            32779
+                        ]
+                    }
+                ],
+                "events": [
+                    {
+                        "event_id": 32779,
+                        "transport_protocol": "UDP"
+                    }
+                ],
+                "methods": [
+                    {
+                        "method_id": 21,
+                        "transport_protocol": "UDP"
+                    },
+                    {
+                        "method_id": 23,
+                        "transport_protocol": "UDP"
+                    },
+                    {
+                        "method_id": 22,
+                        "transport_protocol": "UDP"
+                    }
+                ]
+            }
+        ],
+        "required_ap_service_instances": [
+            {
+                "type": "some/ip",
+                "name": "/iSOFT/Machine1/core/cg/DiagnosticReset/Required/SomeipRequiredDiagnosticResetClientInstance",
+                "service_id": "NSomeipDiagnosticResetClient",
+                "instance_id": "NSOMEIP:ANY",
+                "service_interface_id": 43,
+                "service_interface_version": {
+                    "major_version": 1,
+                    "minor_version": 0
+                },
+                "blacklisted_versions": [],
+                "sd_client_config": {
+                    "service_find_time_to_live": 8
+                },
+                "event_groups": [
+                    {
+                        "event_group_id": 912,
+                        "events": [
+                            32790
+                        ],
+                        "sd_client_event_group_timing_config": {
+                            "time_to_live": 8
+                        }
+                    }
+                ],
+                "events": [
+                    {
+                        "event_id": 32790,
+                        "transport_protocol": "UDP"
+                    }
+                ],
+                "methods": [
+                    {
+                        "method_id": 46,
+                        "transport_protocol": "UDP"
+                    }
+                ]
+            },
+            {
+                "type": "some/ip",
+                "name": "/iSOFT/Machine1/core/cg/PowerMode/Required/SomeipRequiredPowerModeClientInstance",
+                "service_id": "NSomeipPowerModeClient",
+                "instance_id": "NSOMEIP:ANY",
+                "service_interface_id": 41,
+                "service_interface_version": {
+                    "major_version": 1,
+                    "minor_version": 0
+                },
+                "blacklisted_versions": [],
+                "sd_client_config": {
+                    "service_find_time_to_live": 8
+                },
+                "event_groups": [
+                    {
+                        "event_group_id": 912,
+                        "events": [
+                            32780
+                        ],
+                        "sd_client_event_group_timing_config": {
+                            "time_to_live": 8
+                        }
+                    }
+                ],
+                "events": [
+                    {
+                        "event_id": 32780,
+                        "transport_protocol": "UDP"
+                    }
+                ],
+                "methods": [
+                    {
+                        "method_id": 31,
+                        "transport_protocol": "UDP"
+                    }
+                ]
+            }
+        ]
+    }
+}

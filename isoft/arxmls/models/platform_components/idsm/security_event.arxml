@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00049.xsd">
+	<!-- AUTOSAR General Definitions -->
+	<!--
+    Document Owner:                 AUTOSAR
+    Document Responsibility:        AUTOSAR
+    Document Identification Number: 636
+    Document Status:                published
+    Part of AUTOSAR Standard:       Foundation
+    Part of AUTOSAR Release:        R20-11
+    -->
+	<!--
+    Disclaimer
+
+    This work (specification and/or software implementation) and the material
+    contained in it, as released by AUTOSAR, is for the purpose of information
+    only. AUTOSAR and the companies that have contributed to it shall not be liable
+    for any use of the work.
+
+    The material contained in this work is protected by copyright and other types
+    of intellectual property rights. The commercial exploitation of the material
+    contained in this work requires a license to such intellectual property rights.
+
+    This work may be utilized or reproduced without any modification, in any form
+    or by any means, for informational purposes only. For any other purpose, no
+    part of the work may be utilized or reproduced, in any form or by any means,
+    without permission in writing from the publisher.
+
+    The work has been developed for automotive applications only. It has neither
+    been developed, nor tested for non-automotive applications.
+
+    The word AUTOSAR and the AUTOSAR logo are registered trademarks.
+ -->
+	<ADMIN-DATA>
+    <LANGUAGE>EN</LANGUAGE>
+    <USED-LANGUAGES>
+      <L-10 L="EN" xml:space="default">English</L-10>
+    </USED-LANGUAGES>
+  </ADMIN-DATA>
+	<AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>ISOFT</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>GenDef</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>Standardized_SecurityEvents_CanIf</SHORT-NAME>
+              <ELEMENTS>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>CANIF_SEV_ERRORSTATE_BUSOFF</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">The CAN controller transitioned to state busoff.</L-2>
+                  </DESC>
+                  <ID>22</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>CANIF_SEV_ERRORSTATE_PASSIVE</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">The CAN controller transitioned to state passive.</L-2>
+                  </DESC>
+                  <ID>21</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>CANIF_SEV_RX_ERROR_DETECTED</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">A reception related error was detected. Depending on the context data this could indicate suspicious CAN activity.</L-2>
+                  </DESC>
+                  <ID>20</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>CANIF_SEV_TX_ERROR_DETECTED</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">A transmission related error was detected. Depending on the context data this could indicate suspicious CAN activity.</L-2>
+                  </DESC>
+                  <ID>19</ID>
+                </SECURITY-EVENT-DEFINITION>
+              </ELEMENTS>
+            </AR-PACKAGE>
+            <AR-PACKAGE>
+              <SHORT-NAME>Standardized_SecurityEvents_Dcm</SHORT-NAME>
+              <ELEMENTS>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_AUTHENTICATION_SUCCESSFUL</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Succesfully authenticated (via Authentication $29)</L-2>
+                  </DESC>
+                  <ID>38</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_CERTIFICATE_FAILURE</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">The tester tried an authentication with an invalid certficate.</L-2>
+                  </DESC>
+                  <ID>36</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_CLEAR_DTC_SUCCESSFUL</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">DTC information has been cleared by SID 0x14 ClearDTCInformation</L-2>
+                  </DESC>
+                  <ID>39</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_COMMUNICATION_CONTROL_SWITCHED_OFF</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">ECU communicationwas switched off with service CommunicationControl.</L-2>
+                  </DESC>
+                  <ID>25</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_DTC_SETTING_SWITCHED_OFF</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">DTC setting switched off with service 0x85 (ControlDTCSetting).</L-2>
+                  </DESC>
+                  <ID>43</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_ECU_RESET</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">ECU had been reset by SID 0x11 ResetECU</L-2>
+                  </DESC>
+                  <ID>40</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_ECU_UNLOCK_SUCCESSFUL</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Successful unlocked the ECU (via Security Access $27), per Level</L-2>
+                  </DESC>
+                  <ID>37</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_INCORRECT_MESSAGE_LENGTH_OR_FORMAT</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Received request message does not match the specified length or the format of the parameters is different from the specified ones for that service. NRC 0x13 (incorrectMessageLengthOrInvalidFormat) was returned.</L-2>
+                  </DESC>
+                  <ID>28</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_NUMBER_OF_FAILED_AUTHENTICATION_ATTEMPTS_EXCEEDED</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Number of failed authentification attempts - OEM specific</L-2>
+                  </DESC>
+                  <ID>35</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_REQUESTED_ACTIONS_REQUIRES_AUTHENTICATION</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">A diagnostic request was received while the required authentication to executie this service is not given. NRC 0x34 (authenticationRequired) was returned.</L-2>
+                  </DESC>
+                  <ID>31</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_REQUEST_DOWNLOAD</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">A diagnsotic data download sequence was requested with SID 0x34.</L-2>
+                  </DESC>
+                  <ID>42</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_REQUEST_OUT_OF_RANGE</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">A diagnsotic request with a parameter that is our range of the allowed bounds wa received. A NRC 0x31 (requestOutOfRange) was returned.</L-2>
+                  </DESC>
+                  <ID>30</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_REQUEST_SEQUENCE_ERROR</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">A diagnostic service was received in the wrong sequence order. NRC 0x24 (requestSequenceError) was returned.</L-2>
+                  </DESC>
+                  <ID>29</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_SECURITY_ACCESS_DENIED</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Tester has send an diagnostic request without meeting the servers security level requirements for that service. NRC 0x33 (securityAccessDenied) was returned.</L-2>
+                  </DESC>
+                  <ID>24</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_SECURITY_ACCESS_INVALID_KEY</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Security Access failed because the tester has send an invalid key to the server. An NRC 0x35 (invalidKey) was returned.</L-2>
+                  </DESC>
+                  <ID>33</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_SECURITY_ACCESS_NUMBER_OF_ATTEMPTS_EXCEEDED</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Security Access failed and the number of invalid attempts has been exceeded. NRC 0x36 (exceedNumberOfAttempts) was returned.</L-2>
+                  </DESC>
+                  <ID>32</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_SECURITY_ACCESS_REQUIRED_TIME_DELAY_NOT_EXPIRED</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">A further attempt to unlock the ECU was taken before the delay time had expired. NRC 0x37 (requiredTimeDelayNotExpired) was sent.</L-2>
+                  </DESC>
+                  <ID>34</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_SERVICE_NOT_SUPPORTED</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">A diagnostic service war requested that is not supported or not supported in the active session. NRC 0x11 (serviceNotSupported) or NRC 0x7F (serviceNotSupportedInActiveSession) was returned.</L-2>
+                  </DESC>
+                  <ID>26</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_SUBFUNCTION_NOT_SUPPORTED</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">A subfunction of a diagnostic service was requested that is not supported for the requested service.</L-2>
+                  </DESC>
+                  <ID>27</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_WRITE_DATA</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Diagnostic data identifier have been written by SID 0x2E.</L-2>
+                  </DESC>
+                  <ID>41</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>DIAG_SEV_WRITE_INVALID_DATA</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Tester writes invalid data with service WriteDataByIdentifier.</L-2>
+                  </DESC>
+                  <ID>23</ID>
+                </SECURITY-EVENT-DEFINITION>
+              </ELEMENTS>
+            </AR-PACKAGE>
+            <AR-PACKAGE>
+              <SHORT-NAME>Standardized_SecurityEvents_EthIf</SHORT-NAME>
+              <ELEMENTS>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>ETHIF_SEV_DROP_ETH_MAC_COLLISIONN</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Ethernet datagram was dropped because local MAC was same as source MAC in an incoming frame.</L-2>
+                  </DESC>
+                  <ID>18</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>ETHIF_SEV_DROP_INV_VLAN</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">An ethernet datagram was dropped due to an invalid CrtlIdx/VLAN.</L-2>
+                  </DESC>
+                  <ID>17</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>ETHIF_SEV_DROP_UNKNOWN_ETHERTYPE</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">An ethernet datagram was dropped due the Ethertype in not known.</L-2>
+                  </DESC>
+                  <ID>15</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>ETHIF_SEV_DROP_VLAN_DOUBLE_TAG</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">An ethernet datagram was dropped due to double VLAN tag.</L-2>
+                  </DESC>
+                  <ID>16</ID>
+                </SECURITY-EVENT-DEFINITION>
+              </ELEMENTS>
+            </AR-PACKAGE>
+            <AR-PACKAGE>
+              <SHORT-NAME>Standardized_SecurityEvents_IDSM</SHORT-NAME>
+              <ELEMENTS>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>IDSM_INTERNAL_EVENT_COMMUNICATION_ERROR</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">The current rate exceeds a configured rate limitation.</L-2>
+                  </DESC>
+                  <ID>49</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>IDSM_INTERNAL_EVENT_NO_CONTEXT_DATA_BUFFER_AVAILABLE</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">The context data of an incoming event cannot be stored because there are no more context data buffers available.</L-2>
+                  </DESC>
+                  <ID>47</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>IDSM_INTERNAL_EVENT_NO_EVENT_BUFFER_AVAILABLE</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">A SEv cannot be handled because there are no more event buffers available to process the event.</L-2>
+                  </DESC>
+                  <ID>46</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>IDSM_INTERNAL_EVENT_TRAFFIC_LIMITATION_EXCEEDED</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">The current traffic exceeds a configured traffic limitation.</L-2>
+                  </DESC>
+                  <ID>48</ID>
+                </SECURITY-EVENT-DEFINITION>
+              </ELEMENTS>
+            </AR-PACKAGE>
+            <AR-PACKAGE>
+              <SHORT-NAME>Standardized_SecurityEvents_KeyM</SHORT-NAME>
+              <CATEGORY>STANDARD</CATEGORY>
+              <ELEMENTS>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>KEYM_SEV_CERT_VERIF_FAILED</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">A request to verify a certificate against a certificate chain was not successful.</L-2>
+                  </DESC>
+                  <ID>5</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>KEYM_SEV_INST_INTERMEDIATE_CERT_OP</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Attempt to install an intermediate certificate.</L-2>
+                  </DESC>
+                  <ID>3</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>KEYM_SEV_INST_ROOT_CERT_OP</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Attempt to install a root certificate.</L-2>
+                  </DESC>
+                  <ID>1</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>KEYM_SEV_UPD_INTERMEDIATE_CERT_OP</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Attempt to update an intermediate certificate.</L-2>
+                  </DESC>
+                  <ID>4</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>KEYM_SEV_UPD_ROOT_CERT_OP</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Attempt to update an existing root certificate. </L-2>
+                  </DESC>
+                  <ID>2</ID>
+                </SECURITY-EVENT-DEFINITION>
+              </ELEMENTS>
+            </AR-PACKAGE>
+            <AR-PACKAGE>
+              <SHORT-NAME>Standardized_SecurityEvents_SecOc</SHORT-NAME>
+              <ELEMENTS>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>SECOC_SEV_FRESHNESS_NOT_AVAILABLE</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Faild to get freshness value from FvM.</L-2>
+                  </DESC>
+                  <ID>45</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>SECOC_SEV_MAC_VERIFICATION_FAILED</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">MAC verification of a received PDU failed.</L-2>
+                  </DESC>
+                  <ID>44</ID>
+                </SECURITY-EVENT-DEFINITION>
+              </ELEMENTS>
+            </AR-PACKAGE>
+            <AR-PACKAGE>
+              <SHORT-NAME>Standardized_SecurityEvents_SoAd</SHORT-NAME>
+              <ELEMENTS>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>SOAD_SEV_DROP_MSG_RX_UDP_LENGTH</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">SoAd dropped a message. The message contains at least one PDU which violates stack configuration and was received via a UDP socket.
+The violation relates to the length of the PDUs compared to the overall length of the message.</L-2>
+                  </DESC>
+                  <ID>7</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>SOAD_SEV_DROP_MSG_RX_UDP_SOCKET</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">SoAd received a UDP message which violates stack configuration and was dropped. No suitable socket connection matching to configuration was found.</L-2>
+                  </DESC>
+                  <ID>8</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>SOAD_SEV_DROP_PDU_RX_TCP</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">SoAd dropped a PDU. The PDU violates stack configuration and was received via a TCP socket.</L-2>
+                  </DESC>
+                  <ID>5</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>SOAD_SEV_DROP_PDU_RX_UDP</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">SoAd dropped a PDU. The PDU violates stack configuration and was received via a UDP socket.</L-2>
+                  </DESC>
+                  <ID>6</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>SOAD_SEV_REJECTED_TCP_CONNECTION</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">SoAd rejected a TCP connection. The connection request violates stack configuration.</L-2>
+                  </DESC>
+                  <ID>9</ID>
+                </SECURITY-EVENT-DEFINITION>
+              </ELEMENTS>
+            </AR-PACKAGE>
+            <AR-PACKAGE>
+              <SHORT-NAME>Standardized_SecurityEvents_TcpIp</SHORT-NAME>
+              <ELEMENTS>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>TCPIP_SEV_ARP_IP_ADDR_CONFLICT</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Received local IP address in ARP reply for different MAC.</L-2>
+                  </DESC>
+                  <ID>32770</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>TCPIP_SEV_DROP_INV_IPV4_ADDR</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Dropped datagram because of invalid IPV4 address.</L-2>
+                  </DESC>
+                  <ID>32771</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>TCPIP_SEV_DROP_INV_IPV6_ADDR</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Dropped datagram because of invalid IPV6 address.</L-2>
+                  </DESC>
+                  <ID>32772</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>TCPIP_SEV_DROP_INV_PORT_TCP</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Dropped TCP packet because of invalid destination TCP-Port.</L-2>
+                  </DESC>
+                  <ID>32773</ID>
+                </SECURITY-EVENT-DEFINITION>
+                <SECURITY-EVENT-DEFINITION>
+                  <SHORT-NAME>TCPIP_SEV_DROP_INV_PORT_UDP</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="FOR-ALL">Dropped UDP packet because of invalid destination UDP-Port.</L-2>
+                  </DESC>
+                  <ID>32774</ID>
+                </SECURITY-EVENT-DEFINITION>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
